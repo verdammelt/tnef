@@ -1,4 +1,5 @@
 dnl initialization 
+AC_PREREQ(2.59)
 AC_INIT([tnef],[1.4],[verdammelt@users.sourceforge.net])
 AC_CONFIG_SRCDIR([src/tnef.c])
 AM_INIT_AUTOMAKE
@@ -8,12 +9,11 @@ AC_CONFIG_LIBOBJ_DIR(src/replace)
 dnl check for programs
 AC_PROG_AWK
 AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_CXX
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_RANLIB
-
-dnl check for executable extentions
-AC_EXEEXT
 
 dnl check for libraries
 AC_CHECK_LIB([intl],gettext)
