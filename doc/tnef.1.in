@@ -136,7 +136,10 @@ other email clients.
 .SH "AUTHOR"
 Mark Simpson.
 .SH "REPORTING BUGS"
-Report bugs to Mark Simpson <damned@world.std.com> .
+Report bugs to 
+.nh     \"no hyphenation
+Mark Simpson <@PACKAGE_BUGREPORT@>
+.h1 1   \"enable hyphenatiobn
 .SH "OTHER REFERENCES"
 This web page:
 .PP

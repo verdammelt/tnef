@@ -10,7 +10,7 @@ BuildRoot: /var/tmp/%{name}-%{version}-root
 Prefix: @prefix@
 Vendor: Angst Programming I.G.
 URL: http://tnef.sourceforge.net
-Packager: Mark Simpson <@PACKAGE_BUGREORT@>
+Packager: Mark Simpson <@PACKAGE_BUGREPORT@>
 
 %description
 TNEF is a program for unpacking MIME attachments of type

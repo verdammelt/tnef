@@ -1,5 +1,19 @@
 2002-09-12  Person or Persons Unknown  <damned@theworld.com>
 
+	* config.h.in: removed this generated file from the source tree.
+	Regenerate with autoheader.
+
+	* configure.in: Removed unnecessary AC_FUNC_STAT check (which
+	caused problems on Mac OSX).  Also removed old AM_PROG_CC_STDC
+	check. 
+
+	* tnef.spec.in (Packager): Fixing typo which kept
+	PACKAGE_BUGREPORT from being expanded.
+
+	* doc/tnef.1, doc/tnef.1.in: 
+	Using configured bug reporting address in man page.  Removed the
+	old tnef.1 file. 
+
 	* lisp: first version of a TNEF lisp library.  Bare-bones
 	functionality, can read in a an entire TNEF file but doesn't do
 	anything with it yet.
