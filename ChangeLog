@@ -1,3 +1,23 @@
+2002-12-10  Person or Persons Unknown  <damned@theworld.com>
+
+        * Release 1.1.4:
+	
+	* News:
+	* configure.in: 
+	New version
+
+	* INSTALL: 
+	* mkinstalldirs:
+	* install-sh: 
+	Updated version.
+
+	* src/malloc.c: Adding simple fixed malloc implementation to cover
+	case that AC_FUNC_MALLOC test in configure.in
+
+	* src/tnef.c (dump_mapi_attr): Adding new types to dump function.
+	(decode_mapi): Handling szMAPI_OBJECT type.
+	(file_add_mapi_attrs): Handling MAPI_ATTACH_DATA_OBJ.
+
 2002-10-27  Person or Persons Unknown  <damned@theworld.com>
 
 	* Release 1.1.3:

@@ -57,7 +57,7 @@
 #include "path.h"
 
 static char ident_string[] =
-"$Id: tnef.c,v 1.3 2002-09-04 00:39:47 verdammelt Exp $";
+"$Id: tnef.c,v 1.4 2002-12-11 04:37:31 verdammelt Exp $";
 
 /* To quiet compiler define tempnam */
 extern char*
@@ -109,6 +109,14 @@ typedef struct
 
 typedef struct
 {
+  unsigned long data1;
+  unsigned short data2;
+  unsigned short data3;
+  unsigned char data4[8];
+} MAPI_GUID;
+
+typedef struct
+{
     size_t len;
     union 
     { 
@@ -116,6 +124,7 @@ typedef struct
         uint16 bytes2;
         uint32 bytes4;
         uint32 bytes8[2];
+      MAPI_GUID guid;
     } data;
 } MAPI_Value;
 
@@ -529,6 +538,7 @@ dump_mapi_attr (MAPI_Attr* attr)
         case szMAPI_BOOLEAN:
             fprintf (stdout, "%s",
                      ((attr->values[i].data.bytes2 == 0) ? "false" : "true"));
+            break;
 
         case szMAPI_STRING:
         case szMAPI_UNICODE_STRING:
@@ -536,15 +546,15 @@ dump_mapi_attr (MAPI_Attr* attr)
                      attr->values[i].data.buf);
             break;
 
+        case szMAPI_SYSTIME:
         case szMAPI_CURRENCY:
         case szMAPI_INT8BYTE:
-        case szMAPI_SYSTIME:
+        case szMAPI_APPTIME:
             fprintf (stdout, "%x %x",
                      (int)attr->values[i].data.bytes8[0],
                      (int)attr->values[i].data.bytes8[1]);
             break;
 
-        case szMAPI_APPTIME:
         case szMAPI_ERROR:
         case szMAPI_OBJECT:
         case szMAPI_CLSID:
@@ -715,37 +725,51 @@ decode_mapi (size_t len, char *buf)
         
         a->type = GETINT16(buf+idx); idx += 2;
         a->name = GETINT16(buf+idx); idx += 2;
+
         switch (a->type)
         {
         case szMAPI_SHORT:        /* 2 bytes */
             a->num_values = 1;
             v = alloc_mapi_values (a);
             v->len = 2;
-            memmove (&v->data, buf+idx, 2); 
-            idx += 2;
+            memmove (&v->data, buf+idx, v->len); 
+            idx += v->len;
             break;
 
         case szMAPI_INT:
-        case szMAPI_FLOAT:
-        case szMAPI_BOOLEAN:      /* 4 bytes */
+        case szMAPI_FLOAT:      /* 4 bytes */
+        case szMAPI_ERROR:
+        case szMAPI_BOOLEAN:
             a->num_values = 1;
             v = alloc_mapi_values (a);
             v->len = 4;
-            memmove (&v->data, buf+idx, 4);
-            idx += 4;
+            memmove (&v->data, buf+idx, v->len);
+            idx += v->len;
             break;
 
         case szMAPI_DOUBLE:
+        case szMAPI_APPTIME:
+        case szMAPI_CURRENCY:
+        case szMAPI_INT8BYTE:
         case szMAPI_SYSTIME:         /* 8 bytes */
             a->num_values = 1;
             v = alloc_mapi_values (a);
             v->len = 8;
-            memmove (&v->data, buf+idx, 8);
-            idx += 8;
+            memmove (&v->data, buf+idx, v->len);
+            idx += v->len;
             break;
             
+        case szMAPI_CLSID:
+          a->num_values = 1;
+          v = alloc_mapi_values (a);
+          v->len = sizeof (MAPI_GUID);
+          memmove (&v->data, buf+idx, v->len);
+          idx += v->len;
+          break;
+
         case szMAPI_STRING:
         case szMAPI_UNICODE_STRING:
+        case szMAPI_OBJECT:
         case szMAPI_BINARY:       /* variable length */
             {
                 int val_idx = 0;
@@ -821,23 +845,27 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
     {
         MAPI_Attr* a = attrs[i];
         
-        switch (a->name)
-        {
-        case MAPI_ATTACH_LONG_FILENAME:
-            if (file->name) FREE(file->name);
-            file->name = munge_fname (a->values[0].len,
-                                      a->values[0].data.buf);
-            break;
+        if (a->num_values)
+          {
             
-        case MAPI_ATTACH_DATA_OBJ:
-            file->len = a->values[0].len;
-            if (file->data) FREE (file->data);
-            file->data = MALLOC (file->len * sizeof(char));
-            assert (file->data);
-            if (!file->data) abort();
-            memmove (file->data, a->values[0].data.buf, file->len);
-            break;
-        }
+            switch (a->name)
+              {
+              case MAPI_ATTACH_LONG_FILENAME:
+                if (file->name) FREE(file->name);
+                file->name = munge_fname (a->values[0].len,
+                                          a->values[0].data.buf);
+                break;
+                
+              case MAPI_ATTACH_DATA_OBJ:
+                file->len = a->values[0].len;
+                if (file->data) FREE (file->data);
+                file->data = MALLOC (file->len * sizeof(char));
+                assert (file->data);
+                if (!file->data) abort();
+                memmove (file->data, a->values[0].data.buf, file->len);
+                break;
+              }
+          }
     }
 }
 
