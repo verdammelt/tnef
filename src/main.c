@@ -190,6 +190,11 @@ parse_cmdline (int argc, char **argv,
                              optarg);
                     exit (-1);
                 }
+		if (0 > ((int32)(*max_size)))
+		{
+		    fprintf (stderr, "Ignoring negative value given for --maxsize/-x option: '%s' \n", optarg);
+		    (*max_size) = 0L;
+		}
             }
             break;
 
