@@ -1,3 +1,3 @@
-./../../src/tnef -C test-dir test.tnef
+./../../src/tnef -C ./test-dir ./test.tnef
 
-./../../src/tnef --directory test-dir test.tnef
+./../../src/tnef --directory ./test-dir ./test.tnef

@@ -4,9 +4,9 @@
 
 bin=${srcdir}/../../src/tnef
 
-echo $bin --help > help.output
-$bin --help >> help.output 2>&1
-echo >> help.output
-echo $bin -h >> help.output
-$bin -h >> help.output 2>&1
+echo $bin --help > $srcdir/help.output
+$bin --help >> $srcdir/help.output 2>&1
+echo >> $srcdir/help.output
+echo $bin -h >> $srcdir/help.output
+$bin -h >> $srcdir/help.output 2>&1
 check_test help

@@ -3,29 +3,29 @@
 . $srcdir/../util.sh
 
 bin=$srcdir/../../src/tnef
-tnef_file=test.tnef
-dir=test-dir
+tnef_file=$srcdir/test.tnef
+dir=$srcdir/test-dir
 
 cleanup() {
-    rm -rf test-dir
+    rm -rf $srcdir/test-dir
 }
 
 cleanup
-mkdir test-dir
+mkdir $srcdir/test-dir
 
-echo $bin -C test-dir $tnef_file > directory.output 
-$bin -C test-dir $tnef_file >> directory.output 2>&1
-if [ ! -f test-dir/AUTHORS ]; then
+echo $bin -C $srcdir/test-dir $tnef_file > $srcdir/directory.output 
+$bin -C $srcdir/test-dir $tnef_file >> $srcdir/directory.output 2>&1
+if [ ! -f $srcdir/test-dir/AUTHORS ]; then
     echo "AUTHORS file missing.  Test failed."
     exit 1
 fi
 cleanup
-mkdir test-dir
+mkdir $srcdir/test-dir
 
 echo >> directory.output
-echo $bin --directory test-dir $tnef_file >> directory.output
-$bin --directory test-dir $tnef_file >> directory.output 2>&1
-if [ ! -f test-dir/AUTHORS ]; then
+echo $bin --directory $srcdir/test-dir $tnef_file >> $srcdir/directory.output
+$bin --directory $srcdir/test-dir $tnef_file >> $srcdir/directory.output 2>&1
+if [ ! -f $srcdir/test-dir/AUTHORS ]; then
     echo "AUTHORS file missing.  Test failed."
     exit 1
 fi

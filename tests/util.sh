@@ -13,7 +13,7 @@ check_test_full () {
 }
 
 check_test () {
-    check_test_full $1.output $1.baseline $1.diff
+    check_test_full $srcdir/$1.output $srcdir/$1.baseline $srcdir/$1.diff
 }
 
 check_exists () {

@@ -3,12 +3,12 @@
 . $srcdir/../util.sh
 
 bin=$srcdir/../../src/tnef
-tnef_file=test.tnef
+tnef_file=$srcdir/test.tnef
 
-rm -f AUTHORS
+rm -f $srcdir/AUTHORS
 
-$bin --debug $tnef_file > debug.output 2>&1
+$bin --debug $tnef_file > $srcdir/debug.output 2>&1
 check_test debug
-check_file AUTHORS
-rm -f AUTHORS
+check_file $srcdir/AUTHORS
+rm -f $srcdir/AUTHORS
 
