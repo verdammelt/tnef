@@ -123,7 +123,7 @@ typedef struct
         uint16 bytes2;
         uint32 bytes4;
         uint32 bytes8[2];
-      MAPI_GUID guid;
+        MAPI_GUID guid;
     } data;
 } MAPI_Value;
 
@@ -374,19 +374,21 @@ copy_date_from_attr (Attr* attr, struct date* dt)
     {
         memmove (dt, attr->buf, attr->len);
         dt->year = GETINT16((unsigned char*)&dt->year);
-	    dt->month = GETINT16((unsigned char*)&dt->month);
-	    dt->day = GETINT16((unsigned char*)&dt->day);
-	    dt->hour = GETINT16((unsigned char*)&dt->hour);
-	    dt->min = GETINT16((unsigned char*)&dt->min);
-	    dt->sec = GETINT16((unsigned char*)&dt->sec);
-	    dt->dow = GETINT16((unsigned char*)&dt->dow);
-	} 
+        dt->month = GETINT16((unsigned char*)&dt->month);
+        dt->day = GETINT16((unsigned char*)&dt->day);
+        dt->hour = GETINT16((unsigned char*)&dt->hour);
+        dt->min = GETINT16((unsigned char*)&dt->min);
+        dt->sec = GETINT16((unsigned char*)&dt->sec);
+        dt->dow = GETINT16((unsigned char*)&dt->dow);
+    } 
     else 
     {
-	    fprintf (stderr, "date attribute in %s failed sanity check\n",
-                 get_tnef_name_str (attr->name));
-	    memset (dt, 0, sizeof(*dt));
-	}
+        char *name = get_tnef_name_str (attr->name);
+        fprintf (stderr, "date attribute in %s failed sanity check\n",
+                 name);
+        FREE(name);
+        memset (dt, 0, sizeof(*dt));
+    }
 }
 
 /* dump_attr
@@ -403,6 +405,9 @@ dump_attr (Attr* attr)
     size_t i;
 
     fprintf (stdout, "%s [type: %s] =", name, type);
+
+    FREE(name);
+    FREE(type);
 
     switch (attr->type)
     {
@@ -500,12 +505,15 @@ dump_attr (Attr* attr)
 static void
 dump_mapi_attr (MAPI_Attr* attr)
 {
-    const char *name = get_mapi_name_str (attr->name);
-    const char *type = get_mapi_type_str (attr->type);
+    char *name = get_mapi_name_str (attr->name);
+    char *type = get_mapi_type_str (attr->type);
     size_t i;
 
     fprintf (stdout, "%s [type: %s] [num_values = %lu] = \n", 
              name, type, (unsigned long)attr->num_values);
+
+    FREE(name);
+    FREE(type);
 
     for (i = 0; i < attr->num_values; i++)
     {
@@ -556,9 +564,25 @@ dump_mapi_attr (MAPI_Attr* attr)
             break;
 
         case szMAPI_ERROR:
-        case szMAPI_CLSID:
             fprintf (stdout, "%x",
                      attr->values[i].data.bytes4);
+            break;
+
+        case szMAPI_CLSID:
+            {
+                int j;
+                fprintf (stdout, "{%04lx %02x %02x ",
+                         attr->values[i].data.guid.data1,
+                         attr->values[i].data.guid.data2,
+                         attr->values[i].data.guid.data3);
+                fprintf (stdout, "{");
+                for (j = 0; i < 8; i++)
+                {
+                    fprintf (stdout, "%x",
+                             attr->values[i].data.guid.data4[j]);
+                }
+                fprintf (stdout, "}");
+            }
             break;
 
         case szMAPI_OBJECT:
@@ -727,7 +751,7 @@ decode_mapi (size_t len, char *buf)
             a->num_values = 1;
             v = alloc_mapi_values (a);
             v->len = 2;
-            memmove (&v->data, buf+idx, v->len); 
+            v->data.bytes2 = GETINT16(buf+idx);
             idx += v->len;
             break;
 
@@ -738,7 +762,7 @@ decode_mapi (size_t len, char *buf)
             a->num_values = 1;
             v = alloc_mapi_values (a);
             v->len = 4;
-            memmove (&v->data, buf+idx, v->len);
+            v->data.bytes4 = GETINT32(buf+idx);
             idx += v->len;
             break;
 
@@ -750,7 +774,8 @@ decode_mapi (size_t len, char *buf)
             a->num_values = 1;
             v = alloc_mapi_values (a);
             v->len = 8;
-            memmove (&v->data, buf+idx, v->len);
+            v->data.bytes8[0] = GETINT32(buf+idx);
+            v->data.bytes8[1] = GETINT32(buf+idx+4);
             idx += v->len;
             break;
             
