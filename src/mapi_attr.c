@@ -47,6 +47,23 @@ pad_to_4byte (size_t length)
     return length;
 }
 
+/* Copy the GUID data from a character buffer */
+static void
+copy_guid_from_buf (GUID* guid, char *buf)
+{
+    int i;
+    int idx = 0;
+    assert (guid);
+    assert (buf);
+
+    guid->data1 = GETINT32(buf + idx); idx += sizeof (uint32);
+    guid->data2 = GETINT16(buf + idx); idx += sizeof (uint16);
+    guid->data3 = GETINT16(buf + idx); idx += sizeof (uint16);
+    for (i = 0; i < 8; i++, idx += sizeof (uint8))
+	guid->data4[i] = (uint8)(buf[idx]);
+}
+
+
 /* dumps info about MAPI attributes... useful for debugging */
 static void
 mapi_attr_dump (MAPI_Attr* attr)
@@ -80,11 +97,11 @@ mapi_attr_dump (MAPI_Attr* attr)
 	    break;
 
 	case szMAPI_SHORT:
-	    write_uint8 (stdout, attr->values[i].data.bytes2);
+	    write_int16 (stdout, (int16)attr->values[i].data.bytes2);
 	    break;
 
 	case szMAPI_INT:
-	    write_uint32 (stdout, attr->values[i].data.bytes4);
+	    write_int32 (stdout, (int32)attr->values[i].data.bytes4);
 	    break;
 
 	case szMAPI_FLOAT:
@@ -123,7 +140,7 @@ mapi_attr_dump (MAPI_Attr* attr)
 
 	    for (x = 0; x < attr->values[i].len; x++)
 	    {
-		write_uint8 (stdout, (uint8)attr->values[i].data.buf[x]);
+		write_byte (stdout, (uint8)attr->values[i].data.buf[x]);
 		fputc (' ', stdout);
 	    }
 	}
@@ -173,8 +190,7 @@ mapi_attr_read (size_t len, char *buf)
 	{
 	    /* copy GUID */
 	    a->guid = CHECKED_XMALLOC(GUID, 1);
-
-	    memmove (a->guid, buf+idx, sizeof(GUID));
+	    copy_guid_from_buf(a->guid, buf+idx);
 	    idx += sizeof (GUID);
 
 	    a->num_names = GETINT32(buf+idx); idx += 4;
@@ -252,7 +268,7 @@ mapi_attr_read (size_t len, char *buf)
 	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = sizeof (GUID);
-	    memmove (&v->data, buf+idx, v->len);
+	    copy_guid_from_buf(&v->data.guid, buf+idx);
 	    idx += v->len;
 	    break;
 
