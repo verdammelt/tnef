@@ -78,14 +78,6 @@ typedef long           int32;
 typedef unsigned long  uint32;
 #endif /* SIZEOF_INT == 4 */
 
-/* Format Strings for dumping unsigned integers */
-#if (SIZEOF_INT == 4)
-#define SHORT_INT_FMT "%hu"
-#define LONG_INT_FMT  "%u"
-#else
-#define SHORT_INT_FMT "%u"
-#define LONG_INT_FMT  "%ul"
-#endif /* SIZEOF_INT == 4 */
 /* ********** SIZES ********** */
 
 /* ********** REPLACED FUNCS ********** */
