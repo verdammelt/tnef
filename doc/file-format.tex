@@ -1,0 +1,139 @@
+\documentclass{article}
+\title{TNEF File Format}
+\author{Mark Simpson}
+\begin{document}
+\maketitle
+\newcommand{\obj}[1]{\textsf{\textsl{#1}}}
+\newcommand{\literal}[1]{\textsf{\textbf{#1}}}
+\newcommand{\expl}[1]{\small{\textsf{\textsc{#1}}}}
+\newcommand{\code}[1]{\literal{#1}}
+
+\section{Overview}
+This document defines the {\bf TNEF} file format.
+
+\section{File Format}
+
+\begin{tabular}{l@{ : }l}
+\obj{tnef\_stream}  & \literal{TNEF\_SIGNATURE} \obj{key} \obj{object}  \\
+
+\obj{key}           & \expl{nonzero 16 bit integer}                     \\
+
+\obj{object}        & \obj{message\_seq}                                \\
+                    & \obj{message\_seq} \obj{attach\_seq}              \\
+                    & \obj{attach\_seq}                                 \\
+
+\obj{message\_seq}  & \obj{att\_tnef\_version}                          \\
+                    & \obj{att\_tnef\_version} \obj{msg\_attr\_seq}     \\
+                    & \obj{att\_tnef\_version} \obj{att\_msg\_class}    \\
+                    & \obj{att\_tnef\_version} \obj{att\_msg\_class}
+                        \obj{msg\_attr\_seq}                            \\
+                    & \obj{att\_msg\_class}                             \\
+                    & \obj{att\_msg\_class} \obj{msg\_attr\_seq}        \\
+                    & \obj{msg\_attr\_seq}                              \\
+
+\obj{att\_tnef\_version}
+                    & \literal{LVL\_MESSAGE} \literal{attTNEFVersion}
+                      \expl{sizeof(ULONG)} \literal{0x000010000}
+                      \obj{checksum}                                    \\
+
+\obj{msg\_attr\_seq}& \obj{msg\_attr}+                                  \\
+
+\obj{msg\_attr}     & \literal{LVL\_MESSAGE} 
+                      \obj{attr\_id} \obj{attr\_len} 
+                      \obj{attr\_data} \obj{checksum}                   \\
+
+\obj{attr\_name}    & \expl{One of the defined attribute}               \\
+
+\obj{attr\_type}    & \expl{One of the defined attribute types}         \\
+
+\obj{attr\_len}     & \expl{length in bytes of attr data}               \\
+
+\obj{attr\_data}    & \expl{data associated with the attr, 
+                            \obj{attr\_len} bytes of data}              \\
+
+\obj{attach\_seq}   & \obj{att\_rend\_data}                             \\
+                    & \obj{att\_rend\_data} \obj{att\_attr\_seq}        \\
+
+\obj{att\_rend\_data}&\literal{LVL\_MESSAGE} \literal{attRendData} 
+                      \expl{sizeof(RENDDATA)} \obj{renddata} 
+                      \obj{checksum}                                    \\
+
+\obj{renddata}      & \expl{contents of RENDDATA structure}             \\
+
+\obj{att\_attr\_seq}& \obj{att\_attr}+                                  \\
+
+\obj{att\_attr}     & \literal{LVL\_ATTACHMENT} \obj{attr\_id} 
+                      \obj{attr\_len} \obj{attr\_data} \obj{checksum}   \\
+
+\obj{checksum}      & \expl{integer which is the sum of bytes \% 65536} \\
+
+\literal{TNEF\_SIGNATURE}&\literal{0x223e9f78}                          \\
+
+\literal{LVL\_MESSAGE}&\literal{0x01}                                   \\
+
+\literal{LVL\_ATTACHMENT}&\literal{0x02}                                \\
+
+\end{tabular}
+
+All attributes names are defined in \code{src/names.data}; all
+attribute types in \code{src/types.data}.
+
+\section{Notes on Attributes}
+
+This sections describes special handling needed for some attributes.
+
+\subsection{\literal{attATTACHMENT} (\code{0x9005})}
+
+This attribute has some interesting MAPI properties in it.  Most
+importantly is the long filename MAPI property.  The MAPI proerties have
+the following structure:
+
+\begin{tabular}{l@{ : }l}
+    \obj{Property\_seq} & \expl{integer property count}
+                         \obj{Property\_value} \\
+
+    \obj{Property\_value} & \obj{property\_tag} \obj{Property} \\
+                         & \obj{property\_tag} \obj{Proptag\_name} 
+                                \obj{Property} \\
+
+    \obj{Property} & \obj{Value} \\
+                   & \expl{value\_count} \obj{Value} \\
+
+    \obj{Value} & \obj{value\_data} \\
+                & \obj{value\_size} \obj{value\_data} \obj{padding} \\
+                & \obj{value\_size} \obj{value\_IID} \obj{value\_data}
+                                   \obj{padding} \\
+
+    \obj{Proptag\_name} & \obj{name\_guid} \obj{name\_kind} \obj{name\_id} \\
+                       & \obj{name\_guid} \obj{name\_kind} 
+                                         \obj{name\_string\_length}
+                                         \obj{name\_string}
+                                         \obj{padding} \\
+    
+\end{tabular}
+
+\section{Data Structures}
+
+In some cases the attribute data is structured data.  This section
+describes those data structures.
+
+\subsection{\code{date}}
+
+\begin{verbatim}
+struct date
+{
+    int16 year, month, day;
+    int16 hour, min, sec;
+    int16 dow;
+};
+\end{verbatim}
+
+The \code{dow} member is zero based with Sunday equal to zero.
+
+\subsection{\code{RENDDATA}}
+
+This data structure is not currently defined since it is unclear that it is
+needed by anything other than Microsoft\textsuperscript{TM} Outlook.
+
+
+\end{document}

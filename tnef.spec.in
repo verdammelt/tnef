@@ -1,0 +1,46 @@
+# rpm spec file for tnef 1.1.1
+Summary: Decodes MS-TNEF attachments.
+Name: tnef
+Version: @VERSION@
+Release: 1
+Group: Mail/Encoders
+Copyright: GPL
+Source: http://world.std.com/~damned/tnef-%{version}.tar.gz
+BuildRoot: /var/tmp/%{name}-%{version}-root
+Prefix: @prefix@
+Vendor: Angst Programming I.G.
+URL: http://world.std.com/~damned/software.html
+Packager: Mark Simpson <damned@world.std.com>
+
+%description
+TNEF is a program for unpacking MIME attachments of type
+"application/ms-tnef". This is a Microsoft only attachment.
+
+Due to the proliferation of Microsoft Outlook and Exchange mail servers,
+more and more mail is encapsulated into this format.
+
+The TNEF program allows one to unpack the attachments which were
+encapsulated into the TNEF attachment.  Thus alleviating the need to use
+Microsoft Outlook to view the attachment.
+
+
+%prep
+%setup
+
+%build
+CFLAGS=${RPM_OPT_FLAGS} ./configure --prefix=%{prefix}
+make all
+
+%install
+make "DESTDIR=${RPM_BUILD_ROOT}" install
+
+%clean
+rm -rf ${RPM_BUILD_ROOT}
+
+%files
+%defattr(-,root,root)
+%doc README COPYING ChangeLog AUTHORS NEWS TODO BUGS
+%{prefix}/bin/tnef
+%{prefix}/man/man1/tnef.1
+
+

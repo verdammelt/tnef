@@ -1,0 +1,414 @@
+2001-09-18  Person or Persons Unknown  <damned@world.std.com>
+
+        * Release v1.1.1:
+
+	* NEWS:
+	* configure.in:
+	New version.
+	
+	* tnef.spec.in: Small improvements.
+
+	* doc/Makefile.am, doc/tnef.1: man page renamed to tnef.1 to put
+	it into the correct manual page section.
+
+	* src/strdup.c (strdup): Fixing off by one error.
+
+2001-08-13  Mark Simpson  <damned@world.std.com>
+
+	* Release v1.1:
+
+	* NEWS:
+	* configure.in:
+	New version.
+
+	* src/main.c: Disallowing -w with reading a file from stdin.
+	
+	* src/alloc.c (MALLOC): 
+	Modified to not produce error if size is zero.  Some libc
+	libraries return NULL if size is zero.
+
+	* doc/Makefile.am:
+	* doc/tnef.3: 
+	New file courtesy Clark Morgan <cmorgan@aracnet.com> 
+
+2001-07-17  Mark Simpson  <damned@world.std.com>
+
+	* configure.in: 
+	Checking for ldiv.
+
+	* tnef.spec.in: 
+	Cleanup and addition of doc.
+
+	* src/ldiv.c, src/ldiv.h:
+	New files to be compiled if ldiv is not defined.
+
+	* src/tnef.c: 
+	Cleaning up a few memory leaks.
+
+2001-04-07  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release 1.0.1:
+	
+	* NEWS:
+	* configure.in:
+	New version.
+
+	* src/tnef.c:
+	Fixing problem with directory usage.  When a
+	MAPI_ATTACH_LONG_FILENAME is found TNEF must prepend the directory
+	to it just like when it finds a attATTACHTITLE.
+
+	Adding an ident line.
+
+2001-03-17  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release 1.0:
+	* NEWS:
+	* configure.in:
+
+	* src/tnef.c:
+	* src/tnef.h:
+	* src/mkdata.awk:
+	* src/mapi-names.data:
+	* src/mapi-types.data:
+	* src/Makefile.am:
+	* src/.cvsignore:
+	New support for MAPI attributes which are inside of TNEF
+	attributes.  This allows for getting the long filenames.
+
+	* doc/file-format.tex:
+	Now includes information about MAPI types.
+
+2001-01-17  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release v0.16
+
+	* src/main.c (USAGE, parse_cmdline)
+	* src/tnef.c (NUMBER_FILES, find_free_number, write_file):
+	* src/tnef.h: 
+	New numbered backup feature (idea and code from:
+	Jean-Jacques Michel <jjmichel@linbox.com>)
+
+2000-11-15  Person or Persons Unknown  <damned@world.std.com>
+
+	* configure.in:
+	New --enable-debug switch
+	Using AC_REPLACE_FUNCS to check for basename
+
+	* acinclude.m4: New AC_DEBUG_COMPILE macro.  Implementation of
+	--enable-debug in configure script. 
+
+	* src/tnef.c (write_file, rename_file, decode_attachment): Changes
+	needed because basename does not return a newly allocated
+	pointer.  It returns a pointer into the string it was passed.  Do
+	not free this string.
+
+	* src/path.c (concat_fname): Function is now more robust.
+	(basename): Removed this function to basename.c
+
+	* src/basename.c: New file containing my implementation of
+	basename (based upon glibc).  Will be built only on platforms
+	without one of its own.
+
+	* src/strdup.c: Tweaked my implementation after seeing the one in
+	glibc. 
+
+	* .cvsignore: Now ignoring the distribution
+
+	* src/alloc.c:
+	* src/alloc.h:
+	* src/path.c:
+	* src/path.h:
+	* src/main.c:
+	* src/sizes.h:
+	* src/strdup.h:
+	* src/tnef.c:
+	* src/tnef.h:
+	Extra comments.
+
+	* src/path.c:
+	* src/path.h:
+	Conditional compilation of basename.  This is now checked for in
+	the configure script.
+
+2000-10-27  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release 0.15
+
+	* configure.in: Fixing int sizeof check to remove warning.
+	Checking for vprintf.  Addition of maintainer mode.
+
+	* src/tnef.h: Addition of overwrite and confirmation
+	functionality. 
+
+	* src/tnef.c: Addition of overwite and confirmation
+	functionality. Moving of debug output into a seperate
+	function. Moving of writing and renaming files into seperate
+	files.
+
+	* src/main.c: Changes to add two new flags: --overwite and
+	--interactive/--confirmation/-w.
+
+	* Makefile.am (AUTOMAKE_OPTIONS): Setting up defaults for automake
+	runs. 
+
+2000-10-06  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release v0.14
+
+	* configure.in: Check for executable extension.  
+	Add --enable-warnings options and removing unused --enable-debug. 
+	Add checks for strrchr, memmove, and memory.h
+
+	* acinclude.m4: New file with definitin of AC_COMPILER_WARNING
+	used by ./configure --enable-warnings
+
+	* src/tnef.c, src/tnef.h, src/main.h:
+	New command line argument handling.  
+	New command line argument: --use-paths.
+	Corrected pathname security bug.
+
+	* src/alloc.c, src/alloc.h, src/path.c, src/path.h:
+	New files breaking code out of tnef.c
+
+	* src/Makefile.am: Removed CFLAGS so default is used instead.
+
+2000-09-26  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release v0.13
+
+2000-09-23  Mark Simpson  <damned@world.std.com>
+
+	* tnef.spec.in: New file to allow creation of rpm files
+
+	* src/tnef.c, src/main.c: -C option same as -d, -t option same as
+	-l,-n. -v option like tar now. --debug is heavy output (like
+	--verbose was previously).
+	(some changes provided by Ambrose Li <acli@mingpaoxpress.com>
+
+	* minor spelling corrections.
+
+2000-04-27  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release v0.12
+
+	* src/Makefile.am (CFLAGS): using -g
+
+	* src/tnef.c (decode_attachment): Fixed so that it can handle the
+	filename to come after the attachment data... fix curtesy of:
+	"Adam L. Gibson" <Adam@PTM.com>
+
+2000-03-23  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release v0.11
+
+2000-03-22  Person or Persons Unknown  <damned@world.std.com>
+
+	* configure.in: Checking for getopt_long function.
+
+	* src/tnef.c: Inserting byte-order fix from Nathan Neulinger 
+	<nneul@umr.edu>.  Fixes date display problem.
+
+	* src/main.c: Using new getopt_long.h when needed.
+
+	* src/getopt_long.c, src/getopt_long.h: Stole these getopt and
+	getopt_long functions from GNUEmacs 20.5.1 and put them in here
+	with minor mods so that we can build on platforms without a
+	builtin getopt_long function.
+
+	* tests/Makefile.am, tests/long-filename.tnef,
+	tests/missing-filenames.tnef: More test files.
+
+2000-02-16  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release v0.10
+
+	* src/tnef.c:
+	Replace calls to malloc with new Malloc function which produces an
+	error and aborts if memory allocation fails.
+	(dump_attr): Temporary fix for Solaris problem with date data.
+	(decode_attachment): Make up a filename if one is not given in the
+	tnef file. 
+
+1999-12-26  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release v0.9
+
+	* src/tnef.c (decode_attachment): Undoing previous changes
+	concerning attATTACHMENT type.  Found that this did not work
+	reliably and that the changes were incorrect as well.
+
+1999-12-04  Person or Persons Unknown  <damned@world.std.com>
+
+        * Release v0.8
+	
+	* src/tnef.c (decode_attachment): Now watches for attATACHMENT
+	records.  These contain the real filename of the file whereas the
+	attATTACHTITLE is a 'short' filename.  Keeping both ways right now
+	just in case.  Not sure what else is in the attATTACHMENT buffer
+	though.
+
+1999-10-26  Person or Persons Unknown  <damned@world.std.com>
+
+	* Release v0.7.2
+
+	* src/Makefile.am:
+	* src/main.c:
+	* src/tnef.c:
+	* src/tnef.h:
+	Moving main functions and command line parsing to separate file.
+
+	* doc/Makefile.am:
+	* doc/file-format.tex:
+	* doc/.cvsignore:
+	Replacing text file with LaTeX file describing file format.  
+
+        * Release v0.7.1
+	
+        * TODO: Many new tasks.
+	
+	* tests/Makefile.am:
+	* tests/one-file.tnef:
+	* tests/rtf.tnef:
+	* tests/two-files.tnef:
+	Replaced/renamed test files.
+
+        * src/tnef.c: Moved strings of copyright and no-warranty statement
+	to top of file for clarity.
+	
+	* src/mkdata.awk:
+	* src/names.data:
+	* src/strdup.c: 
+	* src/strdup.h:
+	* src/tnef.c:
+	* src/types.data:
+	Copyright fix. Comment Line added.
+
+1999-10-14  Mark Simpson  <simpson@world.std.com>
+
+	* ChangeLog: v0.7
+	
+        * configure.in: New --enable-debug-build switch.  Now checking for
+	int size so we can create appropriate typedefs
+	
+	* src/Makefile.am:
+	* src/mkdata.awk:
+	* src/sizes.h:
+	* src/tnef.c:
+	* src/tnef.h:
+	* src/types.data:
+	Typedef-ing int types for the sizes we need and using them.
+	checksum now works because of this.
+
+	* acconfig.h: Added DEBUG and NDEBUG for the --enable-deubug-build
+	switch to configure.
+
+	* Makefile.am:
+	* doc/.cvsignore:
+	* doc/Makefile.am:
+	* tests/.cvsignore:
+	* tests/Makefile.am:
+	doc and tests directory now being 'built' and included in
+	distribution. 
+
+1999-10-13  Mark Simpson  <simpson@world.std.com>
+
+        * Release v0.6
+	
+        * Makefile.am: add BUGS to EXTRA_DIST
+	
+        * TODO: more to do
+	
+	* BUGS, README: creating this file.
+
+	* src/tnef.c (parse_cmdline): Fixed copyright statement for
+	--version. 
+
+1999-10-12  Mark Simpson  <simpson@world.std.com>
+
+	* Release v0.5
+
+	* src/tnef.c (dump_attr): Now handling szSHORT and szLONG and
+	szTEXT. 
+	(usage, parse_cmdline): New switches -l/--list to simply list
+	contents (currently the same as -n/--dry_run.  -f/--file no longer
+	mandatory, -f/--file can accept '-' to mean stdin.
+
+        * Release v0.4
+	
+	* src/tnef.c: Extern decl of tempnam to quiet compiler.
+	(dump_attr): dump_attr can now handle dates.
+	(check_checksum): #if 0 out this function for now until it works.
+	(decode_attachment): Change in attribute name: attFILENAME becomes
+	attATTACHTITLE.
+	(decode_attachment, parse_cmdline): New -n option allows for tnef
+	to do nothing other than read the file.  If -n was given it will
+	not write the files. 
+
+	* src/tnef.h: Adding date structure.
+
+	* src/names.data: Complete listing of attributes
+
+	* src/Makefile.am: Still working on a good way to get names.[ch]
+	and types.[ch] built and linked but not have them in the dist.
+	This way will work: $(tnef_OBJECTS) depends upon the
+	{names,types}.o and BUILT_SOURCES contains names.[ch] and
+	types.[ch] and most importantly tnef_LIBADD has {names,types}.o
+
+	* TODO: adding some good ideas.
+
+	* tests/two-files: replaced with tnef file that actually _has_ two
+	files in it.
+
+1999-10-09  Mark Simpson  <damned@world.std.com>
+
+	* Release v0.3
+	
+	* TODO: Adding some ideas here.
+	
+	* configure.in: Looking for awk and strdup, version update
+	
+	* src/tnef.c:
+	* src/tnef.h: Big changes to use generated lists of names and
+	types, changes to flow of code, less specialized handling when we
+	just don't care.  All verbose printing done in one function.
+	New -d/--directory option for specifying where to put extracted
+	files. 
+	
+	* src/.cvsignore: Ignore generated files
+	
+	* src/Makefile.am: Changes to use generated files
+	
+	* src/mkdata.awk: AWK script to create foo.[ch] out of foo.data
+	
+	* src/strdup.c:
+	* src/strdup.h: New files defining strdup in case we try to build
+	on a system without it.
+	* src/names.data:
+	* src/types.data: New files containing data to create the
+	names.[ch] and types.[ch] files.  These contain the #define's for
+	names and types, and also code to get the string equivalents.
+	* doc/grammer: new file defining the grammer of a TNEF Stream.
+
+	* src/tnef.c: 
+	* src/tnef.h:
+	changing #define'd names
+
+1999-10-06  Mark Simpson  <damned@world.std.com>
+
+	* src/tnef.c: Removed static buffers
+
+	* tests/one-file: 
+	* tests/rtf:
+	* tests/two-files:
+	Test files
+	
+	* src/Makefile.am: header file needed for distribution of source
+	
+	* configure.in: Checking for install program and size_t decl.
+	
+	* AUTHORS: Initial content
+	
+	* .cvsignore:
+	* src/.cvsignore: ignoring more files
+	

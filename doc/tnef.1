@@ -1,0 +1,154 @@
+.TH TNEF 1 "TNEF MIME Decoder" "Filter" \" -*- nroff -*-
+.SH NAME
+.nf        \" fill off
+tnef \- decode Microsoft's Transport Neutral Encapsulaton Format
+.fi        \" fill on
+.SH SYNOPSIS
+.BR tnef " [options] [FILE]"
+.PP
+.B tnef
+{\fB\-\-help\fP | \fB\-\-version\fP}
+.SH DESCRIPTION
+This manual page documents the
+.B tnef
+filter.
+.B tnef
+decodes e-mail attachments encoded in Microsoft's Transport Neutral
+Encapsulation Format (hereafter, TNEF), which "wraps"
+Microsoft e-mail messages composed in Rich Text Format (RTF).
+.PP
+.IR Unfortunately ","
+RTF-rendered attachments are inaccessible
+to any e-mail client that does not understand TNEF.
+.IR Fortunately ","
+the
+.B tnef
+filter can be used by any MIME-aware client to decode these attachments.
+.SH OPTIONS
+.TP
+\fB\-C\fP DIR,  \-\-\fBdirectory\fP=DIR
+unpack file attachments into DIR.
+.TP
+\fB\-f\fP FILE,  \fB\-\-file\fP=FILE
+use FILE as input ('-' denotes stdin).  When this option is omitted,
+.B tnef
+reads data from stdin.
+.TP
+\fB\-\-number-backups\fP
+when extracting attachments, if file FOO will be overwritten,
+create FOO.1 instead.
+.TP
+\fB\-\-overwrite\fP
+when extracting attachments, overwrite existing files.
+.TP
+\fB\-t,  \-\-list\fP
+list attached files, do not extract.
+.TP
+\fB\-\-use-paths\fP
+honor file pathnames specifieid in the TNEF attachment.
+For security reasons, paths to attached files are
+ignored by default.
+.TP
+\fB\-w,  \-\-interactive,  \-\-confirmation\fP
+ask for confirmation for every action.
+.TP
+\fB\-\-debug\fP
+enable debug output.
+.TP
+\fB\-v,  \-\-verbose\fP
+produce verbose output.
+.SH "EXAMPLE"
+The following example demonstrates typical
+.B tnef
+usage with a popular Unix mail client called "mutt".
+.nf
+.SS "Step 1 \-\- Configure ~/.mailcap"
+.fi
+Mutt can't use
+.B tnef
+for its intended purpose until an appropriate content type definition
+exists in ~/.mailcap .  Here's a sample definition:
+.PP
+.RS
+application/ms\-tnef; tnef -w %s
+.RE
+.PP
+This mailcap entry says that whenever the MIME content type:
+.PP
+.RS
+application/ms\-tnef
+.RE
+.PP
+is encountered, use this command to decode it: 
+.PP
+.RS
+tnef \-w %s
+.RE
+.PP
+The latter command string invokes
+.BR tnef ","
+specifying both the \fB\-w\fP option and the attachment (created as a
+temporary file) as command line arguments.
+.nf
+.SS "Step 2 \-\- Add The Filter To $PATH"
+.fi
+Mutt can't invoke
+.B
+tnef
+if the filter isn't accessible via $PATH.
+.nf
+.SS "Step 3 \-\- Test Mutt"
+.fi
+Use mutt to read a message that includes a TNEF attachment.  Mutt will
+note that an attachment of type "application/ms\-tnef is unsupported".
+.PP
+Press the "v" key to open mutt's "view attachment" menu.
+.PP
+Move the cursor over the TNEF attachment and press the enter key to "view"
+the attachment.
+Mutt will launch
+.B tnef
+and invoke it
+using the command line syntax specified in ~/.mailcap (step 1).
+.B tnef
+then decodes all file(s) included in the TNEF attachment, prompting
+for confirmation prior to creating an individual file (refer to
+.B \-w
+option above).  
+.B \-w
+is useful here because it gives the end user a chance to
+view the filename(s) included in the mail message.
+.PP
+Note that Mutt's attachment menu also supports a pipe option, which permits
+the user to pipe attachments to an external filter (how convenient). 
+So, to list the contents of a TNEF attachment prior to decoding it, press
+the "|" key and enter this command:
+.PP
+.RS
+tnef \-t
+.RE
+.PP
+.SH "SEE ALSO"
+.BR metamail (1),
+.BR mailcap (4),
+.BR mutt (1),
+other email clients.
+.SH "AUTHOR"
+Mark Simpson.
+.SH "REPORTING BUGS"
+Report bugs to Mark Simpson <damned@world.std.com> .
+.SH "OTHER REFERENCES"
+This web page:
+.PP
+.nf
+.nh      \"no hyphenation
+http://support.microsoft.com/support/kb/articles/Q136/2/04.asp
+.hy 1    \"enable hyphenation
+.fi
+.PP
+describes how to configure Microsoft email clients so that the TNEF format
+is disabled when sending messages
+to non-TNEF-compatible clients.
+
+
+

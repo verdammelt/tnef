@@ -1,0 +1,82 @@
+TNEF NEWS -- history of user-visible changes.   12 Oct 2000
+Copyright (C) 2000, 2001 by Mark Simpson
+
+* 1.1.1:
+** man page: moved to man1
+** Updating of spec file
+
+* 1.1:
+** man page
+   (courtesy of Charles Morgan <cmorgan@aracnet.com>) 
+** Fixing bug with -w parameter 
+   (reported by Charles Morgan <cmorgan@aracnet.com>)
+** Should now build on many more platforms 
+   (courtesy of: David T Kerns <dkerns@lucent.com>) 
+
+* 1.0.1:
+** Fixing bug with -C parameter. 
+   (reported by Thomas Ribbrock <argathin@gmx.net>)
+
+* 1.0:
+** First 1.0 release
+** Now parsing MAPI attributes.
+** Long filenams available.
+
+* 0.16:
+** Now builds on Digital UNIX v4.0 (OSF1)
+** Intermittent crash fix.
+** New option to allow for numberd file backups 
+   (courtesy of Jean-Jacques Michel <jjmichel@linbox.com>)
+
+* 0.15:
+** Addition of overwrite and confirmation flags
+
+* 0.14.1:
+** Compile bug in previous release fixed.
+
+* 0.14:
+** Security fix: Now ignores pathnames of files in TNEF file unless
+  --use-paths switch is given.
+
+* 0.13:
+** Added rpm spec file to distribution
+** Changed command line options to be more tar like
+
+* 0.12:
+** Handling case where filename comes after filedata in TNEF file.
+  (contributed by "Adam L. Gibson" <Adam@PTM.com>)
+
+* 0.11:
+** Checking for getopt_long for systems that do not have it
+** Byte order fix (contributed by Nathan Neulinger  <nneul@umr.edu>)
+** More tests
+
+* 0.10:
+** Create default filename when none given in TNEF file.
+
+* 0.9:
+** Undoing change made in v0.8... did not work correctly.
+
+* v0.8:
+** Now gets the actual filename from the tnef file, not the shorter 'DOS'
+  filename. 
+
+* v0.7.2:
+** File format in LaTeX file now.
+
+* v0.7.1:
+** Cleanup.
+
+* v0.7:
+** Now should be able to handle different sizes of int on different machines
+** Checksums now being handled.
+** TNEF grammer document and test files in distribution.
+
+* v0.6:
+** First public release.
+** Just sort of works
+
+
+Local Variables:
+mode: outline
+End:
