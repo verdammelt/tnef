@@ -1,138 +1,139 @@
+setting alloc_limit to: 0
 TNEF Key: 601
-TNEF Version [type: dword] = 00010000
-OEM Codepage [type: byte] = e4 04 00 00 00 00 00 00
-Message Class [type: word] = 5049 5049 5049...
-Date Sent [type: date] = Fri 2000/02/11 17:13:53
-Date Modified [type: date] = Fri 2000/02/11 17:13:59
-Message ID [type: string] ='DADB91D261E0D31183840020AF293BC6'
-Subject [type: string] ='Y2K problem with Add-DT'
-Priority [type: short] = 2
-MAPI Properties [type: byte] = 32 00 00 00 0b 00 02 00 01 00...
-Attachment Rendering Data [type: byte] = 01 00 ff ff ff ff 20 00 20 00...
-Attachment Creation Date [type: date] = Fri 2000/02/11 15:51:34
-Attachment Modification Date [type: date] = Fri 2000/02/11 15:51:34
-Attachment File Name [type: string] ='generpts.src'
-Attachment Meta File [type: byte] = 01 00 09 00 00 03 ca 06 00 00...
-Attachment Data [type: byte] = 2a 50 52 4f 43 20 43 49 52 52...
-Attachment [type: byte] = 0c 00 00 00 03 00 21 0e 00 00...
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Date Sent [type: date] [len: 14] = Fri 2000/02/11 17:13:53
+Date Modified [type: date] [len: 14] = Fri 2000/02/11 17:13:59
+Message ID [type: string] [len: 33] ='DADB91D261E0D31183840020AF293BC6'
+Subject [type: string] [len: 24] ='Y2K problem with Add-DT'
+Priority [type: short] [len: 2] = 2
+MAPI Properties [type: byte] [len: 2280] = 32 00 00 00 0b 00 02 00 01 00...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
+Attachment Creation Date [type: date] [len: 14] = Fri 2000/02/11 15:51:34
+Attachment Modification Date [type: date] [len: 14] = Fri 2000/02/11 15:51:34
+Attachment File Name [type: string] [len: 13] ='generpts.src'
+Attachment Meta File [type: byte] [len: 3476] = 01 00 09 00 00 03 ca 06 00 00...
+Attachment Data [type: byte] [len: 61210] = 2a 50 52 4f 43 20 43 49 52 52...
+Attachment [type: byte] [len: 184] = 0c 00 00 00 03 00 21 0e 00 00...
 MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = -1
+	#0 [len: 4] = -1
 MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 64750
+	#0 [len: 4] = 64750
 MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = ab998f00 1bf744b
+	#0 [len: 8] = ab998f00 1bf744b
 MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = ab998f00 1bf744b
+	#0 [len: 8] = ab998f00 1bf744b
 MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 16] = generpts.src
+	#0 [len: 16] = generpts.src
 MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 0] = 
+	#0 [len: 0] = 
 MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 8] = .src
+	#0 [len: 8] = .src
 MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 16] = generpts.src
+	#0 [len: 16] = generpts.src
 MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = 45 f7 f3 e5 48 e0 d3 11 ac 82 ...
-Attachment Rendering Data [type: byte] = 01 00 ff ff ff ff 20 00 20 00...
+	#0 [len: 16] = 45 f7 f3 e5 48 e0 d3 11 ac 82 ...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
 WRITING ./missing-filenames.dir/generpts.src
-Attachment Creation Date [type: date] = Fri 2000/02/11 17:13:44
-Attachment Modification Date [type: date] = Fri 2000/02/11 17:13:44
-Attachment File Name [type: string] =''
+Attachment Creation Date [type: date] [len: 14] = Fri 2000/02/11 17:13:44
+Attachment Modification Date [type: date] [len: 14] = Fri 2000/02/11 17:13:44
+Attachment File Name [type: string] [len: 1] =''
 No file name specified, using default.
-Attachment Data [type: byte] = d0 cf 11 e0 a1 b1 1a e1 00 00...
-Attachment [type: byte] = 0c 00 00 00 03 00 21 0e 01 00...
+Attachment Data [type: byte] [len: 33792] = d0 cf 11 e0 a1 b1 1a e1 00 00...
+Attachment [type: byte] [len: 188] = 0c 00 00 00 03 00 21 0e 01 00...
 MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = -1
+	#0 [len: 4] = -1
 MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 33856
+	#0 [len: 4] = 33856
 MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 264e36a0 1bf7457
+	#0 [len: 8] = 264e36a0 1bf7457
 MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 264e36a0 1bf7457
+	#0 [len: 8] = 264e36a0 1bf7457
 MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = TechlibDEC99.doc
+	#0 [len: 20] = TechlibDEC99.doc
 MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 0] = 
+	#0 [len: 0] = 
 MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 4] = 
+	#0 [len: 4] = 
 MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = TechlibDEC99.doc
+	#0 [len: 20] = TechlibDEC99.doc
 MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = 46 f7 f3 e5 48 e0 d3 11 ac 82 ...
-Attachment Rendering Data [type: byte] = 01 00 ff ff ff ff 20 00 20 00...
+	#0 [len: 16] = 46 f7 f3 e5 48 e0 d3 11 ac 82 ...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
 WRITING ./missing-filenames.dir/TechlibDEC99.doc
-Attachment Creation Date [type: date] = Fri 2000/02/11 17:13:46
-Attachment Modification Date [type: date] = Fri 2000/02/11 17:13:46
-Attachment File Name [type: string] =''
+Attachment Creation Date [type: date] [len: 14] = Fri 2000/02/11 17:13:46
+Attachment Modification Date [type: date] [len: 14] = Fri 2000/02/11 17:13:46
+Attachment File Name [type: string] [len: 1] =''
 No file name specified, using default.
-Attachment Data [type: byte] = d0 cf 11 e0 a1 b1 1a e1 00 00...
-Attachment [type: byte] = 0c 00 00 00 03 00 21 0e 02 00...
+Attachment Data [type: byte] [len: 34304] = d0 cf 11 e0 a1 b1 1a e1 00 00...
+Attachment [type: byte] [len: 196] = 0c 00 00 00 03 00 21 0e 02 00...
 MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 2
+	#0 [len: 4] = 2
 MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = -1
+	#0 [len: 4] = -1
 MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 34368
+	#0 [len: 4] = 34368
 MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 27dffa30 1bf7457
+	#0 [len: 8] = 27dffa30 1bf7457
 MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 27dffa30 1bf7457
+	#0 [len: 8] = 27dffa30 1bf7457
 MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 24] = TechlibDEC99-JAN00.doc
+	#0 [len: 24] = TechlibDEC99-JAN00.doc
 MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 0] = 
+	#0 [len: 0] = 
 MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 4] = 
+	#0 [len: 4] = 
 MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 24] = TechlibDEC99-JAN00.doc
+	#0 [len: 24] = TechlibDEC99-JAN00.doc
 MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = 47 f7 f3 e5 48 e0 d3 11 ac 82 ...
-Attachment Rendering Data [type: byte] = 01 00 ff ff ff ff 20 00 20 00...
+	#0 [len: 16] = 47 f7 f3 e5 48 e0 d3 11 ac 82 ...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
 WRITING ./missing-filenames.dir/TechlibDEC99-JAN00.doc
-Attachment Creation Date [type: date] = Fri 2000/02/11 17:13:49
-Attachment Modification Date [type: date] = Fri 2000/02/11 17:13:49
-Attachment File Name [type: string] =''
+Attachment Creation Date [type: date] [len: 14] = Fri 2000/02/11 17:13:49
+Attachment Modification Date [type: date] [len: 14] = Fri 2000/02/11 17:13:49
+Attachment File Name [type: string] [len: 1] =''
 No file name specified, using default.
-Attachment Data [type: byte] = d0 cf 11 e0 a1 b1 1a e1 00 00...
-Attachment [type: byte] = 0c 00 00 00 03 00 21 0e 03 00...
+Attachment Data [type: byte] [len: 33792] = d0 cf 11 e0 a1 b1 1a e1 00 00...
+Attachment [type: byte] [len: 188] = 0c 00 00 00 03 00 21 0e 03 00...
 MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 3
+	#0 [len: 4] = 3
 MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = -1
+	#0 [len: 4] = -1
 MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 33856
+	#0 [len: 4] = 33856
 MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 298a4ed0 1bf7457
+	#0 [len: 8] = 298a4ed0 1bf7457
 MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 298a4ed0 1bf7457
+	#0 [len: 8] = 298a4ed0 1bf7457
 MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = TechlibNOV99.doc
+	#0 [len: 20] = TechlibNOV99.doc
 MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 0] = 
+	#0 [len: 0] = 
 MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 4] = 
+	#0 [len: 4] = 
 MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = TechlibNOV99.doc
+	#0 [len: 20] = TechlibNOV99.doc
 MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = 48 f7 f3 e5 48 e0 d3 11 ac 82 ...
+	#0 [len: 16] = 48 f7 f3 e5 48 e0 d3 11 ac 82 ...
 WRITING ./missing-filenames.dir/TechlibNOV99.doc

@@ -1,115 +1,116 @@
+setting alloc_limit to: 0
 TNEF Key: 1af
-TNEF Version [type: dword] = 00010000
-OEM Codepage [type: byte] = e4 04 00 00 00 00 00 00
-MAPI Properties [type: byte] = 35 00 00 00 40 00 07 30 d0 25...
-Attachment Rendering Data [type: byte] = 01 00 20 06 00 00 20 00 20 00...
-Attachment [type: byte] = 11 00 00 00 03 00 21 0e 00 00...
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+MAPI Properties [type: byte] [len: 2968] = 35 00 00 00 40 00 07 30 d0 25...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 20 06 00 00 20 00 20 00...
+Attachment [type: byte] [len: 62216] = 11 00 00 00 03 00 21 0e 00 00...
 MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_OBJECT_TYPE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 7
+	#0 [len: 4] = 7
 MAPI_ACCESS [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 2
+	#0 [len: 4] = 2
 MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1568
+	#0 [len: 4] = 1568
 MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 4] = 00 00 00 00 
+	#0 [len: 4] = 00 00 00 00 
 MAPI_ATTACH_DATA_OBJ [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 61952] = d0 cf 11 e0 a1 b1 1a e1 00 00 ...
+	#0 [len: 61952] = d0 cf 11 e0 a1 b1 1a e1 00 00 ...
 MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 1a82cb00 1c23481
+	#0 [len: 8] = 1a82cb00 1c23481
 MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = a2743400 1c2483c
+	#0 [len: 8] = a2743400 1c2483c
 MAPI_ATTACH_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 16] = VI205A~1.DOC
+	#0 [len: 16] = VI205A~1.DOC
 MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 62030
+	#0 [len: 4] = 62030
 6810 [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
+	#0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
 MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 0] = 
+	#0 [len: 0] = 
 MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = VIA Nytt 1402.doc
+	#0 [len: 20] = VIA Nytt 1402.doc
 MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = VIA_Nytt_1402.doc
+	#0 [len: 20] = VIA_Nytt_1402.doc
 MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 8] = .doc
-Attachment Rendering Data [type: byte] = 01 00 21 06 00 00 20 00 20 00...
+	#0 [len: 8] = .doc
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 21 06 00 00 20 00 20 00...
 WRITING ./MAPI_ATTACH_DATA_OBJ.dir/VIA_Nytt_1402.doc
-Attachment [type: byte] = 11 00 00 00 03 00 21 0e 01 00...
+Attachment [type: byte] [len: 213952] = 11 00 00 00 03 00 21 0e 01 00...
 MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_OBJECT_TYPE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 7
+	#0 [len: 4] = 7
 MAPI_ACCESS [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 2
+	#0 [len: 4] = 2
 MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1569
+	#0 [len: 4] = 1569
 MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 4] = 01 00 00 00 
+	#0 [len: 4] = 01 00 00 00 
 MAPI_ATTACH_DATA_OBJ [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 213688] = 25 50 44 46 2d 31 2e 33 0d 25 ...
+	#0 [len: 213688] = 25 50 44 46 2d 31 2e 33 0d 25 ...
 MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 47779300 1c2481f
+	#0 [len: 8] = 47779300 1c2481f
 MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = a4805550 1c2483c
+	#0 [len: 8] = a4805550 1c2483c
 MAPI_ATTACH_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 16] = VIANYT~1.PDF
+	#0 [len: 16] = VIANYT~1.PDF
 MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 213763
+	#0 [len: 4] = 213763
 6810 [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
+	#0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
 MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 0] = 
+	#0 [len: 0] = 
 MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = VIA Nytt 1402.pdf
+	#0 [len: 20] = VIA Nytt 1402.pdf
 MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = VIA_Nytt_1402.pdf
+	#0 [len: 20] = VIA_Nytt_1402.pdf
 MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 8] = .pdf
-Attachment Rendering Data [type: byte] = 01 00 22 06 00 00 20 00 20 00...
+	#0 [len: 8] = .pdf
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 22 06 00 00 20 00 20 00...
 WRITING ./MAPI_ATTACH_DATA_OBJ.dir/VIA_Nytt_1402.pdf
-Attachment [type: byte] = 11 00 00 00 03 00 21 0e 02 00...
+Attachment [type: byte] [len: 69184] = 11 00 00 00 03 00 21 0e 02 00...
 MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 2
+	#0 [len: 4] = 2
 MAPI_OBJECT_TYPE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 7
+	#0 [len: 4] = 7
 MAPI_ACCESS [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 2
+	#0 [len: 4] = 2
 MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1
+	#0 [len: 4] = 1
 MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 1570
+	#0 [len: 4] = 1570
 MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 4] = 02 00 00 00 
+	#0 [len: 4] = 02 00 00 00 
 MAPI_ATTACH_DATA_OBJ [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 68920] = 3c 68 74 6d 6c 20 78 6d 6c 6e ...
+	#0 [len: 68920] = 3c 68 74 6d 6c 20 78 6d 6c 6e ...
 MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 136fe6e0 1c24836
+	#0 [len: 8] = 136fe6e0 1c24836
 MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = a6cb1d50 1c2483c
+	#0 [len: 8] = a6cb1d50 1c2483c
 MAPI_ATTACH_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 16] = VIANYT~1.HTM
+	#0 [len: 16] = VIANYT~1.HTM
 MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 68997
+	#0 [len: 4] = 68997
 6810 [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
+	#0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
 MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 0] = 
+	#0 [len: 0] = 
 MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = VIA Nytt 14021.htm
+	#0 [len: 20] = VIA Nytt 14021.htm
 MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 20] = VIA_Nytt_14021.htm
+	#0 [len: 20] = VIA_Nytt_14021.htm
 MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 8] = .htm
+	#0 [len: 8] = .htm
 WRITING ./MAPI_ATTACH_DATA_OBJ.dir/VIA_Nytt_14021.htm

@@ -1,42 +1,43 @@
+setting alloc_limit to: 0
 TNEF Key: 8
-TNEF Version [type: dword] = 00010000
-OEM Codepage [type: byte] = e4 04 00 00 00 00 00 00
-Message Class [type: word] = 5049 5049 5049...
-Date Sent [type: date] = Tue 2002/10/08 10:15:35
-Date Modified [type: date] = Tue 2002/10/08 10:15:40
-Message ID [type: string] ='B2DE3DA896A9EB41A32F449E1C135CA8'
-Subject [type: string] ='OCTOBER DISCOUNTED PRICE LIST'
-Priority [type: short] = 2
-MAPI Properties [type: byte] = 31 00 00 00 03 00 de 3f af 6f...
-Attachment Rendering Data [type: byte] = 02 00 52 01 00 00 ff ff ff ff...
-Attachment File Name [type: string] ='Untitled_Attachment'
-Attachment Creation Date [type: date] = Tue 2002/10/08 10:13:48
-Attachment Modification Date [type: date] = Tue 2002/10/08 10:13:48
-Attachment [type: byte] = 0d 00 00 00 03 00 21 0e 00 00...
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Date Sent [type: date] [len: 14] = Tue 2002/10/08 10:15:35
+Date Modified [type: date] [len: 14] = Tue 2002/10/08 10:15:40
+Message ID [type: string] [len: 33] ='B2DE3DA896A9EB41A32F449E1C135CA8'
+Subject [type: string] [len: 30] ='OCTOBER DISCOUNTED PRICE LIST'
+Priority [type: short] [len: 2] = 2
+MAPI Properties [type: byte] [len: 1924] = 31 00 00 00 03 00 de 3f af 6f...
+Attachment Rendering Data [type: byte] [len: 14] = 02 00 52 01 00 00 ff ff ff ff...
+Attachment File Name [type: string] [len: 20] ='Untitled_Attachment'
+Attachment Creation Date [type: date] [len: 14] = Tue 2002/10/08 10:13:48
+Attachment Modification Date [type: date] [len: 14] = Tue 2002/10/08 10:13:48
+Attachment [type: byte] [len: 628428] = 0d 00 00 00 03 00 21 0e 00 00...
 MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 338
+	#0 [len: 4] = 338
 MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 628302
+	#0 [len: 4] = 628302
 MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 0
+	#0 [len: 4] = 0
 6810 [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
+	#0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
 MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 92c4e180 1c26e5f
+	#0 [len: 8] = 92c4e180 1c26e5f
 MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
-	value #0 [len: 8] = 92c4e180 1c26e5f
+	#0 [len: 8] = 92c4e180 1c26e5f
 MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
-	value #0 [len: 4] = 6
+	#0 [len: 4] = 6
 MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 0] = 
+	#0 [len: 0] = 
 MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	value #0 [len: 4] = 
+	#0 [len: 4] = 
 MAPI_ATTACH_TAG [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 12] = 2a 86 48 86 f7 14 03 0a 03 02 ...
+	#0 [len: 12] = 2a 86 48 86 f7 14 03 0a 03 02 ...
 MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
-	value #0 [len: 16] = cd e0 db 7e 59 d0 12 43 96 37 ...
+	#0 [len: 16] = cd e0 db 7e 59 d0 12 43 96 37 ...
 MAPI_ATTACH_DATA_OBJ [type: MAPI embedded object] [num_values = 1] = 
-	value #0 [len: 628240] = 0b 00 00 00 00 00 00 00 c0 00 ...
+	#0 [len: 628240] = 0b 00 00 00 00 00 00 00 c0 00 ...
 WRITING ./MAPI_OBJECT.dir/Untitled_Attachment
