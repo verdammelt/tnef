@@ -1,3 +1,56 @@
+2005-01-13  verdammelt  <verdammelt@freya>
+
+	* src/tnef.c:
+	(decode_mapi) initial parsing of multi-named GUID prefixed
+	properties.
+
+2004-11-15  verdammelt  <verdammelt@freya>
+
+	* src/tnef.c (munge_fname): length parameter is unecessary.
+	(decode_mapi): removing unused parameter
+	(decode_mapi): using real length for attribute length and skipping
+	over pad instead of acting like the actual data length was the padded
+	length.
+	(save_rtf_data): properly 'munging' the name to get the directory
+	(file_add_mapi_attrs): new munge_fname signature
+	(file_add_attr): new munge_fname signature
+
+	* configure.in: upping the version number
+
+	* tests/cmdline/version.baseline: updating version number
+
+	* tests/cmdline/Makefile.am:
+	commenting out the not-yet-implemented tests
+
+	* tests/files/Makefile.am, tests/files/rtf2.test, tests/files/baseline/message.rtf.baseline, tests/files/baseline/rtf2.baseline, tests/files/datafiles/rtf2.list: 
+	new test for the --save-rtf switch
+
+	* tests/files/file-util.sh:
+	(run_test) adding TEST_EXTRA_FLAGS for the rtf2 test
+
+	* tests/files/baselines/two-files.baseline, tests/files/baselines/triples.baseline, tests/files/baselines/rtf.baseline, tests/files/baselines/one-file.baseline, tests/files/baselines/missing-filenames.baseline, tests/files/baselines/long-filename.baseline, tests/files/baselines/data-before-name.baseline, tests/files/baselines/VIA_Nytt_14021.htm.baseline, tests/files/baselines/VIA_Nytt_1402.pdf.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline, tests/cmdline/maxsize.baseline, tests/cmdline/help.baseline, tests/cmdline/debug.baseline:
+	New baselines due to new message attribute parsing
+
+	* src/main.c:
+	(parse_cmdline) PACKAGE is no longer valid, PACKAGE_NAME needs to be
+	used instead
+
+	* tests/util.sh: (check_test_full) capturing stderr as well as stdout
+
+2004-11-13  verdammelt  <verdammelt@freya>
+
+	* README: adding a bit more explanation
+
+	* src/tnef.c:
+	adding parsing of message attributes and parsing of RTF message content
+
+	* src/tnef.h, src/main.c: adding save-rtf feature
+
+2004-02-16  verdammelt  <verdammelt@freya>
+
+	* src/tnef.c, src/malloc.c, src/ldiv.c, src/getopt_long.c:
+	VC6 compiler fixes reported by shooshx@users.sourceforge.net
+
 2004-01-09  verdammelt  <verdammelt@ix>
 
 	* configure.in, NEWS, ChangeLog: New Version
