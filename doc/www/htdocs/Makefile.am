@@ -1,9 +1,6 @@
 EXTRA_DIST	=
 WEB_DIST	= index.html style.css
 
-index.html: index.html.in
-	now=`date +"%Y-%m-%d %T %Z"`; sed -e "s/BUILDDATE/$$now/" $< > $@
-
 web-build: $(WEB_DIST)
 
 web-test: web-build
