@@ -1,5 +1,10 @@
 TNEF NEWS -- history of user-visible changes.   12 Oct 2000
-Copyright (C) 2000, 2001 by Mark Simpson
+Copyright (C) 2000, 2001, 2002 by Mark Simpson
+
+* 1.1.2:
+** Fixing bug with MAPI_ATTACH_OBJ_DATA instead of attATTACHMENT usage.
+   (courtesy of Asbjorn Pettersen <AsbjornPettersen@dualog.no>)
+** Minor Updates of copyright and bug reporting address.
 
 * 1.1.1:
 ** man page: moved to man1

@@ -57,7 +57,7 @@
 #include "path.h"
 
 static char ident_string[] =
-"$Id: tnef.c,v 1.2 2002-08-30 03:40:46 verdammelt Exp $";
+"$Id: tnef.c,v 1.3 2002-09-04 00:39:47 verdammelt Exp $";
 
 /* To quiet compiler define tempnam */
 extern char*
@@ -827,6 +827,15 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
             if (file->name) FREE(file->name);
             file->name = munge_fname (a->values[0].len,
                                       a->values[0].data.buf);
+            break;
+            
+        case MAPI_ATTACH_DATA_OBJ:
+            file->len = a->values[0].len;
+            if (file->data) FREE (file->data);
+            file->data = MALLOC (file->len * sizeof(char));
+            assert (file->data);
+            if (!file->data) abort();
+            memmove (file->data, a->values[0].data.buf, file->len);
             break;
         }
     }

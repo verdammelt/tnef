@@ -1,3 +1,17 @@
+2002-09-03  Person or Persons Unknown  <damned@theworld.com>
+
+	* src/tnef.c (file_add_mapi_attrs): Fixing bug found by Asbjorn
+	Pettersen <AsbjornPettersen@dualog.no>.  This bug occurs when
+	MAPI_ATTACH_DATA_OBJ is where the data for the file is defined
+	instead of attATTACHDATA;
+
+	* src/tnef.c: Removal of unecessary unistd.h
+	(courtesy of Asbjorn Pettersen <AsbjornPettersen@dualog.no>)
+	
+	* <misc files>
+	Updated copyright statements.  Misc changes for newer version of
+	automake/autoconf &c.
+
 2001-09-18  Person or Persons Unknown  <damned@world.std.com>
 
         * Release v1.1.1:
