@@ -109,29 +109,6 @@
 
 #include "getopt_long.h"
 
-/* For communication from `getopt' to the caller.
-   When `getopt' finds an option that takes an argument,
-   the argument value is returned here.
-   Also, when `ordering' is RETURN_IN_ORDER,
-   each non-option ARGV-element is returned here.  */
-
-char *optarg = NULL;
-
-/* Index in ARGV of the next element to be scanned.
-   This is used for communication to and from the caller
-   and for communication between successive calls to `getopt'.
-
-   On entry to `getopt', zero means this is the first call; initialize.
-
-   When `getopt' returns -1, this is the index of the first of the
-   non-option elements that the caller should itself scan.
-
-   Otherwise, `optind' communicates from one call to the next
-   how much of ARGV has been scanned so far.  */
-
-/* 1003.2 says this must be 1 before any call.  */
-int optind = 1;
-
 /* Formerly, initialization of getopt depended on optind==0, which
    causes problems with re-calling getopt as programs generally don't
    know that. */
@@ -146,17 +123,6 @@ int __getopt_initialized = 0;
    by advancing to the next ARGV-element.  */
 
 static char *nextchar;
-
-/* Callers store zero here to inhibit the error message
-   for unrecognized options.  */
-
-int opterr = 1;
-
-/* Set to an option character which was unrecognized.
-   This must be initialized on some systems to avoid linking in the
-   system's own getopt implementation.  */
-
-int optopt = '?';
 
 /* Describe how to deal with options that follow non-option ARGV-elements.
 
@@ -218,9 +184,7 @@ extern char *getenv ();
 #endif
 
 static char *
-my_index (str, chr)
-     const char *str;
-     int chr;
+my_index (const char *str, int chr)
 {
   while (*str)
     {
@@ -308,8 +272,7 @@ static void exchange (char **);
 #endif
 
 static void
-exchange (argv)
-     char **argv;
+exchange (char **argv)
 {
   int bottom = first_nonopt;
   int middle = last_nonopt;
@@ -389,14 +352,8 @@ exchange (argv)
 
 /* Initialize the internal data when the first call is made.  */
 
-#if defined __STDC__ && __STDC__
-static const char *_getopt_initialize (int, char *const *, const char *);
-#endif
 static const char *
-_getopt_initialize (argc, argv, optstring)
-     int argc;
-     char *const *argv;
-     const char *optstring;
+_getopt_initialize (int argc, char *cont *argv, const char* optstring)
 {
   /* Start processing options with ARGV-element 1 (since ARGV-element 0
      is the program name); the sequence of previously skipped
@@ -515,13 +472,9 @@ _getopt_initialize (argc, argv, optstring)
    long-named options.  */
 
 int
-_getopt_internal (argc, argv, optstring, longopts, longind, long_only)
-     int argc;
-     char *const *argv;
-     const char *optstring;
-     const struct option *longopts;
-     int *longind;
-     int long_only;
+_getopt_internal (int argc, char *const *argv, const char* optstring, 
+                  cons struct option* longopts, 
+                  int *longind, int long_only)
 {
   optarg = NULL;
 
@@ -969,42 +922,12 @@ _getopt_internal (argc, argv, optstring, longopts, longind, long_only)
 }
 
 int
-getopt (argc, argv, optstring)
-     int argc;
-     char *const *argv;
-     const char *optstring;
-{
-  return _getopt_internal (argc, argv, optstring,
-			   (const struct option *) 0,
-			   (int *) 0,
-			   0);
-}
-
-int
-getopt_long (argc, argv, options, long_options, opt_index)
-     int argc;
-     char *const *argv;
-     const char *options;
-     const struct option *long_options;
-     int *opt_index;
+getopt_long (int argc, char* const *argv, 
+             const char *options, 
+             const struct option* long_options, 
+             int *opt_index)
 {
   return _getopt_internal (argc, argv, options, long_options, opt_index, 0);
-}
-
-/* Like getopt_long, but '-' as well as '--' can indicate a long option.
-   If an option that starts with '-' (not '--') doesn't match a long option,
-   but does match a short option, it is parsed as a short option
-   instead.  */
-
-int
-getopt_long_only (argc, argv, options, long_options, opt_index)
-     int argc;
-     char *const *argv;
-     const char *options;
-     const struct option *long_options;
-     int *opt_index;
-{
-  return _getopt_internal (argc, argv, options, long_options, opt_index, 1);
 }
 
 #endif	/* Not ELIDE_CODE.  */

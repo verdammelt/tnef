@@ -1,6 +1,9 @@
 TNEF NEWS -- history of user-visible changes.   12 Oct 2000
 Copyright (C) 2000, 2001, 2002 by Mark Simpson
 
+* 1.1.3:
+** Fixing configuration bugs for Mac OS X.
+
 * 1.1.2:
 ** Fixing bug with MAPI_ATTACH_OBJ_DATA instead of attATTACHMENT usage.
    (courtesy of Asbjorn Pettersen <AsbjornPettersen@dualog.no>)
