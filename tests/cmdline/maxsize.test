@@ -15,16 +15,16 @@ rm -f maxsize.output
 touch maxsize.output
 
 # test the -x option
-do_tnef "-x 23"
+do_tnef "-x 25"
 
 # test the --maxsize option
-do_tnef --maxsize=23
+do_tnef --maxsize=25
 
 # invalid input
 do_tnef --maxsize=foo
 
 # negative input
-do_tnef --maxsize=-23
+do_tnef --maxsize=-25
 
 # zero input
 do_tnef --maxsize=0
