@@ -1,4 +1,4 @@
-AUTOMAKE_OPTIONS=gnu check-news
+AUTOMAKE_OPTIONS=	gnits
 
 EXTRA_DIST	=	TODO configure BUGS.in tnef.spec.in
-SUBDIRS	=	doc src tests
+SUBDIRS		=	doc src tests
