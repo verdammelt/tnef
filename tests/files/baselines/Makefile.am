@@ -15,8 +15,10 @@ EXTRA_DIST	=	AUTHORS.baseline		\
 			data-before-name.baseline	\
 			generpts.src.baseline		\
 			long-filename.baseline		\
+			message.rtf.baseline		\
 			missing-filenames.baseline	\
 			one-file.baseline		\
 			rtf.baseline			\
+			rtf2.baseline			\
 			triples.baseline		\
 			two-files.baseline
