@@ -1,7 +1,7 @@
 /*
- * tnef.c -- extract files from microsoft TNEF format
+ * main.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999, 2000, 2001 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,14 +64,14 @@ static const char* USAGE = \
 "-l                  \t[same as -t; deprecated]\n"
 "-n, --dry_run       \t[same as -t; deprecated]\n"
 "\nIf FILE is not specified standard input is used\n"
-"\nReport bugs to <damned@world.std.com>\n";
+"\nReport bugs to <%s>\n";
 
 
 static void
 usage (char* prog)
 {
     fprintf (stdout, "%s: [options] [FILE]\n", prog);
-    fprintf (stdout, USAGE);
+    fprintf (stdout, USAGE, PACKAGE_BUGREPORT);
 }
 
 
@@ -134,7 +134,7 @@ parse_cmdline (int argc, char **argv,
             break;
 
         case 'V':
-            fprintf (stderr, "%s %s\n", PACKAGE, VERSION);
+            fprintf (stderr, "%s\n", PACKAGE_STRING);
             fprintf (stderr, COPYRIGHTS);
             fprintf (stderr, "\n");
             fprintf (stderr, NO_WARRANTY, PACKAGE, PACKAGE);

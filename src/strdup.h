@@ -1,5 +1,5 @@
 /* strdup.h -- version of strdup for systems without it */
-/* Copyright (C) 1999, 2000, 2001 by Mark Simpson <damned@world.std.com> */
+/* Copyright (C) 1999, 2000, 2001, 2002 by Mark Simpson <damned@world.std.com> */
 #ifndef STRDUP_H
 #define STRDUP_H
 

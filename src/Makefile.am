@@ -1,27 +1,29 @@
-EXTRA_DIST		=	alloc.h						\
-					getopt_long.h				\
-					ldiv.h						\
-					mapi-types.data				\
-					mapi-names.data				\
-					mkdata.awk 					\
-					names.data 					\
-					path.h						\
-					sizes.h						\
-					strdup.h 					\
-					types.data 
+EXTRA_DIST	=	alloc.h			\
+			basename.h		\
+			getopt_long.h		\
+			ldiv.h			\
+			mapi-types.data		\
+			mapi-names.data		\
+			mkdata.awk		\
+			names.data		\
+			path.h			\
+			sizes.h			\
+			strdup.h		\
+			types.data 
 bin_PROGRAMS	=	tnef
 tnef_SOURCES	=	alloc.c main.c path.c tnef.c tnef.h
-BUILT_SOURCES	=	tnef_names.c tnef_names.h 	\
-					tnef_types.c tnef_types.h	\
-					mapi_types.c mapi_types.h	\
-					mapi_names.c mapi_names.h
-BUILT_OBJS		=	tnef_names.o tnef_types.o mapi_types.o mapi_names.o
-tnef_LDADD		=	@LIBOBJS@ $(BUILT_OBJS)
+BUILT_SOURCES	=	tnef_names.c tnef_names.h	\
+			tnef_types.c tnef_types.h	\
+			mapi_types.c mapi_types.h	\
+			mapi_names.c mapi_names.h
+BUILT_OBJS	=	tnef_names.o tnef_types.o 	\
+			mapi_types.o mapi_names.o
+tnef_LDADD	=	@LIBOBJS@ $(BUILT_OBJS)
 
 MOSTLYCLEANFILES=	tnef_names.c tnef_names.h	\
-					tnef_types.c tnef_types.h	\
-					mapi_types.c mapi_types.h	\
-					mapi_names.c mapi_names.h
+			tnef_types.c tnef_types.h	\
+			mapi_types.c mapi_types.h	\
+			mapi_names.c mapi_names.h
 
 tnef.o:	tnef.h
 tnef.h: sizes.h

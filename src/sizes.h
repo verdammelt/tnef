@@ -2,7 +2,7 @@
 /* 
  * sizes.h -- defines types for 8, 16 and 32 bit integer values.
  * 
- * Copyright (C) 1999, 2000 by Mark Simpson <damned@world.std.com>
+ * Copyright (C) 1999, 2000, 2002 by Mark Simpson <damned@world.std.com>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
  * Commentary: 
- * 		Defines the sizes appropriately.  oonfig.h must be inculded before
+ * Defines the sizes appropriately.  oonfig.h must be inculded before
  * this file.
  */
 #ifndef SIZES_H

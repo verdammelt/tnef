@@ -4,7 +4,7 @@
    "Keep this file name-space clean" means, talk to drepper@gnu.org
    before changing it!
 
-   Copyright (C) 1987, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98
+   Copyright (C) 1987, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 02
    	Free Software Foundation, Inc.
 
    NOTE: The canonical source of this file is maintained with the GNU C Library.
@@ -72,7 +72,7 @@
 /* Don't include stdlib.h for non-GNU C libraries because some of them
    contain conflicting prototypes for getopt.  */
 # include <stdlib.h>
-# include <unistd.h>
+/* # include <unistd.h> */
 #endif	/* GNU C library.  */
 
 #ifdef VMS

@@ -1,7 +1,7 @@
 # rpm spec file for tnef 1.1.1
 Summary: Decodes MS-TNEF attachments.
-Name: tnef
-Version: @VERSION@
+Name: @PACKAGE_NAME@
+Version: @PACKAGE_VERSION@
 Release: 1
 Group: Mail/Encoders
 Copyright: GPL
@@ -9,8 +9,8 @@ Source: http://world.std.com/~damned/tnef-%{version}.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}-root
 Prefix: @prefix@
 Vendor: Angst Programming I.G.
-URL: http://world.std.com/~damned/software.html
-Packager: Mark Simpson <damned@world.std.com>
+URL: http://tnef.sourceforge.net
+Packager: Mark Simpson <@PACKAGE_BUGREORT@>
 
 %description
 TNEF is a program for unpacking MIME attachments of type

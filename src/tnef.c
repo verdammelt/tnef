@@ -1,7 +1,7 @@
 /*
  * tnef.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999, 2000, 2001 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
  * Copyright (C)1998 Thomas Boll  <tb@boll.ch>		[ORIGINAL AUTHOR]
  *
  * This program is free software; you can redistribute it and/or modify
@@ -32,7 +32,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-#include <unistd.h>
 
 #if STDC_HEADERS
 #  if HAVE_STRING_H
@@ -54,10 +53,11 @@
 #include "tnef.h"
 
 #include "alloc.h"
+#include "basename.h"
 #include "path.h"
 
 static char ident_string[] =
-"$Id: tnef.c,v 1.1.1.1 2002-07-20 15:58:48 verdammelt Exp $";
+"$Id: tnef.c,v 1.2 2002-08-30 03:40:46 verdammelt Exp $";
 
 /* To quiet compiler define tempnam */
 extern char*

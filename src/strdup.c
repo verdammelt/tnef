@@ -1,5 +1,5 @@
 /* strdup.c -- version of strdup for systems without one */
-/* Copyright (C) 1999, 2000, 2001 Mark Simpson <damned@world.std.com> */
+/* Copyright (C) 1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com> */
 #ifdef HAVE_CONFIG_H
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
