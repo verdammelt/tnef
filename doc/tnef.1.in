@@ -26,37 +26,46 @@ the
 filter can be used by any MIME-aware client to decode these attachments.
 .SH OPTIONS
 .TP
-\fB\-C\fP DIR,  \-\-\fBdirectory\fP=DIR
-unpack file attachments into DIR.
-.TP
 \fB\-f\fP FILE,  \fB\-\-file\fP=FILE
 use FILE as input ('-' denotes stdin).  When this option is omitted,
 .B tnef
 reads data from stdin.
 .TP
-\fB\-\-number-backups\fP
-when extracting attachments, if file FOO will be overwritten,
-create FOO.1 instead.
+\fB\-C\fP DIR,  \-\-\fBdirectory\fP=DIR
+unpack file attachments into DIR.
+.TP
+\fB\-x SIZE, \-\-maxsize=SIZE\fP
+limit maximum size of extracted archive (bytes)
+.TP
+\fB\-t,  \-\-list\fP
+list attached files, do not extract.
+.TP
+\fB\-w,  \-\-interactive,  \-\-confirmation\fP
+ask for confirmation for every action.
 .TP
 \fB\-\-overwrite\fP
 when extracting attachments, overwrite existing files.
 .TP
-\fB\-t,  \-\-list\fP
-list attached files, do not extract.
+\fB\-\-number-backups\fP
+when extracting attachments, if file FOO will be overwritten,
+create FOO.1 instead.
 .TP
 \fB\-\-use-paths\fP
 honor file pathnames specifieid in the TNEF attachment.
 For security reasons, paths to attached files are
 ignored by default.
 .TP
-\fB\-w,  \-\-interactive,  \-\-confirmation\fP
-ask for confirmation for every action.
+\fB\-h,  \-\-help\fP 
+show usage message.
 .TP
-\fB\-\-debug\fP
-enable debug output.
+\fB\-V,  \-\-version\fP 
+display version and copyright.
 .TP
 \fB\-v,  \-\-verbose\fP
 produce verbose output.
+.TP
+\fB\-\-debug\fP
+enable debug output.
 .SH "EXAMPLE"
 The following example demonstrates typical
 .B tnef

@@ -1,0 +1,43 @@
+#!/bin/sh
+
+. $srcdir/../util.sh
+bin=$srcdir/../../src/tnef
+tnef_file=$srcdir/test.tnef
+
+do_tnef () {
+    $bin $1 --debug --list $tnef_file > $$.out 2> $$.err
+    cat $$.out $$.err >> $srcdir/maxsize.output
+    rm -f $$.out $$.err
+    echo >> $srcdir/maxsize.output
+}
+
+rm -f maxsize.output
+touch maxsize.output
+
+# test the -x option
+do_tnef "-x 23"
+
+# test the --maxsize option
+do_tnef --maxsize=23
+
+# invalid input
+do_tnef --maxsize=foo
+
+# negative input
+do_tnef --maxsize=-23
+
+# zero input
+do_tnef --maxsize=0
+
+# disallow allocation
+do_tnef --maxsize=1024
+
+# allow allocation
+do_tnef --maxsize=2048
+
+# borderline cases
+do_tnef --maxsize=1464
+do_tnef --maxsize=1463
+do_tnef --maxsize=1465
+
+check_test maxsize

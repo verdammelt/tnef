@@ -1,0 +1,265 @@
+setting alloc_limit to: 23
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+CHECKED_MALLOC: Maximum allocation size exceeded (maxsize = 23; size = 24).
+
+setting alloc_limit to: 23
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+CHECKED_MALLOC: Maximum allocation size exceeded (maxsize = 23; size = 24).
+
+Invalid argument to --maxsize/-x option: 'foo'
+
+setting alloc_limit to: 4294967273
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Message ID [type: string] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
+Date Start [type: word] [len: 24] = 5049 5049 5049...
+Date Modified [type: date] [len: 14] = Wed 1999/10/13 22:49:52
+Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
+Subject [type: string] [len: 9] ='one-file'
+Priority [type: short] [len: 2] = 2
+MAPI Properties [type: byte] [len: 1464] = 38 00 00 00 03 00 fd 3f e4 04...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
+Attachment Creation Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment Modification Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment File Name [type: string] [len: 8] ='AUTHORS'
+Attachment Data [type: byte] [len: 244] = 0a 20 20 20 20 20 20 20 20 20...
+Attachment [type: byte] [len: 200] = 0c 00 00 00 03 00 21 0e 00 00...
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = -1
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 308
+MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AUTHORS
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 24] = AUTHORS file for tnef
+MAPI_ATTACH_MIME_TAG [type: MAPI string] [num_values = 1] = 
+	#0 [len: 28] = application/octet-stream
+3710 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 16] = 1f 01 7f cf d0 81 d3 11 a7 a5 ...
+NOT WRITING AUTHORS
+AUTHORS
+
+setting alloc_limit to: 0
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Message ID [type: string] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
+Date Start [type: word] [len: 24] = 5049 5049 5049...
+Date Modified [type: date] [len: 14] = Wed 1999/10/13 22:49:52
+Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
+Subject [type: string] [len: 9] ='one-file'
+Priority [type: short] [len: 2] = 2
+MAPI Properties [type: byte] [len: 1464] = 38 00 00 00 03 00 fd 3f e4 04...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
+Attachment Creation Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment Modification Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment File Name [type: string] [len: 8] ='AUTHORS'
+Attachment Data [type: byte] [len: 244] = 0a 20 20 20 20 20 20 20 20 20...
+Attachment [type: byte] [len: 200] = 0c 00 00 00 03 00 21 0e 00 00...
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = -1
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 308
+MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AUTHORS
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 24] = AUTHORS file for tnef
+MAPI_ATTACH_MIME_TAG [type: MAPI string] [num_values = 1] = 
+	#0 [len: 28] = application/octet-stream
+3710 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 16] = 1f 01 7f cf d0 81 d3 11 a7 a5 ...
+NOT WRITING AUTHORS
+AUTHORS
+
+setting alloc_limit to: 1024
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Message ID [type: string] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
+Date Start [type: word] [len: 24] = 5049 5049 5049...
+Date Modified [type: date] [len: 14] = Wed 1999/10/13 22:49:52
+Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
+Subject [type: string] [len: 9] ='one-file'
+Priority [type: short] [len: 2] = 2
+CHECKED_MALLOC: Maximum allocation size exceeded (maxsize = 1024; size = 1464).
+
+setting alloc_limit to: 2048
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Message ID [type: string] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
+Date Start [type: word] [len: 24] = 5049 5049 5049...
+Date Modified [type: date] [len: 14] = Wed 1999/10/13 22:49:52
+Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
+Subject [type: string] [len: 9] ='one-file'
+Priority [type: short] [len: 2] = 2
+MAPI Properties [type: byte] [len: 1464] = 38 00 00 00 03 00 fd 3f e4 04...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
+Attachment Creation Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment Modification Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment File Name [type: string] [len: 8] ='AUTHORS'
+Attachment Data [type: byte] [len: 244] = 0a 20 20 20 20 20 20 20 20 20...
+Attachment [type: byte] [len: 200] = 0c 00 00 00 03 00 21 0e 00 00...
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = -1
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 308
+MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AUTHORS
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 24] = AUTHORS file for tnef
+MAPI_ATTACH_MIME_TAG [type: MAPI string] [num_values = 1] = 
+	#0 [len: 28] = application/octet-stream
+3710 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 16] = 1f 01 7f cf d0 81 d3 11 a7 a5 ...
+NOT WRITING AUTHORS
+AUTHORS
+
+setting alloc_limit to: 1464
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Message ID [type: string] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
+Date Start [type: word] [len: 24] = 5049 5049 5049...
+Date Modified [type: date] [len: 14] = Wed 1999/10/13 22:49:52
+Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
+Subject [type: string] [len: 9] ='one-file'
+Priority [type: short] [len: 2] = 2
+MAPI Properties [type: byte] [len: 1464] = 38 00 00 00 03 00 fd 3f e4 04...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
+Attachment Creation Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment Modification Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment File Name [type: string] [len: 8] ='AUTHORS'
+Attachment Data [type: byte] [len: 244] = 0a 20 20 20 20 20 20 20 20 20...
+Attachment [type: byte] [len: 200] = 0c 00 00 00 03 00 21 0e 00 00...
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = -1
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 308
+MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AUTHORS
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 24] = AUTHORS file for tnef
+MAPI_ATTACH_MIME_TAG [type: MAPI string] [num_values = 1] = 
+	#0 [len: 28] = application/octet-stream
+3710 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 16] = 1f 01 7f cf d0 81 d3 11 a7 a5 ...
+NOT WRITING AUTHORS
+AUTHORS
+
+setting alloc_limit to: 1463
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Message ID [type: string] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
+Date Start [type: word] [len: 24] = 5049 5049 5049...
+Date Modified [type: date] [len: 14] = Wed 1999/10/13 22:49:52
+Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
+Subject [type: string] [len: 9] ='one-file'
+Priority [type: short] [len: 2] = 2
+CHECKED_MALLOC: Maximum allocation size exceeded (maxsize = 1463; size = 1464).
+
+setting alloc_limit to: 1465
+TNEF Key: 237
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+Message Class [type: word] [len: 24] = 5049 5049 5049...
+Message ID [type: string] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
+Date Start [type: word] [len: 24] = 5049 5049 5049...
+Date Modified [type: date] [len: 14] = Wed 1999/10/13 22:49:52
+Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
+Subject [type: string] [len: 9] ='one-file'
+Priority [type: short] [len: 2] = 2
+MAPI Properties [type: byte] [len: 1464] = 38 00 00 00 03 00 fd 3f e4 04...
+Attachment Rendering Data [type: byte] [len: 14] = 01 00 ff ff ff ff 20 00 20 00...
+Attachment Creation Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment Modification Date [type: date] [len: 14] = Wed 1999/10/13 22:49:46
+Attachment File Name [type: string] [len: 8] ='AUTHORS'
+Attachment Data [type: byte] [len: 244] = 0a 20 20 20 20 20 20 20 20 20...
+Attachment [type: byte] [len: 200] = 0c 00 00 00 03 00 21 0e 00 00...
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = -1
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 308
+MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c68de150 1bf15ee
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AUTHORS
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 24] = AUTHORS file for tnef
+MAPI_ATTACH_MIME_TAG [type: MAPI string] [num_values = 1] = 
+	#0 [len: 28] = application/octet-stream
+3710 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 16] = 1f 01 7f cf d0 81 d3 11 a7 a5 ...
+NOT WRITING AUTHORS
+AUTHORS
+
