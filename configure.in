@@ -1,5 +1,5 @@
 dnl initialization
-AC_INIT(tnef, 1.1.1, verdammelt@tnef.sourceforge.net)
+AC_INIT(tnef, 1.1.2, verdammelt@users.sourceforge.net)
 AC_CONFIG_SRCDIR([src/tnef.c])
 AM_INIT_AUTOMAKE(tnef,1.1.1)
 AM_CONFIG_HEADER(config.h)
