@@ -1,5 +1,5 @@
 dnl initialization
-AC_INIT(tnef, 1.1.5, verdammelt@users.sourceforge.net)
+AC_INIT(tnef, 1.2.0, verdammelt@users.sourceforge.net)
 AC_CONFIG_SRCDIR([src/tnef.c])
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(config.h)
@@ -54,6 +54,10 @@ dnl output
 AC_CONFIG_FILES([Makefile BUGS tnef.spec 
                  doc/Makefile doc/tnef.1 
                  src/Makefile 
-                 tests/Makefile])
+                 tests/Makefile 
+                 tests/cmdline/Makefile 
+                 tests/files/Makefile
+                 tests/files/baselines/Makefile 
+                 tests/files/datafiles/Makefile])
 AC_OUTPUT
 

@@ -1,3 +1,29 @@
+2003-03-02  Person or Persons Unknown  <damned@theworld.com>
+
+	* Release 1.2.0:
+
+	* News:
+	* configure.in:
+	New version
+
+	* AUTHORS: Moved thanks message to THANKS file.
+
+	* THANKS: New file to keep gnits checking happy.
+
+	* Makefile.am (AUTOMAKE_OPTIONS): Changed to gnits.
+
+	* src/tnef.c (dump_mapi_attr): Dumping szMAPI_OBJECT like
+	sz_MAPI_BINARY so that the data is dumped, not the pointer to the
+	data.  Dumping the pointer value causes tests to fail randomly as
+	the address changes between runs.
+
+	* tests/*: Automated tests for command line arguments and data
+	files now added to tests directory.  Using automake's test
+	facility to run shell scripts.  They are organized into two
+	subdirectories.  One for command line parameter testing/general
+	features and the other for different sorts of data files.  Many
+	new files were added.
+
 2003-02-27  Person or Persons Unknown  <damned@theworld.com>
 
 	* Release 1.1.5:
