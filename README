@@ -25,6 +25,11 @@ for installation is the standard:
     ./configure 
     make
     make install
+    
+'make' will have created the tnef executable in the src directory and
+'make install' should have put it into /usr/local/bin.  Please see the
+man page or tnef --help for options. 
+
 
 
 
