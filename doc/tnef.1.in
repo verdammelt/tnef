@@ -15,15 +15,14 @@ filter.
 .B tnef
 decodes e-mail attachments encoded in Microsoft's Transport Neutral
 Encapsulation Format (hereafter, TNEF), which "wraps"
-Microsoft e-mail messages composed in Rich Text Format (RTF).
+Microsoft e-mail attachements.
 .PP
-.IR Unfortunately ","
-RTF-rendered attachments are inaccessible
-to any e-mail client that does not understand TNEF.
+.IR Unfortunately "," these "wrapped" attachments are inaccessible to
+any e-mail client that does not understand TNEF.
 .IR Fortunately ","
 the
 .B tnef
-filter can be used by any MIME-aware client to decode these attachments.
+filter can be used by any MIME-aware client to unpack these attachments.
 .SH OPTIONS
 .TP
 \fB\-f\fP FILE,  \fB\-\-file\fP=FILE
@@ -48,7 +47,7 @@ when extracting attachments, overwrite existing files.
 .TP
 \fB\-\-number-backups\fP
 when extracting attachments, if file FOO will be overwritten,
-create FOO.1 instead.
+create FOO.n instead.
 .TP
 \fB\-\-use-paths\fP
 honor file pathnames specifieid in the TNEF attachment.
