@@ -1,0 +1,130 @@
+TNEF Key: d
+TNEF Version [type: dword] = 00010000
+OEM Codepage [type: byte] = e4 04 00 00 00 00 00 00
+Message Class [type: word] = 5049 5049 5049...
+Priority [type: short] = 2
+Date Recieved [type: date] = Wed 2000/04/12 20:36:00
+MAPI Properties [type: byte] = 23 00 00 00 0b 00 02 00 01 00...
+Attachment Rendering Data [type: byte] = 01 00 04 00 00 00 20 00 20 00...
+Attachment Modification Date [type: date] = Fri 2000/03/24 09:30:09
+Attachment Data [type: byte] =
+Attachment File Name [type: string] ='AUTOEXEC.BAT'
+Attachment Meta File [type: byte] = 01 00 09 00 00 03 dc 06 00 00...
+Attachment [type: byte] = 11 00 00 00 03 00 20 0e 15 0e...
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 3605
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 16] = AUTOEXEC.BAT
+MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 0] = 
+MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 8] = .BAT
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 16] = AUTOEXEC.BAT
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 4
+7ffa [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+7ffb [type: MAPI time (64 bits)] [num_values = 1] = 
+	value #0 [len: 8] = a3dd4000 cb34557
+7ffc [type: MAPI time (64 bits)] [num_values = 1] = 
+	value #0 [len: 8] = a3dd4000 cb34557
+7ffd [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+7ffe [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	value #0 [len: 4] = false
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 44389
+MAPI_MAPPING_SIGNATURE [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 16] = ea e0 8c 96 6a 09 d4 11 98 2c ...
+MAPI_STORE_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 16] = ea e0 8c 96 6a 09 d4 11 98 2c ...
+MAPI_STORE_ENTRYID [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 148] = 00 00 00 00 38 a1 bb 10 05 e5 ...
+MAPI_OBJECT_TYPE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 7
+Attachment Rendering Data [type: byte] = 01 00 05 00 00 00 20 00 20 00...
+WRITING ./data-before-name.dir/AUTOEXEC.BAT
+Attachment Modification Date [type: date] = Fri 2000/03/24 09:30:09
+Attachment Data [type: byte] =
+Attachment File Name [type: string] ='CONFIG.SYS'
+Attachment Meta File [type: byte] = 01 00 09 00 00 03 dc 06 00 00...
+Attachment [type: byte] = 11 00 00 00 03 00 20 0e 0f 0e...
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 3599
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 12] = CONFIG.SYS
+MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 0] = 
+MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 8] = .SYS
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 12] = CONFIG.SYS
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 5
+7ffa [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+7ffb [type: MAPI time (64 bits)] [num_values = 1] = 
+	value #0 [len: 8] = a3dd4000 cb34557
+7ffc [type: MAPI time (64 bits)] [num_values = 1] = 
+	value #0 [len: 8] = a3dd4000 cb34557
+7ffd [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+7ffe [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	value #0 [len: 4] = false
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 44453
+MAPI_MAPPING_SIGNATURE [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 16] = ea e0 8c 96 6a 09 d4 11 98 2c ...
+MAPI_STORE_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 16] = ea e0 8c 96 6a 09 d4 11 98 2c ...
+MAPI_STORE_ENTRYID [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 148] = 00 00 00 00 38 a1 bb 10 05 e5 ...
+MAPI_OBJECT_TYPE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 7
+Attachment Rendering Data [type: byte] = 01 00 06 00 00 00 20 00 20 00...
+WRITING ./data-before-name.dir/CONFIG.SYS
+Attachment Modification Date [type: date] = Fri 2000/03/24 09:26:59
+Attachment Data [type: byte] = 5b 62 6f 6f 74 20 6c 6f 61 64...
+Attachment File Name [type: string] ='boot.ini'
+Attachment Meta File [type: byte] = 01 00 09 00 00 03 dc 06 00 00...
+Attachment [type: byte] = 11 00 00 00 03 00 20 0e 2a 0f...
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 3882
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 12] = boot.ini
+MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 0] = 
+MAPI_ATTACH_EXTENSION [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 8] = .ini
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 12] = boot.ini
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 6
+7ffa [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+7ffb [type: MAPI time (64 bits)] [num_values = 1] = 
+	value #0 [len: 8] = a3dd4000 cb34557
+7ffc [type: MAPI time (64 bits)] [num_values = 1] = 
+	value #0 [len: 8] = a3dd4000 cb34557
+7ffd [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+7ffe [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	value #0 [len: 4] = false
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 44485
+MAPI_MAPPING_SIGNATURE [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 16] = ea e0 8c 96 6a 09 d4 11 98 2c ...
+MAPI_STORE_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 16] = ea e0 8c 96 6a 09 d4 11 98 2c ...
+MAPI_STORE_ENTRYID [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 148] = 00 00 00 00 38 a1 bb 10 05 e5 ...
+MAPI_OBJECT_TYPE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 7
+WRITING ./data-before-name.dir/boot.ini

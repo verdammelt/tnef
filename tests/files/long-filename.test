@@ -1,0 +1,9 @@
+#!/bin/sh 
+ 
+. $srcdir/../util.sh
+. file-util.sh
+
+cleanup
+mktestdir
+run_test
+cleanup

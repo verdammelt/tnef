@@ -1,0 +1,12 @@
+#!/bin/sh 
+
+. $srcdir/../util.sh
+
+bin=${srcdir}/../../src/tnef
+
+echo $bin --help > help.output
+$bin --help >> help.output 2>&1
+echo >> help.output
+echo $bin -h >> help.output
+$bin -h >> help.output 2>&1
+check_test help

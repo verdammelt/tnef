@@ -1,0 +1,39 @@
+#!/bin/sh
+
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+tnef_file=test.tnef
+
+cleanup () {
+    rm -f AUTHORS
+}
+
+cleanup
+
+# default argument
+echo $bin $tnef_file > basic.output 
+$bin $tnef_file >> basic.output 2>&1
+check_file AUTHORS
+cleanup
+
+# stdin
+echo $bin \< $tnef_file >> basic.output
+$bin < $tnef_file >> basic.output 2>&1
+check_file AUTHORS
+cleanup
+
+# -f
+echo $bin -f $tnef_file >> basic.output
+$bin -f $tnef_file >> basic.output 2>&1
+check_file AUTHORS
+cleanup
+
+# --file
+echo $bin -f $tnef_file >> basic.output
+$bin -f $tnef_file >> basic.output 2>&1
+check_file AUTHORS
+cleanup
+
+check_test basic
+

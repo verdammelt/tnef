@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "$0: not yet implemented"
+
+exit 1

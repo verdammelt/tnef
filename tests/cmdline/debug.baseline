@@ -1,0 +1,42 @@
+TNEF Key: 237
+TNEF Version [type: dword] = 00010000
+OEM Codepage [type: byte] = e4 04 00 00 00 00 00 00
+Message Class [type: word] = 5049 5049 5049...
+Message ID [type: string] ='20017FCFD081D311A7A50008C71BCA8D'
+Date Start [type: word] = 5049 5049 5049...
+Date Modified [type: date] = Wed 1999/10/13 22:49:52
+Date Sent [type: date] = Wed 1999/10/13 22:47:44
+Subject [type: string] ='one-file'
+Priority [type: short] = 2
+MAPI Properties [type: byte] = 38 00 00 00 03 00 fd 3f e4 04...
+Attachment Rendering Data [type: byte] = 01 00 ff ff ff ff 20 00 20 00...
+Attachment Creation Date [type: date] = Wed 1999/10/13 22:49:46
+Attachment Modification Date [type: date] = Wed 1999/10/13 22:49:46
+Attachment File Name [type: string] ='AUTHORS'
+Attachment Data [type: byte] = 0a 20 20 20 20 20 20 20 20 20...
+Attachment [type: byte] = 0c 00 00 00 03 00 21 0e 00 00...
+MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = -1
+MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 308
+MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	value #0 [len: 8] = c68de150 1bf15ee
+MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	value #0 [len: 8] = c68de150 1bf15ee
+MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 1
+MAPI_ATTACH_LONG_FILENAME [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 8] = AUTHORS
+MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 24] = AUTHORS file for tnef
+MAPI_ATTACH_MIME_TAG [type: MAPI string] [num_values = 1] = 
+	value #0 [len: 28] = application/octet-stream
+3710 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	value #0 [len: 4] = 0
+MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+	value #0 [len: 16] = 1f 01 7f cf d0 81 d3 11 a7 a5 ...
+WRITING AUTHORS

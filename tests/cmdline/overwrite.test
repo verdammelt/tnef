@@ -1,0 +1,40 @@
+#!/bin/sh 
+
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+tnef_file=test.tnef
+
+rm -f AUTHORS AUTHORS.1 AUTHORS.2
+
+# extract the AUTHORS file
+$bin $tnef_file > /dev/null 2>&1
+if [ ! -f AUTHORS ]; then
+   echo "AUTHORS file is missing.  Test Failed!"
+   exit 1
+fi
+
+# do the test
+echo $bin $tnef_file > overwrite.output
+$bin $tnef_file >> overwrite.output 2>&1
+echo >> overwrite.output
+echo $bin --overwrite $tnef_file >> overwrite.output
+$bin --overwrite $tnef_file >> overwrite.output
+echo >> overwrite.output
+echo $bin --number-backups $tnef_file >> overwrite.output
+$bin --number-backups $tnef_file >> overwrite.output
+if [ ! -f AUTHORS.1 ]; then
+   echo "AUTHORS.1 file is missing.  Test Failed!"
+   exit 1
+fi
+echo >> overwrite.output
+echo $bin --number-backups $tnef_file >> overwrite.output
+$bin --number-backups $tnef_file >> overwrite.output
+if [ ! -f AUTHORS.2 ]; then
+   echo "AUTHORS.2 file is missing.  Test Failed!"
+   exit 1
+fi
+
+rm -f AUTHORS AUTHORS.1 AUTHORS.2
+
+check_test overwrite

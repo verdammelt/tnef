@@ -1,0 +1,8 @@
+./../../src/tnef test.tnef
+tnef: AUTHORS: Could not create file: File exists
+
+./../../src/tnef --overwrite test.tnef
+
+./../../src/tnef --number-backups test.tnef
+
+./../../src/tnef --number-backups test.tnef

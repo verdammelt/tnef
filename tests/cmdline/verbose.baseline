@@ -1,0 +1,5 @@
+./../../src/tnef --verbose test.tnef
+AUTHORS
+
+./../../src/tnef --verbose --list test.tnef
+        244 1999-10-13 22:49 AUTHORS

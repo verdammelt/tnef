@@ -1,0 +1,10 @@
+TNEF Key: c02
+TNEF Version [type: dword] = 00010000
+OEM Codepage [type: byte] = e4 04 00 00 00 00 00 00
+Message Class [type: word] = 5049 5049 5049...
+Message ID [type: string] ='4C8701152E82D311A7A50008C71BCA8D'
+Date Modified [type: date] = Thu 1999/10/14 08:52:42
+Date Sent [type: date] = Thu 1999/10/14 08:55:44
+Subject [type: string] =''
+Priority [type: short] = 1
+MAPI Properties [type: byte] = 46 00 00 00 03 00 fd 3f e4 04...

@@ -1,0 +1,51 @@
+./../../src/tnef --help
+./../../src/tnef: [options] [FILE]
+-f FILE, --file=FILE    	use FILE as input ('-' == stdin)
+-C DIR, --directory=DIR 	unpack files into DIR
+-t,     --list          	list files, do not extract
+-w,     --interactive   	ask for confirmation for every action
+        --confirmation  	same as -w
+        --overwrite     	Overwrite existing files
+        --number-backups	Instead of overwriting file FOO,
+                        	  create FOO.n instead
+        --use-paths     	Use pathnames for files if found in the TNEF
+                        	  file (for security reasons paths to included
+                        	  files are ignored by default)
+-h,     --help          	show this message
+-V,     --version       	display version and copyright
+-v,     --verbose       	produce verbose output
+        --debug     	 	produce a lot of output
+
+-d                      	[same as -C; deprecated]
+-l                      	[same as -t; deprecated]
+-n, --dry_run           	[same as -t; deprecated]
+
+If FILE is not specified standard input is used
+
+Report bugs to <verdammelt@users.sourceforge.net>
+
+./../../src/tnef -h
+./../../src/tnef: [options] [FILE]
+-f FILE, --file=FILE    	use FILE as input ('-' == stdin)
+-C DIR, --directory=DIR 	unpack files into DIR
+-t,     --list          	list files, do not extract
+-w,     --interactive   	ask for confirmation for every action
+        --confirmation  	same as -w
+        --overwrite     	Overwrite existing files
+        --number-backups	Instead of overwriting file FOO,
+                        	  create FOO.n instead
+        --use-paths     	Use pathnames for files if found in the TNEF
+                        	  file (for security reasons paths to included
+                        	  files are ignored by default)
+-h,     --help          	show this message
+-V,     --version       	display version and copyright
+-v,     --verbose       	produce verbose output
+        --debug     	 	produce a lot of output
+
+-d                      	[same as -C; deprecated]
+-l                      	[same as -t; deprecated]
+-n, --dry_run           	[same as -t; deprecated]
+
+If FILE is not specified standard input is used
+
+Report bugs to <verdammelt@users.sourceforge.net>

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+tnef_file=test.tnef
+
+rm -f AUTHORS
+
+echo $bin -t $tnef_file > list.output 2>&1
+$bin -t $tnef_file >> list.output 2>&1
+
+if [ -f AUTHORS ]; then
+   echo "AUTHORS file exists! Test Failed!"
+   exit 1
+fi
+
+echo >> list.output
+echo $bin --list $tnef_file >> list.output 2>&1
+$bin --list $tnef_file >> list.output 2>&1
+check_test list

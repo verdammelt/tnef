@@ -1,0 +1,19 @@
+#!/bin/sh 
+
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+tnef_file=test.tnef
+
+echo $bin --verbose $tnef_file > verbose.output 2>&1
+$bin --verbose $tnef_file >> verbose.output 2>&1
+check_file AUTHORS
+rm -f AUTHORS
+echo >> verbose.output
+echo $bin --verbose --list $tnef_file >> verbose.output 2>&1
+$bin --verbose --list $tnef_file >> verbose.output 2>&1
+if [ -f AUTHORS ]; then
+   echo "AUTHORS file exists.  Test Failed!"
+   exit 1
+fi
+check_test verbose

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+
+echo $bin --version > version.output
+$bin --version >> version.output 2>&1
+echo >> version.output
+echo $bin -V >> version.output
+$bin -V >> version.output 2>&1
+
+check_test version
+
