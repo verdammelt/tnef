@@ -3,36 +3,36 @@
 . $srcdir/../util.sh
 
 bin=$srcdir/../../src/tnef
-tnef_file=test.tnef
+tnef_file=$srcdir/test.tnef
 
 cleanup () {
-    rm -f AUTHORS
+    rm -f $srcdir/AUTHORS
 }
 
 cleanup
 
 # default argument
-echo $bin $tnef_file > basic.output 
-$bin $tnef_file >> basic.output 2>&1
-check_file AUTHORS
+echo $bin $tnef_file > $srcdir/basic.output 
+$bin $tnef_file >> $srcdir/basic.output 2>&1
+check_file $srcdir/AUTHORS
 cleanup
 
 # stdin
-echo $bin \< $tnef_file >> basic.output
-$bin < $tnef_file >> basic.output 2>&1
-check_file AUTHORS
+echo $bin \< $tnef_file >> $srcdir/basic.output
+$bin < $tnef_file >> $srcdir/basic.output 2>&1
+check_file $srcdir/AUTHORS
 cleanup
 
 # -f
-echo $bin -f $tnef_file >> basic.output
-$bin -f $tnef_file >> basic.output 2>&1
-check_file AUTHORS
+echo $bin -f $tnef_file >> $srcdir/basic.output
+$bin -f $tnef_file >> $srcdir/basic.output 2>&1
+check_file $srcdir/AUTHORS
 cleanup
 
 # --file
-echo $bin -f $tnef_file >> basic.output
-$bin -f $tnef_file >> basic.output 2>&1
-check_file AUTHORS
+echo $bin -f $tnef_file >> $srcdir/basic.output
+$bin -f $tnef_file >> $srcdir/basic.output 2>&1
+check_file $srcdir/AUTHORS
 cleanup
 
 check_test basic
