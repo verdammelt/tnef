@@ -4,6 +4,11 @@ Copyright (C) 2000-2004 by Mark Simpson
 * 1.4: 
 ** Code reorganization
 
+* 1.3.1: 
+** Fixing dumb compiling bugs [BUG: #1108485].  GCC lets me write incorrect code!
+** Small modifications to tnef.spec.in as suggested by jmsl@users.sf.net [BUG: #1102128]
+** Corrected type problems to improve portability to 64 bit systems and Mac.
+
 * 1.3:
 ** Adding feature to allow for saving of RTF data.
 

@@ -6,7 +6,7 @@ Release: 1
 Group: Mail/Encoders
 Copyright: GPL
 Source: http://world.std.com/~damned/tnef-%{version}.tar.gz
-BuildRoot: /var/tmp/%{name}-%{version}-root
+BuildRoot: ${_tmppath}%{name}-%{version}-root
 Prefix: @prefix@
 Vendor: Angst Programming I.G.
 URL: http://tnef.sourceforge.net
@@ -41,6 +41,6 @@ rm -rf ${RPM_BUILD_ROOT}
 %defattr(-,root,root)
 %doc README COPYING ChangeLog AUTHORS NEWS TODO BUGS
 %{prefix}/bin/tnef
-%{prefix}/man/man1/tnef.1
+%{prefix}/man/man1/tnef.1.gz
 
 
