@@ -179,6 +179,19 @@ typedef struct
 /* ********************
    UTILITY FUNCTIONS
    ******************** */
+/* return the length padded to a 4 byte boundary */
+static size_t
+pad_to_4byte (size_t length)
+{
+    ldiv_t d = ldiv (length, 4L);
+    if (d.rem != 0)
+    {
+	length += (4 - d.rem);
+    }
+    return length;
+}
+
+
 /* ask user for confirmation of the action */
 static int
 confirm_action (const char *prompt, ...)
@@ -846,15 +859,7 @@ decode_mapi (size_t len, char *buf)
 		    size_t j;
 
 		    a->names[i].len = GETINT32(buf+idx); idx += 4;
-		    
-		    /* must pad length to 4 byte boundary */
-		    {
-			ldiv_t d = ldiv (a->names[i].len, 4L);
-			if (d.rem != 0)
-			{
-			    a->names[i].len += (4 - d.rem);
-			}
-		    }
+
 		    /* read the data into a buffer */
 		    a->names[i].data 
 			= CHECKED_MALLOC(a->names[i].len * sizeof (char));
@@ -863,7 +868,7 @@ decode_mapi (size_t len, char *buf)
 
 		    /* But what are we going to do with it? */
 		    
-		    idx += a->names[i].len;
+		    idx += pad_to_4byte(a->names[i].len);
 		}
 	    }
 	    else
@@ -926,27 +931,13 @@ decode_mapi (size_t len, char *buf)
 	    v = alloc_mapi_values (a);
 	    for (val_idx = 0; val_idx < a->num_values; val_idx++)
 	    {
-		size_t total_malloc = 0L;
-		size_t padded_length = 0L;
-
 		v[val_idx].len = GETINT32(buf+idx); idx += 4;
-		padded_length = v[val_idx].len;
-		/* must pad length to 4 byte boundary */
-		{
-		    ldiv_t d = ldiv (padded_length, 4L);
-		    if (d.rem != 0)
-		    {
-			padded_length += (4 - d.rem);
-		    }
-		}
-
-		total_malloc = v[val_idx].len * sizeof (char);
-
-		v[val_idx].data.buf = CHECKED_MALLOC(total_malloc);
+		v[val_idx].data.buf 
+		    = CHECKED_MALLOC(v[val_idx].len * sizeof (char));
 		memmove (v[val_idx].data.buf,
 			 buf+idx,
 			 v[val_idx].len);
-		idx += padded_length;
+		idx += pad_to_4byte(v[val_idx].len);
 	    }
 	}
 	break;
