@@ -1,7 +1,9 @@
 * Take over the world. Go out for Chinese food.
-* Make tnef aware of and work fine on system with different 'endian-ness'
 * work on integration with VM/RMAIL/GNUS/Mutt &c.
 * ELISP version for native decoding.
+* Lisp version
+* C++ version
+* Library to allow other applications to use this code more directly.
 * texinfo help file
 * Make more use out of the MAPI types... perhaps there are other useful
   things in them?
