@@ -18,4 +18,5 @@ EXTRA_DIST	=	AUTHORS.baseline		\
 			missing-filenames.baseline	\
 			one-file.baseline		\
 			rtf.baseline			\
+			triples.baseline		\
 			two-files.baseline

@@ -12,6 +12,8 @@ EXTRA_DIST	=	MAPI_ATTACH_DATA_OBJ.list	\
 			one-file.tnef			\
 			rtf.list			\
 			rtf.tnef			\
+			triples.list			\
+			triples.tnef			\
 			two-files.list			\
 			two-files.tnef
 
