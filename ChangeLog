@@ -1,3 +1,7 @@
+2005-01-15  verdammelt  <verdammelt@freya>
+
+	* tnef.1.in: adding info about --save-rtf
+
 2005-01-13  verdammelt  <verdammelt@freya>
 
 	* src/tnef.c:
