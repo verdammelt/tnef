@@ -54,6 +54,8 @@ extern void exit (int);
 #  include "getopt_long.h"
 #endif /* HAVE_GETOPT_LONG */
 
+#include "alloc.h"
+
 #include "tnef.h"
 
 /* COPYRIGHTS & NO_WARRANTY -- defined to make code below a little nicer to
@@ -67,8 +69,9 @@ static const char* NO_WARRANTY = \
 "Public License.  For more information about these matters, see the file\n"
 "named COPYING.";
 static const char* USAGE = \
-"-f FILE, --file=FILE    \tuse FILE as input ('-' == stdin)\n"
+"-f FILE,--file=FILE     \tuse FILE as input ('-' == stdin)\n"
 "-C DIR, --directory=DIR \tunpack files into DIR\n"
+"-x SIZE --maxsize=SIZE  \tlimit maximum size of extracted archive (bytes)\n"
 "-t,     --list          \tlist files, do not extract\n"
 "-w,     --interactive   \task for confirmation for every action\n"
 "        --confirmation  \tsame as -w\n"
@@ -83,9 +86,6 @@ static const char* USAGE = \
 "-v,     --verbose       \tproduce verbose output\n"
 "        --debug     	 \tproduce a lot of output\n"
 "\n"
-"-d                      \t[same as -C; deprecated]\n"
-"-l                      \t[same as -t; deprecated]\n"
-"-n, --dry_run           \t[same as -t; deprecated]\n"
 "\nIf FILE is not specified standard input is used\n"
 "\nReport bugs to <%s>\n";
 
@@ -102,29 +102,30 @@ static void
 parse_cmdline (int argc, char **argv,
                char **in_file,
                char **out_dir,
+               size_t *max_size,
                int *flags)
 {
     int i = 0;
     int option_index = 0;
     static struct option long_options[] = 
     { 
-        {"file", required_argument, 0, 'f' },
-        {"directory", required_argument, 0, 'C' },
-        {"help", no_argument, 0, 'h'},
-        {"verbose", no_argument, 0, 'v'},
-        {"dry_run", no_argument, 0, 'l'},
-        {"list", no_argument, 0, 'l'}, /* for now same as -n */
         {"confirmation", no_argument, 0, 'w' },
-        {"interactive", no_argument, 0, 'w' },
-        {"version", no_argument, 0, 'V'},
-        {"use-paths", no_argument, 0, 0},
         {"debug", no_argument, 0, 0},
-        {"overwrite", no_argument, 0, 0 },
+        {"directory", required_argument, 0, 'C' },
+        {"file", required_argument, 0, 'f' },
+        {"help", no_argument, 0, 'h'},
+        {"interactive", no_argument, 0, 'w' },
+        {"list", no_argument, 0, 't'}, /* for now same as -n */
+        {"maxsize", required_argument, 0, 'x' },
         {"number-backups", no_argument, 0, 0 },
+        {"overwrite", no_argument, 0, 0 },
+        {"use-paths", no_argument, 0, 0},
+        {"verbose", no_argument, 0, 'v'},
+        {"version", no_argument, 0, 'V'},
         { 0, 0, 0, 0 }
     };
 
-    while ((i = getopt_long (argc, argv, "f:C:d:vVwhtnl", 
+    while ((i = getopt_long (argc, argv, "f:C:d:x:vVwht",
                              long_options, &option_index)) != -1)
     {
         switch (i) 
@@ -179,17 +180,26 @@ parse_cmdline (int argc, char **argv,
             (*out_dir) = optarg;
             break;
 
+        case 'x':
+            {
+                char *end_ptr = NULL;
+                (*max_size) = strtoul (optarg, &end_ptr, 10);
+                if (*end_ptr != '\0')
+                {
+                    fprintf (stderr, 
+                             "Invalid argument to --maxsize/-x option: '%s'\n",
+                             optarg);
+                    exit (-1);
+                }
+            }
+            break;
+
         case 'h':
             usage(argv[0]);
             exit (0);
             break;
 
-                                /* for now -t -l -n --list and --dry-run
-                                   are the same.  -l,-n,--dry-run are all
-                                   deprecated.  */
         case 't':
-        case 'l':
-        case 'n':
             *flags |= LIST;
             break;
 
@@ -227,8 +237,16 @@ main (int argc, char *argv[])
     char *in_file = NULL;
     char *out_dir = NULL;
     int flags = NONE;
+    size_t max_size = 0;
     
-    parse_cmdline (argc, argv, &in_file, &out_dir, &flags);
+    parse_cmdline (argc, argv, &in_file, &out_dir, &max_size, &flags);
+
+    set_alloc_limit (max_size);
+    if (flags & DBG_OUT)
+    {
+        fprintf (stdout, "setting alloc_limit to: %lu\n", 
+                 (unsigned long)max_size);
+    }
 
     /* open the file */
     if (in_file)

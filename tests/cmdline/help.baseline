@@ -1,7 +1,8 @@
 ./../../src/tnef --help
 ./../../src/tnef: [options] [FILE]
--f FILE, --file=FILE    	use FILE as input ('-' == stdin)
+-f FILE,--file=FILE     	use FILE as input ('-' == stdin)
 -C DIR, --directory=DIR 	unpack files into DIR
+-x SIZE --maxsize=SIZE  	limit maximum size of extracted archive (bytes)
 -t,     --list          	list files, do not extract
 -w,     --interactive   	ask for confirmation for every action
         --confirmation  	same as -w
@@ -16,9 +17,6 @@
 -v,     --verbose       	produce verbose output
         --debug     	 	produce a lot of output
 
--d                      	[same as -C; deprecated]
--l                      	[same as -t; deprecated]
--n, --dry_run           	[same as -t; deprecated]
 
 If FILE is not specified standard input is used
 
@@ -26,8 +24,9 @@ Report bugs to <verdammelt@users.sourceforge.net>
 
 ./../../src/tnef -h
 ./../../src/tnef: [options] [FILE]
--f FILE, --file=FILE    	use FILE as input ('-' == stdin)
+-f FILE,--file=FILE     	use FILE as input ('-' == stdin)
 -C DIR, --directory=DIR 	unpack files into DIR
+-x SIZE --maxsize=SIZE  	limit maximum size of extracted archive (bytes)
 -t,     --list          	list files, do not extract
 -w,     --interactive   	ask for confirmation for every action
         --confirmation  	same as -w
@@ -42,9 +41,6 @@ Report bugs to <verdammelt@users.sourceforge.net>
 -v,     --verbose       	produce verbose output
         --debug     	 	produce a lot of output
 
--d                      	[same as -C; deprecated]
--l                      	[same as -t; deprecated]
--n, --dry_run           	[same as -t; deprecated]
 
 If FILE is not specified standard input is used
 
