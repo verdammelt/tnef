@@ -1,4 +1,4 @@
 AUTOMAKE_OPTIONS=gnu check-news
 
-EXTRA_DIST	=	TODO configure BUGS tnef.spec
+EXTRA_DIST	=	TODO configure BUGS.in tnef.spec.in
 SUBDIRS	=	doc src tests
