@@ -1,3 +1,12 @@
+2002-09-12  Person or Persons Unknown  <damned@theworld.com>
+
+	* lisp: first version of a TNEF lisp library.  Bare-bones
+	functionality, can read in a an entire TNEF file but doesn't do
+	anything with it yet.
+
+	* src, src/Makefile.am: renamed names.data and types.data to
+	tnef-names.data and tnef-types.data respectively.
+
 2002-09-05  Person or Persons Unknown  <damned@theworld.com>
 
 	* Release v1.1.2:
