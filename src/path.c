@@ -57,7 +57,7 @@ concat_fname (const char *fname1, const char* fname2)
         int len = strlen (fname1);
         if (fname2) len += strlen (fname2);
 
-        filename = (char *)MALLOC ((len + 2) * sizeof (char));
+        filename = (char *)CHECKED_MALLOC ((len + 2) * sizeof (char));
         strcpy (filename, fname1);
 
         if (fname2)

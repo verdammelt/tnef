@@ -26,7 +26,7 @@ char *
 strdup (const char *str)
 {
     size_t len = strlen(str);
-    char *out = MALLOC ((len+1) * sizeof (char));
+    char *out = CHECKED_MALLOC ((len+1) * sizeof (char));
     memmove (out, str, (len + 1));
     return out;
 }

@@ -35,6 +35,43 @@ extern void* malloc (size_t size);
 
 #include "alloc.h"
 
+static size_t alloc_limit = 0;
+
+void
+set_alloc_limit (size_t size)
+{
+    alloc_limit = size;
+}
+
+size_t
+get_alloc_limit()
+{
+    return alloc_limit;
+}
+
+static void
+alloc_limit_failure (char *fn_name, size_t size)
+{
+    fprintf (stderr, 
+             "%s: Maximum allocation size exceeded "
+             "(maxsize = %lu; size = %lu).\n",
+             fn_name,
+             (unsigned long)alloc_limit, 
+             (unsigned long)size);
+}
+
+/* Allocates memory but only up to a limit */
+void*
+CHECKED_MALLOC (size_t size)
+{
+    if (alloc_limit && size > alloc_limit)
+    {
+        alloc_limit_failure ("CHECKED_MALLOC", size);
+        exit (-1);
+    }
+    return MALLOC (size);
+}
+
 /* attempts to malloc memory, if fails print error and call abort */
 void*
 MALLOC (size_t size)
@@ -43,10 +80,22 @@ MALLOC (size_t size)
     if (!ptr 
         && (size != 0))         /* some libc don't like size == 0 */
     {
-        perror ("Memory allocation failure");
+        perror ("MALLOC: Memory allocation failure");
         abort();
     }
     return ptr;
+}
+
+/* CALLOCS memory but only up to a limit */
+void*
+CHECKED_CALLOC (size_t num, size_t size)
+{
+    if (alloc_limit && ((num * size) > alloc_limit))
+    {
+        alloc_limit_failure ("CHECKED_CALLOC", (num*size));
+        exit (-1);
+    }
+    return CALLOC (num, size);
 }
 
 /* mallocs memory and clears it out */

@@ -33,8 +33,16 @@
 extern void free (void*);
 #endif /* STDC_HEADERS */
 
+extern void
+set_alloc_limit (size_t size);
+extern size_t
+get_alloc_limit();
+extern void* 
+CHECKED_MALLOC (size_t size);
 extern void*
 MALLOC (size_t size);
+extern void*
+CHECKED_CALLOC (size_t num, size_t size);
 extern void*
 CALLOC (size_t num, size_t size);
 #define FREE(_x) free(_x);_x=NULL
