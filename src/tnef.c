@@ -70,9 +70,10 @@ tempnam(const char*, const char*);
 #define GETINT16(p)    (uint16)((uint8)(p)[0]+((uint8)(p)[1]<<8))
 
 /* Global variables, used by all (or nearly all) functions */
-static int8 g_flags = NONE;/* program options */
+static int8 g_flags = NONE;     /* program options */
 static char *g_directory = NULL; /* output directory */
 static FILE *g_file = NULL;     /* input file */
+
 
 /* Array of days of the week for translating a date */
 static char* day_of_week[] = { "Sun", "Mon", "Tue",
@@ -108,10 +109,10 @@ typedef struct
 
 typedef struct
 {
-  unsigned long data1;
-  unsigned short data2;
-  unsigned short data3;
-  unsigned char data4[8];
+    unsigned long data1;
+    unsigned short data2;
+    unsigned short data3;
+    unsigned char data4[8];
 } MAPI_GUID;
 
 typedef struct
@@ -199,10 +200,10 @@ debug_print (const char *fmt, ...)
 static char *
 find_free_number (const char *fname)
 {
-    char *tmp = MALLOC (strlen (fname) 
-                        + 1 /* '.' */
-                        + 5 /* big enough for our purposes (i hope) */
-                        + 1 /* NULL */);
+    char *tmp = CHECKED_MALLOC (strlen (fname) 
+                                + 1 /* '.' */
+                                + 5 /* big enough for our purposes (i hope) */
+                                + 1 /* NULL */);
     int counter = 1;
     struct stat buf;
 
@@ -404,7 +405,8 @@ dump_attr (Attr* attr)
     uint32 l;
     size_t i;
 
-    fprintf (stdout, "%s [type: %s] =", name, type);
+    fprintf (stdout, "%s [type: %s] [len: %lu] =",
+             name, type, (unsigned long)attr->len);
 
     FREE(name);
     FREE(type);
@@ -425,7 +427,7 @@ dump_attr (Attr* attr)
             fprintf (stdout, "Not enough data for szSHORT");
             abort();
         }
-		s = GETINT16(attr->buf);
+        s = GETINT16(attr->buf);
         fprintf (stdout, " " SHORT_INT_FMT, s);
         if (attr->len > sizeof(uint16))
         {
@@ -444,7 +446,7 @@ dump_attr (Attr* attr)
             fprintf (stdout, "Not enough data for szLONG");
             abort();
         }
-		l = GETINT32(attr->buf);
+        l = GETINT32(attr->buf);
         fprintf (stdout, " " LONG_INT_FMT, l);
         if (attr->len > sizeof(uint32))
         {
@@ -485,7 +487,7 @@ dump_attr (Attr* attr)
     case szTEXT:
     case szSTRING:
         {
-            char* buf = MALLOC ((attr->len + 1) * sizeof (char));
+            char* buf = CHECKED_MALLOC ((attr->len + 1) * sizeof (char));
             strncpy (buf, (char*)attr->buf, attr->len);
             buf[attr->len] = '\0';
             fprintf (stdout, "'%s'", buf);
@@ -494,8 +496,8 @@ dump_attr (Attr* attr)
         break;
 
     default:
-        fprintf (stdout, "<unknown type> len=%lu", 
-                 (unsigned long)attr->len);
+        fprintf (stdout, "<unknown type>");
+        break;
     }
     fprintf (stdout, "\n");
 }
@@ -517,7 +519,7 @@ dump_mapi_attr (MAPI_Attr* attr)
 
     for (i = 0; i < attr->num_values; i++)
     {
-        fprintf (stdout, "\tvalue #%lu [len: %lu] = ", 
+        fprintf (stdout, "\t#%lu [len: %lu] = ", 
                  (unsigned long)i, 
                  (unsigned long)attr->values[i].len);
 
@@ -589,6 +591,7 @@ dump_mapi_attr (MAPI_Attr* attr)
         case szMAPI_BINARY:
             {
                 int x;
+                
                 for (x = 0; x < attr->values[i].len; x++)
                 {
                     if (x < 10) 
@@ -619,8 +622,8 @@ dump_mapi_attr (MAPI_Attr* attr)
 static int
 check_checksum (Attr* attr, uint16 checksum)
 {
-  size_t i;
-  uint16 sum = 0;
+    size_t i;
+    uint16 sum = 0;
 
     for (i = 0; i < attr->len; i++)
     {
@@ -655,7 +658,7 @@ decode_object (void)
     }
     else
     {
-        Attr *attr = (Attr*)CALLOC (1, sizeof(Attr));
+        Attr *attr = (Attr*)CHECKED_CALLOC (1, sizeof(Attr));
         
         attr->lvl_type = (uint8)buf[0];
         assert ((attr->lvl_type == LVL_MESSAGE) 
@@ -666,7 +669,7 @@ decode_object (void)
         attr->type = (type_and_name >> 16);
         attr->name = ((type_and_name << 16) >> 16);
         attr->len = geti32();
-        attr->buf = MALLOC (attr->len);
+        attr->buf = CHECKED_MALLOC (attr->len);
         
         bytes_read = fread (attr->buf, 1, attr->len, g_file);
         if (bytes_read != attr->len)
@@ -715,8 +718,8 @@ alloc_mapi_values (MAPI_Attr* a)
 {
     if (a && a->num_values)
     {
-        a->values = (MAPI_Value*)CALLOC (a->num_values,
-                                         sizeof (MAPI_Value));
+        a->values = (MAPI_Value*)CHECKED_CALLOC (a->num_values,
+                                                 sizeof (MAPI_Value));
         return a->values;
     }
     return NULL;
@@ -730,8 +733,8 @@ decode_mapi (size_t len, char *buf)
     int i;
     uint32 num_properties = GETINT32(buf+idx);
     MAPI_Attr** attrs= 
-        (MAPI_Attr**)MALLOC ((num_properties + 1) * 
-                             sizeof (MAPI_Attr*));
+        (MAPI_Attr**)CHECKED_MALLOC ((num_properties + 1) * 
+                                     sizeof (MAPI_Attr*));
 
     idx += 4;
 
@@ -739,7 +742,7 @@ decode_mapi (size_t len, char *buf)
     for (i = 0; i < num_properties; i++)
     {
         MAPI_Attr* a = attrs[i] = 
-            (MAPI_Attr*)CALLOC(1, sizeof (MAPI_Attr));
+            (MAPI_Attr*)CHECKED_CALLOC(1, sizeof (MAPI_Attr));
         MAPI_Value* v = NULL;
         
         a->type = GETINT16(buf+idx); idx += 2;
@@ -780,12 +783,12 @@ decode_mapi (size_t len, char *buf)
             break;
             
         case szMAPI_CLSID:
-          a->num_values = 1;
-          v = alloc_mapi_values (a);
-          v->len = sizeof (MAPI_GUID);
-          memmove (&v->data, buf+idx, v->len);
-          idx += v->len;
-          break;
+            a->num_values = 1;
+            v = alloc_mapi_values (a);
+            v->len = sizeof (MAPI_GUID);
+            memmove (&v->data, buf+idx, v->len);
+            idx += v->len;
+            break;
 
         case szMAPI_STRING:
         case szMAPI_UNICODE_STRING:
@@ -797,6 +800,8 @@ decode_mapi (size_t len, char *buf)
                 v = alloc_mapi_values (a);
                 for (val_idx = 0; val_idx < a->num_values; val_idx++)
                 {
+                    size_t total_malloc = 0;
+                    
                     v[val_idx].len = GETINT32(buf+idx); idx += 4;
                     /* must pad length to 4 byte boundary */
                     {
@@ -806,8 +811,10 @@ decode_mapi (size_t len, char *buf)
                             v[val_idx].len += (4 - d.rem);
                         }
                     }
-                    v[val_idx].data.buf = MALLOC(v[val_idx].len * 
-                                                 sizeof (char));
+
+                    total_malloc = v[val_idx].len * sizeof (char);
+                    
+                    v[val_idx].data.buf = CHECKED_MALLOC(total_malloc);
                     memmove (v[val_idx].data.buf, 
                              buf+idx, 
                              v[val_idx].len);
@@ -866,24 +873,24 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
         MAPI_Attr* a = attrs[i];
         
         if (a->num_values)
-          {
+        {
             
             switch (a->name)
-              {
-              case MAPI_ATTACH_LONG_FILENAME:
+            {
+            case MAPI_ATTACH_LONG_FILENAME:
                 if (file->name) FREE(file->name);
                 file->name = munge_fname (a->values[0].len,
                                           a->values[0].data.buf);
                 break;
                 
-              case MAPI_ATTACH_DATA_OBJ:
+            case MAPI_ATTACH_DATA_OBJ:
                 file->len = a->values[0].len;
                 if (file->data) FREE (file->data);
-                file->data = MALLOC (file->len * sizeof(char));
+                file->data = CHECKED_MALLOC (file->len * sizeof(char));
                 memmove (file->data, a->values[0].data.buf, file->len);
                 break;
-              }
-          }
+            }
+        }
     }
 }
 
@@ -918,7 +925,7 @@ file_add_attr (File* file, Attr* attr)
         
     case attATTACHDATA:
         file->len = attr->len;
-        file->data = MALLOC(attr->len * sizeof (char));
+        file->data = CHECKED_MALLOC(attr->len * sizeof (char));
         memmove (file->data, attr->buf, attr->len);
         break;
     }
@@ -966,7 +973,7 @@ parse_file (FILE* input_file, char* directory, int flags)
             }
             else
             {
-                file = (File*)CALLOC (1, sizeof (File));
+                file = (File*)CHECKED_CALLOC (1, sizeof (File));
             }
         }
         /* Add the data to our lists. */
