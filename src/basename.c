@@ -1,7 +1,7 @@
 /*
  * basename.c -- basename function for platforms without
  *
- * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2003 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,14 +24,12 @@
 #endif /* HAVE_CONFIG_H */
 
 #if STDC_HEADERS
-#  if HAVE_STRING_H
-#    include <string.h>
-#  else
-#    include <strings.h>
-#  endif
+#  include <string.h>
 #else
 #  ifndef HAVE_STRRCHR
 #    define strrchr rindex
+#  else
+extern char *strrchr (const char*, int);
 #  endif /* !HAVE_STRRCHR */
 extern char *strrchr();
 #endif /* STDC_HEADERS */

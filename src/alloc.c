@@ -1,7 +1,7 @@
 /*
  * alloc.c -- Useful allocation function/defintions
  *
- * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999, 2000, 2001, 2002, 2003 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,9 @@
 
 #if STDC_HEADERS
 #  include <stdlib.h>
+#  include <string.h>
 #else
+extern void* memset (void* ptr, int c, size_t size);
 extern void* malloc (size_t size);
 #endif /* STDC_HEADERS */
 
@@ -43,6 +45,18 @@ MALLOC (size_t size)
     {
         perror ("Memory allocation failure");
         abort();
+    }
+    return ptr;
+}
+
+/* mallocs memory and clears it out */
+void*
+CALLOC (size_t num, size_t size)
+{
+    void *ptr = MALLOC(num * size);
+    if (ptr)
+    {
+        memset (ptr, '\0', (num * size));
     }
     return ptr;
 }

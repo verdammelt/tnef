@@ -2,7 +2,7 @@
 /*
  * alloc.h -- Useful allocation function/defintions
  *
- * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999, 2000, 2001, 2002, 2003 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,6 +35,8 @@ extern void free (void*);
 
 extern void*
 MALLOC (size_t size);
+extern void*
+CALLOC (size_t num, size_t size);
 #define FREE(_x) free(_x);_x=NULL
 
 #endif /* ALLOC_H */

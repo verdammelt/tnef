@@ -1,8 +1,8 @@
 /*
  * tnef.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
- * Copyright (C)1998 Thomas Boll  <tb@boll.ch>		[ORIGINAL AUTHOR]
+ * Copyright (C)1999-2003 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1998 Thomas Boll  <tb@boll.ch>	[ORIGINAL AUTHOR]
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,34 +30,33 @@
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
+
+#if HAVE_SYS_STAT_H
+#  include <sys/stat.h>
+#endif
 
 #if STDC_HEADERS
-#  if HAVE_STRING_H
-#    include <string.h>
-#  else
-#    include <strings.h>
-#  endif
+#  include <stdarg.h>
+#  include <stdlib.h>
+#  include <string.h>
+#  include <memory.h>
 #else
-#  if HAVE_MEMMOVE
-#    define memmove(d, s, n) bcopy ((s), (d), (n))
-#  endif/* HAVE_MEMMOVE */
-#endif /* STDC_HEADERS */
+extern int strcmp (const char *, const char *);
+#  if !HAVE_MEMMOVE
+#    define memmove(d,s,n) bcopy((s),(d),(n))
+#  else
+extern void* memmove (void *, const void *, size_t);
+#  endif
+#endif
 
-#include <stdarg.h>
-
-#include "strdup.h"
+#include "basename.h"
 #include "ldiv.h"
+#include "strdup.h"
 
 #include "tnef.h"
 
 #include "alloc.h"
-#include "basename.h"
 #include "path.h"
-
-static char ident_string[] =
-"$Id: tnef.c,v 1.4 2002-12-11 04:37:31 verdammelt Exp $";
 
 /* To quiet compiler define tempnam */
 extern char*
@@ -401,7 +400,7 @@ dump_attr (Attr* attr)
     struct date dt;
     uint16 s;
     uint32 l;
-    unsigned long i;
+    size_t i;
 
     fprintf (stdout, "%s [type: %s] =", name, type);
 
@@ -503,15 +502,16 @@ dump_mapi_attr (MAPI_Attr* attr)
 {
     const char *name = get_mapi_name_str (attr->name);
     const char *type = get_mapi_type_str (attr->type);
-    int i;
+    size_t i;
 
-    fprintf (stdout, "%s [type: %s] [num_values = %d] = \n", 
-             name, type, attr->num_values);
+    fprintf (stdout, "%s [type: %s] [num_values = %lu] = \n", 
+             name, type, (unsigned long)attr->num_values);
 
     for (i = 0; i < attr->num_values; i++)
     {
-        fprintf (stdout, "\tvalue #%d [len: %d] = ", i, 
-                 attr->values[i].len);
+        fprintf (stdout, "\tvalue #%lu [len: %lu] = ", 
+                 (unsigned long)i, 
+                 (unsigned long)attr->values[i].len);
 
         switch (attr->type)
         {
@@ -595,8 +595,8 @@ dump_mapi_attr (MAPI_Attr* attr)
 static int
 check_checksum (Attr* attr, uint16 checksum)
 {
-    uint32 i;
-    uint16 sum = 0;
+  size_t i;
+  uint16 sum = 0;
 
     for (i = 0; i < attr->len; i++)
     {
@@ -615,6 +615,7 @@ decode_object (void)
     char buf[2];
     size_t bytes_read = 0;
     uint16 checksum = 0;
+
     /* First we must get the lvl type */
     if (fread (buf, 1, 1, g_file) == 0) 
     { 
@@ -630,15 +631,14 @@ decode_object (void)
     }
     else
     {
-        Attr *attr = (Attr*)MALLOC (sizeof(Attr));
-        memset (attr, '\0', sizeof (Attr));
+        Attr *attr = (Attr*)CALLOC (1, sizeof(Attr));
         
         attr->lvl_type = (uint8)buf[0];
         assert ((attr->lvl_type == LVL_MESSAGE) 
                 || (attr->lvl_type == LVL_ATTACHMENT));
         
         type_and_name = geti32();
-        
+ 
         attr->type = (type_and_name >> 16);
         attr->name = ((type_and_name << 16) >> 16);
         attr->len = geti32();
@@ -691,11 +691,8 @@ alloc_mapi_values (MAPI_Attr* a)
 {
     if (a && a->num_values)
     {
-        a->values = (MAPI_Value*)MALLOC (a->num_values * 
+        a->values = (MAPI_Value*)CALLOC (a->num_values,
                                          sizeof (MAPI_Value));
-        memset (a->values, 
-                '\0', 
-                (a->num_values * sizeof (MAPI_Value)));
         return a->values;
     }
     return NULL;
@@ -718,10 +715,8 @@ decode_mapi (size_t len, char *buf)
     for (i = 0; i < num_properties; i++)
     {
         MAPI_Attr* a = attrs[i] = 
-            (MAPI_Attr*)MALLOC(sizeof (MAPI_Attr));
+            (MAPI_Attr*)CALLOC(1, sizeof (MAPI_Attr));
         MAPI_Value* v = NULL;
-        
-        memset (a, '\0', sizeof (MAPI_Attr));
         
         a->type = GETINT16(buf+idx); idx += 2;
         a->name = GETINT16(buf+idx); idx += 2;
@@ -860,8 +855,6 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
                 file->len = a->values[0].len;
                 if (file->data) FREE (file->data);
                 file->data = MALLOC (file->len * sizeof(char));
-                assert (file->data);
-                if (!file->data) abort();
                 memmove (file->data, a->values[0].data.buf, file->len);
                 break;
               }
@@ -901,8 +894,6 @@ file_add_attr (File* file, Attr* attr)
     case attATTACHDATA:
         file->len = attr->len;
         file->data = MALLOC(attr->len * sizeof (char));
-        assert (file->data);
-        if (!file->data) abort();
         memmove (file->data, attr->buf, attr->len);
         break;
     }
@@ -950,8 +941,7 @@ parse_file (FILE* input_file, char* directory, int flags)
             }
             else
             {
-                file = (File*)MALLOC (sizeof (File));
-                memset (file, '\0', sizeof (File));
+                file = (File*)CALLOC (1, sizeof (File));
             }
         }
         /* Add the data to our lists. */

@@ -1,7 +1,7 @@
 /*
  * main.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2003 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,29 @@
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
+#include <assert.h>
 #include <stdio.h>
+
+#if STDC_HEADERS
+#  include <stdlib.h>
+#  include <string.h>
+#else
+extern int strcmp (consr char *, const char *);
+extern void abort (void);
+extern void exit (int);
+#endif
+
+#ifndef _
+/* This is for other GNU distributions with internationalized messages.
+   When compiling libc, the _ macro is predefined.  */
+# ifdef HAVE_LIBINTL_H
+#  include <libintl.h>
+#  define _(msgid)	gettext (msgid)
+# else
+#  define _(msgid)	(msgid)
+# endif
+#endif
+
 #if HAVE_GETOPT_LONG
 #  include <getopt.h>
 #else
@@ -37,7 +59,7 @@
 /* COPYRIGHTS & NO_WARRANTY -- defined to make code below a little nicer to
    read */
 static const char* COPYRIGHTS = \
-"Copyright (C) 1999 by Mark Simpson\n"
+"Copyright (C) 1999-2003 by Mark Simpson\n"
 "Copyright (C) 1997 by Thomas Boll (original code)";
 static const char* NO_WARRANTY = \
 "%s comes with ABSOLUTELY NO WARRANTY.\n"
@@ -45,24 +67,25 @@ static const char* NO_WARRANTY = \
 "Public License.  For more information about these matters, see the file\n"
 "named COPYING.";
 static const char* USAGE = \
-"-f FILE, --file=FILE\tuse FILE as input ('-' == stdin)\n"
-"-C DIR, --directory=DIR\tunpack files into DIR\n"
-"-t,     --list      \tlist files, do not extract\n"
-"-w,     --interactive\task for confirmation for every action\n"
-"        --confirmation\tsame as -w\n"
-"        --overwrite \tOverwrite existing files\n"
-"        --number-backups\tIf need to overwrite file FOO, make FOO.1 instead\n"
-"        --use-paths \tUse pathnames for files if found in the TNEF file\n"
-"                    \t(for security reasons paths to included files are\n"
-"                    \t ignored by default)\n"
-"-h,     --help      \tshow this message\n"
-"-V,     --version   \tdisplay version and copyright\n"
-"-v,     --verbose   \tproduce verbose output\n"
-"        --debug     \tproduce a lot of output\n"
+"-f FILE, --file=FILE    \tuse FILE as input ('-' == stdin)\n"
+"-C DIR, --directory=DIR \tunpack files into DIR\n"
+"-t,     --list          \tlist files, do not extract\n"
+"-w,     --interactive   \task for confirmation for every action\n"
+"        --confirmation  \tsame as -w\n"
+"        --overwrite     \tOverwrite existing files\n"
+"        --number-backups\tInstead of overwriting file FOO,\n"
+"                        \t  create FOO.n instead\n"
+"        --use-paths     \tUse pathnames for files if found in the TNEF\n" 
+"                        \t  file (for security reasons paths to included\n"
+"                        \t  files are ignored by default)\n"
+"-h,     --help          \tshow this message\n"
+"-V,     --version       \tdisplay version and copyright\n"
+"-v,     --verbose       \tproduce verbose output\n"
+"        --debug     	 \tproduce a lot of output\n"
 "\n"
-"-d                  \t[same as -C; deprecated]\n"
-"-l                  \t[same as -t; deprecated]\n"
-"-n, --dry_run       \t[same as -t; deprecated]\n"
+"-d                      \t[same as -C; deprecated]\n"
+"-l                      \t[same as -t; deprecated]\n"
+"-n, --dry_run           \t[same as -t; deprecated]\n"
 "\nIf FILE is not specified standard input is used\n"
 "\nReport bugs to <%s>\n";
 
@@ -206,6 +229,8 @@ main (int argc, char *argv[])
     int flags = NONE;
     
     parse_cmdline (argc, argv, &in_file, &out_dir, &flags);
+
+    printf (_("testing gettext\n"));
 
     /* open the file */
     if (in_file)

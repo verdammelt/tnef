@@ -1,7 +1,7 @@
 /*
  * path.c -- Utility functions for dealing with pathnames
  *
- * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2003 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +25,13 @@
 
 #include <assert.h>
 #include <stdio.h>
+
+#if STDC_HEADERS
+#  include <string.h>
+#else
+extern char *strcpy (char *, const char *);
+extern char *strcat (char *, const char *);
+#endif
 
 #include "strdup.h"
 
