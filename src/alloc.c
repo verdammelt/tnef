@@ -1,7 +1,7 @@
 /*
  * alloc.c -- Useful allocation function/defintions
  *
- * Copyright (C)1999, 2000, 2001, 2002, 2003 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2005 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +23,7 @@
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#include <stdio.h>
-
-#if STDC_HEADERS
-#  include <stdlib.h>
-#  include <string.h>
-#else
-extern void* memset (void* ptr, int c, size_t size);
-extern void* malloc (size_t size);
-#endif /* STDC_HEADERS */
-
+#include "common.h"
 #include "alloc.h"
 
 static size_t alloc_limit = 0;
@@ -60,54 +51,57 @@ alloc_limit_failure (char *fn_name, size_t size)
              (unsigned long)size);
 }
 
-/* Allocates memory but only up to a limit */
-void*
-CHECKED_MALLOC (size_t size)
+void
+alloc_limit_assert (char *fn_name, size_t size)
 {
     if (alloc_limit && size > alloc_limit)
     {
-        alloc_limit_failure ("CHECKED_MALLOC", size);
-        exit (-1);
+	alloc_limit_failure (fn_name, size);
+	exit (-1);
     }
-    return MALLOC (size);
 }
 
 /* attempts to malloc memory, if fails print error and call abort */
 void*
-MALLOC (size_t size)
+xmalloc (size_t size)
 {
     void *ptr = malloc (size);
     if (!ptr 
         && (size != 0))         /* some libc don't like size == 0 */
     {
-        perror ("MALLOC: Memory allocation failure");
+        perror ("xmalloc: Memory allocation failure");
         abort();
     }
     return ptr;
 }
 
-/* CALLOCS memory but only up to a limit */
+/* Allocates memory but only up to a limit */
 void*
-CHECKED_CALLOC (size_t num, size_t size)
+checked_xmalloc (size_t size)
 {
-    if (alloc_limit && ((num * size) > alloc_limit))
-    {
-        alloc_limit_failure ("CHECKED_CALLOC", (num*size));
-        exit (-1);
-    }
-    return CALLOC (num, size);
+    alloc_limit_assert ("checked_xmalloc", size);
+    return xmalloc (size);
 }
 
-/* mallocs memory and clears it out */
+/* xmallocs memory and clears it out */
 void*
-CALLOC (size_t num, size_t size)
+xcalloc (size_t num, size_t size)
 {
-    void *ptr = MALLOC(num * size);
+    void *ptr = malloc(num * size);
     if (ptr)
     {
         memset (ptr, '\0', (num * size));
     }
     return ptr;
 }
+
+/* xcallocs memory but only up to a limit */
+void*
+checked_xcalloc (size_t num, size_t size)
+{
+    alloc_limit_assert ("checked_xcalloc", (num *size));
+    return xcalloc (num, size);
+}
+
 
 

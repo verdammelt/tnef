@@ -1,5 +1,5 @@
 /*
- * path.h -- Utility functions for dealing with pathnames
+ * mapi_attr.h -- Functions for handling MAPI attributes
  *
  * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
@@ -19,16 +19,57 @@
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
  */
-#ifndef PATH_H
-#define PATH_H
+#ifndef MAPI_ATTR_H
+#define MAPI_ATTR_H
 
 #if HAVE_CONFIG_H
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-extern char * concat_fname (const char* fname1, const char* fname2);
-extern char * munge_fname (const char* directory, char *fname);
-extern char * find_free_number (const char *fname);
-extern int file_exists (const char *fname); /* 1 = true, 0 = false */
+#include "common.h"
 
-#endif /* !PATH_H */
+#include "mapi_types.h"
+#include "mapi_names.h"
+
+typedef struct
+{
+    uint32 data1;
+    uint16 data2;
+    uint16 data3;
+    uint8 data4[8];
+} GUID;
+
+typedef struct
+{
+    size_t len;
+    union
+    {
+	char *buf;
+	uint16 bytes2;
+	uint32 bytes4;
+	uint32 bytes8[2];
+	GUID guid;
+    } data;
+} MAPI_Value;
+
+typedef struct
+{
+    size_t len;
+    char* data;
+} VarLenData;
+
+typedef struct
+{
+    mapi_type type;
+    mapi_name name;
+    size_t num_values;
+    MAPI_Value* values;
+    GUID *guid;
+    size_t num_names;
+    VarLenData *names;
+} MAPI_Attr;
+
+extern MAPI_Attr** mapi_attr_read (size_t len, char *buf);
+extern void mapi_attr_free_list (MAPI_Attr** attrs);
+
+#endif /* MAPI_ATTR_H */

@@ -1,8 +1,7 @@
-/* -*- mode: c++ -*- */
 /*
  * alloc.h -- Useful allocation function/defintions
  *
- * Copyright (C)1999, 2000, 2001, 2002, 2003 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,24 +26,29 @@
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#if STDC_HEADERS
-#  include <stdlib.h>
-#else
+#include "common.h"
+
+#if !STDC_HEADERS
 extern void free (void*);
 #endif /* STDC_HEADERS */
 
-extern void
-set_alloc_limit (size_t size);
-extern size_t
-get_alloc_limit();
-extern void* 
-CHECKED_MALLOC (size_t size);
-extern void*
-MALLOC (size_t size);
-extern void*
-CHECKED_CALLOC (size_t num, size_t size);
-extern void*
-CALLOC (size_t num, size_t size);
-#define FREE(_x) free(_x);_x=NULL
+extern void set_alloc_limit (size_t size);
+extern size_t get_alloc_limit();
+extern void alloc_limit_assert (char *fn_name, size_t size);
+extern void* checked_xmalloc (size_t size);
+extern void* xmalloc (size_t size);
+extern void* checked_xcalloc (size_t num, size_t size);
+extern void* xcalloc (size_t num, size_t size);
+
+#define XMALLOC(_type,_num)			                \
+        ((_type*)xmalloc((_num)*sizeof(_type)))
+#define XCALLOC(_type,_num) 				        \
+        ((_type*)xcalloc((_num), sizeof (_type)))
+#define CHECKED_XMALLOC(_type,_num) 			        \
+        ((_type*)checked_xmalloc((_num)*sizeof(_type)))
+#define CHECKED_XCALLOC(_type,_num) 			        \
+        ((_type*)checked_xcalloc((_num),sizeof(_type)))
+#define XFREE(_ptr)						\
+	do { if (_ptr) { free (_ptr); _ptr = 0; } } while (0)
 
 #endif /* ALLOC_H */

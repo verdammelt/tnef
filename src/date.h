@@ -1,5 +1,5 @@
 /*
- * path.h -- Utility functions for dealing with pathnames
+ * date.h -- functions for dealing with dates.
  *
  * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
@@ -19,16 +19,25 @@
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
  */
-#ifndef PATH_H
-#define PATH_H
+#ifndef DATE_H
+#define DATE_H
 
 #if HAVE_CONFIG_H
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-extern char * concat_fname (const char* fname1, const char* fname2);
-extern char * munge_fname (const char* directory, char *fname);
-extern char * find_free_number (const char *fname);
-extern int file_exists (const char *fname); /* 1 = true, 0 = false */
+#include "common.h"
 
-#endif /* !PATH_H */
+/* Store a date according to file specification */
+struct date
+{
+    int16 year, month, day;
+    int16 hour, min, sec;
+    int16 dow;
+};
+
+extern const char *date_to_str (struct date* dt);
+extern void date_read (struct date *dt, const char *buf);
+
+#endif /* DATE_H */
+

@@ -1,5 +1,5 @@
 /*
- * path.h -- Utility functions for dealing with pathnames
+ * debug.h -- functions for debug output
  *
  * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
@@ -19,16 +19,14 @@
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
  */
-#ifndef PATH_H
-#define PATH_H
+#ifndef DEBUG_H
+#define DEBUG_H
 
 #if HAVE_CONFIG_H
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-extern char * concat_fname (const char* fname1, const char* fname2);
-extern char * munge_fname (const char* directory, char *fname);
-extern char * find_free_number (const char *fname);
-extern int file_exists (const char *fname); /* 1 = true, 0 = false */
+extern void debug_print (const char *fmt, ...);
 
-#endif /* !PATH_H */
+#endif /* DEBUG_H */
+

@@ -2,13 +2,13 @@ setting alloc_limit to: 23
 TNEF Key: 237
 (MESS) TNEF Version [type: dword] [len: 4] = 00010000
 (MESS) OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
-CHECKED_CALLOC: Maximum allocation size exceeded (maxsize = 23; size = 24).
+checked_xcalloc: Maximum allocation size exceeded (maxsize = 23; size = 24).
 
 setting alloc_limit to: 23
 TNEF Key: 237
 (MESS) TNEF Version [type: dword] [len: 4] = 00010000
 (MESS) OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
-CHECKED_CALLOC: Maximum allocation size exceeded (maxsize = 23; size = 24).
+checked_xcalloc: Maximum allocation size exceeded (maxsize = 23; size = 24).
 
 Invalid argument to --maxsize/-x option: 'foo'
 
@@ -337,7 +337,7 @@ TNEF Key: 237
 (MESS) Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
 (MESS) Subject [type: string] [len: 9] ='one-file'
 (MESS) Priority [type: short] [len: 2] = 2
-CHECKED_CALLOC: Maximum allocation size exceeded (maxsize = 1024; size = 1464).
+checked_xcalloc: Maximum allocation size exceeded (maxsize = 1024; size = 1464).
 
 setting alloc_limit to: 2048
 TNEF Key: 237
@@ -664,7 +664,7 @@ TNEF Key: 237
 (MESS) Date Sent [type: date] [len: 14] = Wed 1999/10/13 22:47:44
 (MESS) Subject [type: string] [len: 9] ='one-file'
 (MESS) Priority [type: short] [len: 2] = 2
-CHECKED_CALLOC: Maximum allocation size exceeded (maxsize = 1463; size = 1464).
+checked_xcalloc: Maximum allocation size exceeded (maxsize = 1463; size = 1464).
 
 setting alloc_limit to: 1465
 TNEF Key: 237

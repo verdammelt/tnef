@@ -1,5 +1,5 @@
 /*
- * path.h -- Utility functions for dealing with pathnames
+ * options.c -- functions for dealing with program options
  *
  * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
@@ -19,16 +19,16 @@
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
  */
-#ifndef PATH_H
-#define PATH_H
-
-#if HAVE_CONFIG_H
+#ifdef HAVE_CONFIG_H
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-extern char * concat_fname (const char* fname1, const char* fname2);
-extern char * munge_fname (const char* directory, char *fname);
-extern char * find_free_number (const char *fname);
-extern int file_exists (const char *fname); /* 1 = true, 0 = false */
+#include "common.h"
 
-#endif /* !PATH_H */
+#include "options.h"
+
+/* Global variables, used by all (or nearly all) functions */
+int8 g_flags = NONE;     /* program options */
+/* char *g_directory = NULL;*/ /* output directory */
+/* FILE *g_file = NULL;*/     /* input file */
+

@@ -1,7 +1,7 @@
 /*
  * path.c -- Utility functions for dealing with pathnames
  *
- * Copyright (C)1999-2003 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,21 +23,16 @@
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#include <assert.h>
-#include <stdio.h>
+#include "common.h"
 
-#if STDC_HEADERS
-#  include <string.h>
-#else
-extern char *strcpy (char *, const char *);
-extern char *strcat (char *, const char *);
+#if HAVE_SYS_STAT_H
+#  include <sys/stat.h>
 #endif
 
-#include "strdup.h"
-
 #include "alloc.h"
-
+#include "options.h"
 #include "path.h"
+#include "debug.h"
 
 /* concatenates fname1 with fname2 to make a pathname, adds '/' as needed
  */ 
@@ -50,14 +45,14 @@ concat_fname (const char *fname1, const char* fname2)
 
     if (!fname1)
     {
-        filename = strdup (fname2);
+        filename = xstrdup (fname2);
     }
     else
     {
         int len = strlen (fname1);
         if (fname2) len += strlen (fname2);
 
-        filename = (char *)CHECKED_MALLOC ((len + 2) * sizeof (char));
+        filename = CHECKED_XMALLOC (char, (len + 2));
         strcpy (filename, fname1);
 
         if (fname2)
@@ -73,4 +68,70 @@ concat_fname (const char *fname1, const char* fname2)
 
     return filename;
 }
+
+int
+file_exists (const char *fname)
+{
+    static struct stat buf;
+    return (stat (fname, &buf) == 0);
+}
+
+/* finds a filename fname.N where N >= 1 and is not the name of an existing
+   filename.  Assumes that fname does not already have such an extension */
+char *
+find_free_number (const char *fname)
+{
+    size_t len = (strlen(fname) 
+		  + 1	/* '.' */
+		  + 5	/* big enough for our purposes (i hope) */
+		  + 1);	/* NULL */
+    char *tmp = CHECKED_XMALLOC (char, len);
+    int counter = 1;
+    do
+    {
+	sprintf (tmp, "%s.%d", fname, counter++);
+    }
+    while (file_exists(tmp));
+    return tmp;
+}
+
+char *
+munge_fname (const char* directory, char *fname)
+{
+    char *file = NULL;
+
+    /* If we were not given a filename make one up */
+    if (!fname || *fname == '\0')
+    {
+	char *tmp = concat_fname (directory, "tnef-tmp");
+	debug_print ("No file name specified, using default.\n");
+	file = find_free_number (tmp);
+	XFREE (tmp);
+    }
+    else
+    {
+	char *buf = NULL;
+
+	if (USE_PATHS)
+	{
+	    buf = xstrdup (fname);
+	}
+	else
+	{
+	    buf = xstrdup (basename (fname));
+	    if (strcmp (buf, fname) != 0)
+	    {
+		debug_print ("!!Filename contains path: '%s'!!\n",
+			     fname);
+	    }
+	}
+	file = concat_fname (directory, buf);
+
+	XFREE(buf);
+    }
+
+    return file;
+}
+
+
 

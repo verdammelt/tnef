@@ -1,5 +1,5 @@
 /*
- * path.h -- Utility functions for dealing with pathnames
+ * file.h -- functions for dealing with file output
  *
  * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
@@ -19,16 +19,28 @@
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
  */
-#ifndef PATH_H
-#define PATH_H
+#ifndef FILE_H
+#define FILE_H
 
 #if HAVE_CONFIG_H
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-extern char * concat_fname (const char* fname1, const char* fname2);
-extern char * munge_fname (const char* directory, char *fname);
-extern char * find_free_number (const char *fname);
-extern int file_exists (const char *fname); /* 1 = true, 0 = false */
+#include "common.h"
 
-#endif /* !PATH_H */
+#include "date.h"
+#include "attr.h"
+
+typedef struct
+{
+    char * name;
+    size_t len;
+    char * data;
+    struct date dt;
+} File;
+
+extern void file_write (File *file, const char* directory);
+extern void file_add_attr (File* file, const char* directory, Attr* attr);
+extern void file_free (File *file);
+
+#endif /* FILE_H */

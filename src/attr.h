@@ -1,5 +1,5 @@
 /*
- * path.h -- Utility functions for dealing with pathnames
+ * attr.h -- Functions for handling tnef attributes
  *
  * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
@@ -19,16 +19,54 @@
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
  */
-#ifndef PATH_H
-#define PATH_H
+#ifndef ATTR_H
+#define ATTR_H
 
 #if HAVE_CONFIG_H
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-extern char * concat_fname (const char* fname1, const char* fname2);
-extern char * munge_fname (const char* directory, char *fname);
-extern char * find_free_number (const char *fname);
-extern int file_exists (const char *fname); /* 1 = true, 0 = false */
+#include "common.h"
+#include "date.h"
+#include "tnef_types.h"
+#include "tnef_names.h"
 
-#endif /* !PATH_H */
+/* Object types */
+enum _lvl_type
+{
+    LVL_MESSAGE		= 0x1,
+    LVL_ATTACHMENT	= 0x2,
+};
+typedef enum _lvl_type level_type;
+
+/* Attr -- storing a structure, formated according to file specification */
+typedef struct
+{
+    level_type lvl_type;
+    tnef_type type;
+    tnef_name name;
+    size_t len;
+    char* buf;
+} Attr;
+
+typedef struct
+{
+    uint16 id;
+    uint16 chbgtrp;
+    uint16 cch;
+    uint16 cb;
+} TRP;
+
+typedef struct
+{
+    TRP trp;
+    char* sender_display_name;
+    char* sender_address;
+} TRIPLE;
+
+extern void attr_dump (Attr* attr);
+extern void attr_free (Attr* attr);
+extern void copy_date_from_attr (Attr* attr, struct date* dt);
+extern Attr* attr_read ();
+
+#endif /* ATTR_H */

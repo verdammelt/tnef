@@ -1,7 +1,7 @@
 /*
  * main.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999-2003 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,17 +25,7 @@
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#include <assert.h>
-#include <stdio.h>
-
-#if STDC_HEADERS
-#  include <stdlib.h>
-#  include <string.h>
-#else
-extern int strcmp (consr char *, const char *);
-extern void abort (void);
-extern void exit (int);
-#endif
+#include "common.h"
 
 #ifndef _
 /* This is for other GNU distributions with internationalized messages.
@@ -51,17 +41,17 @@ extern void exit (int);
 #if HAVE_GETOPT_LONG
 #  include <getopt.h>
 #else
-#  include "getopt_long.h"
+#  include "replace/getopt_long.h"
 #endif /* HAVE_GETOPT_LONG */
 
 #include "alloc.h"
-
 #include "tnef.h"
+#include "options.h"
 
 /* COPYRIGHTS & NO_WARRANTY -- defined to make code below a little nicer to
    read */
 static const char* COPYRIGHTS = \
-"Copyright (C) 1999-2003 by Mark Simpson\n"
+"Copyright (C) 1999-2005 by Mark Simpson\n"
 "Copyright (C) 1997 by Thomas Boll (original code)";
 static const char* NO_WARRANTY = \
 "%s comes with ABSOLUTELY NO WARRANTY.\n"

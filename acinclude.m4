@@ -7,8 +7,8 @@ dnl configure.in
 dnl
 dnl author Loic Dachary <loic@senga.org>
 dnl
-AC_DEFUN(AC_COMPILE_WARNINGS,
-[AC_MSG_CHECKING(maximum warning verbosity option)
+AC_DEFUN([AC_COMPILE_WARNINGS],
+[AC_MSG_CHECKING([maximum warning verbosity option])
 if test -n "$CXX"
 then
   if test "$GXX" = "yes"
@@ -33,8 +33,8 @@ unset ac_compile_warnings_msg
 unset ac_compile_warnings_opt
 ])
 
-AC_DEFUN(AC_DEBUG_COMPILE,
-[AC_MSG_CHECKING(debug build option)
+AC_DEFUN([AC_DEBUG_COMPILE],
+[AC_MSG_CHECKING([debug build option])
 if test -n "$CXX"
 then
     CXXFLAGS="$CXXFLAGS -DDEBUG"
