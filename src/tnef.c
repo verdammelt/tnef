@@ -708,6 +708,7 @@ decode_object (void)
         Attr *attr = (Attr*)CHECKED_CALLOC (1, sizeof(Attr));
         
         attr->lvl_type = (uint8)buf[0];
+
         assert ((attr->lvl_type == LVL_MESSAGE) 
                 || (attr->lvl_type == LVL_ATTACHMENT));
         
@@ -716,8 +717,8 @@ decode_object (void)
         attr->type = (type_and_name >> 16);
         attr->name = ((type_and_name << 16) >> 16);
         attr->len = geti32();
-        attr->buf = CHECKED_MALLOC (attr->len);
-        
+        attr->buf = CHECKED_CALLOC (attr->len, sizeof(char));
+
         bytes_read = fread (attr->buf, 1, attr->len, g_file);
         if (bytes_read != attr->len)
         {
@@ -791,7 +792,7 @@ decode_mapi (size_t len, char *buf)
         MAPI_Attr* a = attrs[i] = 
             (MAPI_Attr*)CHECKED_CALLOC(1, sizeof (MAPI_Attr));
         MAPI_Value* v = NULL;
-        
+
         a->type = GETINT16(buf+idx); idx += 2;
         a->name = GETINT16(buf+idx); idx += 2;
 
@@ -841,6 +842,7 @@ decode_mapi (size_t len, char *buf)
         case szMAPI_UNICODE_STRING:
         case szMAPI_OBJECT:
         case szMAPI_BINARY:       /* variable length */
+        case szMAPI_UNSPECIFIED:
             {
                 int val_idx = 0;
                 a->num_values = GETINT32(buf+idx); idx += 4;
