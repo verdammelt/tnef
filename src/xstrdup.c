@@ -1,7 +1,7 @@
 /*
- * basename.h -- basename for platforms without.
+ * xstrdup.c -- version of strdup for that handles NULL and checks size limit
  *
- * Copyright (C)1999, 2000, 2001, 2002, 2003 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,23 @@
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
  */
-#ifndef BASENAME_H
-#define BASENAME_H
-
-#if HAVE_CONFIG_H
+#ifdef HAVE_CONFIG_H
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-extern char *
-basename (const char* path);
+#include "common.h"
 
-#if HAVE_BASENAME
-#  if HAVE_STRING_H
-#    include <string.h>
-#  else
-#    include <strings.h>
-#  endif /* HAVE_STRING_H */
-#endif /* HAVE_BASENAME */
+#include "alloc.h"
 
+char *
+xstrdup (const char *str)
+{
+    char *ret = NULL;
+    if (str)
+    {
+	alloc_limit_assert ("xstrdup", strlen(str));
+	ret = strdup (str);
+    }
+    return ret;
+}
 
-#endif /* !BASENAME_H */
