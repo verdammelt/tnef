@@ -1,0 +1,167 @@
+setting alloc_limit to: 0
+TNEF Key: c02
+(MESS) TNEF Version [type: dword] [len: 4] = 00010000
+(MESS) OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+(MESS) Message Class [type: word] [len: 24] = 5049 2e4d 694d...
+(MESS) Message ID [type: string] [len: 33] ='4C8701152E82D311A7A50008C71BCA8D'
+(MESS) Date Modified [type: date] [len: 14] = Thu 1999/10/14 08:52:42
+(MESS) Date Sent [type: date] [len: 14] = Thu 1999/10/14 08:55:44
+(MESS) Subject [type: string] [len: 1] =''
+(MESS) Priority [type: short] [len: 2] = 1
+(MESS) MAPI Properties [type: byte] [len: 2240] = 46 00 00 00 03 00 fd 3f e4 04...
+(MAPI) 3ffd [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1252
+(MAPI) MAPI_REPLY_RECIPIENT_NAMES [type: MAPI string] [num_values = 1] = 
+	#0 [len: 18] = gallen@numega.com
+(MAPI) 3ffc [type: MAPI string] [num_values = 1] = 
+	#0 [len: 18] = gallen@numega.com
+(MAPI) MAPI_CLIENT_SUBMIT_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = 6d2dc800 1bf1643
+(MAPI) 4031 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 18] = gallen@numega.com
+(MAPI) 401a [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) 4030 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 18] = gallen@numega.com
+(MAPI) 4019 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_ALTERNATE_RECIPIENT_ALLOWED [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = true
+(MAPI) MAPI_PRIORITY [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1
+(MAPI) MAPI_SENSITIVITY [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_CONVERSATION_INDEX [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 22] = 01 bf 16 43 3b 78 be a7 a1 a6 ...
+(MAPI) MAPI_RTF_COMPRESSED [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 409] = 95 01 00 00 51 02 00 00 4c 5a ...
+(MAPI) 8503 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) 8510 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 0
+(MAPI) 8552 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 5603
+(MAPI) 8554 [type: MAPI string] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 8.5
+(MAPI) 8506 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) 8501 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 0
+(MAPI) 850e [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) 8511 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 0
+(MAPI) 8518 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 0
+(MAPI) 8536 [type: MAPI string] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 1] = 
+(MAPI) 8537 [type: MAPI string] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 1] = 
+(MAPI) 8538 [type: MAPI string] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 1] = 
+(MAPI) 8582 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = true
+(MAPI) 8800 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 6200b 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) 8805 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 6200b 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) MAPI_SEND_RICH_INFO [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = true
+(MAPI) 3fde [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 28591
+(MAPI) MAPI_CONVERSATION_TOPIC [type: MAPI string] [num_values = 1] = 
+	#0 [len: 1] = 
+(MAPI) 10f2 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = true
+(MAPI) 3ff3 [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 0] = 
+(MAPI) 3ff4 [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 0] = 
+(MAPI) MAPI_RECEIVED_BY_ENTRYID [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 81] = 00 00 00 00 dc a7 40 c8 c0 42 ...
+(MAPI) MAPI_RECEIVED_BY_ADDRTYPE [type: MAPI string] [num_values = 1] = 
+	#0 [len: 5] = SMTP
+(MAPI) MAPI_RECEIVED_BY_EMAIL_ADDRESS [type: MAPI string] [num_values = 1] = 
+	#0 [len: 24] = mark.simpson@numega.com
+(MAPI) MAPI_RECEIVED_BY_NAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 14] = Simpson, Mark
+(MAPI) 4034 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 9] = MSIMPSON
+(MAPI) MAPI_RECEIVED_BY_SEARCH_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 56] = 45 58 3a 2f 4f 3d 43 4f 4d 50 ...
+(MAPI) 401b [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_RCVD_REPRESENTING_ENTRYID [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 81] = 00 00 00 00 dc a7 40 c8 c0 42 ...
+(MAPI) MAPI_RCVD_REPRESENTING_ADDRTYPE [type: MAPI string] [num_values = 1] = 
+	#0 [len: 5] = SMTP
+(MAPI) MAPI_RCVD_REPRESENTING_EMAIL_ADDRESS [type: MAPI string] [num_values = 1] = 
+	#0 [len: 24] = mark.simpson@numega.com
+(MAPI) MAPI_RCVD_REPRESENTING_NAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 14] = Simpson, Mark
+(MAPI) 4035 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 9] = MSIMPSON
+(MAPI) MAPI_RCVD_REPRESENTING_SEARCH_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 56] = 45 58 3a 2f 4f 3d 43 4f 4d 50 ...
+(MAPI) 401c [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_MESSAGE_TO_ME [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = true
+(MAPI) MAPI_MESSAGE_CC_ME [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = false
+(MAPI) MAPI_MESSAGE_RECIP_ME [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = true
+(MAPI) MAPI_MESSAGE_SUBMISSION_ID [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 0] = 
+(MAPI) MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = fe872cac 1bf1642
+(MAPI) MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = c3610c 1bf1643
+(MAPI) MAPI_SUBJECT_PREFIX [type: MAPI string] [num_values = 1] = 
+	#0 [len: 1] = 
+(MAPI) MAPI_NORMALIZED_SUBJECT [type: MAPI string] [num_values = 1] = 
+	#0 [len: 1] = 
+(MAPI) 3fd4 [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 0] = 
+(MAPI) 1035 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 50] = <013501bf1643$6d982290$17ce15d1@hornet.vireo.com>
+(MAPI) 1039 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 1] = 
+(MAPI) 1036 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 1] = 
+(MAPI) 4068 [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 0] = 
+(MAPI) 4069 [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 0] = 
+(MAPI) MAPI_READ_RECEIPT_REQUESTED [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = false
+(MAPI) MAPI_ORIGINATOR_DELIVERY_REPORT_REQUESTED [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = false
+(MAPI) MAPI_RTF_SYNC_BODY_CRC [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 17973582
+(MAPI) MAPI_RTF_SYNC_BODY_COUNT [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 202
+(MAPI) MAPI_RTF_SYNC_PREFIX_COUNT [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_RTF_SYNC_TRAILING_COUNT [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_RTF_SYNC_BODY_TAG [type: MAPI string] [num_values = 1] = 
+	#0 [len: 101] = AAFGAGALGAKGKAGKA;KGAGAF;KAFKKGAHAKGAKGQARJAKMBAHGMPGKJAQPGBMDVBADHGERGTADADFHADHADHB--GREGGREGALLEN
+(MAPI) MAPI_TNEF_CORRELATION_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 50] = 3c 30 31 33 35 30 31 62 66 31 ...
+WRITING ./rtf2.dir/message.rtf
