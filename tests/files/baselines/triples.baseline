@@ -1,0 +1,17 @@
+setting alloc_limit to: 0
+TNEF Key: ea64
+TNEF Version [type: dword] [len: 4] = 00010000
+OEM Codepage [type: byte] [len: 8] = e3 04 00 00 00 00 00 00
+Message Class [type: word] [len: 16] = 5049 5049 5049...
+Priority [type: short] [len: 2] = 2
+Subject [type: string] [len: 15] ='Sample Summary'
+Date Sent [type: date] [len: 14] = Fri 2003/05/23 17:26:17
+Response Requested. [type: short] [len: 2] = 1
+From [type: triples] [len: 66] ={id=4,chgtrp=66,cch=18,cb=32} sender_display_name='Martin Rakhmanoff', sender_address='SMTP:rakhmanoff@sundance.spb.ru'
+Date Recieved [type: date] [len: 14] = Fri 2003/05/23 17:26:17
+Message Status [type: byte] [len: 1] = 21
+Body [type: text] [len: 21] ='Sample description
+'
+Date Modified [type: date] [len: 14] = Fri 2003/05/23 17:26:36
+Message ID [type: string] [len: 33] ='C326F5735704184D96EBD387444C618B'
+MAPI Properties [type: byte] [len: 2900] = 60 00 00 00 0b 00 02 00 01 00...
