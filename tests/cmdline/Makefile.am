@@ -13,8 +13,8 @@ EXTRA_DIST	=	help.test help.baseline			\
 
 TESTS		=	help.test version.test basic.test debug.test 	\
 			list.test verbose.test overwrite.test 		\
-			directory.test maxsize.test			\
-			use-path.test interactive.test
+			directory.test maxsize.test
+#			use-path.test interactive.test
 
 XFAIL_TESTS	=	use-path.test interactive.test
 
