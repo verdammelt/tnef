@@ -1,7 +1,7 @@
 /*
  * ldiv.c -- ldiv function if not provided.
  *
- * Copyright (C)1999, 2000, 2001, 2002 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999, 2000, 2001, 2002, 2004 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,3 +36,5 @@ ldiv (int numer, int denom)
 
     return ld;
 }
+
+#endif /* !HAVE_LDIV */

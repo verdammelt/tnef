@@ -1,7 +1,7 @@
 /*
  * tnef.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999-2003 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999-2004 Mark Simpson <damned@world.std.com>
  * Copyright (C)1998 Thomas Boll  <tb@boll.ch>	[ORIGINAL AUTHOR]
  *
  * This program is free software; you can redistribute it and/or modify
@@ -637,7 +637,7 @@ dump_mapi_attr (MAPI_Attr* attr)
         case szMAPI_OBJECT:
         case szMAPI_BINARY:
             {
-                int x;
+                size_t x;
                 
                 for (x = 0; x < attr->values[i].len; x++)
                 {
@@ -778,7 +778,7 @@ static MAPI_Attr**
 decode_mapi (size_t len, char *buf)
 {
     size_t idx = 0;
-    int i;
+    uint32 i;
     uint32 num_properties = GETINT32(buf+idx);
     MAPI_Attr** attrs= 
         (MAPI_Attr**)CHECKED_MALLOC ((num_properties + 1) * 
@@ -844,7 +844,7 @@ decode_mapi (size_t len, char *buf)
         case szMAPI_BINARY:       /* variable length */
         case szMAPI_UNSPECIFIED:
             {
-                int val_idx = 0;
+                size_t val_idx = 0;
                 a->num_values = GETINT32(buf+idx); idx += 4;
                 v = alloc_mapi_values (a);
                 for (val_idx = 0; val_idx < a->num_values; val_idx++)
@@ -886,7 +886,7 @@ mapi_attr_free (MAPI_Attr* attr)
 {
     if (attr)
     {
-        int i;
+        size_t i;
         for (i = 0; i < attr->num_values; i++)
         {
             if ((attr->type == szMAPI_STRING)

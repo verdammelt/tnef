@@ -109,6 +109,9 @@
 
 #include "getopt_long.h"
 
+int optind, opterr, optopt;
+char* optarg;
+
 /* Formerly, initialization of getopt depended on optind==0, which
    causes problems with re-calling getopt as programs generally don't
    know that. */

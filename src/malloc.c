@@ -2,7 +2,7 @@
  * malloc.c -- replacement malloc function if provided malloc does not
  *             handle malloc(0) well  
  *
- * Copyright (C)1999, 2000, 2001, 2002, 2003 Mark Simpson <damned@world.std.com>
+ * Copyright (C)1999, 2000, 2001, 2002, 2003, 2004 Mark Simpson <damned@world.std.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,11 +21,11 @@
  *
  */
 #if HAVE_CONFIG_H
-# include <config.h>
+# include "config.h"
 #endif
 #undef malloc
 
-#include <sys/types.h>
+#include <memory.h>
 
 char *malloc ();
 
