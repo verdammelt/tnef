@@ -59,12 +59,13 @@ enum { NONE    	= 0x00,
        PATHS   	= 0x08,
        OVERWRITE= 0x10,
        CONFIRM 	= 0x20,
-       NUMBERED = 0x40
+       NUMBERED = 0x40,
+       SAVERTF  = 0x80
 };
 
 /* Main entrance point to tnef processing */
 extern int
-parse_file(FILE *input, char * output_dir, int flags);
+parse_file(FILE *input, char * output_dir, char *rtf_file, int flags);
 
 #endif /* !TNEF_H */
 

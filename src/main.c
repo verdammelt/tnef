@@ -81,6 +81,7 @@ static const char* USAGE = \
 "        --use-paths     \tUse pathnames for files if found in the TNEF\n" 
 "                        \t  file (for security reasons paths to included\n"
 "                        \t  files are ignored by default)\n"
+"        --save-rtf[=FILE]\tSave the rtf message to a file\n"
 "-h,     --help          \tshow this message\n"
 "-V,     --version       \tdisplay version and copyright\n"
 "-v,     --verbose       \tproduce verbose output\n"
@@ -102,6 +103,7 @@ static void
 parse_cmdline (int argc, char **argv,
                char **in_file,
                char **out_dir,
+	       char **rtf_file,
                size_t *max_size,
                int *flags)
 {
@@ -120,6 +122,7 @@ parse_cmdline (int argc, char **argv,
         {"number-backups", no_argument, 0, 0 },
         {"overwrite", no_argument, 0, 0 },
         {"use-paths", no_argument, 0, 0},
+	{"save-rtf", optional_argument, 0, 0 },
         {"verbose", no_argument, 0, 'v'},
         {"version", no_argument, 0, 'V'},
         { 0, 0, 0, 0 }
@@ -151,6 +154,12 @@ parse_cmdline (int argc, char **argv,
             {
                 *flags |= NUMBERED;
             }
+	    else if (strcmp (long_options[option_index].name,
+			     "save-rtf") == 0)
+	    {
+		*flags |= SAVERTF;
+		(*rtf_file) = optarg;
+	    }
             else
             {
                 abort ();       /* impossible! */
@@ -236,10 +245,12 @@ main (int argc, char *argv[])
     FILE *fp = NULL;
     char *in_file = NULL;
     char *out_dir = NULL;
+    char *rtf_file = NULL;
     int flags = NONE;
     size_t max_size = 0;
     
-    parse_cmdline (argc, argv, &in_file, &out_dir, &max_size, &flags);
+    parse_cmdline (argc, argv, 
+		   &in_file, &out_dir, &rtf_file, &max_size, &flags);
 
     set_alloc_limit (max_size);
     if (flags & DBG_OUT)
@@ -271,5 +282,5 @@ main (int argc, char *argv[])
         exit (1);
     }
     
-    return parse_file (fp, out_dir, flags);
+    return parse_file (fp, out_dir, rtf_file, flags);
 }
