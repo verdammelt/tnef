@@ -327,12 +327,12 @@ file_write (File *file)
 }
 
 static char *
-munge_fname (unsigned long attr_len, char *attr_buf)
+munge_fname (char *fname)
 {
     char *file = NULL;
 
     /* If we were not given a filename make one up */
-    if (attr_len && *attr_buf == '\0')
+    if (!fname || *fname == '\0')
     {
 	char *tmp = concat_fname (g_directory, "tnef-tmp");
 	debug_print ("No file name specified, using default.\n");
@@ -345,15 +345,15 @@ munge_fname (unsigned long attr_len, char *attr_buf)
 
 	if (USE_PATHS)
 	{
-	    buf = strdup (attr_buf);
+	    buf = strdup (fname);
 	}
 	else
 	{
-	    buf = strdup (basename (attr_buf));
-	    if (strcmp (buf, attr_buf) != 0)
+	    buf = strdup (basename (fname));
+	    if (strcmp (buf, fname) != 0)
 	    {
 		debug_print ("!!Filename contains path: '%s'!!\n",
-			     attr_buf);
+			     fname);
 	    }
 	}
 	file = concat_fname (g_directory, buf);
@@ -828,8 +828,6 @@ decode_mapi (size_t len, char *buf)
 	if (a->name >= 0x8000)
 	{
 	    /* copy GUID */
-	    uint32 length;
-
 	    a->guid = CHECKED_MALLOC(1 * sizeof (MAPI_GUID));
 
 	    memmove (a->guid, buf+idx, sizeof(MAPI_GUID));
@@ -848,6 +846,7 @@ decode_mapi (size_t len, char *buf)
 		    size_t j;
 
 		    a->names[i].len = GETINT32(buf+idx); idx += 4;
+		    
 		    /* must pad length to 4 byte boundary */
 		    {
 			ldiv_t d = ldiv (a->names[i].len, 4L);
@@ -927,15 +926,17 @@ decode_mapi (size_t len, char *buf)
 	    v = alloc_mapi_values (a);
 	    for (val_idx = 0; val_idx < a->num_values; val_idx++)
 	    {
-		size_t total_malloc = 0;
+		size_t total_malloc = 0L;
+		size_t padded_length = 0L;
 
 		v[val_idx].len = GETINT32(buf+idx); idx += 4;
+		padded_length = v[val_idx].len;
 		/* must pad length to 4 byte boundary */
 		{
-		    ldiv_t d = ldiv (v[val_idx].len, 4L);
+		    ldiv_t d = ldiv (padded_length, 4L);
 		    if (d.rem != 0)
 		    {
-			v[val_idx].len += (4 - d.rem);
+			padded_length += (4 - d.rem);
 		    }
 		}
 
@@ -945,7 +946,7 @@ decode_mapi (size_t len, char *buf)
 		memmove (v[val_idx].data.buf,
 			 buf+idx,
 			 v[val_idx].len);
-		idx += v[val_idx].len;
+		idx += padded_length;
 	    }
 	}
 	break;
@@ -1097,7 +1098,7 @@ static void
 save_rtf_data (char *rtf_file, MAPI_Attr **attrs)
 {
     File file;
-    file.name = rtf_file;
+    file.name = munge_fname(rtf_file);
 
     int i;
     for (i = 0; attrs[i]; i++)
@@ -1140,8 +1141,7 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
 	    {
 	    case MAPI_ATTACH_LONG_FILENAME:
 		if (file->name) FREE(file->name);
-		file->name = munge_fname (a->values[0].len,
-					  a->values[0].data.buf);
+		file->name = munge_fname (a->values[0].data.buf);
 		break;
 
 	    case MAPI_ATTACH_DATA_OBJ:
@@ -1181,7 +1181,7 @@ file_add_attr (File* file, Attr* attr)
     break;
 
     case attATTACHTITLE:
-	file->name = munge_fname (attr->len, attr->buf);
+	file->name = munge_fname (attr->buf);
 	break;
 
     case attATTACHDATA:
