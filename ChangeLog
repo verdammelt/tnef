@@ -1,3 +1,118 @@
+2005-03-08  verdammelt  <verdammelt@freya>
+
+	* NEWS: Merging from v1.3.2
+
+2005-03-07  verdammelt  <verdammelt@freya>
+
+        * Merging from v1.3.2
+	
+	* src/main.c: ignoring negative maxsize options
+
+	* src/common.h: moving formatting macros to write.c
+
+	* src/mapi_attr.c: using new copy_guid_from_attr function
+
+	* src/write.h, src/write.c: New output methods for signed integers
+	Updating other output methods
+
+	* tests/files/baselines/two-files.baseline, tests/files/baselines/triples.baseline, tests/files/baselines/rtf.baseline, tests/files/baselines/rtf2.baseline:
+	New baselines for new output style
+
+	* tests/files/baselines/one-file.baseline:
+	Updating baselines for new output style.
+
+	* tests/files/baselines/missing-filenames.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline, tests/files/baselines/long-filename.baseline, tests/files/baselines/data-before-name.baseline, tests/cmdline/version.baseline, tests/cmdline/maxsize.test, tests/cmdline/maxsize.baseline, tests/cmdline/debug.baseline:
+	New baselines for new output style
+
+	* configure.in: Adding prereq for autoconf
+	Removing exe extension check (no longer needed)
+	Adding checking for CPP and CXX (not needed but recommended by
+	autoscan)
+
+2005-03-05  verdammelt  <verdammelt@freya>
+
+        * Release v1.3.2
+	
+	* ChangeLog: update again.
+	
+	* maxsize.baseline: Updating baseline to match proper output
+
+2005-02-22  verdammelt  <verdammelt@freya>
+
+        * NEWS, ChangeLog, configure.in: new version
+	
+	* tests/cmdline/version.baseline: new version
+
+	* tests/cmdline/maxsize.test: refixing
+
+2005-02-13  verdammelt  <verdammelt@freya>
+
+	* tests/cmdline/maxsize.test, tests/cmdline/maxsize.baseline:
+	Changing initial tests from 23 bytes to 25 bytes because on 64 bit
+	systems the sizeof(Attr) is 24 bytes itself, was causing the test to
+	fail due to different output (but not incorrect program operation).
+
+2005-02-13  verdammelt  <verdammelt@freya>
+
+	* tests/cmdline/maxsize.test, tests/cmdline/maxsize.baseline:
+	Changing initial tests from 23 bytes to 25 bytes because on 64 bit
+	systems the sizeof(Attr) is 24 bytes itself, was causing the test to
+	fail due to different output (but not incorrect program
+	operation). [Bug# 1121539]
+
+2005-02-12  verdammelt  <verdammelt@freya>
+
+	* src/main.c (parse_cmdline):
+	ignoring negative values to maxsize option. [Bug# 1121539]
+
+2005-02-11  verdammelt  <verdammelt@freya>
+
+	* tnef.c (copy_guid_from_buf):
+	[Bug# 1117373].  New function to parse a GUID
+	from a character buffer correctly; big endian machines interpreted it
+	incorrectly, forcing to be dealt with as little endian number.
+
+	(decode_mapi): Use of new function
+
+	(dump_mapi_attr): Fixing compiler warnings
+
+2005-02-07  verdammelt  <verdammelt@freya>
+
+	* configure.in: adding stroul to checked functions
+
+	* configure.in, src/basename.h, src/basename.c:
+	[Bug# 1109683] - fixing declaration of basename
+
+2005-02-05  verdammelt  <verdammelt@freya>
+
+        * Release v1.3.1
+	
+	* tests/cmdline/version.baseline:
+	removing extra spaces which screwed up the test
+
+2005-02-01  verdammelt  <verdammelt@freya>
+
+        * ChangeLog, NEWS: new version
+	
+	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline:
+	Fixing boolean output changes the baseline.
+
+	* tests/cmdline/version.baseline, configure.in: Bump the version number
+
+	* src/tnef.c (MAPI_GUID):
+	changed member types to ensure portability to 64 bit
+	system
+	(dump_mapi_attr): Fixed printing of boolean, Mac & Sparc platforms was
+	showing incorect value.
+	(decode_mapi): removed bogus C++ style comments
+	(save_rtf_data): C doesn't allow mixing declarations and statements
+	but GCC lets you!
+
+	* tnef.spec.in:
+	 made changes as suggested by jmsl@users.sf.net [BUG: #1102128]
+
+	* src/main.c: Updating copyright date
+
 2005-01-15  verdammelt  <verdammelt@freya>
 
 	* tnef.1.in: adding info about --save-rtf
