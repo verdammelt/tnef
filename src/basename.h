@@ -1,4 +1,3 @@
-/* -*- mode: c++ -*- */
 /*
  * basename.h -- basename for platforms without.
  *
@@ -23,9 +22,20 @@
 #ifndef BASENAME_H
 #define BASENAME_H
 
-#if !HAVE_BASENAME
+#if HAVE_CONFIG_H
+#  include "config.h"
+#endif /* HAVE_CONFIG_H */
+
 extern char *
 basename (const char* path);
-#endif /* !HAVE_BASENAME */
+
+#if HAVE_BASENAME
+#  if HAVE_STRING_H
+#    include <string.h>
+#  else
+#    include <strings.h>
+#  endif /* HAVE_STRING_H */
+#endif /* HAVE_BASENAME */
+
 
 #endif /* !BASENAME_H */
