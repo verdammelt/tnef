@@ -353,7 +353,7 @@ exchange (char **argv)
 /* Initialize the internal data when the first call is made.  */
 
 static const char *
-_getopt_initialize (int argc, char *cont *argv, const char* optstring)
+_getopt_initialize (int argc, char *const *argv, const char* optstring)
 {
   /* Start processing options with ARGV-element 1 (since ARGV-element 0
      is the program name); the sequence of previously skipped
@@ -473,7 +473,7 @@ _getopt_initialize (int argc, char *cont *argv, const char* optstring)
 
 int
 _getopt_internal (int argc, char *const *argv, const char* optstring, 
-                  cons struct option* longopts, 
+                  const struct option* longopts, 
                   int *longind, int long_only)
 {
   optarg = NULL;
