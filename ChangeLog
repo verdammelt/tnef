@@ -1,3 +1,96 @@
+2003-12-23  Person or Persons Unknown  <damned@theworld.com>
+
+	* Release 1.2.3:
+	
+	* News:
+	* configure.in:
+	New version.
+
+	* src/tnef.c (decode_mapi): Handling szMAPI_UNSPECIFIED like
+	szMAPI_BINARY etc.
+
+2003-06-17  Person or Persons Unknown  <damned@theworld.com>
+
+	* TODO: New items in TODO list.
+
+	* tests/files/Makefile.am:
+	* tests/files/triples.test:
+	* tests/files/baseline/triples.baseline:
+	* tests/files/datafiles/triples.list:
+	* tests/files/datafiles/triples.tnef:
+	New test for dumping of szTRIPLES data.
+
+	* src/tnef.c (dump_attr): Adding decoding of szTRIPLE type for
+	dumping.
+
+	* src/tnef.h: Copyright header change.
+
+2003-05-22  Person or Persons Unknown  <damned@theworld.com>
+
+	* doc/www/htdocs/Makefile.am:
+	* doc/www/htdocs/index.html.in:
+	* doc/www/htdocs/index.html:
+	Removed index.html.in and checked in index.html.  Will use Id CVS
+	keyword instead of 'building' the file to put the date in.
+
+2003-05-17  Person or Persons Unknown  <damned@theworld.com>
+
+	* Makefile.am:
+	* configure.in:
+	* doc/Makefile.am:
+	* doc/www/.cvsignore:
+	* doc/www/Makefile.am:
+	* doc/www/cgi-bin/.cvsignore
+	* doc/www/cgi-bin/Makefile.am
+	* doc/www/htdocs/.cvsignore
+	* doc/www/htdocs/Makefile.am
+	* doc/www/htdocs/index.html
+	* doc/www/htdocs/style.css
+	First pass primitive web site for TNEF.  This is to be installed
+	at tnef.sourceforge.net
+
+	* doc/.cvsignore: 
+	* src/.cvsignore:
+	* src/baseline.h:
+	* src/malloc.c:
+	These files had DOS line-endings.  Switched to Unix line endings. 
+
+2003-05-16  Person or Persons Unknown  <damned@theworld.com>
+
+	* doc/tnef.1.in:
+	* src/alloc.c:
+	* src/alloc.h:
+	* src/main.c:
+	* src/path.c:
+	* src/strdup.c:
+	* src/tnef.c:
+	* tests/cmdline/Makefile.am:
+	* tests/cmdline/help.baseline:
+	* tests/cmdline/maxsize.baseline:
+	* tests/cmdline/maxsize.test:
+	New command line option -x SIZE | --maxsize=SIZE.  New allocation
+	functions to use allocation limit given by these new command line
+	switches.  This can be used by the user to protect against
+	nefarious TNEF files.
+
+	* doc/tnef.1.c:
+	* src/main.c:
+	* tests/cmdline/help.baseline:
+	Removed deprecated command line options.
+
+	* src/tnef.c:
+	* tests/cmdline/debug.baseline:
+	* tests/file/MAPI_ATTACH_DATA_OBJ.baseline:
+	* tests/file/MAPI_OBJECT.baseline:
+	* tests/file/data-before-name.baseline:
+	* tests/file/long-filename.baseline:
+	* tests/file/missing-filenames.baseline:
+	* tests/one-file.baseline:
+	* tests/rtf.baseline:
+	* tests/two-files.baseline:
+	Added length to debug attribute output.  Tweaked MAPI attribute
+	debug output.
+
 2003-04-28  Person or Persons Unknown  <damned@theworld.com>
 
 	* Release 1.2.1:
