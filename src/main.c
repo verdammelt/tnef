@@ -230,8 +230,6 @@ main (int argc, char *argv[])
     
     parse_cmdline (argc, argv, &in_file, &out_dir, &flags);
 
-    printf (_("testing gettext\n"));
-
     /* open the file */
     if (in_file)
     {
