@@ -52,7 +52,8 @@ AC_ARG_ENABLE( debug,
 
 dnl output
 AC_CONFIG_FILES([Makefile BUGS tnef.spec 
-                 doc/Makefile doc/tnef.1 
+                 doc/Makefile doc/tnef.1 doc/www/Makefile 
+                 doc/www/cgi-bin/Makefile doc/www/htdocs/Makefile
                  src/Makefile 
                  tests/Makefile 
                  tests/cmdline/Makefile 

@@ -1,0 +1,25 @@
+Frequently Asked questions about TNEF
+=====================================
+
+Q1. I ran TNEF on my winmail.dat file and 'nothing happened'.  Why not?
+
+A1. The ms-tnef file may not contain any files.  TNEF only unpacks
+embedded files.  It ignores all other data such as RTF markup and
+email meta-data in the ms-tnef format.
+
+Compare the output of tnef --debug --verbose <file> with:
+
+     setting alloc_limit to: 0
+     TNEF Key: c02
+     TNEF Version [type: dword] [len: 4] = 00010000
+     OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+     Message Class [type: word] [len: 24] = 5049 5049 5049...
+     Message ID [type: string] [len: 33] ='4C8701152E82D311A7A50008C71BCA8D'
+     Date Modified [type: date] [len: 14] = Thu 1999/10/14 08:52:42
+     Date Sent [type: date] [len: 14] = Thu 1999/10/14 08:55:44
+     Subject [type: string] [len: 1] =''
+     Priority [type: short] [len: 2] = 1
+     MAPI Properties [type: byte] [len: 2240] = 46 00 00 00 03 00 fd 3f e4 04...
+
+If it looks similar then the issue is because there are no included
+files in the winmail.dat file.

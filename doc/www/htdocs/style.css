@@ -1,0 +1,13 @@
+/* Style sheet for use with HTML 4.0 */
+
+address { text-align: center; font-size: x-small; }
+
+div.center { text-align: center }
+
+div.footnote { font-size: x-small; }
+
+div.build-info { font-size: x-small; }
+
+sup { vertical-align: super; font-size: 80%; }
+
+           
