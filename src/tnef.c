@@ -117,6 +117,21 @@ typedef struct
 
 typedef struct
 {
+    unsigned short id;
+    unsigned short chbgtrp;
+    unsigned short cch;
+    unsigned short cb;
+} TRP;
+
+typedef struct
+{
+    TRP trp;
+    char* sender_display_name;
+    char* sender_address;
+} TRIPLE;
+
+typedef struct
+{
     size_t len;
     union 
     { 
@@ -392,6 +407,21 @@ copy_date_from_attr (Attr* attr, struct date* dt)
     }
 }
 
+void
+copy_triple_from_attr (Attr* attr, TRIPLE *t)
+{
+    assert (attr);
+    assert (t);
+    assert (attr->type == szTRIPLES);
+    
+    t->trp.id = GETINT16 (attr->buf);
+    t->trp.chbgtrp = GETINT16 (attr->buf+2);
+    t->trp.cch = GETINT16 (attr->buf+4);
+    t->trp.cb = GETINT16 (attr->buf+6);
+    t->sender_display_name = attr->buf+8;
+    t->sender_address = attr->buf+8+t->trp.cch;
+}
+
 /* dump_attr
    print attr to stderr.  Assumes that the Debug flag has been set and
    already checked */
@@ -492,6 +522,23 @@ dump_attr (Attr* attr)
             buf[attr->len] = '\0';
             fprintf (stdout, "'%s'", buf);
             FREE (buf);
+        }
+        break;
+
+    case szTRIPLES:
+        {
+            TRIPLE triple;
+            copy_triple_from_attr (attr, &triple);
+            fprintf (stdout, 
+                     "{id=%d,chgtrp=%d,cch=%d,cb=%d} "
+                     "sender_display_name='%s', "
+                     "sender_address='%s'",
+                     triple.trp.id,
+                     triple.trp.chbgtrp,
+                     triple.trp.cch,
+                     triple.trp.cb,
+                     triple.sender_display_name,
+                     triple.sender_address);
         }
         break;
 
