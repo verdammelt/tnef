@@ -1,8 +1,13 @@
-TNEF NEWS -- history of user-visible changes.   02 November 2003
-Copyright (C) 2000-2004 by Mark Simpson
+TNEF NEWS -- history of user-visible changes.   21 February 2005
+Copyright (C) 2000-2005 by Mark Simpson
 
 * 1.4: 
 ** Code reorganization
+
+* 1.3.2:
+** Fixing test buf [Bug# 1121539].  Tests failed due to 32 vs. 64 bit diff.
+** Fixing compile bug [Bug# 1109683].  Basename declared incorrectly
+** Fixing endian bug [Bug# 1117373].  GUIDs were not being parsed, only copied out of stream, thus endianess was wrong left up to chance
 
 * 1.3.1: 
 ** Fixing dumb compiling bugs [BUG: #1108485].  GCC lets me write incorrect code!
