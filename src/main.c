@@ -170,7 +170,7 @@ parse_cmdline (int argc, char **argv,
             fprintf (stderr, "%s\n", PACKAGE_STRING);
             fprintf (stderr, COPYRIGHTS);
             fprintf (stderr, "\n");
-            fprintf (stderr, NO_WARRANTY, PACKAGE, PACKAGE);
+            fprintf (stderr, NO_WARRANTY, PACKAGE_NAME, PACKAGE_NAME);
             fprintf (stderr, "\n");
             exit (0);
             break;
