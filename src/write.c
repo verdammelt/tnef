@@ -6,22 +6,53 @@
 #include "attr.h"
 #include "mapi_attr.h"
 
+/* Format Strings */
+#define UINT8_FMT "%u"
+#define INT8_FMT "%d"
+#define UINT16_FMT "%hu"
+#define INT16_FMT "%hd"
+#if (SIZEOF_INT == 2)
+#define UINT32_FMT  "%lu"
+#define INT32_FMT  "%ld"
+#else
+#define UINT32_FMT  "%u"
+#define INT32_FMT  "%d"
+#endif /* (SIZEOF_INT == 2) */
+
 void
 write_uint8 (FILE* fp, uint8 b)
 {
-    fprintf (fp, "%d", b);
+    fprintf (fp, UINT8_FMT, b);
 }
 
 void 
 write_uint16 (FILE* fp, uint16 s)
 {
-    fprintf (fp, SHORT_INT_FMT, s);
+    fprintf (fp, UINT16_FMT, s);
 }
 
 void
 write_uint32 (FILE* fp, uint32 l)
 {
-    fprintf (fp, LONG_INT_FMT, l);
+    fprintf (fp, UINT32_FMT, l);
+}
+
+void
+write_int8 (FILE* fp, int8 b)
+{
+    fprintf (fp, INT8_FMT, b);
+}
+
+void
+write_int16 (FILE* fp, int16 s)
+{
+    fprintf (fp, INT16_FMT, s);
+}
+
+void
+write_int32 (FILE* fp, int32 l)
+{
+    fprintf (fp, INT32_FMT, l);
 }
 
 void
@@ -64,7 +95,10 @@ void
 write_triple (FILE* fp, TRIPLE* triple)
 {
     fprintf (fp,
-	     "{id=%d,chgtrp=%d,cch=%d,cb=%d} "
+	     "{id=" UINT16_FMT 
+	     ",chgtrp=" UINT16_FMT 
+	     ",cch=" UINT16_FMT 
+	     ",cb=" UINT16_FMT "} "
 	     "sender_display_name='%s', "
 	     "sender_address='%s'",
 	     triple->trp.id,
@@ -91,11 +125,12 @@ void
 write_guid (FILE *fp, GUID *guid)
 {
     int j;
-    fprintf (fp, "{ 0x%04lx 0x%02x 0x%02x { ",
+    fprintf (fp, "{ 0x%04x 0x%02x 0x%02x { ",
 	     guid->data1, guid->data2, guid->data3);
     for (j = 0; j < 8; j++)
     {
 	write_byte (fp, guid->data4[j]);
+	fprintf (fp, " ");
     }
     fprintf (fp, "}");
 }

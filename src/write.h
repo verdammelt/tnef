@@ -8,6 +8,9 @@
 extern void write_uint8 (FILE* fp, uint8 b);
 extern void write_uint16 (FILE* fp, uint16 s);
 extern void write_uint32 (FILE* fp, uint32 l);
+extern void write_int8 (FILE* fp, int8 b);
+extern void write_int16 (FILE* fp, int16 s);
+extern void write_int32 (FILE* fp, int32 l);
 extern void write_float (FILE *fp, float f);
 extern void write_string(FILE* fp, const char *s);
 extern void write_byte (FILE* fp, uint8 b);
