@@ -1,43 +1,152 @@
 setting alloc_limit to: 0
 TNEF Key: 8
-TNEF Version [type: dword] [len: 4] = 00010000
-OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
-Message Class [type: word] [len: 24] = 5049 5049 5049...
-Date Sent [type: date] [len: 14] = Tue 2002/10/08 10:15:35
-Date Modified [type: date] [len: 14] = Tue 2002/10/08 10:15:40
-Message ID [type: string] [len: 33] ='B2DE3DA896A9EB41A32F449E1C135CA8'
-Subject [type: string] [len: 30] ='OCTOBER DISCOUNTED PRICE LIST'
-Priority [type: short] [len: 2] = 2
-MAPI Properties [type: byte] [len: 1924] = 31 00 00 00 03 00 de 3f af 6f...
-Attachment Rendering Data [type: byte] [len: 14] = 02 00 52 01 00 00 ff ff ff ff...
-Attachment File Name [type: string] [len: 20] ='Untitled_Attachment'
-Attachment Creation Date [type: date] [len: 14] = Tue 2002/10/08 10:13:48
-Attachment Modification Date [type: date] [len: 14] = Tue 2002/10/08 10:13:48
-Attachment [type: byte] [len: 628428] = 0d 00 00 00 03 00 21 0e 00 00...
-MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+(MESS) TNEF Version [type: dword] [len: 4] = 00010000
+(MESS) OEM Codepage [type: byte] [len: 8] = e4 04 00 00 00 00 00 00
+(MESS) Message Class [type: word] [len: 24] = 5049 2e4d 694d...
+(MESS) Date Sent [type: date] [len: 14] = Tue 2002/10/08 10:15:35
+(MESS) Date Modified [type: date] [len: 14] = Tue 2002/10/08 10:15:40
+(MESS) Message ID [type: string] [len: 33] ='B2DE3DA896A9EB41A32F449E1C135CA8'
+(MESS) Subject [type: string] [len: 30] ='OCTOBER DISCOUNTED PRICE LIST'
+(MESS) Priority [type: short] [len: 2] = 2
+(MESS) MAPI Properties [type: byte] [len: 1924] = 31 00 00 00 03 00 de 3f af 6f...
+(MAPI) 3fde [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 28591
+(MAPI) 8552 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 94506
+(MAPI) 8554 [type: MAPI string] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 9.0
+(MAPI) 8506 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) 8501 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
 	#0 [len: 4] = 0
-MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+(MAPI) 8503 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) 850e [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) 8510 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 0
+(MAPI) 8511 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 0
+(MAPI) 8518 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = 0
+(MAPI) MAPI_RTF_COMPRESSED [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 532] = 10 02 00 00 dc 02 00 00 4c 5a ...
+(MAPI) MAPI_CONVERSATION_TOPIC [type: MAPI string] [num_values = 1] = 
+	#0 [len: 30] = OCTOBER DISCOUNTED PRICE LIST
+(MAPI) MAPI_ALTERNATE_RECIPIENT_ALLOWED [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = true
+(MAPI) 3ffd [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1252
+(MAPI) 5909 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 3
+(MAPI) 8514 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = false
+(MAPI) MAPI_CONVERSATION_INDEX [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 22] = 01 c2 6e 5f d1 17 a2 b0 49 74 ...
+(MAPI) 8582 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	GUID: { 62008 00 00 { c000000046 }
+	#0 [len: 4] = true
+(MAPI) MAPI_CLIENT_SUBMIT_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = d2ad33b0 1c26e5f
+(MAPI) 3ff1 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 1033
+(MAPI) 4031 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AU-5737
+(MAPI) 401a [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) 4030 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AU-5737
+(MAPI) 4019 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_PRIORITY [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_SENSITIVITY [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) 10f2 [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = true
+(MAPI) 1080 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = -1
+(MAPI) MAPI_MESSAGE_SUBMISSION_ID [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 42] = 63 3d 55 53 3b 61 3d 20 3b 70 ...
+(MAPI) MAPI_PROVIDER_SUBMIT_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = d2e40ea8 1c26e5f
+(MAPI) 3ff9 [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 72] = 00 00 00 00 dc a7 40 c8 c0 42 ...
+(MAPI) 3ff8 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 49] = COMMUNICATIONS,HP-INTERNAL (HP-Australia,exgen3)
+(MAPI) 4038 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AU-5737
+(MAPI) 3ffb [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 72] = 00 00 00 00 dc a7 40 c8 c0 42 ...
+(MAPI) 3ffa [type: MAPI string] [num_values = 1] = 
+	#0 [len: 49] = COMMUNICATIONS,HP-INTERNAL (HP-Australia,exgen3)
+(MAPI) 4039 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 8] = AU-5737
+(MAPI) MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = d2386558 1c26e5f
+(MAPI) MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+	#0 [len: 8] = d579471e 1c26e5f
+(MAPI) MAPI_SUBJECT_PREFIX [type: MAPI string] [num_values = 1] = 
+	#0 [len: 1] = 
+(MAPI) MAPI_NORMALIZED_SUBJECT [type: MAPI string] [num_values = 1] = 
+	#0 [len: 30] = OCTOBER DISCOUNTED PRICE LIST
+(MAPI) 1035 [type: MAPI string] [num_values = 1] = 
+	#0 [len: 60] = <BF55F48D9D4AD51190C500D0B7BB2C6E089088FE@xau03.aus.hp.com>
+(MAPI) MAPI_READ_RECEIPT_REQUESTED [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = false
+(MAPI) MAPI_ORIGINATOR_DELIVERY_REPORT_REQUESTED [type: MAPI boolean (16 bits)] [num_values = 1] = 
+	#0 [len: 4] = false
+(MAPI) MAPI_RTF_SYNC_BODY_CRC [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = -620788710
+(MAPI) MAPI_RTF_SYNC_BODY_COUNT [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 275
+(MAPI) MAPI_RTF_SYNC_PREFIX_COUNT [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_RTF_SYNC_TRAILING_COUNT [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 2
+(MAPI) MAPI_RTF_SYNC_BODY_TAG [type: MAPI string] [num_values = 1] = 
+	#0 [len: 101] = ATTACHEDISTHEUPDATEDOCTOBERDISCOUNTEDPRICELISTOFREFURBISHEDHPPRODUCTSAVAILABLETOSTAFFMEMBERSASTHESEI
+(MAPI) MAPI_TNEF_CORRELATION_KEY [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 60] = 3c 42 46 35 35 46 34 38 44 39 ...
+(ATTA) Attachment Rendering Data [type: byte] [len: 14] = 02 00 52 01 00 00 ff ff ff ff...
+(ATTA) Attachment File Name [type: string] [len: 20] ='Untitled_Attachment'
+(ATTA) Attachment Creation Date [type: date] [len: 14] = Tue 2002/10/08 10:13:48
+(ATTA) Attachment Modification Date [type: date] [len: 14] = Tue 2002/10/08 10:13:48
+(ATTA) Attachment [type: byte] [len: 628428] = 0d 00 00 00 03 00 21 0e 00 00...
+(MAPI) MAPI_ATTACH_NUM [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+	#0 [len: 4] = 0
+(MAPI) MAPI_RENDERING_POSITION [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
 	#0 [len: 4] = 338
-MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+(MAPI) MAPI_ATTACH_SIZE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
 	#0 [len: 4] = 628302
-MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+(MAPI) MAPI_ACCESS_LEVEL [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
 	#0 [len: 4] = 0
-6810 [type: MAPI binary] [num_values = 1] = 
-	#0 [len: 16] = 00 00 00 00 00 00 00 00 00 00 ...
-MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+(MAPI) 6810 [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 14] = 00 00 00 00 00 00 00 00 00 00 ...
+(MAPI) MAPI_CREATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
 	#0 [len: 8] = 92c4e180 1c26e5f
-MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
+(MAPI) MAPI_LAST_MODIFICATION_TIME [type: MAPI time (64 bits)] [num_values = 1] = 
 	#0 [len: 8] = 92c4e180 1c26e5f
-MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+(MAPI) MAPI_ATTACH_METHOD [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
 	#0 [len: 4] = 6
-MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
+(MAPI) MAPI_ATTACH_ENCODING [type: MAPI binary] [num_values = 1] = 
 	#0 [len: 0] = 
-MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
-	#0 [len: 4] = 
-MAPI_ATTACH_TAG [type: MAPI binary] [num_values = 1] = 
-	#0 [len: 12] = 2a 86 48 86 f7 14 03 0a 03 02 ...
-MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
+(MAPI) MAPI_DISPLAY_NAME [type: MAPI string] [num_values = 1] = 
+	#0 [len: 1] = 
+(MAPI) MAPI_ATTACH_TAG [type: MAPI binary] [num_values = 1] = 
+	#0 [len: 11] = 2a 86 48 86 f7 14 03 0a 03 02 ...
+(MAPI) MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
 	#0 [len: 16] = cd e0 db 7e 59 d0 12 43 96 37 ...
-MAPI_ATTACH_DATA_OBJ [type: MAPI embedded object] [num_values = 1] = 
+(MAPI) MAPI_ATTACH_DATA_OBJ [type: MAPI embedded object] [num_values = 1] = 
 	#0 [len: 628240] = 0b 00 00 00 00 00 00 00 c0 00 ...
 WRITING ./MAPI_OBJECT.dir/Untitled_Attachment
