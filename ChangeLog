@@ -1,3 +1,11 @@
+2003-02-27  Person or Persons Unknown  <damned@theworld.com>
+
+	* Release 1.1.5:
+	Code Cleanup
+	Help & Copyright statement cleanup
+	Inclusion of MAPI_OBJECT test file
+	Correction to MacOSX gettext link error.
+
 2002-12-10  Person or Persons Unknown  <damned@theworld.com>
 
         * Release 1.1.4:
