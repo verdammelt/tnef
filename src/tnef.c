@@ -556,12 +556,12 @@ dump_mapi_attr (MAPI_Attr* attr)
             break;
 
         case szMAPI_ERROR:
-        case szMAPI_OBJECT:
         case szMAPI_CLSID:
             fprintf (stdout, "%x",
                      attr->values[i].data.bytes4);
             break;
 
+        case szMAPI_OBJECT:
         case szMAPI_BINARY:
             {
                 int x;
