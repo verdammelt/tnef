@@ -1,3 +1,35 @@
+2003-04-28  Person or Persons Unknown  <damned@theworld.com>
+
+	* Release 1.2.1:
+
+	* News:
+	* configure.in:
+	New version.
+
+2003-03-30  Person or Persons Unknown  <damned@theworld.com>
+
+	* src/tnef.c (copy_date_from_attr, dump_attr, dump_mapi_attr): 
+	get_[tnef|mapi]_[name|type]_str return allocated buffer.  Must
+	call FREE.
+
+	* src/tnef.c (dump_mapi_attr): szMAPI_CLSID must be printed out
+	carefully. 
+
+	* src/tnef.c (decode_mapi): no longer using memove for integer
+	type objects (sz_MAPI_SHORT, szMAPI_INT &c.).  this fixes an
+	endian problem. (bug: 712371).
+
+2003-03-06  Person or Persons Unknown  <damned@theworld.com>
+
+	* tests/cmdline/*.test:
+	* tests/cmdline/*.baseline:
+	* tests/files/*.test:
+	* tests/files/*.baseline:
+	* tests/files/file-utils.sh:
+	* tests/util.sh: 
+	Update scripts and baselines to use and expect $srcdir for all
+	paths. (bug: 698111)
+
 2003-03-02  Person or Persons Unknown  <damned@theworld.com>
 
 	* Release 1.2.0:

@@ -1,5 +1,8 @@
-TNEF NEWS -- history of user-visible changes.   10 Dec 2002
-Copyright (C) 2000, 2001, 2002, 2003 by Mark Simpson
+TNEF NEWS -- history of user-visible changes.   28 Apr 2003
+Copyright (C) 2000-2003 by Mark Simpson
+
+* 1.2.1:
+** Fixing test failure on NetBSD (698111) and big-endian systems (712371). 
 
 * 1.2.0:
 ** Added new automated testing.  Run them with ``make check''.
