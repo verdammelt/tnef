@@ -54,6 +54,10 @@ honor file pathnames specifieid in the TNEF attachment.
 For security reasons, paths to attached files are
 ignored by default.
 .TP
+\fB\-\-save-rtf\fP
+Save any RTF data found in the TNEF data to files named
+tnef-rtf-tmp.
+.TP
 \fB\-h,  \-\-help\fP 
 show usage message.
 .TP
