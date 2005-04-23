@@ -319,6 +319,7 @@ mapi_attr_free (MAPI_Attr* attr)
 	    }
 	}
 	XFREE (attr->values);
+	XFREE (attr->guid);
 	memset (attr, '\0', sizeof (MAPI_Attr));
     }
 }

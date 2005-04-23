@@ -1,3 +1,7 @@
+2005-04-23  verdammelt  <verdammelt@freya>
+
+	* tnef.c: fixing memory leak with GUID
+
 2005-03-08  verdammelt  <verdammelt@freya>
 
 	* NEWS: Merging from v1.3.2
