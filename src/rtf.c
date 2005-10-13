@@ -141,36 +141,24 @@ get_rtf_data (size_t len, char *data, File *dest_file)
     }
 }
 
-void
-save_rtf_data (char *rtf_file, 
-	       const char *directory, 
-	       MAPI_Attr **attrs)
+static VarLenData**
+get_rtf_data (MAPI_Attr *a)
 {
-    int i;
-    File file;
-    file.name = munge_fname(directory, rtf_file);
+    VarLenData** body 
+	= (VarLenData**)CALLOC(a->num_values + 1, sizeof(VarLenData*));
 
-    for (i = 0; attrs[i]; i++)
+    int j;
+    for (j = 0; j < a->num_values; j++)
     {
-	MAPI_Attr* a = attrs[i];
-	if (a->name == MAPI_RTF_COMPRESSED)
+	if (is_rtf_data (a->values[j].data.buf))
 	{
-	    int j;
-	    for (j = 0; j < a->num_values; j++)
-	    {
-		size_t len = a->values[j].len;
-		void *data = a->values[j].data.buf;
-		if (j > 0)
-		{
-		    file.name = find_free_number (rtf_file);
-		}
+	    body[j] = (VarLenData*)MALLOC(1 * sizeof(VarLenData));
 
-		if (is_rtf_data ((char*)data))
-		{
-		    get_rtf_data (len, (char*)data, &file);
-		    file_write (&file, directory);
-		}
-	    }
+	    get_rtf_data_from_buf (a->values[j].len,
+				   a->values[j].data.buf,
+				   &body[j]->len, &body[j]->data);
 	}
     }
+    return body;
 }
+

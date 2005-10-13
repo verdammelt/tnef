@@ -1,0 +1,55 @@
+#!/bin/sh
+
+. $srcdir/../util.sh
+bin=$srcdir/../../src/tnef
+tnef_file=$srcdir/../files/datafiles/body.tnef
+
+do_tnef () {
+    $bin $* --debug $tnef_file > $$.out 2> $$.err
+    cat $$.out $$.err >> $srcdir/body.output
+    rm -f $$.out $$.err
+    echo >> $srcdir/body.output
+}
+
+cleanup() {
+    rm -f message.txt message.html message.rtf
+    rm -f body-test.txt body-test.html body-test.rtf 
+    rm -f rtf-test.txt rtf-test.html rtf-test.rtf 
+    rm -f triples-test.txt triples-test.html triples-test.rtf
+    rm -f triples-test-2.txt triples-test-2.html triples-test-2.rtf
+}
+
+cleanup
+rm -f body.output 
+
+touch body.output
+
+# test the --save-body option with default filename
+do_tnef --save-body
+
+# test the --save-body option with a specific filename
+do_tnef --save-body=body-test
+
+
+# test the --save-body option with an rtf message
+tnef_file=$srcdir/../files/datafiles/rtf.tnef
+do_tnef --save-body=rtf-test
+
+# test the --save-body option with a plain text message body
+tnef_file=$srcdir/../files/datafiles/triples.tnef
+do_tnef --save-body=triples-test --body-pref=t
+
+# test the all flag for body-pref
+do_tnef --save-body=triples-test-2 --body-pref=all
+
+check_test body
+
+check_file message.html
+check_file body-test.html
+check_file rtf-test.rtf
+check_file triples-test.txt
+check_file triples-test-2.txt
+check_file triples-test-2.rtf
+
+cleanup
+

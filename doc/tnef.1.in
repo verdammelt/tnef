@@ -45,18 +45,32 @@ ask for confirmation for every action.
 \fB\-\-overwrite\fP
 when extracting attachments, overwrite existing files.
 .TP
-\fB\-\-number-backups\fP
+\fB\-\-number\-backups\fP
 when extracting attachments, if file FOO will be overwritten,
 create FOO.n instead.
 .TP
-\fB\-\-use-paths\fP
+\fB\-\-use\-paths\fP
 honor file pathnames specifieid in the TNEF attachment.
 For security reasons, paths to attached files are
 ignored by default.
 .TP
-\fB\-\-save-rtf\fP
-Save any RTF data found in the TNEF data to files named
-tnef-rtf-tmp.
+\fB\-\-save\-body FILE\fP
+Save message body data found in the TNEF data.  There can be up to
+three message bodies in the file, plain text, HTML encoded, and RTF
+encoded.  Which are saved is specified by the \-\-body-pref option.
+By default the message bodies are written to a file named message with
+an extension based upon the type (txt, html, rtf).
+.TP
+\fB\-\-body\-pref PREF\fP
+Specifies which of the possibly three message body formats will be
+saved.  PREF can be up to three characters long and each character
+must be one of 'r', 'h', or 't' specifying RTF, HTML or text.  The
+order is the order that the data will be checked, the first type found
+will be saved.  If PREF is the special value of 'all' then any and all
+message body data found will be saved.  The default is 'rht'.
+.TP
+\fB\-\-save-rtf FILE\fP
+DEPRECATED.  Equivalent to --save-body FILE --body-pref=r
 .TP
 \fB\-h,  \-\-help\fP 
 show usage message.

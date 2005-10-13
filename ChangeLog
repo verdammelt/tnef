@@ -1,37 +1,129 @@
+2005-05-17  verdammelt  <verdammelt@freya>
+
+        * Release v1.3.3
+	
+	* NEWS, configure.in, ChangeLog: New version
+
+	* src/main.c: (parse_cmdline): fixing small bug in shifting
+	argument to all lowercase.
+
+	* tests/cmdline/Makefile.am, 
+	* tests/files/datafile/Makefile.am,
+	* tests/files/baselines/Makefile.am:
+	New items for distribution.
+	
+	* acinclude.m4: (AC_COMPILE_WARNINGS, AC_DEBUG_COMPILE) fixing
+	quoting warning.
+
+	* doc/tnef.1.in: Updating document for new --save-body and
+	--body-pref feature.
+
+
+	* tnef.spec.in:
+	[Bug# 1200197] fix from John Simpson <jms1@users.sf.net>
+
+2005-05-16  verdammelt  <verdammelt@freya>
+
+	* tests/files/baselines/rtf2.baseline,
+	* tests/files/datafiles/rtf2.list,
+	* tests/files/datafiles/rtf2.tnef, 
+	* tests/files/rtf2.test: 
+	rtf2 test superceeded body test
+
+	* tests/files/baselines/body.baseline: new body baseline
+
+	* tests/cmdline/body.baseline,
+	* tests/files/baselines/triples-body.rtf.baseline,
+	* tests/files/datafiles/body.list: 
+	new baselines & test data
+
+	* tests/cmdline/body.test, tests/files/body.test:
+	new tests for body feature
+
+	* src/tnef.c:
+	new function get_text_data encapsulating code to get text message
+	body 
+
+	* src/main.c: initializing i
+
+	* tests/cmdline/triples-test.txt.baseline,
+	* tests/cmdline/triples-test-2.txt.baseline,
+	* tests/cmdline/triples-test-2.rtf.baseline,
+	* tests/cmdline/rtf-test.rtf.baseline,
+	* tests/cmdline/message.html.baseline,
+	* tests/cmdline/Makefile.am,
+	* tests/cmdline/body-test.html.baseline:
+	new --save-body test and use of it in other tests.
+
+	* tests/files/datafiles/triples.list,
+	* tests/files/datafiles/rtf.list,
+	* tests/files/datafiles/missing-filenames.list,
+	* tests/files/datafiles/MAPI_OBJECT.list,
+	* tests/files/datafiles/MAPI_ATTACH_DATA_OBJ.list,
+	* tests/files/datafiles/long-filename.list,
+	* tests/files/datafiles/data-before-name.list,
+	* tests/files/datafiles/body.tnef,
+	* tests/files/baselines/triples.baseline,
+	* tests/files/baselines/rtf-body.rtf.baseline,
+	* tests/files/baselines/rtf.baseline,
+	* tests/files/baselines/missing-filenames-body.rtf.baseline,
+	* tests/files/baselines/missing-filenames.baseline,
+	* tests/files/baselines/MAPI_OBJECT-body.rtf.baseline,
+	* tests/files/baselines/MAPI_OBJECT.baseline,
+	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline,
+	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+	* tests/files/baselines/long-filename-body.rtf.baseline,
+	* tests/files/baselines/long-filename.baseline,
+	* tests/files/baselines/data-before-name-body.rtf.baseline,
+	* tests/files/baselines/data-before-name.baseline,
+	* tests/files/baselines/body-body.html.baseline,
+	* tests/files/Makefile.am, 
+	* tests/files/file-util.sh :
+	New test for body files.
+	Updating other tests to use the --save-body switch (new baselines etc.)
+
+2005-05-04  verdammelt  <verdammelt@freya>
+
+	* tests/files/baselines/long-filename.baseline, tests/files/baselines/missing-filenames.baseline, tests/files/baselines/one-file.baseline, tests/files/baselines/rtf.baseline, tests/files/baselines/two-files.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline:
+	Updating baselines for new named attributes
+
+	* tests/files/baselines/rtf2.baseline, tests/files/rtf2.test:
+	Updating rtf body saving test with new preferences
+
+	* tests/cmdline/debug.baseline, tests/cmdline/help.baseline, tests/cmdline/maxsize.baseline:
+	Updating baselines for new named attributes
+
+	* src/tnef.c:
+	Saving the body whether it is text, rtf, or html.  Using body_pref
+	feature to determine which order to try to save in (or save all of
+	them).
+
+	* src/main.c:
+	Making the --save-rtf feature a more general --save-body feature.
+	This entails adding a --body-pref flag which specifies the preference
+	for the type of body to save (an ordering).  This preference must be
+	validated.
+
+	* src/tnef.h:
+	Making the --save-rtf feature a more general --save-body feature
+
+	* src/mapi-names.data:
+	Adding new-found names.  Most important is MAPI_BODY_HTML (0x1013)
+
 2005-04-23  verdammelt  <verdammelt@freya>
 
 	* tnef.c: fixing memory leak with GUID
 
-2005-03-08  verdammelt  <verdammelt@freya>
-
-	* NEWS: Merging from v1.3.2
-
 2005-03-07  verdammelt  <verdammelt@freya>
 
-        * Merging from v1.3.2
-	
-	* src/main.c: ignoring negative maxsize options
+	* main.c: ignoring negative maxsize options
 
-	* src/common.h: moving formatting macros to write.c
+	* common.h: moving formatting macros to write.c
 
-	* src/mapi_attr.c: using new copy_guid_from_attr function
+	* mapi_attr.c: using new copy_guid_from_attr function
 
-	* src/write.h, src/write.c: New output methods for signed integers
+	* write.h, write.c: New output methods for signed integers
 	Updating other output methods
-
-	* tests/files/baselines/two-files.baseline, tests/files/baselines/triples.baseline, tests/files/baselines/rtf.baseline, tests/files/baselines/rtf2.baseline:
-	New baselines for new output style
-
-	* tests/files/baselines/one-file.baseline:
-	Updating baselines for new output style.
-
-	* tests/files/baselines/missing-filenames.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline, tests/files/baselines/long-filename.baseline, tests/files/baselines/data-before-name.baseline, tests/cmdline/version.baseline, tests/cmdline/maxsize.test, tests/cmdline/maxsize.baseline, tests/cmdline/debug.baseline:
-	New baselines for new output style
-
-	* configure.in: Adding prereq for autoconf
-	Removing exe extension check (no longer needed)
-	Adding checking for CPP and CXX (not needed but recommended by
-	autoscan)
 
 2005-03-05  verdammelt  <verdammelt@freya>
 
@@ -48,13 +140,6 @@
 	* tests/cmdline/version.baseline: new version
 
 	* tests/cmdline/maxsize.test: refixing
-
-2005-02-13  verdammelt  <verdammelt@freya>
-
-	* tests/cmdline/maxsize.test, tests/cmdline/maxsize.baseline:
-	Changing initial tests from 23 bytes to 25 bytes because on 64 bit
-	systems the sizeof(Attr) is 24 bytes itself, was causing the test to
-	fail due to different output (but not incorrect program operation).
 
 2005-02-13  verdammelt  <verdammelt@freya>
 

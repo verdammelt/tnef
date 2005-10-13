@@ -26,6 +26,7 @@
 #endif /* HAVE_CONFIG_H */
 
 #include "common.h"
+#include <ctype.h>
 
 #ifndef _
 /* This is for other GNU distributions with internationalized messages.
@@ -71,7 +72,8 @@ static const char* USAGE = \
 "        --use-paths     \tUse pathnames for files if found in the TNEF\n" 
 "                        \t  file (for security reasons paths to included\n"
 "                        \t  files are ignored by default)\n"
-"        --save-rtf[=FILE]\tSave the rtf message to a file\n"
+"        --save-rtf[=FILE]\t[DEPRECATED] Save the RTF message body to a file\n"
+"        --save-body[=FILE]\tSave the message body to a file\n"
 "-h,     --help          \tshow this message\n"
 "-V,     --version       \tdisplay version and copyright\n"
 "-v,     --verbose       \tproduce verbose output\n"
@@ -89,11 +91,57 @@ usage (char* prog)
 }
 
 
+static char*
+validate_body_pref (char *optarg)
+{
+    int i = 0;
+    char *pref;
+    char *p;
+
+    if (optarg == NULL)
+    {
+	fprintf (stderr, "--body-pref cannot be null.\n");
+	abort();
+    }
+    if (strlen(optarg) == 0 || strlen(optarg) > 3)
+    {
+	fprintf (stderr, "'%s' is an invalid setting for --body-pref", optarg);
+	abort();
+    }
+    
+    pref = strdup (optarg);
+    p = pref;
+
+    /* shift to all lower case */
+    while ((*p = tolower(*p))) p++;
+
+    /* 'all' is a special setting, do not validate */
+    if (strcmp (pref, "all") != 0)
+    {
+	i = 0;
+	while (pref[i])
+	{
+	    if (pref[i] != 'r'
+		&& pref[i] != 'h'
+		&& pref[i] != 't')
+	    {
+		fprintf (stderr, 
+			 "--body-pref setting can only contain R, H or T.\n");
+		abort();
+	    }
+	    i++;
+	}
+    }
+    return pref;
+}
+
+
 static void
 parse_cmdline (int argc, char **argv,
                char **in_file,
                char **out_dir,
-	       char **rtf_file,
+	       char **body_file,
+	       char **body_pref,
                size_t *max_size,
                int *flags)
 {
@@ -113,10 +161,15 @@ parse_cmdline (int argc, char **argv,
         {"overwrite", no_argument, 0, 0 },
         {"use-paths", no_argument, 0, 0},
 	{"save-rtf", optional_argument, 0, 0 },
+	{"save-body", optional_argument, 0, 0 },
+	{"body-pref", required_argument, 0, 0 },
         {"verbose", no_argument, 0, 'v'},
         {"version", no_argument, 0, 'V'},
         { 0, 0, 0, 0 }
     };
+
+    /* default values */
+    (*body_pref) = strdup("rht");
 
     while ((i = getopt_long (argc, argv, "f:C:d:x:vVwht",
                              long_options, &option_index)) != -1)
@@ -147,8 +200,23 @@ parse_cmdline (int argc, char **argv,
 	    else if (strcmp (long_options[option_index].name,
 			     "save-rtf") == 0)
 	    {
-		*flags |= SAVERTF;
-		(*rtf_file) = optarg;
+		fprintf (stderr, "--save-rtf is a deprecated feature."
+			 "  Use --save-body[=FILE] and "
+			 "--body-pref=r instead.\n");
+		*flags |= SAVEBODY;
+		(*body_file) = strdup(((optarg) ? optarg : "message"));
+		(*body_pref) = strdup("r");
+	    }
+	    else if (strcmp (long_options[option_index].name,
+			     "save-body") == 0)
+	    {
+		*flags |= SAVEBODY;
+		(*body_file) = strdup(((optarg) ? optarg : "message"));
+	    }
+	    else if (strcmp (long_options[option_index].name,
+			     "body-pref") == 0)
+	    {
+		(*body_pref) = validate_body_pref (optarg);
 	    }
             else
             {
@@ -240,12 +308,16 @@ main (int argc, char *argv[])
     FILE *fp = NULL;
     char *in_file = NULL;
     char *out_dir = NULL;
-    char *rtf_file = NULL;
+    char *body_file = NULL;
+    char *body_pref = NULL;
     int flags = NONE;
     size_t max_size = 0;
     
     parse_cmdline (argc, argv, 
-		   &in_file, &out_dir, &rtf_file, &max_size, &flags);
+		   &in_file, &out_dir, 
+		   &body_file, &body_pref,
+		   &max_size, 
+		   &flags);
 
     set_alloc_limit (max_size);
     if (flags & DBG_OUT)
@@ -277,5 +349,5 @@ main (int argc, char *argv[])
         exit (1);
     }
     
-    return parse_file (fp, out_dir, rtf_file, flags);
+    return parse_file (fp, out_dir, body_file, body_pref, flags);
 }

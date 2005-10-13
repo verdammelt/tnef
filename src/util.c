@@ -78,3 +78,35 @@ geti8(FILE *fp)
     return (uint8)GETINT8(getbuf(fp, buf, 1));
 }
 
+char*
+unicode_to_utf8 (size_t len, char* buf)
+{
+    int i = 0;
+    int j = 0;
+    char *utf8 = malloc (3 * len/2 + 1); /* won't get any longer than this */
+
+    for (i = 0; i < len - 1; i += 2)
+    {
+	uint32 c = GETINT16(buf + i);
+	if (c <= 0x007f)
+	{
+	    utf8[j++] = 0x00 | ((c & 0x007f) >> 0);
+	}
+	else if (c < 0x07ff)
+	{
+	    utf8[j++] = 0xc0 | ((c & 0x07c0) >> 6);
+	    utf8[j++] = 0x80 | ((c & 0x003f) >> 0);
+	}
+	else
+	{
+	    utf8[j++] = 0xe0 | ((c & 0xf000) >> 12);
+	    utf8[j++] = 0x80 | ((c & 0x0fc0) >> 6);
+	    utf8[j++] = 0x80 | ((c & 0x003f) >> 0);
+	}
+    }
+    
+    utf8[j] = '\0';
+    
+    return utf8;
+}
+

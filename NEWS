@@ -4,6 +4,12 @@ Copyright (C) 2000-2005 by Mark Simpson
 * 1.4: 
 ** Code reorganization
 
+* 1.3.3:
+** Fixing memory leak bug [Bug# 1168062].  GUIDs not being freed corrrectly.
+** Fixing tnef.spec.in bug [Bug# 1200197]. Adding fix to RedHat package building problem from John Simpson <jms1@users.sourceforge.net>
+** Now saving message body data [RFE# 1033855]. Now optionally saves message body data, generalizing the previous --save-rtf feature.
+** Implementing Unicode handling [Patch# 666561].  Implementing code to translate Unicode strings to uft8 as best as can be.  Snitched code from ytnef <URL: www.sourceforge.net/projects/ytnef>  Thanks yerase@users.sourceforge.net!
+
 * 1.3.2:
 ** Fixing test buf [Bug# 1121539].  Tests failed due to 32 vs. 64 bit diff.
 ** Fixing compile bug [Bug# 1109683].  Basename declared incorrectly
@@ -25,13 +31,12 @@ Copyright (C) 2000-2005 by Mark Simpson
 ** Dumping of data for objects of type szTRIPLE
 
 * 1.2.2:
-** New command line option: -x SIZE | --maxsize=SIZE to allow users to protect 
-   against nefarious TNEF files.
+** New command line option: -x SIZE | --maxsize=SIZE to allow users to protect against nefarious TNEF files.
 ** Removed deprecated command line options
 ** First pass at a primitive web page for tnef.sourceforge.net
 
 * 1.2.1:
-** Fixing test failure on NetBSD (698111) and big-endian systems (712371). 
+** Fixing test failure on NetBSD [Bug# 698111] and big-endian systems [Bug# 712371]. 
 
 * 1.2.0:
 ** Added new automated testing.  Run them with ``make check''.
@@ -41,14 +46,13 @@ Copyright (C) 2000-2005 by Mark Simpson
 ** Code cleanup.
 
 * 1.1.4:
-** Fixed Bug 620072: Segfault related to MAPI_OBJECT parsing.
+** Fixed crash [Bug# 620072]: Segfault related to MAPI_OBJECT parsing.
 
 * 1.1.3:
-** Fixed Bug 608075: configuration on MacOSX
+** Fixed MacOSX config. [Bug# 608075]: configuration on MacOSX
 
 * 1.1.2:
-** Fixing bug with MAPI_ATTACH_OBJ_DATA instead of attATTACHMENT usage.
-   (courtesy of Asbjorn Pettersen <AsbjornPettersen@dualog.no>)
+** Fixing bug with MAPI_ATTACH_OBJ_DATA instead of attATTACHMENT usage. (courtesy of Asbjorn Pettersen <AsbjornPettersen@dualog.no>)
 ** Minor Updates of copyright and bug reporting address.
 
 * 1.1.1:
@@ -56,16 +60,12 @@ Copyright (C) 2000-2005 by Mark Simpson
 ** Updating of spec file
 
 * 1.1:
-** man page
-   (courtesy of Charles Morgan <cmorgan@aracnet.com>) 
-** Fixing bug with -w parameter 
-   (reported by Charles Morgan <cmorgan@aracnet.com>)
-** Should now build on many more platforms 
-   (courtesy of: David T Kerns <dkerns@lucent.com>) 
+** man page (courtesy of Charles Morgan <cmorgan@aracnet.com>) 
+** Fixing bug with -w parameter (reported by Charles Morgan <cmorgan@aracnet.com>)
+** Should now build on many more platforms (courtesy of: David T Kerns <dkerns@lucent.com>) 
 
 * 1.0.1:
-** Fixing bug with -C parameter. 
-   (reported by Thomas Ribbrock <argathin@gmx.net>)
+** Fixing bug with -C parameter. (reported by Thomas Ribbrock <argathin@gmx.net>) 
 
 * 1.0:
 ** First 1.0 release

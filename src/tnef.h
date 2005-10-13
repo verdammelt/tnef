@@ -35,7 +35,9 @@
 
 /* Main entrance point to tnef processing */
 extern int
-parse_file(FILE *input, char * output_dir, char *rtf_file, int flags);
+parse_file(FILE *input, char * output_dir, 
+	   char *body_file, char *body_pref,
+	   int flags);
 
 #endif /* !TNEF_H */
 

@@ -51,7 +51,7 @@ enum { NONE    	= 0x00,
        OVERWRITE= 0x10,
        CONFIRM 	= 0x20,
        NUMBERED = 0x40,
-       SAVERTF  = 0x80
+       SAVEBODY  = 0x80
 };
 
 #endif /* OPTIONS_H */

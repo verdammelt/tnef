@@ -252,3 +252,4 @@ No file name specified, using default.
 (MAPI) MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
 	#0 [len: 16] = 0x48 0xf7 0xf3 0xe5 0x48 0xe0 0xd3 0x11 0xac 0x82 0x00 0x08 0xc7 0x07 0x21 0xaf 
 WRITING ./missing-filenames.dir/TechlibNOV99.doc
+WRITING ./missing-filenames.dir/missing-filenames-body.rtf

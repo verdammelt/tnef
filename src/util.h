@@ -37,4 +37,6 @@ extern uint32 geti32(FILE *fp);
 extern uint16 geti16(FILE *fp);
 extern uint8 geti8(FILE *fp);
 
+extern char* unicode_to_utf8 (size_t len, char *buf);
+
 #endif /* UTIL_H */

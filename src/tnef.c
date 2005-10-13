@@ -41,6 +41,20 @@
 #include "rtf.h"
 #include "util.h"
 
+typedef struct
+{
+    VarLenData **text_body;
+    VarLenData **html_bodies;
+    VarLenData **rtf_bodies;
+} MessageBody;
+
+typedef enum
+{
+    TEXT = 't',
+    HTML = 'h',
+    RTF = 'r'
+} MessageBodyTypes;
+
 /* Reads and decodes a object from the stream */
 
 static Attr*
@@ -58,19 +72,104 @@ read_object (FILE *in)
     return attr;
 }
 
+static File**
+get_body_files (const char* directory,
+		const char* filename,
+		const char pref,
+		const MessageBody* body)
+{
+    File **files = NULL;
+    VarLenData **data;
+    char *ext = "";
+    int i;
+
+    switch (pref)
+    {
+    case 'r':
+	data = body->rtf_bodies;
+	ext = ".rtf";
+	break;
+    case 'h':
+	data = body->html_bodies;
+	ext = ".html";
+	break;
+    case 't':
+	data = body->text_body;
+	ext = ".txt";
+	break;
+    default:
+	data = NULL;
+	break;
+    }
+
+    if (data)
+    {
+	int count = 0;
+	char *tmp 
+	    = (char*)CHECKED_XCALLOC(char*, 
+				     strlen(filename) + strlen(ext) + 1);
+	strcpy (tmp, filename);
+	strcat (tmp, ext);
+
+	/* first get a count */
+	while (data[count++]);
+
+	files = (File**)XCALLOC(FILE*, count + 1);
+	for (i = 0; data[i]; i++)
+	{
+	    files[i] = (File*)XCALLOC(FILE, 1);
+	    files[i]->name = munge_fname(directory, tmp);
+	    files[i]->len = data[i]->len;
+	    files[i]->data 
+		= (char*)CHECKED_XMALLOC(char, data[i]->len);
+	    memmove (files[i]->data, data[i]->data, data[i]->len);
+	}
+    }
+    return files;
+}
+
+static VarLenData**
+get_text_data (Attr *attr)
+{
+    VarLenData **bodies = XCALLOC(VarLenData*, 2);
+    bodies[0] = XCALLOC(VarLenData, 1);
+    bodies[0]->len = attr->len;
+    bodies[0]->data = CHECKED_XCALLOC(char, attr->len);
+    memmove (bodies[0]->data, attr->buf, attr->len);
+    return bodies;
+}
+
+static VarLenData**
+get_html_data (MAPI_Attr *a)
+{
+    VarLenData **body = XCALLOC(VarLenData, a->num_values + 1);
+
+    int j;
+    for (j = 0; j < a->num_values; j++)
+    {
+	body[j] = XMALLOC(VarLenData, 1);
+	body[j]->len = a->values[j].len;
+	body[j]->data = CHECKED_XCALLOC(char, a->values[j].len);
+	memmove (body[j]->data, a->values[j].data.buf, body[j]->len);
+    }
+    return body;
+}
+
 
 /* The entry point into this module.  This parses an entire TNEF file. */
 int
-parse_file (FILE* input_file, char* directory, char *rtf_file, int flags)
+parse_file (FILE* input_file, char* directory, 
+	    char *body_filename, char *body_pref,
+	    int flags)
 {
     uint32 d;
     uint16 key;
-    File *file = NULL;
     Attr *attr = NULL;
+    File *file = NULL;
+    MessageBody body;
+    memset (&body, '\0', sizeof (MessageBody));
 
     /* store the program options in our file global variables */
-    /* g_file = input_file; */
-    /* g_directory = directory; */
     g_flags = flags;
 
     /* check that this is in fact a TNEF file */
@@ -107,33 +206,37 @@ parse_file (FILE* input_file, char* directory, char *rtf_file, int flags)
 	switch (attr->lvl_type)
 	{
 	case LVL_MESSAGE:
-	    /* We currently have no use for these attributes */
- 	    if (attr->name == attMAPIPROPS) 
- 	    { 
- 		MAPI_Attr **mapi_attrs 
+	    if (attr->name == attBODY)
+	    {
+		body.text_body = get_text_data (attr);
+	    }
+	    else if (attr->name == attMAPIPROPS) 
+	    { 
+		MAPI_Attr **mapi_attrs 
 		    = mapi_attr_read (attr->len, attr->buf); 
- 		if (mapi_attrs) 
- 		{ 
-		    /* save the rtf if wanted */
-		    if (flags & SAVERTF)
+		if (mapi_attrs)
+		{ 
+		    int i;
+		    for (i = 0; mapi_attrs[i]; i++)
 		    {
-			if (!rtf_file) 
+			MAPI_Attr *a = mapi_attrs[i];
+			    
+			if (a->name == MAPI_BODY_HTML)
 			{
-			    char *tmp = concat_fname (directory, 
-						      "tnef-rtf-tmp");
-			    rtf_file = find_free_number (tmp);
-			    XFREE (tmp);
+			    body.html_bodies = get_html_data (a);
 			}
-			save_rtf_data (rtf_file, directory, mapi_attrs);
+			else if (a->name == MAPI_RTF_COMPRESSED)
+			{
+			    body.rtf_bodies = get_rtf_data (a);
+			}
 		    }
-
-		    /* cannot save attributes to file, since they are 
-		       not attachment attributes */
+		    /* cannot save attributes to file, since they
+		     * are not attachment attributes */ 
 		    /* file_add_mapi_attrs (file, mapi_attrs); */
- 		    mapi_attr_free_list (mapi_attrs); 
- 		    XFREE (mapi_attrs); 
- 		} 
- 	    } 
+		    mapi_attr_free_list (mapi_attrs); 
+		    XFREE (mapi_attrs); 
+		}
+	    }
 	    break;
 	case LVL_ATTACHMENT:
 	    file_add_attr (file, directory, attr);
@@ -152,6 +255,35 @@ parse_file (FILE* input_file, char* directory, char *rtf_file, int flags)
 	file_write (file, directory);
 	file_free (file);
 	XFREE (file);
+    }
+    
+    /* Write the message body */
+    if (flags & SAVEBODY)
+    {
+	int i = 0;
+	int all_flag = 0;
+	if (strcmp (body_pref, "all") == 0) 
+	{
+	    all_flag = 1;
+	    body_pref = "rht";
+	}
+
+	for (; i < 3; i++)
+	{
+	    File **files
+		= get_body_files (directory, body_filename, body_pref[i], &body);
+	    if (files)
+	    {
+		int j = 0; 
+		for (; files[j]; j++)
+		{
+		    file_write(files[j]);
+		    file_free (files[j]);
+		}
+		FREE(files);
+		if (!all_flag) break;
+	    }
+	}
     }
     return 0;
 }

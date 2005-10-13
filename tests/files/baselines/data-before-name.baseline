@@ -210,3 +210,4 @@ WRITING ./data-before-name.dir/CONFIG.SYS
 (MAPI) MAPI_OBJECT_TYPE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
 	#0 [len: 4] = 7
 WRITING ./data-before-name.dir/boot.ini
+WRITING ./data-before-name.dir/data-before-name-body.rtf

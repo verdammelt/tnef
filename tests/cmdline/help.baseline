@@ -12,7 +12,8 @@
         --use-paths     	Use pathnames for files if found in the TNEF
                         	  file (for security reasons paths to included
                         	  files are ignored by default)
-        --save-rtf[=FILE]	Save the rtf message to a file
+        --save-rtf[=FILE]	[DEPRECATED] Save the RTF message body to a file
+        --save-body[=FILE]	Save the message body to a file
 -h,     --help          	show this message
 -V,     --version       	display version and copyright
 -v,     --verbose       	produce verbose output
@@ -37,7 +38,8 @@ Report bugs to <verdammelt@users.sourceforge.net>
         --use-paths     	Use pathnames for files if found in the TNEF
                         	  file (for security reasons paths to included
                         	  files are ignored by default)
-        --save-rtf[=FILE]	Save the rtf message to a file
+        --save-rtf[=FILE]	[DEPRECATED] Save the RTF message body to a file
+        --save-body[=FILE]	Save the message body to a file
 -h,     --help          	show this message
 -V,     --version       	display version and copyright
 -v,     --verbose       	produce verbose output

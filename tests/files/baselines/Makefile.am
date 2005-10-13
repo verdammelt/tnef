@@ -1,24 +1,32 @@
-EXTRA_DIST	=	AUTHORS.baseline		\
-			AUTOEXEC.BAT.baseline		\
-			CONFIG.SYS.baseline		\
-			MAPI_ATTACH_DATA_OBJ.baseline	\
-			MAPI_OBJECT.baseline		\
-			README.baseline			\
-			TechlibDEC99-JAN00.doc.baseline	\
-			TechlibDEC99.doc.baseline	\
-			TechlibNOV99.doc.baseline	\
-			Untitled_Attachment.baseline	\
-			VIA_Nytt_1402.doc.baseline	\
-			VIA_Nytt_1402.pdf.baseline	\
-			VIA_Nytt_14021.htm.baseline	\
-			boot.ini.baseline		\
-			data-before-name.baseline	\
-			generpts.src.baseline		\
-			long-filename.baseline		\
-			message.rtf.baseline		\
-			missing-filenames.baseline	\
-			one-file.baseline		\
-			rtf.baseline			\
-			rtf2.baseline			\
-			triples.baseline		\
-			two-files.baseline
+EXTRA_DIST	=	AUTHORS.baseline			\
+			AUTOEXEC.BAT.baseline			\
+			body.baseline				\
+			body-body.html.baseline			\
+			boot.ini.baseline			\
+			CONFIG.SYS.baseline			\
+			data-before-name.baseline		\
+			data-before-name-body.rtf.baseline	\
+			generpts.src.baseline			\
+			long-filename.baseline			\
+			long-filename-body.rtf.baseline		\
+			MAPI_ATTACH_DATA_OBJ.baseline		\
+			MAPI_ATTACH_DATA_OBJ-body.rtf.baseline	\
+			MAPI_OBJECT.baseline			\
+			MAPI_OBJECT-body.rtf.baseline		\
+			message.rtf.baseline			\
+			missing-filenames.baseline		\
+			missing-filenames-body.rtf.baseline	\
+			one-file.baseline			\
+			README.baseline				\
+			rtf.baseline				\
+			rtf-body.rtf.baseline			\
+			TechlibDEC99.doc.baseline		\
+			TechlibDEC99-JAN00.doc.baseline		\
+			TechlibNOV99.doc.baseline		\
+			triples.baseline			\
+			triples-body.rtf.baseline		\
+			two-files.baseline			\
+			Untitled_Attachment.baseline		\
+			VIA_Nytt_14021.htm.baseline		\
+			VIA_Nytt_1402.doc.baseline		\
+			VIA_Nytt_1402.pdf.baseline
