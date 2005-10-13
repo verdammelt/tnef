@@ -1,0 +1,43 @@
+#
+# Crappy Micrsoft Exchange Archive File [winmail.dat]
+#
+# Assumes gxmessage is installed.
+# You might want to point /users to $HOME or something else.
+#
+FILE_PASSED=$1
+export FILE_PASSED
+ARCHIVE_STAMP=`date +%Y%m%d%H%M%S`
+ARCHIVE_DIR="outlook_archive_$ARCHIVE_STAMP"
+rm /tmp/$USER.tnef 2>/dev/null
+echo "The sender has sent you a proprietary file archive with unknown
+files." > /tmp/$USER.tnef
+echo " The file(s) found in this archive are displayed below:" >>
+/tmp/$USER.tnef
+echo "" >> /tmp/$USER.tnef
+/usr/local/bin/tnef --list "$FILE_PASSED" >> /tmp/$USER.tnef
+echo "" >> /tmp/$USER.tnef
+echo "The file(s) can be extracted into your /users directory" >>
+/tmp/$USER.tnef
+echo "Use the appropriate application to open them." >>
+/tmp/$USER.tnef
+echo "Should I extract these files now?" >> /tmp/$USER.tnef
+/usr/local/bin/gxmessage -center -file /tmp/$USER.tnef -buttons
+"Yes,No" 2> /dev/null
+case $? in
+        101)
+                echo "They want it"
+        ;;
+        102)
+                echo "User exited"
+                exit 0
+        ;;
+        *)
+                echo "Window manager close"
+                exit 0
+        ;;
+esac
+mkdir "/users/$USER/$ARCHIVE_DIR" 2> /dev/null
+/usr/local/bin/tnef --directory="/users/$USER/$ARCHIVE_DIR"
+"$FILE_PASSED"
+/usr/local/bin/gxmessage -center "The file(s) have been extracted and
+placed in /users/$USER/$ARCHIVE_DIR" 2> /dev/nu

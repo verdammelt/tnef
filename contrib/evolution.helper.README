@@ -1,0 +1,11 @@
+Mark-
+   We (The City of Largo) has implemented your tnef library in
+Evolution as a helper application to open those pesky/dumb/stupid
+winmail.dat
+files that we get all the time.
+I thought possibly, that you might want to include this little and
+simple script in with the build as an example of how to deploy from
+within Evolution.  It assumes they have gxmessage, but any graphical
+front end utility would work.
+Regards-
+Dave Richards
