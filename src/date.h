@@ -37,7 +37,7 @@ struct date
 };
 
 extern const char *date_to_str (struct date* dt);
-extern void date_read (struct date *dt, const char *buf);
+extern void date_read (struct date *dt, const unsigned char *buf);
 
 #endif /* DATE_H */
 

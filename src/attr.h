@@ -46,7 +46,7 @@ typedef struct
     tnef_type type;
     tnef_name name;
     size_t len;
-    char* buf;
+    unsigned char* buf;
 } Attr;
 
 typedef struct

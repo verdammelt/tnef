@@ -51,10 +51,10 @@ date_to_str (struct date *dt)
 }
 
 void
-date_read (struct date *dt, const char *buf)
+date_read (struct date *dt, const unsigned char *buf)
 {
     size_t i = 0;
-    char *tmp = (char *)buf;
+    unsigned char *tmp = (unsigned char *)buf;
     dt->year = GETINT16 (tmp + i); i += sizeof (uint16);
     dt->month = GETINT16 (tmp + i); i += sizeof (uint16);
     dt->day = GETINT16 (tmp + i); i += sizeof (uint16);

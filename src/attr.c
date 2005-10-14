@@ -57,8 +57,8 @@ copy_triple_from_attr (Attr* attr, TRIPLE *t)
     t->trp.chbgtrp = GETINT16 (attr->buf+2);
     t->trp.cch = GETINT16 (attr->buf+4);
     t->trp.cb = GETINT16 (attr->buf+6);
-    t->sender_display_name = attr->buf+8;
-    t->sender_address = attr->buf+8+t->trp.cch;
+    t->sender_display_name = (char*)(attr->buf+8);
+    t->sender_address = (char*)(attr->buf+8+t->trp.cch);
 }
 
 /* attr_dump
@@ -222,7 +222,7 @@ attr_read (FILE* in)
     attr->type = (type_and_name >> 16);
     attr->name = ((type_and_name << 16) >> 16);
     attr->len = geti32(in);
-    attr->buf = CHECKED_XCALLOC (char, attr->len);
+    attr->buf = CHECKED_XCALLOC (unsigned char, attr->len);
     
     (void)getbuf(in, attr->buf, attr->len);
     
