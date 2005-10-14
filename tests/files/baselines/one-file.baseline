@@ -94,7 +94,7 @@ TNEF Key: 237
 	#0 [len: 9] = 'one-file'
 (MAPI) 3fd4 [type: MAPI binary] [num_values = 1] = 
 	#0 [len: 0] = 
-(MAPI) 1035 [type: MAPI string] [num_values = 1] = 
+(MAPI) MAPI_SMTP_MESSAGE_ID [type: MAPI string] [num_values = 1] = 
 	#0 [len: 50] = '<14341.17488.631053.695454@localhost.localdomain>'
 (MAPI) 1039 [type: MAPI string] [num_values = 1] = 
 	#0 [len: 1] = ''
@@ -148,7 +148,7 @@ TNEF Key: 237
 	#0 [len: 22] = 'AUTHORS file for tnef'
 (MAPI) MAPI_ATTACH_MIME_TAG [type: MAPI string] [num_values = 1] = 
 	#0 [len: 25] = 'application/octet-stream'
-(MAPI) 3710 [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
+(MAPI) MAPI_ATTACH_MIME_SEQUENCE [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
 	#0 [len: 4] = 0
 (MAPI) MAPI_RECORD_KEY [type: MAPI binary] [num_values = 1] = 
 	#0 [len: 16] = 0x1f 0x01 0x7f 0xcf 0xd0 0x81 0xd3 0x11 0xa7 0xa5 0x00 0x08 0xc7 0x1b 0xca 0x8d 

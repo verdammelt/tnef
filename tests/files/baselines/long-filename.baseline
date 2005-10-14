@@ -157,7 +157,7 @@ TNEF Key: 1422
 	#0 [len: 13] = 'license file'
 (MAPI) 3fd4 [type: MAPI binary] [num_values = 1] = 
 	#0 [len: 0] = 
-(MAPI) 1035 [type: MAPI string] [num_values = 1] = 
+(MAPI) MAPI_SMTP_MESSAGE_ID [type: MAPI string] [num_values = 1] = 
 	#0 [len: 65] = '<A58643BEDEF7D211BABB0008C75D853F0173A32E@fhpri01.compuware.com>'
 (MAPI) 1039 [type: MAPI string] [num_values = 1] = 
 	#0 [len: 1] = ''

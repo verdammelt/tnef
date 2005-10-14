@@ -106,7 +106,7 @@ TNEF Key: 601
 	#0 [len: 1] = ''
 (MAPI) MAPI_NORMALIZED_SUBJECT [type: MAPI string] [num_values = 1] = 
 	#0 [len: 24] = 'Y2K problem with Add-DT'
-(MAPI) 1035 [type: MAPI string] [num_values = 1] = 
+(MAPI) MAPI_SMTP_MESSAGE_ID [type: MAPI string] [num_values = 1] = 
 	#0 [len: 76] = '<41D7BC0B968CD111B6A100805FA774F503F2AAEB@itbne-msg01.incorrect.bhp.com.au>'
 (MAPI) MAPI_READ_RECEIPT_REQUESTED [type: MAPI boolean (16 bits)] [num_values = 1] = 
 	#0 [len: 4] = false

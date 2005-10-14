@@ -91,7 +91,7 @@ TNEF Key: 1af
 	#0 [len: 1] = ''
 (MAPI) MAPI_NORMALIZED_SUBJECT [type: MAPI string] [num_values = 1] = 
 	#0 [len: 19] = 'Bodø-damer på vei!'
-(MAPI) 1035 [type: MAPI string] [num_values = 1] = 
+(MAPI) MAPI_SMTP_MESSAGE_ID [type: MAPI string] [num_values = 1] = 
 	#0 [len: 48] = '<BBDA395B19A3D3119A0E0000F8D02CA902AEBCE8@ODIN>'
 (MAPI) MAPI_READ_RECEIPT_REQUESTED [type: MAPI boolean (16 bits)] [num_values = 1] = 
 	#0 [len: 4] = false
@@ -110,7 +110,7 @@ TNEF Key: 1af
 (MAPI) MAPI_TNEF_CORRELATION_KEY [type: MAPI binary] [num_values = 1] = 
 	#0 [len: 48] = 0x3c 0x42 0x42 0x44 0x41 0x33 0x39 0x35 0x42 0x31 0x39 0x41 0x33 0x44 0x33 0x31 0x31 0x39 0x41 0x30 0x45 0x30 0x30 0x30 0x30 0x46 0x38 0x44 0x30 0x32 0x43 0x41 0x39 0x30 0x32 0x41 0x45 0x42 0x43 0x45 0x38 0x40 0x4f 0x44 0x49 0x4e 0x3e 0x00 
 (MAPI) MAPI_RTF_IN_SYNC [type: MAPI boolean (16 bits)] [num_values = 1] = 
-	#0 [len: 4] = true
+	#0 [len: 4] = false
 (MAPI) MAPI_MESSAGE_FLAGS [type: MAPI integer (signed 32 bits)] [num_values = 1] = 
 	#0 [len: 4] = 16
 (MAPI) MAPI_HASATTACH [type: MAPI boolean (16 bits)] [num_values = 1] = 
