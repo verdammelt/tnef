@@ -40,7 +40,7 @@ static const char* rtf_prebuf = "{\\rtf1\\ansi\\mac\\deff0\\deftab720{\\fonttbl;
 
 
 static int
-is_rtf_data (char *data)
+is_rtf_data (unsigned char *data)
 {
     size_t compr_size = 0L;
     size_t uncompr_size = 0L;
@@ -57,7 +57,7 @@ is_rtf_data (char *data)
     return 0;
 }
 
-static char*
+static unsigned char*
 decompress_rtf_data (unsigned char *src, size_t len)
 {
     const size_t rtf_prebuf_len = strlen(rtf_prebuf);
@@ -66,14 +66,14 @@ decompress_rtf_data (unsigned char *src, size_t len)
     int out = 0;
     int flag_count = 0;
     int flags = 0;
-    char *ret = NULL;
-    char *dest = CHECKED_XCALLOC(char, rtf_prebuf_len + len);
+    unsigned char *ret = NULL;
+    unsigned char *dest = CHECKED_XCALLOC(unsigned char, rtf_prebuf_len + len);
 
     memmove (dest, rtf_prebuf, rtf_prebuf_len);
 
     out = rtf_prebuf_len;
 
-    while (out < len)
+    while (out < len + rtf_prebuf_len)
     {
 	/* each flag byte flags 8 literals/references, 1 per bit */
 	flags = (((flag_count++ % 8) == 0) ? src[in++] : flags >> 1);
@@ -103,7 +103,7 @@ decompress_rtf_data (unsigned char *src, size_t len)
 	
     }
     
-    ret = CHECKED_XCALLOC(char, len);
+    ret = CHECKED_XCALLOC(unsigned char, len);
     memmove (ret, dest+rtf_prebuf_len, len);
     XFREE(dest);
     
@@ -111,7 +111,8 @@ decompress_rtf_data (unsigned char *src, size_t len)
 }
 
 static void
-get_rtf_data (size_t len, char *data, File *dest_file)
+get_rtf_data_from_buf (size_t len, unsigned char *data, 
+		       size_t *out_len, unsigned char **out_data)
 {
     size_t compr_size = 0L;
     size_t uncompr_size = 0L;
@@ -127,32 +128,32 @@ get_rtf_data (size_t len, char *data, File *dest_file)
     /* sanity check */
     /* assert (compr_size + 4 == len); */
 
-    dest_file->len = uncompr_size;
+    (*out_len) = uncompr_size;
 
     if (magic == rtf_uncompressed_magic) /* uncompressed rtf stream */
     {
-	dest_file->data = CHECKED_XCALLOC(char, dest_file->len);
-	memmove (dest_file->data, data+4, uncompr_size);
+	(*out_data) = CHECKED_XCALLOC(unsigned char, (*out_len));
+	memmove ((*out_data), data+4, uncompr_size);
     }
     else if (magic == rtf_compressed_magic) /* compressed rtf stream */
     {
-	dest_file->data 
+	(*out_data)
 	    = decompress_rtf_data (data+idx, uncompr_size);
     }
 }
 
-static VarLenData**
+VarLenData**
 get_rtf_data (MAPI_Attr *a)
 {
     VarLenData** body 
-	= (VarLenData**)CALLOC(a->num_values + 1, sizeof(VarLenData*));
+	= (VarLenData**)CHECKED_XCALLOC(VarLenData*, a->num_values + 1);
 
     int j;
     for (j = 0; j < a->num_values; j++)
     {
 	if (is_rtf_data (a->values[j].data.buf))
 	{
-	    body[j] = (VarLenData*)MALLOC(1 * sizeof(VarLenData));
+	    body[j] = (VarLenData*)XMALLOC(VarLenData, 1);
 
 	    get_rtf_data_from_buf (a->values[j].len,
 				   a->values[j].data.buf,
