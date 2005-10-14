@@ -31,8 +31,6 @@
 
 #include "mapi_attr.h"
 
-extern void save_rtf_data (char *rtf_file, 
-			   const char *directory, 
-			   MAPI_Attr **attrs);
+extern VarLenData** get_rtf_data (MAPI_Attr *attr);
 
 #endif /* RTF_H */
