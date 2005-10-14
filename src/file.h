@@ -35,7 +35,7 @@ typedef struct
 {
     char * name;
     size_t len;
-    char * data;
+    unsigned char * data;
     struct date dt;
 } File;
 

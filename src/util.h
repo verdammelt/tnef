@@ -28,15 +28,15 @@
 
 #include "common.h"
 
-extern uint32 GETINT32(char *p);
-extern uint16 GETINT16(char *p);
-extern uint8 GETINT8(char *p);
+extern uint32 GETINT32(unsigned char*p);
+extern uint16 GETINT16(unsigned char*p);
+extern uint8 GETINT8(unsigned char*p);
 
 extern unsigned char* getbuf (FILE *fp, unsigned char buf[], size_t n);
 extern uint32 geti32(FILE *fp);
 extern uint16 geti16(FILE *fp);
 extern uint8 geti8(FILE *fp);
 
-extern char* unicode_to_utf8 (size_t len, char *buf);
+extern char* unicode_to_utf8 (size_t len, unsigned char*buf);
 
 #endif /* UTIL_H */

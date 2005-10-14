@@ -106,8 +106,8 @@ get_body_files (const char* directory,
     {
 	int count = 0;
 	char *tmp 
-	    = (char*)CHECKED_XCALLOC(char*, 
-				     strlen(filename) + strlen(ext) + 1);
+	    = CHECKED_XCALLOC(char, 
+			      strlen(filename) + strlen(ext) + 1);
 	strcpy (tmp, filename);
 	strcat (tmp, ext);
 
@@ -121,7 +121,7 @@ get_body_files (const char* directory,
 	    files[i]->name = munge_fname(directory, tmp);
 	    files[i]->len = data[i]->len;
 	    files[i]->data 
-		= (char*)CHECKED_XMALLOC(char, data[i]->len);
+		= CHECKED_XMALLOC(unsigned char, data[i]->len);
 	    memmove (files[i]->data, data[i]->data, data[i]->len);
 	}
     }
@@ -134,7 +134,7 @@ get_text_data (Attr *attr)
     VarLenData **bodies = XCALLOC(VarLenData*, 2);
     bodies[0] = XCALLOC(VarLenData, 1);
     bodies[0]->len = attr->len;
-    bodies[0]->data = CHECKED_XCALLOC(char, attr->len);
+    bodies[0]->data = CHECKED_XCALLOC(unsigned char, attr->len);
     memmove (bodies[0]->data, attr->buf, attr->len);
     return bodies;
 }
@@ -142,14 +142,14 @@ get_text_data (Attr *attr)
 static VarLenData**
 get_html_data (MAPI_Attr *a)
 {
-    VarLenData **body = XCALLOC(VarLenData, a->num_values + 1);
+    VarLenData **body = XCALLOC(VarLenData*, a->num_values + 1);
 
     int j;
     for (j = 0; j < a->num_values; j++)
     {
 	body[j] = XMALLOC(VarLenData, 1);
 	body[j]->len = a->values[j].len;
-	body[j]->data = CHECKED_XCALLOC(char, a->values[j].len);
+	body[j]->data = CHECKED_XCALLOC(unsigned char, a->values[j].len);
 	memmove (body[j]->data, a->values[j].data.buf, body[j]->len);
     }
     return body;
@@ -277,10 +277,10 @@ parse_file (FILE* input_file, char* directory,
 		int j = 0; 
 		for (; files[j]; j++)
 		{
-		    file_write(files[j]);
+		    file_write(files[j], directory);
 		    file_free (files[j]);
 		}
-		FREE(files);
+		XFREE(files);
 		if (!all_flag) break;
 	    }
 	}

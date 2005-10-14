@@ -152,13 +152,13 @@ file_add_mapi_attrs (File* file,
 	    {
 	    case MAPI_ATTACH_LONG_FILENAME:
 		if (file->name) XFREE(file->name);
-		file->name = munge_fname (directory, a->values[0].data.buf);
+		file->name = munge_fname (directory, (char*)a->values[0].data.buf);
 		break;
 
 	    case MAPI_ATTACH_DATA_OBJ:
 		file->len = a->values[0].len;
 		if (file->data) XFREE (file->data);
-		file->data = CHECKED_XMALLOC (char, file->len);
+		file->data = CHECKED_XMALLOC (unsigned char, file->len);
 		memmove (file->data, a->values[0].data.buf, file->len);
 		break;
 
@@ -195,12 +195,12 @@ file_add_attr (File* file, const char *directory, Attr* attr)
     break;
 
     case attATTACHTITLE:
-	file->name = munge_fname (directory, attr->buf);
+	file->name = munge_fname (directory, (char*)attr->buf);
 	break;
 
     case attATTACHDATA:
 	file->len = attr->len;
-	file->data = CHECKED_XMALLOC(char, attr->len);
+	file->data = CHECKED_XMALLOC(unsigned char, attr->len);
 	memmove (file->data, attr->buf, attr->len);
 	break;
 

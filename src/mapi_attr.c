@@ -49,7 +49,7 @@ pad_to_4byte (size_t length)
 
 /* Copy the GUID data from a character buffer */
 static void
-copy_guid_from_buf (GUID* guid, char *buf)
+copy_guid_from_buf (GUID* guid, unsigned char *buf)
 {
     int i;
     int idx = 0;
@@ -115,7 +115,7 @@ mapi_attr_dump (MAPI_Attr* attr)
 
 	case szMAPI_STRING:
 	case szMAPI_UNICODE_STRING:
-	    write_string (stdout, attr->values[i].data.buf);
+	    write_string (stdout, (char*)attr->values[i].data.buf);
 	    break;
 
 	case szMAPI_SYSTIME:
@@ -167,7 +167,7 @@ alloc_mapi_values (MAPI_Attr* a)
 
 /* parses out the MAPI attibutes hidden in the character buffer */
 MAPI_Attr**
-mapi_attr_read (size_t len, char *buf)
+mapi_attr_read (size_t len, unsigned char *buf)
 {
     size_t idx = 0;
     uint32 i;
@@ -209,7 +209,7 @@ mapi_attr_read (size_t len, char *buf)
 
 		    /* read the data into a buffer */
 		    a->names[i].data 
-			= CHECKED_XMALLOC(char, a->names[i].len);
+			= CHECKED_XMALLOC(unsigned char, a->names[i].len);
 		    for (j = 0; j < (a->names[i].len >> 1); j++)
 			a->names[i].data[j] = (buf+idx)[j*2];
 
@@ -285,7 +285,7 @@ mapi_attr_read (size_t len, char *buf)
 	    {
 		v[val_idx].len = GETINT32(buf+idx); idx += 4;
 		v[val_idx].data.buf 
-		    = CHECKED_XMALLOC(char, v[val_idx].len);
+		    = CHECKED_XMALLOC(unsigned char, v[val_idx].len);
 		memmove (v[val_idx].data.buf,
 			 buf+idx,
 			 v[val_idx].len);

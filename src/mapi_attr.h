@@ -44,7 +44,7 @@ typedef struct
     size_t len;
     union
     {
-	char *buf;
+	unsigned char *buf;
 	uint16 bytes2;
 	uint32 bytes4;
 	uint32 bytes8[2];
@@ -55,7 +55,7 @@ typedef struct
 typedef struct
 {
     size_t len;
-    char* data;
+    unsigned char* data;
 } VarLenData;
 
 typedef struct
@@ -69,7 +69,7 @@ typedef struct
     VarLenData *names;
 } MAPI_Attr;
 
-extern MAPI_Attr** mapi_attr_read (size_t len, char *buf);
+extern MAPI_Attr** mapi_attr_read (size_t len, unsigned char *buf);
 extern void mapi_attr_free_list (MAPI_Attr** attrs);
 
 #endif /* MAPI_ATTR_H */

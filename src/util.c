@@ -29,7 +29,7 @@
 #include "options.h"
 
 /* Needed to transform char buffers into little endian numbers */
-uint32 GETINT32(char *p)
+uint32 GETINT32(unsigned char *p)
 {
     return (uint32)((uint8)(p)[0]           \
 		    +((uint8)(p)[1]<<8)     \
@@ -37,12 +37,12 @@ uint32 GETINT32(char *p)
 		    +((uint8)(p)[3]<<24));
 }
 
-uint16 GETINT16 (char* p)
+uint16 GETINT16 (unsigned char* p)
 {
     return (uint16)((uint8)(p)[0]+((uint8)(p)[1]<<8));
 }
 
-uint8 GETINT8 (char *p)
+uint8 GETINT8 (unsigned char *p)
 {
     return (uint8)(p)[0];
 }
@@ -79,7 +79,7 @@ geti8(FILE *fp)
 }
 
 char*
-unicode_to_utf8 (size_t len, char* buf)
+unicode_to_utf8 (size_t len, unsigned char* buf)
 {
     int i = 0;
     int j = 0;
