@@ -1,3 +1,26 @@
+2006-02-20  verdammelt  <verdammelt@freya>
+
+	* NEWS: updating NEWS
+
+	* tests/cmdline/version.baseline, src/replace/strdup.c, src/replace/malloc.c, src/replace/basename.c, src/xstrdup.c, src/util.h, src/util.c, src/tnef.h, src/tnef.c, src/rtf.h, src/rtf.c, src/path.h, src/path.c, src/options.h, src/options.c, src/mkdata.awk, src/mapi_attr.h, src/mapi_attr.c, src/main.c, src/file.h, src/file.c, src/debug.h, src/debug.c, src/date.h, src/date.c, src/common.h, src/attr.h, src/attr.c, src/alloc.h, src/alloc.c:
+	Updating copyright statement.
+
+	* src/replace/ldiv.h, src/replace/ldiv.c: no longer needed
+
+	* TODO: updating TODO
+
+	* src/mapi_attr.c:
+	Removing ldiv, user contributed another way to compute padding size
+	Fixing parsing of mapi attributes with respect to multi-value
+	properties
+
+	* src/mapi_attr.h: Adding defines to help with parsing of mapi attrs
+
+	* configure.in: Removing ldiv
+
+	* tests/files/baselines/triples.baseline, tests/files/baselines/data-before-name.baseline, tests/cmdline/body.baseline, src/rtf.c, src/tnef-names.data:
+	Fixing typo
+
 2005-10-14  verdammelt  <verdammelt@freya>
 
 	* NEWS: Merging from v1.3.x and adding v1.4 base info
