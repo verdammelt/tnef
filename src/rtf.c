@@ -90,7 +90,7 @@ decompress_rtf_data (unsigned char *src, size_t len)
 	     * the beginning when the end is reached.  we save the
 	     * need for this by pointing straight into the data
 	     * buffer, and simulating this behaviour by modifying the
-	     * pointeers appropriately */ 
+	     * pointers appropriately */ 
 	    offset = (out / 4096) * 4096 + offset;
 	    if (offset >= (int)out) offset -= 4096; /* from previous block */
 	    end = offset + length;
