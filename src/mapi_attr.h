@@ -31,6 +31,9 @@
 #include "mapi_types.h"
 #include "mapi_names.h"
 
+#define MULTI_VALUE_FLAG 0x1000
+#define GUID_EXISTS_FLAG 0x8000
+
 typedef struct
 {
     uint32 data1;
