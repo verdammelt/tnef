@@ -1,10 +1,7 @@
 * Take over the world. Go out for Chinese food.
-* work on integration with VM/RMAIL/GNUS/Mutt &c.
-* ELISP version for native decoding.
 * Lisp version
-* C++ version
 * Library to allow other applications to use this code more directly.
 * texinfo help file
-* Make more use out of the MAPI types... perhaps there are other useful
-  things in them?
+* unpacking ical data (RFE #1258119)
+* unpacking RFC headers (RFE #1167718)
 
