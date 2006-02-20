@@ -23,10 +23,6 @@
 #  include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#if !HAVE_LDIV
-#  include "replace/ldiv.h"
-#endif 
-
 #include "common.h"
 
 #include "mapi_attr.h"
@@ -39,12 +35,7 @@
 static size_t
 pad_to_4byte (size_t length)
 {
-    ldiv_t d = ldiv (length, 4L);
-    if (d.rem != 0)
-    {
-	length += (4 - d.rem);
-    }
-    return length;
+    return (length+3) & ~3;
 }
 
 /* Copy the GUID data from a character buffer */
@@ -185,8 +176,12 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	a->type = GETINT16(buf+idx); idx += 2;
 	a->name = GETINT16(buf+idx); idx += 2;
 
+
+	/* Multi-valued attributes have their type modified by the MULTI_VALUE_FLAG value */
+	if (a->type & MULTI_VALUE_FLAG) a->type -= MULTI_VALUE_FLAG;
+
 	/* handle special case of GUID prefixed properties */
-	if (a->name >= 0x8000)
+	if (a->name >= GUID_EXISTS_FLAG)
 	{
 	    /* copy GUID */
 	    a->guid = CHECKED_XMALLOC(GUID, 1);
