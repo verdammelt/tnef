@@ -1,16 +1,16 @@
-setting alloc_limit to: 25
+setting alloc_limit to: 33
 TNEF Key: 237
 (MESS) TNEF Version [type: dword] [len: 4] = 0x00010000
 (MESS) OEM Codepage [type: byte] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
 (MESS) Message Class [type: word] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
-checked_xcalloc: Maximum allocation size exceeded (maxsize = 25; size = 33).
+(MESS) Message ID [type: string] [len: 33] =checked_xmalloc: Maximum allocation size exceeded (maxsize = 33; size = 34).
 
-setting alloc_limit to: 25
+setting alloc_limit to: 33
 TNEF Key: 237
 (MESS) TNEF Version [type: dword] [len: 4] = 0x00010000
 (MESS) OEM Codepage [type: byte] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
 (MESS) Message Class [type: word] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
-checked_xcalloc: Maximum allocation size exceeded (maxsize = 25; size = 33).
+(MESS) Message ID [type: string] [len: 33] =checked_xmalloc: Maximum allocation size exceeded (maxsize = 33; size = 34).
 
 Invalid argument to --maxsize/-x option: 'foo'
 
@@ -170,7 +170,7 @@ TNEF Key: 237
 	#0 [len: 16] = 0x1f 0x01 0x7f 0xcf 0xd0 0x81 0xd3 0x11 0xa7 0xa5 0x00 0x08 0xc7 0x1b 0xca 0x8d 
 NOT WRITING AUTHORS
 AUTHORS
-Ignoring negative value given for --maxsize/-x option: '-25' 
+Ignoring negative value given for --maxsize/-x option: '-33' 
 
 setting alloc_limit to: 0
 TNEF Key: 237
