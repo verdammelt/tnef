@@ -1,3 +1,56 @@
+2006-03-12  verdammelt  <verdammelt@freya>
+
+	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
+	New file.
+
+	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
+	adding test for handling of multi-name properties
+
+	* tests/files/baselines/multi-name-property.baseline: New file.
+
+	* tests/files/baselines/multi-name-property.baseline:
+	adding test for handling of multi-name properties
+
+	* tests/files/multi-name-property.test: New file.
+
+	* tests/files/Makefile.am, tests/files/multi-name-property.test:
+	adding test for handling of multi-name properties
+
+	* tests/cmdline/maxsize.baseline, tests/cmdline/maxsize.test:
+	tweaking maxsize tests to overcome co-incidence on 64 bit and alpha arch.
+
+2006-03-07  verdammelt  <verdammelt@freya>
+
+	* date.c:
+	date_to_str: increasing buffer size to remove problem with buffer
+	overrun
+
+2006-03-06  verdammelt  <verdammelt@freya>
+
+	* mkdata.awk: fixing syntax error
+
+	* Makefile.am: missing write.h
+
+2006-03-04  verdammelt  <verdammelt@freya>
+
+	* replace/Makefile.am: removing ldiv.h from distributed sources
+
+2006-02-20  verdammelt  <verdammelt@freya>
+
+	* replace/strdup.c, replace/malloc.c, replace/basename.c, xstrdup.c, util.h, util.c, tnef.h, tnef.c, rtf.h, rtf.c, path.h, path.c, options.h, options.c, mkdata.awk, mapi_attr.h, mapi_attr.c, main.c, file.h, file.c, debug.h, debug.c, date.h, date.c, common.h, attr.h, attr.c, alloc.h, alloc.c:
+	Updating copyright statement.
+
+	* replace/ldiv.h, replace/ldiv.c: no longer needed
+
+	* mapi_attr.c:
+	Removing ldiv, user contributed another way to compute padding size
+	Fixing parsing of mapi attributes with respect to multi-value
+	properties
+
+	* mapi_attr.h: Adding defines to help with parsing of mapi attrs
+
+	* rtf.c, tnef-names.data: Fixing typo
+
 2006-02-20  verdammelt  <verdammelt@freya>
 
 	* NEWS: updating NEWS
