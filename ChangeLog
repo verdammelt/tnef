@@ -1,3 +1,31 @@
+2006-03-18  verdammelt  <verdammelt@freya>
+
+        * NEWS: Release of v1.4
+	
+	* tests/files/baselines/Makefile.am, tests/files/datafiles/Makefile.am:
+	adding files to dist.
+
+2006-03-12  verdammelt  <verdammelt@freya>
+
+	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
+	New file.
+
+	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
+	adding test for handling of multi-name properties
+
+	* tests/files/baselines/multi-name-property.baseline: New file.
+
+	* tests/files/baselines/multi-name-property.baseline:
+	adding test for handling of multi-name properties
+
+	* tests/files/multi-name-property.test: New file.
+
+	* tests/files/Makefile.am, tests/files/multi-name-property.test:
+	adding test for handling of multi-name properties
+
+	* tests/cmdline/maxsize.baseline, tests/cmdline/maxsize.test:
+	tweaking maxsize tests to overcome co-incidence on 64 bit and alpha arch.
+
 2006-03-12  verdammelt  <verdammelt@freya>
 
 	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
