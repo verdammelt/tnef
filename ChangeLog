@@ -1,3 +1,8 @@
+2006-03-20  verdammelt  <verdammelt@freya>
+
+	* tests/cmdline/body.baseline, tests/cmdline/maxsize.baseline, tests/cmdline/maxsize.test, tests/cmdline/version.baseline, tests/files/Makefile.am, tests/files/baselines/Makefile.am, tests/files/baselines/data-before-name.baseline, tests/files/baselines/multi-name-property.baseline, tests/files/baselines/triples.baseline, tests/files/datafiles/Makefile.am, tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef, tests/files/multi-name-property.test, ChangeLog, NEWS, TODO, configure.in, src/Makefile.am, src/alloc.c, src/alloc.h, src/attr.c, src/attr.h, src/common.h, src/date.c, src/date.h, src/debug.c, src/debug.h, src/file.c, src/file.h, src/main.c, src/mapi_attr.c, src/mapi_attr.h, src/mkdata.awk, src/options.c, src/options.h, src/path.c, src/path.h, src/replace/Makefile.am, src/replace/basename.c, src/replace/ldiv.c, src/replace/ldiv.h, src/replace/malloc.c, src/replace/strdup.c, src/rtf.c, src/rtf.h, src/tnef-names.data, src/tnef.c, src/tnef.h, src/util.c, src/util.h, src/xstrdup.c:
+	merging from v1.4
+
 2006-03-18  verdammelt  <verdammelt@freya>
 
         * NEWS: Release of v1.4
