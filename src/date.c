@@ -1,7 +1,7 @@
 /*
  * date.c -- functions for dealing with dates.
  *
- * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ dow_str(int dow)
 const char *
 date_to_str (struct date *dt)
 {
-    static char buf[23];
+    static char buf[32];
     sprintf (buf, "%s %04d/%02d/%02d %02d:%02d:%02d",
 	     dow_str(dt->dow),
 	     dt->year, dt->month, dt->day,

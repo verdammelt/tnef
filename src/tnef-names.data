@@ -10,7 +10,7 @@ attREQUESTRES                   0x0009  Response Requested.
 attFROM                         0x8000  From
 attSUBJECT                      0x8004  Subject
 attDATESENT                     0x8005  Date Sent
-attDATERECD                     0x8006  Date Recieved
+attDATERECD                     0x8006  Date Received
 attMESSAGESTATUS                0x8007  Message Status
 attMESSAGECLASS                 0x8008  Message Class
 attMESSAGEID                    0x8009  Message ID

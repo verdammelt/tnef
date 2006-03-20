@@ -1,7 +1,7 @@
 /* 
  * rtf.h -- utility functions for dealing with RTF content
  * 
- * Copyright (C) 1999-2005 by Mark Simpson <damned@theworld.com>
+ * Copyright (C) 1999-2006 by Mark Simpson <damned@theworld.com>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

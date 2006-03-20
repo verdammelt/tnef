@@ -1,8 +1,8 @@
 /*
  * tnef.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
- * Copyright (C)1998 Thomas Boll  <tb@boll.ch>	[ORIGINAL AUTHOR]
+ * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1997 Thomas Boll  <tb@boll.ch>	[ORIGINAL AUTHOR]
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

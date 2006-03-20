@@ -8,7 +8,7 @@ TNEF Key: ea64
 (MESS) Date Sent [type: date] [len: 14] = Fri 2003/05/23 17:26:17
 (MESS) Response Requested. [type: short] [len: 2] = 1
 (MESS) From [type: triples] [len: 66] ={id=4,chgtrp=66,cch=18,cb=32} sender_display_name='Martin Rakhmanoff', sender_address='SMTP:rakhmanoff@sundance.spb.ru'
-(MESS) Date Recieved [type: date] [len: 14] = Fri 2003/05/23 17:26:17
+(MESS) Date Received [type: date] [len: 14] = Fri 2003/05/23 17:26:17
 (MESS) Message Status [type: byte] [len: 1] = 0x21
 (MESS) Body [type: text] [len: 21] ='Sample description
 '

@@ -1,7 +1,7 @@
 /*
  * rtf.c -- utility function for dealing with RTF content
  *
- * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -90,7 +90,7 @@ decompress_rtf_data (unsigned char *src, size_t len)
 	     * the beginning when the end is reached.  we save the
 	     * need for this by pointing straight into the data
 	     * buffer, and simulating this behaviour by modifying the
-	     * pointeers appropriately */ 
+	     * pointers appropriately */ 
 	    offset = (out / 4096) * 4096 + offset;
 	    if (offset >= (int)out) offset -= 4096; /* from previous block */
 	    end = offset + length;

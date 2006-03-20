@@ -1,7 +1,7 @@
 /*
  * xstrdup.c -- version of strdup for that handles NULL and checks size limit
  *
- * Copyright (C)1999-2005 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

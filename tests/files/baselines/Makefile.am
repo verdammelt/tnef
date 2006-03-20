@@ -16,6 +16,7 @@ EXTRA_DIST	=	AUTHORS.baseline			\
 			message.rtf.baseline			\
 			missing-filenames.baseline		\
 			missing-filenames-body.rtf.baseline	\
+			multi-name-property.baseline		\
 			one-file.baseline			\
 			README.baseline				\
 			rtf.baseline				\
