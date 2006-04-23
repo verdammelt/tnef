@@ -169,8 +169,8 @@ file_add_mapi_attrs (File* file,
 
              case MAPI_ATTACH_MIME_TAG:
 		if (file->mime_type) XFREE (file->mime_type);
-		file->mime_type = CHECKED_XMALLOC (char, file->len);
-		memmove (file->mime_type, a->values[0].data.buf, file->len);
+		file->mime_type = CHECKED_XMALLOC (char, a->values[0].len);
+		memmove (file->mime_type, a->values[0].data.buf, a->values[0].len);
 		break;
 
 	    default:
