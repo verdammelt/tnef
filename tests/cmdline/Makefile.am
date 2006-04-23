@@ -17,7 +17,7 @@ EXTRA_DIST	=	help.test help.baseline			\
 			triples-test.txt.baseline		\
 			triples-test-2.txt.baseline		\
 			triples-test-2.rtf.baseline             \
-			mime-types.test mime-times.baseline
+			mime-types.test mime-types.baseline
 
 TESTS		=	help.test version.test basic.test debug.test 	\
 			list.test verbose.test overwrite.test 		\
