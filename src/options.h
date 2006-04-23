@@ -29,7 +29,7 @@
 #include "common.h"
 
 /* Global variables, used by all (or nearly all) functions */
-extern int8 g_flags;     /* program options */
+extern int g_flags;     /* program options */
 /* extern char *g_directory;*/ /* output directory */
 /* extern FILE *g_file; */     /* input file */
 
@@ -37,6 +37,7 @@ extern int8 g_flags;     /* program options */
 #define DEBUG_ON ((g_flags)&DBG_OUT)
 #define VERBOSE_ON ((g_flags)&VERBOSE)
 #define LIST_ONLY ((g_flags)&LIST)
+#define SHOW_MIME ((g_flags)&LISTMIME)
 #define USE_PATHS ((g_flags)&PATHS)
 #define INTERACTIVE ((g_flags)&CONFIRM)
 #define OVERWRITE_FILES ((g_flags)&OVERWRITE)
@@ -51,7 +52,8 @@ enum { NONE    	= 0x00,
        OVERWRITE= 0x10,
        CONFIRM 	= 0x20,
        NUMBERED = 0x40,
-       SAVEBODY  = 0x80
+       SAVEBODY = 0x80,
+       LISTMIME = 0x100
 };
 
 #endif /* OPTIONS_H */
