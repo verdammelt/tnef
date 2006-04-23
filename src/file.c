@@ -123,15 +123,20 @@ file_write (File *file, const char* directory)
 	{
 	    /* FIXME: print out date and stuff */
 	    const char *date_str = date_to_str(&file->dt);
-	    fprintf (stdout, "%11lu %s %s\n", 
+	    fprintf (stdout, "%11lu %s %s", 
 		     (unsigned long)file->len,
 		     date_str+4, /* skip the day of week */
 		     base_fname);
 	}
 	else
 	{
-	    fprintf (stdout, "%s\n", base_fname);
+            fprintf (stdout, "%s", base_fname);
 	}
+	if ( SHOW_MIME )
+	{
+	    fprintf (stdout, "|%s", file->mime_type ? file->mime_type : "");
+	}
+        fprintf (stdout, "\n");
     }
 }
 
@@ -160,6 +165,12 @@ file_add_mapi_attrs (File* file,
 		if (file->data) XFREE (file->data);
 		file->data = CHECKED_XMALLOC (unsigned char, file->len);
 		memmove (file->data, a->values[0].data.buf, file->len);
+		break;
+
+             case MAPI_ATTACH_MIME_TAG:
+		if (file->mime_type) XFREE (file->mime_type);
+		file->mime_type = CHECKED_XMALLOC (char, file->len);
+		memmove (file->mime_type, a->values[0].data.buf, file->len);
 		break;
 
 	    default:
@@ -216,8 +227,8 @@ file_free (File *file)
     {
 	XFREE (file->name);
 	XFREE (file->data);
+	XFREE (file->mime_type);
 	memset (file, '\0', sizeof (File));
     }
 }
-
 
