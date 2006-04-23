@@ -1,5 +1,15 @@
 2006-04-23  verdammelt  <verdammelt@freya>
 
+	* tnef.c (get_body_files):
+	correcting mistake in allocation of File pointers.
+	Was allocating objects of type FILE not File!
+
+	* file.c (file_add_mapi_attrs):
+	fixing allocation of mime_types to be the
+	correct size.
+
+2006-04-23  verdammelt  <verdammelt@freya>
+
 	* NEWS: Adding info about v1.4.1
 
 	* configure.in: Updating version number
