@@ -64,6 +64,7 @@ static const char* USAGE = \
 "-C DIR, --directory=DIR \tunpack files into DIR\n"
 "-x SIZE --maxsize=SIZE  \tlimit maximum size of extracted archive (bytes)\n"
 "-t,     --list          \tlist files, do not extract\n"
+"        --list-with-mime-types \tlist files and mime-types, do not extract\n"
 "-w,     --interactive   \task for confirmation for every action\n"
 "        --confirmation  \tsame as -w\n"
 "        --overwrite     \tOverwrite existing files\n"
@@ -155,6 +156,7 @@ parse_cmdline (int argc, char **argv,
         {"file", required_argument, 0, 'f' },
         {"help", no_argument, 0, 'h'},
         {"interactive", no_argument, 0, 'w' },
+        {"list-with-mime-types", no_argument, 0, 0},
         {"list", no_argument, 0, 't'}, /* for now same as -n */
         {"maxsize", required_argument, 0, 'x' },
         {"number-backups", no_argument, 0, 0 },
@@ -217,6 +219,11 @@ parse_cmdline (int argc, char **argv,
 			     "body-pref") == 0)
 	    {
 		(*body_pref) = validate_body_pref (optarg);
+	    }
+	    else if (strcmp (long_options[option_index].name,
+			     "list-with-mime-types") == 0)
+	    {
+		*flags |= LIST|LISTMIME;
 	    }
             else
             {

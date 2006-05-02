@@ -16,12 +16,13 @@ EXTRA_DIST	=	help.test help.baseline			\
 			rtf-test.rtf.baseline			\
 			triples-test.txt.baseline		\
 			triples-test-2.txt.baseline		\
-			triples-test-2.rtf.baseline
+			triples-test-2.rtf.baseline             \
+			mime-types.test mime-types.baseline
 
 TESTS		=	help.test version.test basic.test debug.test 	\
 			list.test verbose.test overwrite.test 		\
 			directory.test maxsize.test			\
-			body.test
+			body.test mime-types.test
 #			use-path.test interactive.test
 
 XFAIL_TESTS	=	use-path.test interactive.test

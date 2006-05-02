@@ -4,6 +4,7 @@
 -C DIR, --directory=DIR 	unpack files into DIR
 -x SIZE --maxsize=SIZE  	limit maximum size of extracted archive (bytes)
 -t,     --list          	list files, do not extract
+        --list-with-mime-types 	list files and mime-types, do not extract
 -w,     --interactive   	ask for confirmation for every action
         --confirmation  	same as -w
         --overwrite     	Overwrite existing files
@@ -30,6 +31,7 @@ Report bugs to <verdammelt@users.sourceforge.net>
 -C DIR, --directory=DIR 	unpack files into DIR
 -x SIZE --maxsize=SIZE  	limit maximum size of extracted archive (bytes)
 -t,     --list          	list files, do not extract
+        --list-with-mime-types 	list files and mime-types, do not extract
 -w,     --interactive   	ask for confirmation for every action
         --confirmation  	same as -w
         --overwrite     	Overwrite existing files

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+tnef_file=$srcdir/test.tnef
+
+echo > $srcdir/mime-types.output
+echo $bin --list-with-mime-types $tnef_file >> $srcdir/mime-types.output 2>&1
+$bin --list-with-mime-types $tnef_file >> $srcdir/mime-types.output 2>&1
+check_test mime-types

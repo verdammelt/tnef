@@ -37,10 +37,10 @@ typedef struct
     size_t len;
     unsigned char * data;
     struct date dt;
+    char * mime_type;
 } File;
 
 extern void file_write (File *file, const char* directory);
 extern void file_add_attr (File* file, const char* directory, Attr* attr);
 extern void file_free (File *file);
-
 #endif /* FILE_H */

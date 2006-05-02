@@ -114,10 +114,10 @@ get_body_files (const char* directory,
 	/* first get a count */
 	while (data[count++]);
 
-	files = (File**)XCALLOC(FILE*, count + 1);
+	files = (File**)XCALLOC(File*, count + 1);
 	for (i = 0; data[i]; i++)
 	{
-	    files[i] = (File*)XCALLOC(FILE, 1);
+	    files[i] = (File*)XCALLOC(File, 1);
 	    files[i]->name = munge_fname(directory, tmp);
 	    files[i]->len = data[i]->len;
 	    files[i]->data 
