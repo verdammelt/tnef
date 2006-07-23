@@ -41,8 +41,6 @@
 #include "rtf.h"
 #include "util.h"
 
-#include <sys/stat.h>
-
 static size_t filesize;
 
 typedef struct
