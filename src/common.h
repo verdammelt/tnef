@@ -54,6 +54,10 @@ extern void *memmove (void *, const void*, size_t)
 #  endif
 #endif
 
+#ifdef HAVE_SYS_STAT_H
+#  include <sys/stat.h>
+#endif
+
 extern char* xstrdup (const char* str);
 
 /* ********** SIZES ********** */
