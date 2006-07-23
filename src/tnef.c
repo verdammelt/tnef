@@ -162,21 +162,21 @@ get_html_data (MAPI_Attr *a)
 int
 data_left (FILE* input_file)
 {
-    int retval = 0;
-
-    if (!feof(input_file))
+    int retval = 1;
+    
+    if (feof(input_file)) retval = 0;
+    else
     {
 	/* check if there is enough data left */
 	struct stat statbuf;
 	fstat (fileno(input_file), &statbuf);
 	size_t pos = ftell(input_file);
-	if (statbuf.st_size - pos < MINIMUM_ATTR_LENGTH)
+	size_t data_left = (statbuf.st_size - pos);
+
+	if (data_left > 0 && data_left < MINIMUM_ATTR_LENGTH) 
 	{
 	    fprintf (stderr, "ERROR: garbage at end of file.\n");
-	}
-	else
-	{
-	    retval = 1;
+	    retval = 0;
 	}
     }
     return retval;
