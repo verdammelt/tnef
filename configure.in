@@ -24,6 +24,7 @@ AC_CHECK_DECLS([basename])
 
 dnl check for typedefs
 AC_TYPE_SIZE_T
+AC_HEADER_STAT
 
 dnl check for structures 
 
