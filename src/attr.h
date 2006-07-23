@@ -31,6 +31,8 @@
 #include "tnef_types.h"
 #include "tnef_names.h"
 
+#define MINIMUM_ATTR_LENGTH 72
+
 /* Object types */
 enum _lvl_type
 {

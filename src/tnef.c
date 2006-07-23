@@ -41,6 +41,10 @@
 #include "rtf.h"
 #include "util.h"
 
+#include <sys/stat.h>
+
+static size_t filesize;
+
 typedef struct
 {
     VarLenData **text_body;
@@ -155,6 +159,29 @@ get_html_data (MAPI_Attr *a)
     return body;
 }
 
+int
+data_left (FILE* input_file)
+{
+    int retval = 0;
+
+    if (!feof(input_file))
+    {
+	/* check if there is enough data left */
+	struct stat statbuf;
+	fstat (fileno(input_file), &statbuf);
+	size_t pos = ftell(input_file);
+	if (statbuf.st_size - pos < MINIMUM_ATTR_LENGTH)
+	{
+	    fprintf (stderr, "ERROR: garbage at end of file.\n");
+	}
+	else
+	{
+	    retval = 1;
+	}
+    }
+    return retval;
+}
+
 
 /* The entry point into this module.  This parses an entire TNEF file. */
 int
@@ -186,7 +213,7 @@ parse_file (FILE* input_file, char* directory,
 
     /* The rest of the file is a series of 'messages' and 'attachments' */
     for (attr = read_object(input_file);
-	 attr && !feof (input_file);
+	 attr && data_left (input_file);
 	 attr = read_object(input_file))
     {
 	/* This signals the beginning of a file */
