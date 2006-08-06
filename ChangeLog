@@ -1,10 +1,61 @@
+2006-08-06  verdammelt  <verdammelt@freya>
+
+        * Release v1.4.2
+	
+	* tests/files/file-util.sh (run_test):
+	improving handling for stdout and stderr to make tests
+	more robust.
+
+	* tests/files/baselines/garbage-at-end.baseline: fixing baseline
+
+	* tests/files/baselines/Makefile.am (EXTRA_DIST):
+	adding garbage-at-end.baseline
+
+	* tests/files/datafiles/Makefile.am (EXTRA_DIST):
+	adding garbage-at-end.list, garbage-at-end.tnef
+
+	* src/tnef.c (data_left): fixing problem with variable declarations
+
+2006-07-23  verdammelt  <verdammelt@freya>
+
+	* configure.in, tnef/configure.in, NEWS, tnef/NEWS:
+	Preparing to release v1.4.2
+
+	* tests/cmdline/version.baseline, tnef/tests/cmdline/version.baseline:
+	updating version number
+
+	* tests/files/baselines/garbage-at-end.baseline, tests/files/datafiles/garbage-at-end.list, tests/files/datafiles/garbage-at-end.tnef, tests/files/garbage-at-end.test, tnef/tests/files/baselines/garbage-at-end.baseline, tnef/tests/files/datafiles/garbage-at-end.list, tnef/tests/files/datafiles/garbage-at-end.tnef, tnef/tests/files/garbage-at-end.test:
+	New file.
+
+	* tests/files/baselines/garbage-at-end.baseline, tests/files/datafiles/garbage-at-end.list, tests/files/datafiles/garbage-at-end.tnef, tests/files/garbage-at-end.test, tnef/tests/files/baselines/garbage-at-end.baseline, tnef/tests/files/datafiles/garbage-at-end.list, tnef/tests/files/datafiles/garbage-at-end.tnef, tnef/tests/files/garbage-at-end.test:
+	new test for 'garbage at end' problem
+
+	* src/replace/dummy.c, tnef/src/replace/dummy.c: New file.
+
+	* src/replace/dummy.c, tnef/src/replace/dummy.c:
+	new dummy file/function to ensure that libreplace.a is never empty
+
+	* tests/files/Makefile.am, tnef/tests/files/Makefile.am:
+	New test for the 'garbage at end' problem
+
+	* src/replace/Makefile.am, tnef/src/replace/Makefile.am:
+	New dummy file/function so that libreplace.a is never empty
+
+	* src/tnef.c, tnef/src/tnef.c:
+	removing sys/stat.h -- that is now in common.h
+
+	* src/common.h, tnef/src/common.h: conditionally including sys/stat.h
+
+	* configure.in, tnef/configure.in:
+	Adding AC_HEADER_STAT - used in tnef.c.
+
 2006-04-23  verdammelt  <verdammelt@freya>
 
-	* tnef.c (get_body_files):
+	* src/tnef.c, tnef/src/tnef.c (get_body_files):
 	correcting mistake in allocation of File pointers.
 	Was allocating objects of type FILE not File!
 
-	* file.c (file_add_mapi_attrs):
+	* src/file.c, tnef/src/file.c (file_add_mapi_attrs):
 	fixing allocation of mime_types to be the
 	correct size.
 

@@ -24,6 +24,7 @@ AC_CHECK_DECLS([basename])
 
 dnl check for typedefs
 AC_TYPE_SIZE_T
+AC_HEADER_STAT
 
 dnl check for structures 
 
@@ -55,7 +56,7 @@ dnl output
 AC_CONFIG_FILES([Makefile BUGS tnef.spec 
                  doc/Makefile doc/tnef.1 doc/www/Makefile 
                  doc/www/cgi-bin/Makefile doc/www/htdocs/Makefile
-                 src/Makefile src/replace/Makefile
+                 src/Makefile src/lib/Makefile
                  tests/Makefile 
                  tests/cmdline/Makefile 
                  tests/files/Makefile

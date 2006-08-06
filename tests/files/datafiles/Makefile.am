@@ -6,6 +6,8 @@ EXTRA_DIST	=	MAPI_ATTACH_DATA_OBJ.list	\
 			body.tnef			\
 			data-before-name.list		\
 			data-before-name.tnef		\
+			garbage-at-end.list		\
+			garbage-at-end.tnef		\
 			long-filename.list		\
 			long-filename.tnef		\
 			missing-filenames.list		\

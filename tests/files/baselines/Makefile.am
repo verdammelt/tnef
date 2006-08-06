@@ -6,6 +6,7 @@ EXTRA_DIST	=	AUTHORS.baseline			\
 			CONFIG.SYS.baseline			\
 			data-before-name.baseline		\
 			data-before-name-body.rtf.baseline	\
+			garbage-at-end.baseline			\
 			generpts.src.baseline			\
 			long-filename.baseline			\
 			long-filename-body.rtf.baseline		\

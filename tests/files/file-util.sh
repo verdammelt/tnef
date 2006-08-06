@@ -25,7 +25,12 @@ run_test () {
     check_exists $srcdir/datafiles/$test.list
     $tnef --debug --directory $srcdir/$test.dir \
 	--save-body=$test-body $TEST_EXTRA_ARGS \
-        $srcdir/datafiles/$test.tnef > $srcdir/$test.output 2>&1
+        $srcdir/datafiles/$test.tnef > $srcdir/$test.output \
+	2> $srcdir/$test.error
+    if [ -f $srcdir/$test.error ]; then
+	cat $srcdir/$test.error >> $srcdir/$test.output
+	rm -f $srcdir/$test.error
+    fi
     check_test_full $srcdir/$test.output                \
                     $srcdir/baselines/$test.baseline    \
                     $srcdir/$test.diff
