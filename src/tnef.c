@@ -167,9 +167,10 @@ data_left (FILE* input_file)
     {
 	/* check if there is enough data left */
 	struct stat statbuf;
+	size_t pos, data_left;
 	fstat (fileno(input_file), &statbuf);
-	size_t pos = ftell(input_file);
-	size_t data_left = (statbuf.st_size - pos);
+	pos = ftell(input_file);
+	data_left = (statbuf.st_size - pos);
 
 	if (data_left > 0 && data_left < MINIMUM_ATTR_LENGTH) 
 	{
