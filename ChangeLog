@@ -1,3 +1,19 @@
+2006-08-06  verdammelt  <verdammelt@freya>
+
+	* tests/files/file-util.sh (run_test):
+	improving handling for stdout and stderr to make tests
+	more robust.
+
+	* tests/files/baselines/garbage-at-end.baseline: fixing baseline
+
+	* tests/files/baselines/Makefile.am (EXTRA_DIST):
+	adding garbage-at-end.baseline
+
+	* tests/files/datafiles/Makefile.am (EXTRA_DIST):
+	adding garbage-at-end.list, garbage-at-end.tnef
+
+	* src/tnef.c (data_left): fixing problem with variable declarations
+
 2006-07-23  verdammelt  <verdammelt@freya>
 
 	* configure.in, tnef/configure.in, NEWS, tnef/NEWS:
