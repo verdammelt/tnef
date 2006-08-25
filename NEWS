@@ -1,6 +1,11 @@
 TNEF NEWS -- history of user-visible changes.   23 July 2006
 Copyright (C) 2000-2006 by Mark Simpson
 
+* 1.4.3: [25 August 2006]
+** Fixing 'unicode string filename' bug [Bug #1546546].  Regressive bug:
+code to handle unicode strings added in v1.3.3 was lost in v1.4 during
+code re-arranging/refactoring
+
 * 1.4.2: [23 July 2006]
 ** Fixing 'garbage at end of file' bug [Bug# 1513940]. Now tries to handle gracefully
 ** Fixing Solaris 10 empty libreplace.a bug [Bug# 1517789]. Now libreplace.a never empty.
