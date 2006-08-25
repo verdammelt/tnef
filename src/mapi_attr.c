@@ -279,11 +279,19 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    for (val_idx = 0; val_idx < a->num_values; val_idx++)
 	    {
 		v[val_idx].len = GETINT32(buf+idx); idx += 4;
-		v[val_idx].data.buf 
-		    = CHECKED_XMALLOC(unsigned char, v[val_idx].len);
-		memmove (v[val_idx].data.buf,
-			 buf+idx,
-			 v[val_idx].len);
+
+		if (a->type == szMAPI_UNICODE_STRING)
+		{
+		    v[val_idx].data.buf = unicode_to_utf8(v[val_idx].len, buf+idx);
+		}
+		else
+		{
+		    v[val_idx].data.buf 
+			= CHECKED_XMALLOC(unsigned char, v[val_idx].len);
+		    memmove (v[val_idx].data.buf,
+			     buf+idx,
+			     v[val_idx].len);
+		}
 		idx += pad_to_4byte(v[val_idx].len);
 	    }
 	}
