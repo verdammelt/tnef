@@ -1,3 +1,7 @@
+2006-08-28  verdammelt  <verdammelt@freya>
+
+	* tests/cmdline/body.baseline: Updating baseline for unicode change
+
 2006-08-25  verdammelt  <verdammelt@freya>
 
 	* configure.in, NEWS: incremeting version
