@@ -1,4 +1,4 @@
-# rpm spec file for tnef 1.1.1
+# rpm spec file for tnef 1.4.3
 Summary: Decodes MS-TNEF attachments.
 Name: @PACKAGE_NAME@
 Version: @PACKAGE_VERSION@
@@ -28,7 +28,7 @@ Microsoft Outlook to view the attachment.
 %setup
 
 %build
-CFLAGS=${RPM_OPT_FLAGS} ./configure --prefix=%{prefix}
+CFLAGS=${RPM_OPT_FLAGS} ./configure --prefix=%{prefix} --datarootdir=%{prefix}/share
 make all
 
 %install
@@ -41,4 +41,4 @@ rm -rf ${RPM_BUILD_ROOT}
 %defattr(-,root,root)
 %doc README COPYING ChangeLog AUTHORS NEWS TODO BUGS
 %{prefix}/bin/tnef
-%{prefix}/man/man1/tnef.1
+%{prefix}/share/man/man1/tnef.1

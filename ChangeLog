@@ -1,7 +1,19 @@
+2006-08-28  verdammelt  <verdammelt@freya>
+
+	* tests/cmdline/body.baseline: Updating baseline for unicode change
+
+2006-08-25  verdammelt  <verdammelt@freya>
+
+	* configure.in, NEWS: incremeting version
+
+	* src/mapi_attr.c:
+	re-instating unicode_to_utf8 usage lost during v1.4 development
+
+	* tests/files/baselines/body.baseline, tests/cmdline/version.baseline:
+	Fixing baseline given code changes
+
 2006-08-06  verdammelt  <verdammelt@freya>
 
-        * Release v1.4.2
-	
 	* tests/files/file-util.sh (run_test):
 	improving handling for stdout and stderr to make tests
 	more robust.
