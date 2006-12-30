@@ -1,6 +1,6 @@
 AC_PREREQ(2.59)
 AC_INIT([tnef],[2.0],[verdammelt@users.sourceforge.net])
-AC_CONFIG_SRCDIR([src/tnef.c])
+AC_CONFIG_SRCDIR([src/lib/tnef.c])
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADER([src/config.h])
 AC_CONFIG_LIBOBJ_DIR(src/replace)
@@ -12,7 +12,8 @@ AC_PROG_CPP
 AC_PROG_CXX
 AC_PROG_INSTALL
 AC_PROG_LN_S
-AC_PROG_RANLIB
+dnl AC_PROG_RANLIB
+AC_PROG_LIBTOOL
 
 dnl check for libraries
 AC_CHECK_LIB([intl],gettext)
@@ -56,7 +57,7 @@ dnl output
 AC_CONFIG_FILES([Makefile BUGS tnef.spec 
                  doc/Makefile doc/tnef.1 doc/www/Makefile 
                  doc/www/cgi-bin/Makefile doc/www/htdocs/Makefile
-                 src/Makefile src/lib/Makefile
+                 src/Makefile src/lib/Makefile src/app/Makefile
                  tests/Makefile 
                  tests/cmdline/Makefile 
                  tests/files/Makefile

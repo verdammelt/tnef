@@ -1,0 +1,19 @@
+# mapi-types.data -- data file defining all types found in MAPI TNEF attachment
+# sym                 val    name
+szMAPI_UNSPECIFIED    0x0000 MAPI Unspecified
+szMAPI_NULL           0x0001 MAPI null property
+szMAPI_SHORT          0x0002 MAPI short (signed 16 bits)
+szMAPI_INT            0x0003 MAPI integer (signed 32 bits)
+szMAPI_FLOAT          0x0004 MAPI float (4 bytes)
+szMAPI_DOUBLE         0x0005 MAPI double
+szMAPI_CURRENCY       0x0006 MAPI currency (64 bits)
+szMAPI_APPTIME        0x0007 MAPI application time
+szMAPI_ERROR          0x000a MAPI error (32 bits)
+szMAPI_BOOLEAN        0x000b MAPI boolean (16 bits)
+szMAPI_OBJECT         0x000d MAPI embedded object
+szMAPI_INT8BYTE       0x0014 MAPI 8 byte signed int
+szMAPI_STRING         0x001e MAPI string
+szMAPI_UNICODE_STRING 0x001f MAPI unicode-string (null terminated)
+szMAPI_SYSTIME        0x0040 MAPI time (64 bits)
+szMAPI_CLSID          0x0048 MAPI OLE GUID
+szMAPI_BINARY         0x0102 MAPI binary
