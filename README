@@ -23,12 +23,15 @@ for installation is the standard:
     tar xzvf tnef-x.y.tar.gz
     cd tnef-x.y
     ./configure 
-    make
+    make check
     make install
     
-'make' will have created the tnef executable in the src directory and
-'make install' should have put it into /usr/local/bin.  Please see the
-man page or tnef --help for options. 
+'make check' will have created the tnef executable in the src
+directory and run all the unit tests.  'make install' should have put
+it into /usr/local/bin.  Please see the man page or tnef --help for
+options. 
+
+
 
 
 
