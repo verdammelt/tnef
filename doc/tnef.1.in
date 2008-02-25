@@ -1,7 +1,7 @@
 .TH TNEF 1 "TNEF MIME Decoder" "Filter" \" -*- nroff -*-
 .SH NAME
 .nf        \" fill off
-tnef \- decode Microsoft's Transport Neutral Encapsulaton Format
+tnef \- decode Microsoft's Transport Neutral Encapsulation Format
 .fi        \" fill on
 .SH SYNOPSIS
 .BR tnef " [options] [FILE]"
@@ -15,7 +15,7 @@ filter.
 .B tnef
 decodes e-mail attachments encoded in Microsoft's Transport Neutral
 Encapsulation Format (hereafter, TNEF), which "wraps"
-Microsoft e-mail attachements.
+Microsoft e-mail attachments.
 .PP
 .IR Unfortunately "," these "wrapped" attachments are inaccessible to
 any e-mail client that does not understand TNEF.
@@ -50,7 +50,7 @@ when extracting attachments, if file FOO will be overwritten,
 create FOO.n instead.
 .TP
 \fB\-\-use\-paths\fP
-honor file pathnames specifieid in the TNEF attachment.
+honor file pathnames specified in the TNEF attachment.
 For security reasons, paths to attached files are
 ignored by default.
 .TP
