@@ -73,7 +73,7 @@ mapi_attr_dump (MAPI_Attr* attr)
     }
 	
     for (i = 0; i < attr->num_names; i++)
-	fprintf (stdout, "\tname #%d: '%s'\n", i, attr->names[i].data);
+      fprintf (stdout, "\tname #%d: '%s'\n", (int)i, attr->names[i].data);
 
     for (i = 0; i < attr->num_values; i++)
     {
@@ -282,7 +282,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 
 		if (a->type == szMAPI_UNICODE_STRING)
 		{
-		    v[val_idx].data.buf = unicode_to_utf8(v[val_idx].len, buf+idx);
+		  v[val_idx].data.buf = (unsigned char*)unicode_to_utf8(v[val_idx].len, buf+idx);
 		}
 		else
 		{

@@ -76,6 +76,7 @@ static const char* USAGE = \
 "        --save-rtf[=FILE]\t[DEPRECATED] Save the RTF message body to a file\n"
 "        --save-body[=FILE]\tSave the message body to a file\n"
 "-h,     --help          \tshow this message\n"
+"-K,     --ignore-checksum\tIgnore any checksum error (warn only)\n"
 "-V,     --version       \tdisplay version and copyright\n"
 "-v,     --verbose       \tproduce verbose output\n"
 "        --debug     	 \tproduce a lot of output\n"
@@ -155,6 +156,7 @@ parse_cmdline (int argc, char **argv,
         {"directory", required_argument, 0, 'C' },
         {"file", required_argument, 0, 'f' },
         {"help", no_argument, 0, 'h'},
+	{"ignore-checksum", no_argument, 0, 'K'},
         {"interactive", no_argument, 0, 'w' },
         {"list-with-mime-types", no_argument, 0, 0},
         {"list", no_argument, 0, 't'}, /* for now same as -n */
@@ -173,7 +175,7 @@ parse_cmdline (int argc, char **argv,
     /* default values */
     (*body_pref) = strdup("rht");
 
-    while ((i = getopt_long (argc, argv, "f:C:d:x:vVwht",
+    while ((i = getopt_long (argc, argv, "f:C:d:x:vVwhtK",
                              long_options, &option_index)) != -1)
     {
         switch (i) 
@@ -285,6 +287,10 @@ parse_cmdline (int argc, char **argv,
         case 'w':
             *flags |= CONFIRM;
             break;
+
+	case 'K':
+	  *flags |= CHECKSUM_OK;
+	  break;
 
         case '?':
             fprintf (stderr, "Try '%s --help' for more info.\n", argv[0]);

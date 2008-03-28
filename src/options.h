@@ -42,6 +42,7 @@ extern int g_flags;     /* program options */
 #define INTERACTIVE ((g_flags)&CONFIRM)
 #define OVERWRITE_FILES ((g_flags)&OVERWRITE)
 #define NUMBER_FILES ((g_flags)&NUMBERED)
+#define CHECKSUM_SKIP ((g_flags)&CHECKSUM_OK)
 
 /* flags to modify behaviour of file parsing */
 enum { NONE    	= 0x00,
@@ -53,7 +54,8 @@ enum { NONE    	= 0x00,
        CONFIRM 	= 0x20,
        NUMBERED = 0x40,
        SAVEBODY = 0x80,
-       LISTMIME = 0x100
+       LISTMIME = 0x100,
+       CHECKSUM_OK = 0x200
 };
 
 #endif /* OPTIONS_H */
