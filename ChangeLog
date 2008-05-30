@@ -1,3 +1,23 @@
+2008-03-28  verdammelt  <verdammelt@virgil.local>
+
+	* tests/cmdline/help.baseline, src/options.h, src/mapi_attr.c, src/main.c, src/attr.c:
+	Applying ignore checksum patch.  Adds new command line option for
+	changing checksum errors into warnings
+
+2008-02-25  verdammelt  <verdammelt@MBPro.local>
+
+	* INSTALL, README, depcomp, install-sh, missing, mkinstalldirs:
+	updating build artefacts
+
+	* doc/tnef.1.in: correcting typos in man page
+
+	* configure.in, src/main.c, tests/cmdline/version.baseline, tnef.spec.in:
+	increasing version number and updating copyright year
+
+2006-09-15  verdammelt  <verdammelt@MBPro.local>
+
+	* tnef.spec.in: Fixing version number and share path
+
 2006-08-28  verdammelt  <verdammelt@freya>
 
 	* tests/cmdline/body.baseline: Updating baseline for unicode change
