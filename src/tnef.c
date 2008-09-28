@@ -163,7 +163,7 @@ data_left (FILE* input_file)
     int retval = 1;
     
     if (feof(input_file)) retval = 0;
-    else
+    else if (input_file != stdin)
     {
 	/* check if there is enough data left */
 	struct stat statbuf;
