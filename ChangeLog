@@ -1,3 +1,17 @@
+2008-09-28  verdammelt  <verdammelt@virgil.local>
+
+	* tests/cmdline/version.baseline, configure.in, NEWS:
+	Releasing v1.4.5 with bug fix
+
+	* src/tnef.c, tests/cmdline/Makefile.am, tests/cmdline/stdin.baseline, tests/cmdline/stdin.test:
+	fixing bug 2126695
+
+2008-05-30  verdammelt  <verdammelt@virgil.local>
+
+	* NEWS: adding news
+
+	* ChangeLog: updating ChangeLog
+
 2008-03-28  verdammelt  <verdammelt@virgil.local>
 
 	* tests/cmdline/help.baseline, src/options.h, src/mapi_attr.c, src/main.c, src/attr.c:
