@@ -27,8 +27,6 @@
 
 #include "alloc.h"
 #include "attr.h"
-#include "tnef_types.h"
-#include "tnef_names.h"
 #include "date.h"
 #include "options.h"
 #include "util.h"
