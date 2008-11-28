@@ -1,0 +1,18 @@
+#!/bin/sh
+
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+tnef_file=$srcdir/test.tnef
+
+rm -f $srcdir/AUTHORS
+
+echo cat $tnef_file \| $bin -v -f - > $srcdir/stdin.output 2>&1
+cat $tnef_file | $bin -v -f - $tnef_file >> $srcdir/stdin.output 2>&1
+
+if [ ! -f $srcdir/AUTHORS ]; then
+   echo "AUTHORS file does not exists! Test Failed!"
+   exit 1
+fi
+
+check_test stdin

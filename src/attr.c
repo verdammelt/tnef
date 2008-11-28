@@ -229,7 +229,7 @@ attr_read (FILE* in)
     {
 	fprintf (stderr,
 		 "Invalid checksum, input file may be corrupted\n");
-	exit (1);
+	if (!CHECKSUM_SKIP) exit (1);
     }
     
     if (DEBUG_ON) attr_dump (attr);

@@ -16,6 +16,7 @@
         --save-rtf[=FILE]	[DEPRECATED] Save the RTF message body to a file
         --save-body[=FILE]	Save the message body to a file
 -h,     --help          	show this message
+-K,     --ignore-checksum	Ignore any checksum error (warn only)
 -V,     --version       	display version and copyright
 -v,     --verbose       	produce verbose output
         --debug     	 	produce a lot of output
@@ -43,6 +44,7 @@ Report bugs to <verdammelt@users.sourceforge.net>
         --save-rtf[=FILE]	[DEPRECATED] Save the RTF message body to a file
         --save-body[=FILE]	Save the message body to a file
 -h,     --help          	show this message
+-K,     --ignore-checksum	Ignore any checksum error (warn only)
 -V,     --version       	display version and copyright
 -v,     --verbose       	produce verbose output
         --debug     	 	produce a lot of output
