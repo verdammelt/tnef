@@ -5,7 +5,7 @@ bin_PROGRAMS	=	tnef
 tnef_SOURCES	=	alloc.c attr.c date.c debug.c	\
 			file.c main.c mapi_attr.c	\
 			options.c path.c rtf.c		\
-			tnef.c util.c write.c 		\	
+			tnef.c util.c write.c 		\
 			xstrdup.c
 
 noinst_HEADERS	=	alloc.h attr.h common.h 	\
