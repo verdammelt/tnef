@@ -1,15 +1,3 @@
-2008-11-28  verdammelt  <verdammelt@virgil.local>
-
-	* ChangeLog, INSTALL, NEWS, README, configure.in, depcomp, doc/tnef.1.in, install-sh, missing, mkinstalldirs, src/attr.c, src/main.c, src/mapi_attr.c, src/options.h, src/tnef.c, tests/cmdline/Makefile.am, tests/cmdline/help.baseline, tests/cmdline/stdin.baseline, tests/cmdline/stdin.test, tests/cmdline/version.baseline, tests/files/Makefile.am, tnef.spec.in:
-	merging from 1.4.5
-
-	* src/Makefile.am: making mainline work again
-
-	* src/.cvsignore, src/xstrdup.c: getting mainline to work again
-
-	* src/util.h, src/util.c, src/attr.c, src/Makefile.am, configure.in, .cvsignore:
-	Getting the mainline code to work again
-
 2008-09-28  verdammelt  <verdammelt@virgil.local>
 
 	* tests/cmdline/version.baseline, configure.in, NEWS:

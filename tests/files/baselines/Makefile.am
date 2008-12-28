@@ -32,3 +32,4 @@ EXTRA_DIST	=	AUTHORS.baseline			\
 			VIA_Nytt_14021.htm.baseline		\
 			VIA_Nytt_1402.doc.baseline		\
 			VIA_Nytt_1402.pdf.baseline
+
