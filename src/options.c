@@ -29,6 +29,4 @@
 
 /* Global variables, used by all (or nearly all) functions */
 int g_flags = NONE;     /* program options */
-/* char *g_directory = NULL;*/ /* output directory */
-/* FILE *g_file = NULL;*/     /* input file */
 

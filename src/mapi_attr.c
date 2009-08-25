@@ -143,6 +143,8 @@ mapi_attr_dump (MAPI_Attr* attr)
 	}
 	fprintf (stdout, "\n");
     }
+
+    fflush( NULL );
 }
 
 static MAPI_Value*
@@ -156,12 +158,20 @@ alloc_mapi_values (MAPI_Attr* a)
     return NULL;
 }
 
+/*
+  2009/07/07
+  Microsoft documentation reference: [MS-OXPROPS] v 2.0, April 10, 2009
+
+  only multivalue types appearing are:
+  szMAPI_INT, szMAPI_SYSTIME, szMAPI_UNICODE_STRING, szMAPI_BINARY
+*/
+
 /* parses out the MAPI attibutes hidden in the character buffer */
 MAPI_Attr**
 mapi_attr_read (size_t len, unsigned char *buf)
 {
     size_t idx = 0;
-    uint32 i;
+    uint32 i,j,mvf;
     uint32 num_properties = GETINT32(buf+idx);
     MAPI_Attr** attrs = CHECKED_XMALLOC (MAPI_Attr*, (num_properties + 1));
 
@@ -178,7 +188,21 @@ mapi_attr_read (size_t len, unsigned char *buf)
 
 
 	/* Multi-valued attributes have their type modified by the MULTI_VALUE_FLAG value */
-	if (a->type & MULTI_VALUE_FLAG) a->type -= MULTI_VALUE_FLAG;
+	if (a->type & MULTI_VALUE_FLAG)
+	{
+	    a->type -= MULTI_VALUE_FLAG;
+	    mvf = 1;
+
+	    if (DEBUG_ON)
+	    {
+		fprintf( stdout, "!!MULTI_VALUE_FLAG seen (0x%02x 0x%02x)\n", a->name, a->type );
+		fflush( NULL );
+	    }
+	}
+        else
+        {
+            mvf = 0;
+        }
 
 	/* handle special case of GUID prefixed properties */
 	if (a->name >= GUID_EXISTS_FLAG)
@@ -222,23 +246,38 @@ mapi_attr_read (size_t len, unsigned char *buf)
 
 	switch (a->type)
 	{
-	case szMAPI_NULL:
-	    a->num_values = 0;
-	    v = NULL;
-	    break;
-
 	case szMAPI_SHORT:        /* 2 bytes */
+	    assert(!mvf);
 	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = 2;
 	    v->data.bytes2 = GETINT16(buf+idx);
-	    idx += 4; /* advance by 4! */
+	    idx += 4;	/* assume padding of 2, advance by 4! */
 	    break;
 
-	case szMAPI_INT:
+	case szMAPI_INT:	/* 4 bytes, possible MV */
+	    if ( mvf )
+            {
+                a->num_values = GETINT32(buf+idx);
+		idx += 4;
+	    }
+	    else
+	    {
+		a->num_values = 1;
+	    }
+	    v = alloc_mapi_values (a);
+	    for ( j=0; j< a->num_values; j++ )
+	    {
+		v->len = 4;
+		v->data.bytes4 = GETINT32(buf+idx);
+		idx += 4;
+		v++;
+	    }
+	    break;
+
 	case szMAPI_FLOAT:      /* 4 bytes */
-	case szMAPI_ERROR:
-	case szMAPI_BOOLEAN:	/* spec says 2 bytes but reality is 4! */
+	case szMAPI_BOOLEAN:			/* this should be 2 bytes + 2 padding */
+	    assert(!mvf);
 	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = 4;
@@ -246,11 +285,32 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    idx += v->len;
 	    break;
 
-	case szMAPI_DOUBLE:
+	case szMAPI_SYSTIME:         /* 8 bytes */
+	    if ( mvf )
+            {
+                a->num_values = GETINT32(buf+idx);
+		idx += 4;
+	    }
+	    else
+	    {
+		a->num_values = 1;
+	    }
+	    v = alloc_mapi_values (a);
+	    for ( j=0; j< a->num_values; j++ )
+	    {
+		v->len = 8;
+		v->data.bytes8[0] = GETINT32(buf+idx);
+		v->data.bytes8[1] = GETINT32(buf+idx+4);
+		idx += 8;
+		v++;
+	    }
+	    break;
+
+	case szMAPI_DOUBLE:		/* 8 bytes */
 	case szMAPI_APPTIME:
 	case szMAPI_CURRENCY:
 	case szMAPI_INT8BYTE:
-	case szMAPI_SYSTIME:         /* 8 bytes */
+	    assert(!mvf);
 	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = 8;
@@ -260,6 +320,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    break;
 
 	case szMAPI_CLSID:
+	    assert(!mvf);
 	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = sizeof (GUID);
@@ -271,37 +332,49 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	case szMAPI_UNICODE_STRING:
 	case szMAPI_OBJECT:
 	case szMAPI_BINARY:       /* variable length */
-	case szMAPI_UNSPECIFIED:
-	{
-	    size_t val_idx = 0;
 	    a->num_values = GETINT32(buf+idx); idx += 4;
 	    v = alloc_mapi_values (a);
-	    for (val_idx = 0; val_idx < a->num_values; val_idx++)
+	    for (j = 0; j < a->num_values; j++)
 	    {
-		v[val_idx].len = GETINT32(buf+idx); idx += 4;
+		v->len = GETINT32(buf+idx); idx += 4;
 
 		if (a->type == szMAPI_UNICODE_STRING)
 		{
-		  v[val_idx].data.buf = (unsigned char*)unicode_to_utf8(v[val_idx].len, buf+idx);
+		    v->data.buf = (unsigned char*)unicode_to_utf8(v->len, buf+idx);
 		}
 		else
 		{
-		    v[val_idx].data.buf 
-			= CHECKED_XMALLOC(unsigned char, v[val_idx].len);
-		    memmove (v[val_idx].data.buf,
-			     buf+idx,
-			     v[val_idx].len);
+		    v->data.buf = CHECKED_XMALLOC(unsigned char, v->len);
+		    memmove (v->data.buf, buf+idx, v->len);
 		}
-		idx += pad_to_4byte(v[val_idx].len);
+
+		idx += pad_to_4byte(v->len);
+		v++;
 	    }
-	}
-	break;
+	    break;
+
+	case szMAPI_NULL:	/* illegal in input tnef streams */
+	case szMAPI_ERROR:
+	case szMAPI_UNSPECIFIED:
+
+            fprintf (stderr,
+                 "Invalid attribute, input file may be corrupted\n");
+            if (!ENCODE_SKIP) exit (1);
+
+	    return NULL;
+
+        default:		/* should never get here */
+            fprintf (stderr,
+                 "Undefined attribute, input file may be corrupted\n");
+            if (!ENCODE_SKIP) exit (1);
+
+	    return NULL;
+
 	}
 	if (DEBUG_ON) mapi_attr_dump (attrs[i]);
 
     }
     attrs[i] = NULL;
-
 
     return attrs;
 }

@@ -47,8 +47,8 @@ BEGIN {
     printf "char*\n"                                               > CFILE;
     printf "get_%s_str(uint16 d)\n", ENVIRON["TAG"]                > CFILE;
     printf "{\n"                                                   > CFILE;
-    printf "    static char buf[10];\n"                            > CFILE;
-    printf "    static char* str = NULL;\n"                        > CFILE;
+    printf "    static char buf[128];\n"                           > CFILE;
+    printf "    static char* str;\n"                               > CFILE;
     printf "    switch(d) {\n"                                     > CFILE;
 }
 
@@ -84,10 +84,17 @@ END {
     printf "#endif /* %s */\n", HFILEDEF > HFILE;
     
     printf "    default:\n"                                        > CFILE;
-    printf "        sprintf(buf,\"%%04x\",d);\n"                   > CFILE;
-    printf "        str=buf;\n"                                    > CFILE;
+    printf "        str=NULL;\n"                                   > CFILE;
     printf "        break;\n"                                      > CFILE;
     printf "    }\n"                                               > CFILE;
-    printf "    return str;\n"                                     > CFILE;
+    printf "    if ( str )\n"                                      > CFILE;
+    printf "    {\n"                                               > CFILE;
+    printf "        sprintf(buf,\"%%s <%%04x>\",str,d);\n"         > CFILE;
+    printf "    }\n"                                               > CFILE;
+    printf "    else\n"                                            > CFILE;
+    printf "    {\n"                                               > CFILE;
+    printf "        sprintf(buf,\"%%04x\",d);\n"                   > CFILE;
+    printf "    }\n"                                               > CFILE;
+    printf "    return buf;\n"                                     > CFILE;
     printf "}\n"                                                   > CFILE;
 }

@@ -40,4 +40,5 @@ rm -rf ${RPM_BUILD_ROOT}
 %defattr(-,root,root)
 %doc README COPYING ChangeLog AUTHORS NEWS TODO BUGS
 %{prefix}/bin/tnef
-%{prefix}/share/man/man1/tnef.1
+%{prefix}/share/man/man1/tnef.1.gz
+

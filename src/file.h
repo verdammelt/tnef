@@ -34,6 +34,7 @@
 typedef struct
 {
     char * name;
+    char * path;	/* filesystem "safe" version of name */
     size_t len;
     unsigned char * data;
     struct date dt;
@@ -41,6 +42,6 @@ typedef struct
 } File;
 
 extern void file_write (File *file, const char* directory);
-extern void file_add_attr (File* file, const char* directory, Attr* attr);
+extern void file_add_attr (File* file, Attr* attr);
 extern void file_free (File *file);
 #endif /* FILE_H */

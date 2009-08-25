@@ -30,8 +30,6 @@
 
 /* Global variables, used by all (or nearly all) functions */
 extern int g_flags;     /* program options */
-/* extern char *g_directory;*/ /* output directory */
-/* extern FILE *g_file; */     /* input file */
 
 /* macros for dealing with program flags */
 #define DEBUG_ON ((g_flags)&DBG_OUT)
@@ -43,6 +41,10 @@ extern int g_flags;     /* program options */
 #define OVERWRITE_FILES ((g_flags)&OVERWRITE)
 #define NUMBER_FILES ((g_flags)&NUMBERED)
 #define CHECKSUM_SKIP ((g_flags)&CHECKSUM_OK)
+#define ENCODE_SKIP ((g_flags)&ENCODE_OK)
+#define CRUFT_SKIP ((g_flags)&CRUFT_OK)
+#define UNIX_FS ((g_flags)&UNIX_PATHS)
+#define ABSOLUTE_OK ((g_flags)&ABSOLUTE_PATHS)
 
 /* flags to modify behaviour of file parsing */
 enum { NONE    	= 0x00,
@@ -55,7 +57,11 @@ enum { NONE    	= 0x00,
        NUMBERED = 0x40,
        SAVEBODY = 0x80,
        LISTMIME = 0x100,
-       CHECKSUM_OK = 0x200
+       CHECKSUM_OK = 0x200,
+       ENCODE_OK = 0x400,
+       CRUFT_OK = 0x800,
+       UNIX_PATHS = 0x1000,
+       ABSOLUTE_PATHS = 0x2000
 };
 
 #endif /* OPTIONS_H */

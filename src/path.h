@@ -27,7 +27,7 @@
 #endif /* HAVE_CONFIG_H */
 
 extern char * concat_fname (const char* fname1, const char* fname2);
-extern char * munge_fname (const char* directory, char *fname);
+extern char * munge_fname (const char *fname);
 extern char * find_free_number (const char *fname);
 extern int file_exists (const char *fname); /* 1 = true, 0 = false */
 

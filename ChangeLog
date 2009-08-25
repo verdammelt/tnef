@@ -1,3 +1,9 @@
+2009-01-01  verdammelt  <verdammelt@virgil.local>
+
+	* contrib/tnef-alpine.perl, contrib/tnef-alpine.perl.README:
+	Adding PERL helper script to link alpine and tnef. 
+	Contributed by Urs Schuerer
+	
 2008-09-28  verdammelt  <verdammelt@virgil.local>
 
 	* tests/cmdline/version.baseline, configure.in, NEWS:
