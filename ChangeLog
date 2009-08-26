@@ -1,3 +1,10 @@
+2009-08-25 verdammelt <verdammelt@virgil.local>
+	* src/util.[ch], src/ConvertUTF.[ch], src/Makefile.am
+	Integrating Public Domain UTF conversion code
+
+	* src/path.c, src/attr.c, src/tnef.c
+	Fixing new warnings about 'unsigned char' mostly.
+	
 2009-08-24 verdammelt <verdammelt@virgil.local>
 
 	* src/attr.c, src/attr.h, src/common.h, src/debug.c, src/file.c,
