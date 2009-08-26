@@ -71,7 +71,7 @@ concat_fname (const char *fname1, const char* fname2)
 
     /* strip trailing '/' */
 
-    while ( len=strlen(filename) )
+    while ((len=strlen(filename)) > 0)
     {
 	if ( filename[len-1] == '/' )
 	{
@@ -118,20 +118,20 @@ find_free_number (const char *fname)
 
 /* per windows file manager, these aren't allowed in filenames */
 
-static unsigned char unsanitary_windows_chars[] = {
+static char unsanitary_windows_chars[] = {
 	'\\', '/', ':', '*', '?', '"', '<', '>', '|', '\0'
 };
 
 /* these aren't welcomed in unix filenames */
 
-static unsigned char unsavory_unix_chars[] = {
+static char unsavory_unix_chars[] = {
 	' ', ';', '`', '\'', '[', ']', '{', '}', '(', ')', '\0'
 };
 
 static int
-could_be_a_windows_path( const unsigned char *fname )
+could_be_a_windows_path( const char *fname )
 {
-    const unsigned char *up;
+    const char *up;
 
     if ( ( fname == NULL ) || ( *fname == '\0' ) ) return 0;
 
@@ -186,17 +186,17 @@ static unsigned char hex_digits[16] = {
 
 #define SLOP 4		/* a minimum rational buffer size */
 
-static unsigned char *
-sanitize_filename( const unsigned char *fname )
+static char *
+sanitize_filename( const char *fname )
 {
-    unsigned char *buf, *bp;
-    const unsigned char *cp, *up;
+    char *buf, *bp;
+    const char *cp, *up;
     int flag, stet;
 
     if ( ( fname == NULL ) || ( *fname == '\0' ) )
     {
 	/* nothing to see here -- return small, zeroed buffer */
-	buf = CHECKED_XCALLOC( unsigned char, SLOP );
+	buf = CHECKED_XCALLOC( char, SLOP );
 	return buf;
     }
 
@@ -206,7 +206,7 @@ sanitize_filename( const unsigned char *fname )
 	return a "fresh and freeable" buffer with the sanitary filename
     */
 
-    buf = CHECKED_XCALLOC( unsigned char, 3*strlen(fname)+SLOP );
+    buf = CHECKED_XCALLOC( char, 3*strlen(fname)+SLOP );
     bp = buf;
 
     for ( cp=fname; *cp; cp++ )
@@ -305,7 +305,7 @@ sanitize_filename( const unsigned char *fname )
 char *
 munge_fname( const char *fname )
 {
-    unsigned char *dir, *base, *p, *fpd, *fpb;
+    char *dir, *base, *p, *fpd, *fpb;
 
     /* If we were not given a filename give up */
     if (!fname || *fname == '\0')
@@ -317,7 +317,7 @@ munge_fname( const char *fname )
     {
 	/* evaluate windows path potential */
 
-	if ( could_be_a_windows_path( (unsigned char *)fname ) )
+	if ( could_be_a_windows_path( (char *)fname ) )
 	{
 	    /* split fname after last path separator */
 

@@ -33,6 +33,7 @@
 #include "options.h"
 #include "util.h"
 #include "write.h"
+#include "debug.h"
 
 /* Copy the date data from the attribute into a struct date */
 void

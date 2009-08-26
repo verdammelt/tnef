@@ -41,8 +41,6 @@
 #include "rtf.h"
 #include "util.h"
 
-static size_t filesize;
-
 typedef struct
 {
     VarLenData **text_body;
