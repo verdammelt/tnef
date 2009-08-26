@@ -27,6 +27,11 @@
 
 #include "util.h"
 #include "options.h"
+#include "alloc.h"
+
+/* include UTF conversion routine library */
+
+#include "ConvertUTF.h"
 
 /* Needed to transform char buffers into little endian numbers */
 uint32 GETINT32(unsigned char *p)
@@ -78,35 +83,36 @@ geti8(FILE *fp)
     return (uint8)GETINT8(getbuf(fp, buf, 1));
 }
 
-char*
+unsigned char*
 unicode_to_utf8 (size_t len, unsigned char* buf)
 {
-    int i = 0;
-    int j = 0;
-    char *utf8 = malloc (3 * len/2 + 1); /* won't get any longer than this */
+    size_t len8;
+    ConversionResult rc;
+    const UTF16 *buf_start,  *buf_end;
+    UTF8 *utf8, *utf8_start, *utf8_end;
 
-    for (i = 0; i < len - 1; i += 2)
+    len8 = 2*len + 1;		/* max converted length */
+
+    utf8 = XCALLOC(UTF8, len8 );
+
+    buf_start = (UTF16*)buf;
+    buf_end = (UTF16*)(buf+len);
+
+    utf8_start = utf8;
+    utf8_end = utf8+len8;
+
+    rc = ConvertUTF16toUTF8( &buf_start,  buf_end,
+			     &utf8_start, utf8_end,
+			     strictConversion );
+
+    if ( rc != conversionOK )
     {
-	uint32 c = GETINT16(buf + i);
-	if (c <= 0x007f)
-	{
-	    utf8[j++] = 0x00 | ((c & 0x007f) >> 0);
-	}
-	else if (c < 0x07ff)
-	{
-	    utf8[j++] = 0xc0 | ((c & 0x07c0) >> 6);
-	    utf8[j++] = 0x80 | ((c & 0x003f) >> 0);
-	}
-	else
-	{
-	    utf8[j++] = 0xe0 | ((c & 0xf000) >> 12);
-	    utf8[j++] = 0x80 | ((c & 0x0fc0) >> 6);
-	    utf8[j++] = 0x80 | ((c & 0x003f) >> 0);
-	}
+	fprintf( stderr, "ERROR: UTF16 conversion failed\n" );
+	exit( 1 );
     }
+
+    *utf8_start = '\0';
     
-    utf8[j] = '\0';
-    
-    return utf8;
+    return (unsigned char *)utf8;
 }
 
