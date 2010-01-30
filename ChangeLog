@@ -1,3 +1,13 @@
+2010-01-30 verdammelt <verdammelt@virgil.local>
+	* src/ConvertUTF.[ch] src/Makefile.am
+	  Removing unused code
+	
+	* src/util[ch]:
+	  Reverting to previous version of utf decoder.
+
+	* src/main.c:
+	  Updating main copyright statement.
+	
 2009-08-25 verdammelt <verdammelt@virgil.local>
 	* src/util.[ch], src/ConvertUTF.[ch], src/Makefile.am
 	Integrating Public Domain UTF conversion code
