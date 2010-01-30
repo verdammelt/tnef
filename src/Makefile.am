@@ -6,13 +6,13 @@ tnef_SOURCES	=	alloc.c attr.c date.c debug.c	\
 			file.c main.c mapi_attr.c	\
 			options.c path.c rtf.c		\
 			tnef.c util.c write.c 		\
-			xstrdup.c ConvertUTF.c
+			xstrdup.c
 
 noinst_HEADERS	=	alloc.h attr.h common.h 	\
 			date.h debug.h file.h 		\
 			mapi_attr.h options.h 		\
 			path.h rtf.h tnef.h util.h	\
-			write.h ConvertUTF.h
+			write.h
 
 BUILT_SOURCES	=	tnef_names.c tnef_names.h	\
 			tnef_types.c tnef_types.h	\
