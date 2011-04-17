@@ -1,7 +1,7 @@
 /*
  * main.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2010 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,7 +52,7 @@
 /* COPYRIGHTS & NO_WARRANTY -- defined to make code below a little nicer to
    read */
 static const char* COPYRIGHTS = \
-"Copyright (C) 1999-2008 by Mark Simpson\n"
+"Copyright (C) 1999-2010 by Mark Simpson\n"
 "Copyright (C) 1997 by Thomas Boll (original code)";
 static const char* NO_WARRANTY = \
 "%s comes with ABSOLUTELY NO WARRANTY.\n"
@@ -60,26 +60,30 @@ static const char* NO_WARRANTY = \
 "Public License.  For more information about these matters, see the file\n"
 "named COPYING.";
 static const char* USAGE = \
-"-f FILE,--file=FILE     \tuse FILE as input ('-' == stdin)\n"
-"-C DIR, --directory=DIR \tunpack files into DIR\n"
-"-x SIZE --maxsize=SIZE  \tlimit maximum size of extracted archive (bytes)\n"
-"-t,     --list          \tlist files, do not extract\n"
-"        --list-with-mime-types \tlist files and mime-types, do not extract\n"
-"-w,     --interactive   \task for confirmation for every action\n"
-"        --confirmation  \tsame as -w\n"
+"-f FILE,--file=FILE     \tUse FILE as input ('-' == stdin)\n"
+"-C DIR, --directory=DIR \tUnpack files into DIR\n"
+"-x SIZE --maxsize=SIZE  \tLimit maximum size of extracted archive (bytes)\n"
+"-t,     --list          \tList files, do not extract\n"
+"        --list-with-mime-types \tList files and mime-types, do not extract\n"
+"-w,     --interactive   \tAsk for confirmation for every action\n"
+"        --confirmation  \t  same as -w\n"
 "        --overwrite     \tOverwrite existing files\n"
 "        --number-backups\tInstead of overwriting file FOO,\n"
 "                        \t  create FOO.n instead\n"
 "        --use-paths     \tUse pathnames for files if found in the TNEF\n" 
 "                        \t  file (for security reasons paths to included\n"
 "                        \t  files are ignored by default)\n"
-"        --save-rtf[=FILE]\t[DEPRECATED] Save the RTF message body to a file\n"
+"        --unix-paths    \tMake Windows filenames more Unix friendly\n" 
+"        --allow-absolute-paths\tAllow absolute paths (NOT RECOMMENDED)\n" 
 "        --save-body[=FILE]\tSave the message body to a file\n"
-"-h,     --help          \tshow this message\n"
+"        --body-pref=PREF\tPreferred body type (R|H|T|ALL)\n"
+"-h,     --help          \tShow this message\n"
 "-K,     --ignore-checksum\tIgnore any checksum error (warn only)\n"
-"-V,     --version       \tdisplay version and copyright\n"
-"-v,     --verbose       \tproduce verbose output\n"
-"        --debug     	 \tproduce a lot of output\n"
+"        --ignore-encode \tIgnore any encoding error (warn only)\n"
+"        --ignore-cruft  \tIgnore common cruft error (warn only)\n"
+"-V,     --version       \tDisplay version and copyright\n"
+"-v,     --verbose       \tProduce verbose output\n"
+"        --debug     	 \tProduce a lot of output\n"
 "\n"
 "\nIf FILE is not specified standard input is used\n"
 "\nReport bugs to <%s>\n";
@@ -157,14 +161,17 @@ parse_cmdline (int argc, char **argv,
         {"file", required_argument, 0, 'f' },
         {"help", no_argument, 0, 'h'},
 	{"ignore-checksum", no_argument, 0, 'K'},
+	{"ignore-encode", no_argument, 0, 0 },
+	{"ignore-cruft", no_argument, 0, 0 },
         {"interactive", no_argument, 0, 'w' },
         {"list-with-mime-types", no_argument, 0, 0},
-        {"list", no_argument, 0, 't'}, /* for now same as -n */
+        {"list", no_argument, 0, 't'},
         {"maxsize", required_argument, 0, 'x' },
         {"number-backups", no_argument, 0, 0 },
         {"overwrite", no_argument, 0, 0 },
         {"use-paths", no_argument, 0, 0},
-	{"save-rtf", optional_argument, 0, 0 },
+        {"unix-paths", no_argument, 0, 0},
+        {"allow-absolute-paths", no_argument, 0, 0},
 	{"save-body", optional_argument, 0, 0 },
 	{"body-pref", required_argument, 0, 0 },
         {"verbose", no_argument, 0, 'v'},
@@ -175,7 +182,7 @@ parse_cmdline (int argc, char **argv,
     /* default values */
     (*body_pref) = strdup("rht");
 
-    while ((i = getopt_long (argc, argv, "f:C:d:x:vVwhtK",
+    while ((i = getopt_long (argc, argv, "f:C:x:vVwhtK",
                              long_options, &option_index)) != -1)
     {
         switch (i) 
@@ -192,6 +199,16 @@ parse_cmdline (int argc, char **argv,
                 *flags |= PATHS;
             }
             else if (strcmp (long_options[option_index].name,
+                             "unix-paths") == 0)
+            {
+                *flags |= UNIX_PATHS;
+            }
+            else if (strcmp (long_options[option_index].name,
+                             "allow-absolute-paths") == 0)
+            {
+                *flags |= ABSOLUTE_PATHS;
+            }
+            else if (strcmp (long_options[option_index].name,
                              "overwrite") == 0)
             {
                 *flags |= OVERWRITE;
@@ -201,16 +218,6 @@ parse_cmdline (int argc, char **argv,
             {
                 *flags |= NUMBERED;
             }
-	    else if (strcmp (long_options[option_index].name,
-			     "save-rtf") == 0)
-	    {
-		fprintf (stderr, "--save-rtf is a deprecated feature."
-			 "  Use --save-body[=FILE] and "
-			 "--body-pref=r instead.\n");
-		*flags |= SAVEBODY;
-		(*body_file) = strdup(((optarg) ? optarg : "message"));
-		(*body_pref) = strdup("r");
-	    }
 	    else if (strcmp (long_options[option_index].name,
 			     "save-body") == 0)
 	    {
@@ -226,6 +233,16 @@ parse_cmdline (int argc, char **argv,
 			     "list-with-mime-types") == 0)
 	    {
 		*flags |= LIST|LISTMIME;
+	    }
+	    else if (strcmp (long_options[option_index].name,
+			     "ignore-encode") == 0)
+	    {
+		*flags |= ENCODE_OK;
+	    }
+	    else if (strcmp (long_options[option_index].name,
+			     "ignore-cruft") == 0)
+	    {
+		*flags |= CRUFT_OK;
 	    }
             else
             {
@@ -252,7 +269,6 @@ parse_cmdline (int argc, char **argv,
             break;
             
         case 'C':
-        case 'd':
             (*out_dir) = optarg;
             break;
 

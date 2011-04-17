@@ -75,8 +75,7 @@ read_object (FILE *in)
 }
 
 static File**
-get_body_files (const char* directory,
-		const char* filename,
+get_body_files (const char* filename,
 		const char pref,
 		const MessageBody* body)
 {
@@ -120,7 +119,7 @@ get_body_files (const char* directory,
 	for (i = 0; data[i]; i++)
 	{
 	    files[i] = (File*)XCALLOC(File, 1);
-	    files[i]->name = munge_fname(directory, tmp);
+	    files[i]->name = tmp;
 	    files[i]->len = data[i]->len;
 	    files[i]->data 
 		= CHECKED_XMALLOC(unsigned char, data[i]->len);
@@ -133,12 +132,13 @@ get_body_files (const char* directory,
 static VarLenData**
 get_text_data (Attr *attr)
 {
-    VarLenData **bodies = XCALLOC(VarLenData*, 2);
-    bodies[0] = XCALLOC(VarLenData, 1);
-    bodies[0]->len = attr->len;
-    bodies[0]->data = CHECKED_XCALLOC(unsigned char, attr->len);
-    memmove (bodies[0]->data, attr->buf, attr->len);
-    return bodies;
+    VarLenData **body = XCALLOC(VarLenData*, 2);
+
+    body[0] = XCALLOC(VarLenData, 1);
+    body[0]->len = attr->len;
+    body[0]->data = CHECKED_XCALLOC(unsigned char, attr->len);
+    memmove (body[0]->data, attr->buf, attr->len);
+    return body;
 }
 
 static VarLenData**
@@ -174,7 +174,47 @@ data_left (FILE* input_file)
 
 	if (data_left > 0 && data_left < MINIMUM_ATTR_LENGTH) 
 	{
-	    fprintf (stderr, "ERROR: garbage at end of file.\n");
+	    if ( CRUFT_SKIP )
+	    {
+		/* look for specific flavor of cruft -- trailing "\r\n" */
+
+		if ( data_left == 2 )
+		{
+		    int c = fgetc( input_file );
+
+		    if ( c < 0 )	/* this should never happen */
+		    {
+			fprintf( stderr, "ERROR: confused beyond all redemption.\n" );
+			exit (1);
+		    }
+
+		    ungetc( c, input_file );
+
+		    if ( c == 0x0d )		/* test for "\r" part of "\r\n" */
+		    {
+			/* "trust" that next char is 0x0a and ignore this cruft */
+
+			if ( VERBOSE_ON )
+			    fprintf( stderr, "WARNING: garbage at end of file (ignored)\n" );
+
+			if ( DEBUG_ON )
+			    debug_print( "!!garbage at end of file (ignored)\n" );
+		    }
+		    else
+		    {
+			fprintf( stderr, "ERROR: garbage at end of file.\n" );
+		    }
+		}
+		else
+		{
+		    fprintf (stderr, "ERROR: garbage at end of file.\n");
+		}
+	    }
+	    else
+	    {
+		fprintf (stderr, "ERROR: garbage at end of file.\n");
+	    }
+
 	    retval = 0;
 	}
     }
@@ -211,10 +251,12 @@ parse_file (FILE* input_file, char* directory,
     debug_print ("TNEF Key: %hx\n", key);
 
     /* The rest of the file is a series of 'messages' and 'attachments' */
-    for (attr = read_object(input_file);
-	 attr && data_left (input_file);
-	 attr = read_object(input_file))
+    while ( data_left( input_file ) )
     {
+	attr = read_object( input_file );
+
+	if ( attr == NULL ) break;
+
 	/* This signals the beginning of a file */
 	if (attr->name == attATTACHRENDDATA)
 	{
@@ -228,6 +270,7 @@ parse_file (FILE* input_file, char* directory,
 		file = CHECKED_XCALLOC (File, 1);
 	    }
 	}
+
 	/* Add the data to our lists. */
 	switch (attr->lvl_type)
 	{
@@ -265,7 +308,7 @@ parse_file (FILE* input_file, char* directory,
 	    }
 	    break;
 	case LVL_ATTACHMENT:
-	    file_add_attr (file, directory, attr);
+	    file_add_attr (file, attr);
 	    break;
 	default:
 	    fprintf (stderr, "Invalid lvl type on attribute: %d\n",
@@ -276,6 +319,7 @@ parse_file (FILE* input_file, char* directory,
 	attr_free (attr);
 	XFREE (attr);
     }
+
     if (file)
     {
 	file_write (file, directory);
@@ -297,7 +341,7 @@ parse_file (FILE* input_file, char* directory,
 	for (; i < 3; i++)
 	{
 	    File **files
-		= get_body_files (directory, body_filename, body_pref[i], &body);
+		= get_body_files (body_filename, body_pref[i], &body);
 	    if (files)
 	    {
 		int j = 0; 

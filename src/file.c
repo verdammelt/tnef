@@ -33,6 +33,8 @@
 #include "options.h"
 #include "path.h"
 
+#define TNEF_DEFAULT_FILENAME "tnef-tmp"
+
 /* ask user for confirmation of the action */
 static int
 confirm_action (const char *prompt, ...)
@@ -55,61 +57,77 @@ confirm_action (const char *prompt, ...)
     return 1;
 }
 
-
 void
 file_write (File *file, const char* directory)
 {
+    char *path = NULL;
+
     assert (file);
     if (!file) return;
 
     if (file->name == NULL)
     {
-	char *tmp = concat_fname (directory, "tnef-tmp");
-	debug_print ("No file name specified, using default.\n");
-	file->name = find_free_number (tmp);
-	XFREE (tmp);
-	debug_print ("default filename = %s", file->name);
+	file->name = strdup( TNEF_DEFAULT_FILENAME );
+	debug_print ("No file name specified, using default %s.\n", TNEF_DEFAULT_FILENAME);
     }
 
-    debug_print ("%sWRITING %s\n",
-		 ((LIST_ONLY==0)?"":"NOT "), file->name);
+    if ( file->path == NULL )
+    {
+	file->path = munge_fname( file->name );
+
+	if (file->path == NULL)
+	{
+	    file->path = strdup( TNEF_DEFAULT_FILENAME );
+	    debug_print ("No path name available, using default %s.\n", TNEF_DEFAULT_FILENAME);
+	}
+    }
+
+    path = concat_fname( directory, file->path );
+
+    if (path == NULL)
+    {
+	path = strdup( TNEF_DEFAULT_FILENAME );
+	debug_print ("No path generated, using default %s.\n", TNEF_DEFAULT_FILENAME);
+    }
+
+    debug_print ("%sWRITING\t|\t%s\t|\t%s\n",
+		 ((LIST_ONLY==0)?"":"NOT "), file->name, path);
 
     if (!LIST_ONLY)
     {
 	FILE *fp = NULL;
-	char *base_fname = basename (file->name);
 
-	if (!confirm_action ("extract %s?", base_fname)) return;
+	if (!confirm_action ("extract %s?", file->name)) return;
 	if (!OVERWRITE_FILES)
 	{
-	    if (file_exists (file->name))
+	    if (file_exists (path))
 	    {
 		if (!NUMBER_FILES)
 		{
 		    fprintf (stderr,
 			     "tnef: %s: Could not create file: File exists\n",
-			     file->name);
+			     path);
 		    return;
 		}
 		else
 		{
-		    char *tmp = find_free_number (file->name);
-		    debug_print ("Renaming %s to %s\n", file->name, tmp);
-		    XFREE (file->name);
-		    file->name = tmp;
+		    char *tmp = find_free_number (path);
+		    debug_print ("Renaming %s to %s\n", path, tmp);
+		    XFREE (path);
+		    path = tmp;
 		}
 	    }
 	}
 
-	fp = fopen (file->name, "wb");
+	fp = fopen (path, "wb");
 	if (fp == NULL)
 	{
-	    perror (file->name);
+	    perror (path);
 	    exit (1);
 	}
 	if (fwrite (file->data, 1, file->len, fp) != file->len)
 	{
-	    perror (file->name);
+	    perror (path);
 	    exit (1);
 	}
 	fclose (fp);
@@ -117,33 +135,30 @@ file_write (File *file, const char* directory)
 
     if (LIST_ONLY || VERBOSE_ON)
     {
-	char *base_fname = basename (file->name);
-
 	if (LIST_ONLY && VERBOSE_ON)
 	{
 	    /* FIXME: print out date and stuff */
 	    const char *date_str = date_to_str(&file->dt);
-	    fprintf (stdout, "%11lu %s %s", 
+	    fprintf (stdout, "%11lu\t|\t%s\t|\t%s\t|\t%s", 
 		     (unsigned long)file->len,
 		     date_str+4, /* skip the day of week */
-		     base_fname);
+		     file->name,
+		     path);
 	}
 	else
 	{
-            fprintf (stdout, "%s", base_fname);
+            fprintf (stdout, "%s\t|\t%s", file->name, path);
 	}
 	if ( SHOW_MIME )
 	{
-	    fprintf (stdout, "|%s", file->mime_type ? file->mime_type : "");
+	    fprintf (stdout, "\t|\t%s", file->mime_type ? file->mime_type : "unknown");
 	}
         fprintf (stdout, "\n");
     }
 }
 
 static void
-file_add_mapi_attrs (File* file, 
-		     const char *directory, 
-		     MAPI_Attr** attrs)
+file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
 {
     int i;
     for (i = 0; attrs[i]; i++)
@@ -157,7 +172,7 @@ file_add_mapi_attrs (File* file,
 	    {
 	    case MAPI_ATTACH_LONG_FILENAME:
 		if (file->name) XFREE(file->name);
-		file->name = munge_fname (directory, (char*)a->values[0].data.buf);
+		file->name = strdup( (char*)a->values[0].data.buf );
 		break;
 
 	    case MAPI_ATTACH_DATA_OBJ:
@@ -181,7 +196,7 @@ file_add_mapi_attrs (File* file,
 }
 
 void
-file_add_attr (File* file, const char *directory, Attr* attr)
+file_add_attr (File* file, Attr* attr)
 {
     assert (file && attr);
     if (!(file && attr)) return;
@@ -198,7 +213,7 @@ file_add_attr (File* file, const char *directory, Attr* attr)
 	MAPI_Attr **mapi_attrs = mapi_attr_read (attr->len, attr->buf);
 	if (mapi_attrs)
 	{
-	    file_add_mapi_attrs (file, directory, mapi_attrs);
+	    file_add_mapi_attrs (file, mapi_attrs);
 	    mapi_attr_free_list (mapi_attrs);
 	    XFREE (mapi_attrs);
 	}
@@ -206,7 +221,7 @@ file_add_attr (File* file, const char *directory, Attr* attr)
     break;
 
     case attATTACHTITLE:
-	file->name = munge_fname (directory, (char*)attr->buf);
+	file->name = strdup( (char*)attr->buf );
 	break;
 
     case attATTACHDATA:

@@ -1,0 +1,10 @@
+From Urs Schürer - sitb - <urs@sitb.de>
+
+ > Since it was difficult for me to include it into alpine (the successor
+ > of pine, but basically the same) I just did a simple perl hack, so
+ > that if I use this script in my .mailcap, it sends me back a mime
+ > message with the decoded attachments.
+ > 
+ > The script is still pretty ugly yet and might fail in various
+ > situations, but I just thought maybe you might correct it a little bit
+ > and add it to a 'contrib' directory in the tnef package.

@@ -94,7 +94,7 @@ extern char *basename (char *path);
 #elif HAVE_DOPRNT
 #  define VPRINTF(s,f,a) _doprnt((f),(a),(s))
 #else
-#  error Neither vpritnf no _doprnt defined
+#  error Neither vpritnf nor _doprnt defined
 #endif
 /* ********** REPLACED FUNCS ********** */
 

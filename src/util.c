@@ -78,12 +78,12 @@ geti8(FILE *fp)
     return (uint8)GETINT8(getbuf(fp, buf, 1));
 }
 
-char*
+unsigned char*
 unicode_to_utf8 (size_t len, unsigned char* buf)
 {
     int i = 0;
     int j = 0;
-    char *utf8 = malloc (3 * len/2 + 1); /* won't get any longer than this */
+    unsigned char *utf8 = malloc (3 * len/2 + 1); /* won't get any longer than this */
 
     for (i = 0; i < len - 1; i += 2)
     {

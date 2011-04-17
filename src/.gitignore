@@ -1,0 +1,9 @@
+*.o
+tnef_types.[ch]
+mapi_types.[ch]
+tnef_names.[ch]
+mapi_names.[ch]
+.deps
+tnef
+stamp-h1
+config.h

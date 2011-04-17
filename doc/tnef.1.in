@@ -70,7 +70,7 @@ will be saved.  If PREF is the special value of 'all' then any and all
 message body data found will be saved.  The default is 'rht'.
 .TP
 \fB\-\-save-rtf FILE\fP
-DEPRECATED.  Equivalent to --save-body FILE --body-pref=r
+DEPRECATED.  Equivalent to --save-body=FILE --body-pref=r
 .TP
 \fB\-h,  \-\-help\fP 
 show usage message.

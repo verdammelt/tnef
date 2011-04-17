@@ -1,0 +1,10 @@
+*~
+*.in
+Makefile
+configure
+aclocal.m4
+autom4te.cache
+tnef.spec
+*.tar.gz
+config.log
+config.status

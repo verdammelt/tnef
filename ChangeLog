@@ -1,3 +1,59 @@
+2010-01-30 verdammelt <verdammelt@virgil.local>
+	* src/ConvertUTF.[ch] src/Makefile.am
+	  Removing unused code
+	
+	* src/util[ch]:
+	  Reverting to previous version of utf decoder.
+
+	* src/main.c:
+	  Updating main copyright statement.
+	
+2009-08-25 verdammelt <verdammelt@virgil.local>
+	* src/util.[ch], src/ConvertUTF.[ch], src/Makefile.am
+	Integrating Public Domain UTF conversion code
+
+	* src/path.c, src/attr.c, src/tnef.c
+	Fixing new warnings about 'unsigned char' mostly.
+	
+2009-08-24 verdammelt <verdammelt@virgil.local>
+
+	* src/attr.c, src/attr.h, src/common.h, src/debug.c, src/file.c,
+	* src/file.h, src/main.c, src/mapi_attr.c, src/mkdata.awk,
+	* src/options.c, src/options.h, src/path.c, src/path.h, src/replace,
+	* src/rtf.c, src/tnef.c, tests/cmdline, tests/cmdline/body.baseline,
+	* tests/cmdline/debug.baseline, tests/cmdline/help.baseline,
+	* tests/cmdline/list.baseline, tests/cmdline/maxsize.baseline,
+	* tests/cmdline/mime-types.baseline,
+	* tests/cmdline/rtf-test.rtf.baseline, tests/cmdline/stdin.baseline,
+	* tests/cmdline/triples-test-2.rtf.baseline,
+	* tests/cmdline/verbose.baseline,
+	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline,
+	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+	* tests/files/baselines/MAPI_OBJECT-body.rtf.baseline,
+	* tests/files/baselines/MAPI_OBJECT.baseline,
+	* tests/files/baselines/body.baseline,
+	* tests/files/baselines/data-before-name-body.rtf.baseline,
+	* tests/files/baselines/data-before-name.baseline,
+	* tests/files/baselines/garbage-at-end.baseline,
+	* tests/files/baselines/long-filename-body.rtf.baseline,
+	* tests/files/baselines/long-filename.baseline,
+	* tests/files/baselines/missing-filenames-body.rtf.baseline,
+	* tests/files/baselines/missing-filenames.baseline,
+	* tests/files/baselines/multi-name-property.baseline,
+	* tests/files/baselines/one-file.baseline,
+	* tests/files/baselines/rtf-body.rtf.baseline,
+	* tests/files/baselines/rtf.baseline,
+	* tests/files/baselines/triples-body.rtf.baseline,
+	* tests/files/baselines/triples.baseline,
+	* tests/files/baselines/two-files.baseline, tnef.spec.in:
+	Integrated code changes from Randy Diffenderfer
+
+2009-01-01  verdammelt  <verdammelt@virgil.local>
+
+	* contrib/tnef-alpine.perl, contrib/tnef-alpine.perl.README:
+	Adding PERL helper script to link alpine and tnef.
+	Contributed by Urs Schuerer
+
 2008-09-28  verdammelt  <verdammelt@virgil.local>
 
 	* tests/cmdline/version.baseline, configure.in, NEWS:

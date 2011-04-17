@@ -1,8 +1,13 @@
-TNEF NEWS -- history of user-visible changes.   28 Dec 2008
-Copyright (C) 2000-2006 by Mark Simpson
+TNEF NEWS -- history of user-visible changes.   31 January 2010
+Copyright (C) 2000-2010 by Mark Simpson
 
-* 2.0.0 [28 Dec 2008]
-** Merging v1.4.5 to trunk
+* 1.4.7 [31 January 2010]
+** Reverting to older UTF decoding method.  The public domain UTF converter I replaced my buggy/wrong version with was itself buggy and wrong it seems (didn't work on some platforms).
+** Updating main copyright date notice.
+
+* 1.4.6 [25 August 2009]
+** Including patch from Randy Diffenderfer for a variety of fixes & tweaks.
+** Replacing my buggy/wrong UTF converter code with public domain UTF converter code.
 
 * 1.4.5 [28 Sept 2008]
 ** Fixing bug when reading from stdin [Bug #2126695]

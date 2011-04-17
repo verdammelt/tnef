@@ -38,6 +38,8 @@ debug_print (const char *fmt, ...)
 	va_start (args, fmt);
 	VPRINTF(stdout, fmt, args);
 	va_end (args);
+
+	fflush( NULL );		/* make sure it gets output */
     }
 }
 

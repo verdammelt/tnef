@@ -33,6 +33,7 @@
 #include "options.h"
 #include "util.h"
 #include "write.h"
+#include "debug.h"
 
 /* Copy the date data from the attribute into a struct date */
 void
@@ -62,7 +63,7 @@ copy_triple_from_attr (Attr* attr, TRIPLE *t)
 }
 
 /* attr_dump
-   print attr to stderr.  Assumes that the Debug flag has been set and
+   print attr to stdout.  Assumes that the Debug flag has been set and
    already checked */
 void
 attr_dump (Attr* attr)
@@ -175,6 +176,7 @@ attr_dump (Attr* attr)
 	break;
     }
     fprintf (stdout, "\n");
+    fflush( NULL );
 }
 
 void
@@ -194,13 +196,33 @@ static int
 check_checksum (Attr* attr, uint16 checksum)
 {
     size_t i;
-    uint16 sum = 0;
+    uint32 sum = 0;
 
     for (i = 0; i < attr->len; i++)
     {
-	sum += (uint8)attr->buf[i];
+	sum = ( sum + (uint8)attr->buf[i] ) & 0xffff;
     }
-    sum %= 65536;
+
+    if (DEBUG_ON)
+    {
+	if ( sum != checksum )
+	{
+	    /* for grins, figure out if it *ever* matched */
+
+	    int match = -1;
+	    uint32 mysum = 0;
+
+	    for ( i=0; i < attr->len; i++ )
+	    {
+		mysum = ( mysum + (uint8)attr->buf[i] ) & 0xffff;
+
+		if ( mysum == checksum ) match = i;
+	    }
+
+	    debug_print( "!!checksum error: length=%d sum=%04x checksum=%04x match=%d\n", attr->len, mysum, checksum, match );
+	}
+    }
+
     return (sum == checksum);
 }
 
@@ -229,9 +251,17 @@ attr_read (FILE* in)
     checksum = geti16(in);
     if (!check_checksum(attr, checksum))
     {
-	fprintf (stderr,
-		 "Invalid checksum, input file may be corrupted\n");
-	if (!CHECKSUM_SKIP) exit (1);
+	if ( CHECKSUM_SKIP )
+	{
+	    fprintf (stderr,
+		 "WARNING: invalid checksum, input file may be corrupted\n");
+	}
+	else
+	{
+	    fprintf (stderr,
+		 "ERROR: invalid checksum, input file may be corrupted\n");
+	    exit( 1 );
+	}
     }
     
     if (DEBUG_ON) attr_dump (attr);

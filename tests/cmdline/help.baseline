@@ -1,25 +1,29 @@
 ./../../src/tnef --help
 ./../../src/tnef: [options] [FILE]
--f FILE,--file=FILE     	use FILE as input ('-' == stdin)
--C DIR, --directory=DIR 	unpack files into DIR
--x SIZE --maxsize=SIZE  	limit maximum size of extracted archive (bytes)
--t,     --list          	list files, do not extract
-        --list-with-mime-types 	list files and mime-types, do not extract
--w,     --interactive   	ask for confirmation for every action
-        --confirmation  	same as -w
+-f FILE,--file=FILE     	Use FILE as input ('-' == stdin)
+-C DIR, --directory=DIR 	Unpack files into DIR
+-x SIZE --maxsize=SIZE  	Limit maximum size of extracted archive (bytes)
+-t,     --list          	List files, do not extract
+        --list-with-mime-types 	List files and mime-types, do not extract
+-w,     --interactive   	Ask for confirmation for every action
+        --confirmation  	  same as -w
         --overwrite     	Overwrite existing files
         --number-backups	Instead of overwriting file FOO,
                         	  create FOO.n instead
         --use-paths     	Use pathnames for files if found in the TNEF
                         	  file (for security reasons paths to included
                         	  files are ignored by default)
-        --save-rtf[=FILE]	[DEPRECATED] Save the RTF message body to a file
+        --unix-paths    	Make Windows filenames more Unix friendly
+        --allow-absolute-paths	Allow absolute paths (NOT RECOMMENDED)
         --save-body[=FILE]	Save the message body to a file
--h,     --help          	show this message
+        --body-pref=PREF	Preferred body type (R|H|T|ALL)
+-h,     --help          	Show this message
 -K,     --ignore-checksum	Ignore any checksum error (warn only)
--V,     --version       	display version and copyright
--v,     --verbose       	produce verbose output
-        --debug     	 	produce a lot of output
+        --ignore-encode 	Ignore any encoding error (warn only)
+        --ignore-cruft  	Ignore common cruft error (warn only)
+-V,     --version       	Display version and copyright
+-v,     --verbose       	Produce verbose output
+        --debug     	 	Produce a lot of output
 
 
 If FILE is not specified standard input is used
@@ -28,26 +32,30 @@ Report bugs to <verdammelt@users.sourceforge.net>
 
 ./../../src/tnef -h
 ./../../src/tnef: [options] [FILE]
--f FILE,--file=FILE     	use FILE as input ('-' == stdin)
--C DIR, --directory=DIR 	unpack files into DIR
--x SIZE --maxsize=SIZE  	limit maximum size of extracted archive (bytes)
--t,     --list          	list files, do not extract
-        --list-with-mime-types 	list files and mime-types, do not extract
--w,     --interactive   	ask for confirmation for every action
-        --confirmation  	same as -w
+-f FILE,--file=FILE     	Use FILE as input ('-' == stdin)
+-C DIR, --directory=DIR 	Unpack files into DIR
+-x SIZE --maxsize=SIZE  	Limit maximum size of extracted archive (bytes)
+-t,     --list          	List files, do not extract
+        --list-with-mime-types 	List files and mime-types, do not extract
+-w,     --interactive   	Ask for confirmation for every action
+        --confirmation  	  same as -w
         --overwrite     	Overwrite existing files
         --number-backups	Instead of overwriting file FOO,
                         	  create FOO.n instead
         --use-paths     	Use pathnames for files if found in the TNEF
                         	  file (for security reasons paths to included
                         	  files are ignored by default)
-        --save-rtf[=FILE]	[DEPRECATED] Save the RTF message body to a file
+        --unix-paths    	Make Windows filenames more Unix friendly
+        --allow-absolute-paths	Allow absolute paths (NOT RECOMMENDED)
         --save-body[=FILE]	Save the message body to a file
--h,     --help          	show this message
+        --body-pref=PREF	Preferred body type (R|H|T|ALL)
+-h,     --help          	Show this message
 -K,     --ignore-checksum	Ignore any checksum error (warn only)
--V,     --version       	display version and copyright
--v,     --verbose       	produce verbose output
-        --debug     	 	produce a lot of output
+        --ignore-encode 	Ignore any encoding error (warn only)
+        --ignore-cruft  	Ignore common cruft error (warn only)
+-V,     --version       	Display version and copyright
+-v,     --verbose       	Produce verbose output
+        --debug     	 	Produce a lot of output
 
 
 If FILE is not specified standard input is used
