@@ -1,3 +1,14 @@
+2011-04-18 verdammelt <verdammelt@viril.local>
+	* NEWS: new release
+
+	* src/main.c, configure.in:
+	  Increasing version & copyright
+
+	* doc/tnef.1.in: 
+	  Applying patch #3014753 from Jari Aalto
+	  (https://sourceforge.net/users/jaalto/)
+	  to fix hyphenation.
+
 2010-01-30 verdammelt <verdammelt@virgil.local>
 	* src/ConvertUTF.[ch] src/Makefile.am
 	  Removing unused code

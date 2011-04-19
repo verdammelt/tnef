@@ -52,7 +52,7 @@
 /* COPYRIGHTS & NO_WARRANTY -- defined to make code below a little nicer to
    read */
 static const char* COPYRIGHTS = \
-"Copyright (C) 1999-2010 by Mark Simpson\n"
+"Copyright (C) 1999-2011 by Mark Simpson\n"
 "Copyright (C) 1997 by Thomas Boll (original code)";
 static const char* NO_WARRANTY = \
 "%s comes with ABSOLUTELY NO WARRANTY.\n"
