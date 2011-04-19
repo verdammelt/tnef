@@ -70,7 +70,7 @@ will be saved.  If PREF is the special value of 'all' then any and all
 message body data found will be saved.  The default is 'rht'.
 .TP
 \fB\-\-save-rtf FILE\fP
-DEPRECATED.  Equivalent to --save-body=FILE --body-pref=r
+DEPRECATED.  Equivalent to \-\-save-body=FILE \-\-body-pref=r
 .TP
 \fB\-h,  \-\-help\fP 
 show usage message.
@@ -96,7 +96,7 @@ for its intended purpose until an appropriate content type definition
 exists in ~/.mailcap .  Here's a sample definition:
 .PP
 .RS
-application/ms\-tnef; tnef -w %s
+application/ms\-tnef; tnef \-w %s
 .RE
 .PP
 This mailcap entry says that whenever the MIME content type:
@@ -165,7 +165,7 @@ Mark Simpson.
 Report bugs to 
 .nh     \"no hyphenation
 Mark Simpson <@PACKAGE_BUGREPORT@>
-.h1 1   \"enable hyphenatiobn
+.hy 1   \"enable hyphenation
 .SH "OTHER REFERENCES"
 This web page:
 .PP
