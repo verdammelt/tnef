@@ -82,6 +82,7 @@ get_body_files (const char* filename,
     File **files = NULL;
     VarLenData **data;
     char *ext = "";
+    char *type = "unknown";
     int i;
 
     switch (pref)
@@ -89,14 +90,17 @@ get_body_files (const char* filename,
     case 'r':
 	data = body->rtf_bodies;
 	ext = ".rtf";
+            type = "text/rtf";
 	break;
     case 'h':
 	data = body->html_bodies;
 	ext = ".html";
+            type = "text/html";
 	break;
     case 't':
 	data = body->text_body;
 	ext = ".txt";
+            type = "text/plain";
 	break;
     default:
 	data = NULL;
@@ -112,6 +116,9 @@ get_body_files (const char* filename,
 	strcpy (tmp, filename);
 	strcat (tmp, ext);
 
+        char *mime = CHECKED_XCALLOC(char, strlen(type) + 1);
+        strcpy (mime, type);
+
 	/* first get a count */
 	while (data[count++]);
 
@@ -120,6 +127,7 @@ get_body_files (const char* filename,
 	{
 	    files[i] = (File*)XCALLOC(File, 1);
 	    files[i]->name = tmp;
+            files[i]->mime_type = mime;
 	    files[i]->len = data[i]->len;
 	    files[i]->data 
 		= CHECKED_XMALLOC(unsigned char, data[i]->len);
@@ -232,6 +240,7 @@ parse_file (FILE* input_file, char* directory,
     uint16 key;
     Attr *attr = NULL;
     File *file = NULL;
+    int rtf_size = 0, html_size = 0;
     MessageBody body;
     memset (&body, '\0', sizeof (MessageBody));
 
@@ -293,10 +302,12 @@ parse_file (FILE* input_file, char* directory,
 			if (a->name == MAPI_BODY_HTML)
 			{
 			    body.html_bodies = get_html_data (a);
+                                html_size = a->num_values;
 			}
 			else if (a->name == MAPI_RTF_COMPRESSED)
 			{
 			    body.rtf_bodies = get_rtf_data (a);
+                                rtf_size = a->num_values;
 			}
 		    }
 		    /* cannot save attributes to file, since they
@@ -349,11 +360,37 @@ parse_file (FILE* input_file, char* directory,
 		{
 		    file_write(files[j], directory);
 		    file_free (files[j]);
+                    XFREE(files[j]);
 		}
 		XFREE(files);
 		if (!all_flag) break;
 	    }
 	}
     }
+
+    if (body.text_body)
+    {
+        free_bodies(body.text_body, 1);
+        XFREE(body.text_body);
+    }
+    if (rtf_size > 0)
+    {
+        free_bodies(body.rtf_bodies, rtf_size);
+        XFREE(body.rtf_bodies);
+    }
+    if (html_size > 0)
+    {
+        free_bodies(body.html_bodies, html_size);
+        XFREE(body.html_bodies);
+    }
     return 0;
+}
+
+void free_bodies(VarLenData **bodies, int len)
+{
+    while (len--)
+    {
+        XFREE(bodies[len]->data);
+        XFREE(bodies[len]);
+    }
 }
