@@ -39,6 +39,7 @@ typedef struct
     unsigned char * data;
     struct date dt;
     char * mime_type;
+    char * content_id; /* cid for inline HTML attachments */
 } File;
 
 extern void file_write (File *file, const char* directory);

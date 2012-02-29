@@ -152,9 +152,11 @@ file_write (File *file, const char* directory)
 	if ( SHOW_MIME )
 	{
 	    fprintf (stdout, "\t|\t%s", file->mime_type ? file->mime_type : "unknown");
+            fprintf (stdout, "\t|\t%s", file->content_id ? file->content_id : "");
 	}
         fprintf (stdout, "\n");
     }
+    XFREE(path);
 }
 
 static void
@@ -187,6 +189,12 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
 		file->mime_type = CHECKED_XMALLOC (char, a->values[0].len);
 		memmove (file->mime_type, a->values[0].data.buf, a->values[0].len);
 		break;
+
+                case MAPI_ATTACH_CONTENT_ID:
+                    if (file->content_id) XFREE(file->content_id);
+                    file->content_id = CHECKED_XMALLOC (char, a->values[0].len);
+                    memmove (file->content_id, a->values[0].data.buf, a->values[0].len);
+                    break;
 
 	    default:
 		break;
@@ -243,6 +251,8 @@ file_free (File *file)
 	XFREE (file->name);
 	XFREE (file->data);
 	XFREE (file->mime_type);
+        XFREE (file->content_id);
+        XFREE (file->path);
 	memset (file, '\0', sizeof (File));
     }
 }
