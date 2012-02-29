@@ -1,2 +1,2 @@
 cat ./test.tnef | ./../../src/tnef -v -f -
-AUTHORS	|	AUTHORS
+AUTHORS	|	AUTHORS	|	application/octet-stream	|	
