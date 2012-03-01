@@ -1,5 +1,5 @@
 ./../../src/tnef --verbose ./test.tnef
-AUTHORS	|	AUTHORS
+AUTHORS	|	AUTHORS	|	application/octet-stream	|	
 
 ./../../src/tnef --verbose --list ./test.tnef
-        244	|	1999/10/13 22:49:46	|	AUTHORS	|	AUTHORS
+        244	|	1999/10/13 22:49:46	|	AUTHORS	|	AUTHORS	|	application/octet-stream	|	

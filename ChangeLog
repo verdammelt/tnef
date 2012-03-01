@@ -1,10 +1,27 @@
+2012-02-29 Engelke Eschner <tekai@gmx.li>
+	* src/file.c, src/main.c, src/mapi_attr.c, src/tnef.c
+	Free more memory
+
+	* src/file.c, src/file.h
+	Print content id with the mime type
+
+	* src/main.c
+	verbose option includes --list--with-mime-types
+
+	* src/tnef.c
+	Assign the body a respective mime type
+
+	* tests/cmdline/mime-types.baseline, tests/cmdline/stdin.baseline,
+	* tests/cmdline/verbose.baseline
+	Adjust tests to include mime type
+
 2011-04-18 verdammelt <verdammelt@viril.local>
 	* NEWS: new release
 
 	* src/main.c, configure.in:
 	  Increasing version & copyright
 
-	* doc/tnef.1.in: 
+	* doc/tnef.1.in:
 	  Applying patch #3014753 from Jari Aalto
 	  (https://sourceforge.net/users/jaalto/)
 	  to fix hyphenation.
@@ -12,20 +29,20 @@
 2010-01-30 verdammelt <verdammelt@virgil.local>
 	* src/ConvertUTF.[ch] src/Makefile.am
 	  Removing unused code
-	
+
 	* src/util[ch]:
 	  Reverting to previous version of utf decoder.
 
 	* src/main.c:
 	  Updating main copyright statement.
-	
+
 2009-08-25 verdammelt <verdammelt@virgil.local>
 	* src/util.[ch], src/ConvertUTF.[ch], src/Makefile.am
 	Integrating Public Domain UTF conversion code
 
 	* src/path.c, src/attr.c, src/tnef.c
 	Fixing new warnings about 'unsigned char' mostly.
-	
+
 2009-08-24 verdammelt <verdammelt@virgil.local>
 
 	* src/attr.c, src/attr.h, src/common.h, src/debug.c, src/file.c,
@@ -218,7 +235,7 @@
 2006-03-18  verdammelt  <verdammelt@freya>
 
         * NEWS: Release of v1.4
-	
+
 	* tests/files/baselines/Makefile.am, tests/files/datafiles/Makefile.am:
 	adding files to dist.
 
@@ -354,9 +371,9 @@
 2005-10-11  verdammelt  <verdammelt@freya>
 
 	* Release v1.3.4
-	
+
         * ChangeLog: New version
-	
+
 	* configure.in, tests/cmdline/version.baseline: fixing version number
 
 	* tests/files/baselines/triples-body.rtf.baseline, tests/files/baselines/rtf-body.rtf.baseline, tests/files/baselines/missing-filenames-body.rtf.baseline, tests/files/baselines/MAPI_OBJECT-body.rtf.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline, tests/files/baselines/long-filename-body.rtf.baseline, tests/files/baselines/data-before-name-body.rtf.baseline, tests/cmdline/triples-test-2.rtf.baseline, tests/cmdline/rtf-test.rtf.baseline:
@@ -382,17 +399,17 @@
 2005-05-17  verdammelt  <verdammelt@freya>
 
         * Release v1.3.3
-	
+
 	* NEWS, configure.in, ChangeLog: New version
 
 	* src/main.c: (parse_cmdline): fixing small bug in shifting
 	argument to all lowercase.
 
-	* tests/cmdline/Makefile.am, 
+	* tests/cmdline/Makefile.am,
 	* tests/files/datafile/Makefile.am,
 	* tests/files/baselines/Makefile.am:
 	New items for distribution.
-	
+
 	* acinclude.m4: (AC_COMPILE_WARNINGS, AC_DEBUG_COMPILE) fixing
 	quoting warning.
 
@@ -407,15 +424,15 @@
 
 	* tests/files/baselines/rtf2.baseline,
 	* tests/files/datafiles/rtf2.list,
-	* tests/files/datafiles/rtf2.tnef, 
-	* tests/files/rtf2.test: 
+	* tests/files/datafiles/rtf2.tnef,
+	* tests/files/rtf2.test:
 	rtf2 test superceeded body test
 
 	* tests/files/baselines/body.baseline: new body baseline
 
 	* tests/cmdline/body.baseline,
 	* tests/files/baselines/triples-body.rtf.baseline,
-	* tests/files/datafiles/body.list: 
+	* tests/files/datafiles/body.list:
 	new baselines & test data
 
 	* tests/cmdline/body.test, tests/files/body.test:
@@ -423,7 +440,7 @@
 
 	* src/tnef.c:
 	new function get_text_data encapsulating code to get text message
-	body 
+	body
 
 	* src/main.c: initializing i
 
@@ -458,7 +475,7 @@
 	* tests/files/baselines/data-before-name-body.rtf.baseline,
 	* tests/files/baselines/data-before-name.baseline,
 	* tests/files/baselines/body-body.html.baseline,
-	* tests/files/Makefile.am, 
+	* tests/files/Makefile.am,
 	* tests/files/file-util.sh :
 	New test for body files.
 	Updating other tests to use the --save-body switch (new baselines etc.)
@@ -509,15 +526,15 @@
 2005-03-05  verdammelt  <verdammelt@freya>
 
         * Release v1.3.2
-	
+
 	* ChangeLog: update again.
-	
+
 	* maxsize.baseline: Updating baseline to match proper output
 
 2005-02-22  verdammelt  <verdammelt@freya>
 
         * NEWS, ChangeLog, configure.in: new version
-	
+
 	* tests/cmdline/version.baseline: new version
 
 	* tests/cmdline/maxsize.test: refixing
@@ -556,14 +573,14 @@
 2005-02-05  verdammelt  <verdammelt@freya>
 
         * Release v1.3.1
-	
+
 	* tests/cmdline/version.baseline:
 	removing extra spaces which screwed up the test
 
 2005-02-01  verdammelt  <verdammelt@freya>
 
         * ChangeLog, NEWS: new version
-	
+
 	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline:
 	Fixing boolean output changes the baseline.
 
@@ -586,17 +603,17 @@
 2005-05-17  verdammelt  <verdammelt@freya>
 
         * Release v1.3.3
-	
+
 	* NEWS, configure.in, ChangeLog: New version
 
 	* src/main.c: (parse_cmdline): fixing small bug in shifting
 	argument to all lowercase.
 
-	* tests/cmdline/Makefile.am, 
+	* tests/cmdline/Makefile.am,
 	* tests/files/datafile/Makefile.am,
 	* tests/files/baselines/Makefile.am:
 	New items for distribution.
-	
+
 	* acinclude.m4: (AC_COMPILE_WARNINGS, AC_DEBUG_COMPILE) fixing
 	quoting warning.
 
@@ -611,15 +628,15 @@
 
 	* tests/files/baselines/rtf2.baseline,
 	* tests/files/datafiles/rtf2.list,
-	* tests/files/datafiles/rtf2.tnef, 
-	* tests/files/rtf2.test: 
+	* tests/files/datafiles/rtf2.tnef,
+	* tests/files/rtf2.test:
 	rtf2 test superceeded body test
 
 	* tests/files/baselines/body.baseline: new body baseline
 
 	* tests/cmdline/body.baseline,
 	* tests/files/baselines/triples-body.rtf.baseline,
-	* tests/files/datafiles/body.list: 
+	* tests/files/datafiles/body.list:
 	new baselines & test data
 
 	* tests/cmdline/body.test, tests/files/body.test:
@@ -627,7 +644,7 @@
 
 	* src/tnef.c:
 	new function get_text_data encapsulating code to get text message
-	body 
+	body
 
 	* src/main.c: initializing i
 
@@ -662,7 +679,7 @@
 	* tests/files/baselines/data-before-name-body.rtf.baseline,
 	* tests/files/baselines/data-before-name.baseline,
 	* tests/files/baselines/body-body.html.baseline,
-	* tests/files/Makefile.am, 
+	* tests/files/Makefile.am,
 	* tests/files/file-util.sh :
 	New test for body files.
 	Updating other tests to use the --save-body switch (new baselines etc.)
@@ -713,15 +730,15 @@
 2005-03-05  verdammelt  <verdammelt@freya>
 
         * Release v1.3.2
-	
+
 	* ChangeLog: update again.
-	
+
 	* maxsize.baseline: Updating baseline to match proper output
 
 2005-02-22  verdammelt  <verdammelt@freya>
 
         * NEWS, ChangeLog, configure.in: new version
-	
+
 	* tests/cmdline/version.baseline: new version
 
 	* tests/cmdline/maxsize.test: refixing
@@ -760,14 +777,14 @@
 2005-02-05  verdammelt  <verdammelt@freya>
 
         * Release v1.3.1
-	
+
 	* tests/cmdline/version.baseline:
 	removing extra spaces which screwed up the test
 
 2005-02-01  verdammelt  <verdammelt@freya>
 
         * ChangeLog, NEWS: new version
-	
+
 	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline:
 	Fixing boolean output changes the baseline.
 
@@ -815,7 +832,7 @@
 	* tests/cmdline/Makefile.am:
 	commenting out the not-yet-implemented tests
 
-	* tests/files/Makefile.am, tests/files/rtf2.test, tests/files/baseline/message.rtf.baseline, tests/files/baseline/rtf2.baseline, tests/files/datafiles/rtf2.list: 
+	* tests/files/Makefile.am, tests/files/rtf2.test, tests/files/baseline/message.rtf.baseline, tests/files/baseline/rtf2.baseline, tests/files/datafiles/rtf2.list:
 	new test for the --save-rtf switch
 
 	* tests/files/file-util.sh:
@@ -872,11 +889,11 @@
 
 	* tests/files/datafiles/triples.tnef:
 	* tests/files/datafiles/triples.list:
-	* tests/files/baselines/triples.baseline: 
+	* tests/files/baselines/triples.baseline:
 	* tests/files/triples.test:
-	* tests/files/Makefile.am: 
+	* tests/files/Makefile.am:
 	* tests/cmdline/version.baseline:
-	* tests/cmdline/maxsize.baseline: 
+	* tests/cmdline/maxsize.baseline:
 	maxsize and triplet printing tests
 
 	* src/tnef.c (decode_mapi):
@@ -922,11 +939,11 @@
 	First pass primitive web site for TNEF.  This is to be installed
 	at tnef.sourceforge.net
 
-	* doc/.cvsignore: 
+	* doc/.cvsignore:
 	* src/.cvsignore:
 	* src/baseline.h:
 	* src/malloc.c:
-	These files had DOS line-endings.  Switched to Unix line endings. 
+	These files had DOS line-endings.  Switched to Unix line endings.
 
 2003-05-16  Mark Simpson  <damned@theworld.com>
 
@@ -974,12 +991,12 @@
 
 2003-03-30  Mark Simpson  <damned@theworld.com>
 
-	* src/tnef.c (copy_date_from_attr, dump_attr, dump_mapi_attr): 
+	* src/tnef.c (copy_date_from_attr, dump_attr, dump_mapi_attr):
 	get_[tnef|mapi]_[name|type]_str return allocated buffer.  Must
 	call FREE.
 
 	* src/tnef.c (dump_mapi_attr): szMAPI_CLSID must be printed out
-	carefully. 
+	carefully.
 
 	* src/tnef.c (decode_mapi): no longer using memove for integer
 	type objects (sz_MAPI_SHORT, szMAPI_INT &c.).  this fixes an
@@ -992,7 +1009,7 @@
 	* tests/files/*.test:
 	* tests/files/*.baseline:
 	* tests/files/file-utils.sh:
-	* tests/util.sh: 
+	* tests/util.sh:
 	Update scripts and baselines to use and expect $srcdir for all
 	paths. (bug: 698111)
 
@@ -1033,14 +1050,14 @@
 2002-12-10  Mark Simpson  <damned@theworld.com>
 
         * Release 1.1.4:
-	
+
 	* News:
-	* configure.in: 
+	* configure.in:
 	New version
 
-	* INSTALL: 
+	* INSTALL:
 	* mkinstalldirs:
-	* install-sh: 
+	* install-sh:
 	Updated version.
 
 	* src/malloc.c: Adding simple fixed malloc implementation to cover
@@ -1068,7 +1085,7 @@
 2002-09-15  Mark Simpson  <damned@theworld.com>
 
 	* lisp/*
-	Nearly functionally complete.	
+	Nearly functionally complete.
 
 2002-09-12  Mark Simpson  <damned@theworld.com>
 
@@ -1082,9 +1099,9 @@
 	* tnef.spec.in (Packager): Fixing typo which kept
 	PACKAGE_BUGREPORT from being expanded.
 
-	* doc/tnef.1, doc/tnef.1.in: 
+	* doc/tnef.1, doc/tnef.1.in:
 	Using configured bug reporting address in man page.  Removed the
-	old tnef.1 file. 
+	old tnef.1 file.
 
 	* lisp: first version of a TNEF lisp library.  Bare-bones
 	functionality, can read in a an entire TNEF file but doesn't do
@@ -1112,7 +1129,7 @@
 
 	* src/tnef.c: Removal of unecessary unistd.h
 	(courtesy of Asbjorn Pettersen <AsbjornPettersen@dualog.no>)
-	
+
 	* <misc files>
 	Updated copyright statements.  Misc changes for newer version of
 	automake/autoconf &c.
@@ -1124,7 +1141,7 @@
 	* NEWS:
 	* configure.in:
 	New version.
-	
+
 	* tnef.spec.in: Small improvements.
 
 	* doc/Makefile.am, doc/tnef.1: man page renamed to tnef.1 to put
@@ -1141,33 +1158,33 @@
 	New version.
 
 	* src/main.c: Disallowing -w with reading a file from stdin.
-	
-	* src/alloc.c (MALLOC): 
+
+	* src/alloc.c (MALLOC):
 	Modified to not produce error if size is zero.  Some libc
 	libraries return NULL if size is zero.
 
 	* doc/Makefile.am:
-	* doc/tnef.3: 
-	New file courtesy Clark Morgan <cmorgan@aracnet.com> 
+	* doc/tnef.3:
+	New file courtesy Clark Morgan <cmorgan@aracnet.com>
 
 2001-07-17  Mark Simpson  <damned@world.std.com>
 
-	* configure.in: 
+	* configure.in:
 	Checking for ldiv.
 
-	* tnef.spec.in: 
+	* tnef.spec.in:
 	Cleanup and addition of doc.
 
 	* src/ldiv.c, src/ldiv.h:
 	New files to be compiled if ldiv is not defined.
 
-	* src/tnef.c: 
+	* src/tnef.c:
 	Cleaning up a few memory leaks.
 
 2001-04-07  Mark Simpson  <damned@world.std.com>
 
 	* Release 1.0.1:
-	
+
 	* NEWS:
 	* configure.in:
 	New version.
@@ -1204,7 +1221,7 @@
 
 	* src/main.c (USAGE, parse_cmdline)
 	* src/tnef.c (NUMBER_FILES, find_free_number, write_file):
-	* src/tnef.h: 
+	* src/tnef.h:
 	New numbered backup feature (idea and code from:
 	Jean-Jacques Michel <jjmichel@linbox.com>)
 
@@ -1215,7 +1232,7 @@
 	Using AC_REPLACE_FUNCS to check for basename
 
 	* acinclude.m4: New AC_DEBUG_COMPILE macro.  Implementation of
-	--enable-debug in configure script. 
+	--enable-debug in configure script.
 
 	* src/tnef.c (write_file, rename_file, decode_attachment): Changes
 	needed because basename does not return a newly allocated
@@ -1230,7 +1247,7 @@
 	without one of its own.
 
 	* src/strdup.c: Tweaked my implementation after seeing the one in
-	glibc. 
+	glibc.
 
 	* .cvsignore: Now ignoring the distribution
 
@@ -1258,7 +1275,7 @@
 	Checking for vprintf.  Addition of maintainer mode.
 
 	* src/tnef.h: Addition of overwrite and confirmation
-	functionality. 
+	functionality.
 
 	* src/tnef.c: Addition of overwite and confirmation
 	functionality. Moving of debug output into a seperate
@@ -1269,21 +1286,21 @@
 	--interactive/--confirmation/-w.
 
 	* Makefile.am (AUTOMAKE_OPTIONS): Setting up defaults for automake
-	runs. 
+	runs.
 
 2000-10-06  Mark Simpson  <damned@world.std.com>
 
 	* Release v0.14
 
-	* configure.in: Check for executable extension.  
-	Add --enable-warnings options and removing unused --enable-debug. 
+	* configure.in: Check for executable extension.
+	Add --enable-warnings options and removing unused --enable-debug.
 	Add checks for strrchr, memmove, and memory.h
 
 	* acinclude.m4: New file with definitin of AC_COMPILER_WARNING
 	used by ./configure --enable-warnings
 
 	* src/tnef.c, src/tnef.h, src/main.h:
-	New command line argument handling.  
+	New command line argument handling.
 	New command line argument: --use-paths.
 	Corrected pathname security bug.
 
@@ -1325,7 +1342,7 @@
 
 	* configure.in: Checking for getopt_long function.
 
-	* src/tnef.c: Inserting byte-order fix from Nathan Neulinger 
+	* src/tnef.c: Inserting byte-order fix from Nathan Neulinger
 	<nneul@umr.edu>.  Fixes date display problem.
 
 	* src/main.c: Using new getopt_long.h when needed.
@@ -1347,7 +1364,7 @@
 	error and aborts if memory allocation fails.
 	(dump_attr): Temporary fix for Solaris problem with date data.
 	(decode_attachment): Make up a filename if one is not given in the
-	tnef file. 
+	tnef file.
 
 1999-12-26  Mark Simpson  <damned@world.std.com>
 
@@ -1360,7 +1377,7 @@
 1999-12-04  Mark Simpson  <damned@world.std.com>
 
         * Release v0.8
-	
+
 	* src/tnef.c (decode_attachment): Now watches for attATACHMENT
 	records.  These contain the real filename of the file whereas the
 	attATTACHTITLE is a 'short' filename.  Keeping both ways right now
@@ -1380,12 +1397,12 @@
 	* doc/Makefile.am:
 	* doc/file-format.tex:
 	* doc/.cvsignore:
-	Replacing text file with LaTeX file describing file format.  
+	Replacing text file with LaTeX file describing file format.
 
         * Release v0.7.1
-	
+
         * TODO: Many new tasks.
-	
+
 	* tests/Makefile.am:
 	* tests/one-file.tnef:
 	* tests/rtf.tnef:
@@ -1394,10 +1411,10 @@
 
         * src/tnef.c: Moved strings of copyright and no-warranty statement
 	to top of file for clarity.
-	
+
 	* src/mkdata.awk:
 	* src/names.data:
-	* src/strdup.c: 
+	* src/strdup.c:
 	* src/strdup.h:
 	* src/tnef.c:
 	* src/types.data:
@@ -1406,10 +1423,10 @@
 1999-10-14  Mark Simpson  <simpson@world.std.com>
 
 	* ChangeLog: v0.7
-	
+
         * configure.in: New --enable-debug-build switch.  Now checking for
 	int size so we can create appropriate typedefs
-	
+
 	* src/Makefile.am:
 	* src/mkdata.awk:
 	* src/sizes.h:
@@ -1428,33 +1445,33 @@
 	* tests/.cvsignore:
 	* tests/Makefile.am:
 	doc and tests directory now being 'built' and included in
-	distribution. 
+	distribution.
 
 1999-10-13  Mark Simpson  <simpson@world.std.com>
 
         * Release v0.6
-	
+
         * Makefile.am: add BUGS to EXTRA_DIST
-	
+
         * TODO: more to do
-	
+
 	* BUGS, README: creating this file.
 
 	* src/tnef.c (parse_cmdline): Fixed copyright statement for
-	--version. 
+	--version.
 
 1999-10-12  Mark Simpson  <simpson@world.std.com>
 
 	* Release v0.5
 
 	* src/tnef.c (dump_attr): Now handling szSHORT and szLONG and
-	szTEXT. 
+	szTEXT.
 	(usage, parse_cmdline): New switches -l/--list to simply list
 	contents (currently the same as -n/--dry_run.  -f/--file no longer
 	mandatory, -f/--file can accept '-' to mean stdin.
 
         * Release v0.4
-	
+
 	* src/tnef.c: Extern decl of tempnam to quiet compiler.
 	(dump_attr): dump_attr can now handle dates.
 	(check_checksum): #if 0 out this function for now until it works.
@@ -1462,7 +1479,7 @@
 	attATTACHTITLE.
 	(decode_attachment, parse_cmdline): New -n option allows for tnef
 	to do nothing other than read the file.  If -n was given it will
-	not write the files. 
+	not write the files.
 
 	* src/tnef.h: Adding date structure.
 
@@ -1482,24 +1499,24 @@
 1999-10-09  Mark Simpson  <damned@world.std.com>
 
 	* Release v0.3
-	
+
 	* TODO: Adding some ideas here.
-	
+
 	* configure.in: Looking for awk and strdup, version update
-	
+
 	* src/tnef.c:
 	* src/tnef.h: Big changes to use generated lists of names and
 	types, changes to flow of code, less specialized handling when we
 	just don't care.  All verbose printing done in one function.
 	New -d/--directory option for specifying where to put extracted
-	files. 
-	
+	files.
+
 	* src/.cvsignore: Ignore generated files
-	
+
 	* src/Makefile.am: Changes to use generated files
-	
+
 	* src/mkdata.awk: AWK script to create foo.[ch] out of foo.data
-	
+
 	* src/strdup.c:
 	* src/strdup.h: New files defining strdup in case we try to build
 	on a system without it.
@@ -1509,7 +1526,7 @@
 	names and types, and also code to get the string equivalents.
 	* doc/grammer: new file defining the grammer of a TNEF Stream.
 
-	* src/tnef.c: 
+	* src/tnef.c:
 	* src/tnef.h:
 	changing #define'd names
 
@@ -1517,17 +1534,17 @@
 
 	* src/tnef.c: Removed static buffers
 
-	* tests/one-file: 
+	* tests/one-file:
 	* tests/rtf:
 	* tests/two-files:
 	Test files
-	
+
 	* src/Makefile.am: header file needed for distribution of source
-	
+
 	* configure.in: Checking for install program and size_t decl.
-	
+
 	* AUTHORS: Initial content
-	
+
 	* .cvsignore:
 	* src/.cvsignore: ignoring more files
-	
+

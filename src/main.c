@@ -111,7 +111,7 @@ validate_body_pref (char *optarg)
     }
     if (strlen(optarg) == 0 || strlen(optarg) > 3)
     {
-	fprintf (stderr, "'%s' is an invalid setting for --body-pref", optarg);
+        fprintf (stderr, "'%s' is an invalid setting for --body-pref\n", optarg);
 	abort();
     }
     
@@ -227,6 +227,7 @@ parse_cmdline (int argc, char **argv,
 	    else if (strcmp (long_options[option_index].name,
 			     "body-pref") == 0)
 	    {
+                    XFREE((*body_pref));
 		(*body_pref) = validate_body_pref (optarg);
 	    }
 	    else if (strcmp (long_options[option_index].name,
@@ -260,7 +261,7 @@ parse_cmdline (int argc, char **argv,
             break;
 
         case 'v': 
-            *flags |= VERBOSE;
+                *flags |= VERBOSE|LISTMIME;
             break;
 
         case 'f':
@@ -377,6 +378,9 @@ main (int argc, char *argv[])
                  "interactive mode at the same time.\n");
         exit (1);
     }
-    
-    return parse_file (fp, out_dir, body_file, body_pref, flags);
+    int ret = parse_file (fp, out_dir, body_file, body_pref, flags);
+    XFREE(body_pref);
+    XFREE(body_file);
+    fclose(fp);
+    return  ret;
 }
