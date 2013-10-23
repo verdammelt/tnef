@@ -1,4 +1,5 @@
-.TH TNEF 1 "TNEF MIME Decoder" "Filter" \" -*- nroff -*-
+.\" -*- nroff -*-
+.TH TNEF 1
 .SH NAME
 .nf        \" fill off
 tnef \- decode Microsoft's Transport Neutral Encapsulation Format
@@ -17,16 +18,16 @@ decodes e-mail attachments encoded in Microsoft's Transport Neutral
 Encapsulation Format (hereafter, TNEF), which "wraps"
 Microsoft e-mail attachments.
 .PP
-.IR Unfortunately "," these "wrapped" attachments are inaccessible to
+Unfortunately, these "wrapped" attachments are inaccessible to
 any e-mail client that does not understand TNEF.
-.IR Fortunately ","
-the
+Fortunately, the
 .B tnef
 filter can be used by any MIME-aware client to unpack these attachments.
 .SH OPTIONS
 .TP
 \fB\-f\fP FILE,  \fB\-\-file\fP=FILE
-use FILE as input ('-' denotes stdin).  When this option is omitted,
+use FILE as input ('-' denotes stdin).
+When this option is omitted,
 .B tnef
 reads data from stdin.
 .TP
@@ -55,27 +56,34 @@ For security reasons, paths to attached files are
 ignored by default.
 .TP
 \fB\-\-save\-body FILE\fP
-Save message body data found in the TNEF data.  There can be up to
+Save message body data found in the TNEF data.
+There can be up to
 three message bodies in the file, plain text, HTML encoded, and RTF
-encoded.  Which are saved is specified by the \-\-body-pref option.
+encoded.
+Which are saved is specified by the \-\-body-pref option.
 By default the message bodies are written to a file named message with
 an extension based upon the type (txt, html, rtf).
 .TP
 \fB\-\-body\-pref PREF\fP
 Specifies which of the possibly three message body formats will be
-saved.  PREF can be up to three characters long and each character
-must be one of 'r', 'h', or 't' specifying RTF, HTML or text.  The
+saved.
+PREF can be up to three characters long and each character
+must be one of 'r', 'h', or 't' specifying RTF, HTML or text.
+The
 order is the order that the data will be checked, the first type found
-will be saved.  If PREF is the special value of 'all' then any and all
-message body data found will be saved.  The default is 'rht'.
+will be saved.
+If PREF is the special value of 'all' then any and all
+message body data found will be saved.
+The default is 'rht'.
 .TP
 \fB\-\-save-rtf FILE\fP
-DEPRECATED.  Equivalent to \-\-save-body=FILE \-\-body-pref=r
+DEPRECATED.
+Equivalent to \-\-save-body=FILE \-\-body-pref=r
 .TP
-\fB\-h,  \-\-help\fP 
+\fB\-h,  \-\-help\fP
 show usage message.
 .TP
-\fB\-V,  \-\-version\fP 
+\fB\-V,  \-\-version\fP
 display version and copyright.
 .TP
 \fB\-v,  \-\-verbose\fP
@@ -88,12 +96,12 @@ The following example demonstrates typical
 .B tnef
 usage with a popular Unix mail client called "mutt".
 .nf
-.SS "Step 1 \-\- Configure ~/.mailcap"
-.fi
+.SS "Step 1 \(em Configure ~/.mailcap"
 Mutt can't use
 .B tnef
 for its intended purpose until an appropriate content type definition
-exists in ~/.mailcap .  Here's a sample definition:
+exists in ~/.mailcap .
+Here's a sample definition:
 .PP
 .RS
 application/ms\-tnef; tnef \-w %s
@@ -105,7 +113,7 @@ This mailcap entry says that whenever the MIME content type:
 application/ms\-tnef
 .RE
 .PP
-is encountered, use this command to decode it: 
+is encountered, use this command to decode it:
 .PP
 .RS
 tnef \-w %s
@@ -116,16 +124,15 @@ The latter command string invokes
 specifying both the \fB\-w\fP option and the attachment (created as a
 temporary file) as command line arguments.
 .nf
-.SS "Step 2 \-\- Add The Filter To $PATH"
-.fi
+.SS "Step 2 \(em Add The Filter To $PATH"
 Mutt can't invoke
 .B
 tnef
 if the filter isn't accessible via $PATH.
 .nf
-.SS "Step 3 \-\- Test Mutt"
-.fi
-Use mutt to read a message that includes a TNEF attachment.  Mutt will
+.SS "Step 3 \(em Test Mutt"
+Use mutt to read a message that includes a TNEF attachment.
+Mutt will
 note that an attachment of type "application/ms\-tnef is unsupported".
 .PP
 Press the "v" key to open mutt's "view attachment" menu.
@@ -140,20 +147,19 @@ using the command line syntax specified in ~/.mailcap (step 1).
 then decodes all file(s) included in the TNEF attachment, prompting
 for confirmation prior to creating an individual file (refer to
 .B \-w
-option above).  
+option above).
 .B \-w
 is useful here because it gives the end user a chance to
 view the filename(s) included in the mail message.
 .PP
 Note that Mutt's attachment menu also supports a pipe option, which permits
-the user to pipe attachments to an external filter (how convenient). 
+the user to pipe attachments to an external filter (how convenient).
 So, to list the contents of a TNEF attachment prior to decoding it, press
 the "|" key and enter this command:
 .PP
 .RS
 tnef \-t
 .RE
-.PP
 .SH "SEE ALSO"
 .BR metamail (1),
 .BR mailcap (4),
@@ -162,7 +168,7 @@ other email clients.
 .SH "AUTHOR"
 Mark Simpson.
 .SH "REPORTING BUGS"
-Report bugs to 
+Report bugs to
 .nh     \"no hyphenation
 Mark Simpson <@PACKAGE_BUGREPORT@>
 .hy 1   \"enable hyphenation
@@ -176,8 +182,4 @@ http://support.microsoft.com/support/kb/articles/Q136/2/04.asp
 .fi
 .PP
 describes how to configure Microsoft email clients so that the TNEF format
-is disabled when sending messages
-to non-TNEF-compatible clients.
-
-
-
+is disabled when sending messages to non-TNEF-compatible clients.
