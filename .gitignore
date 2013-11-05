@@ -9,3 +9,5 @@ tnef.spec
 config.log
 config.status
 BUGS
+*.trs
+*.log
