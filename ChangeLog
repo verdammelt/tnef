@@ -1,3 +1,21 @@
+2013-11-04 verdammelt <verdammelt@gmail.com>
+	* src/tnef.c:
+	  free_bodies needs to be defined bofore use - C99
+	* .gitignore:
+	  new testing script from automake generates *.log and *.trs files 
+	  which need to be ignored.
+	* compile, test-driver:
+	  adding these missing automake files.
+	
+2013-10-22 Anthony J. Bently <anthony@cathet.us>
+	* doc/tnef.1.in:
+	- Remove some redundant macros (empty paragraphs, etc)
+	- Properly format the title
+	- Correct the "-*- nroff -*-" line (was a mistyped comment)
+	- Fix formatting issues with .IR
+	- Start new sentences on a new line. (This is a standard so that 
+	  troff formats inter-sentences properly.)
+	
 2012-02-29 Engelke Eschner <tekai@gmx.li>
 	* src/file.c, src/main.c, src/mapi_attr.c, src/tnef.c
 	Free more memory
