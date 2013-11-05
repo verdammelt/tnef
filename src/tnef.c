@@ -74,6 +74,16 @@ read_object (FILE *in)
     return attr;
 }
 
+static void 
+free_bodies(VarLenData **bodies, int len)
+{
+    while (len--)
+    {
+        XFREE(bodies[len]->data);
+        XFREE(bodies[len]);
+    }
+}
+
 static File**
 get_body_files (const char* filename,
 		const char pref,
@@ -386,11 +396,3 @@ parse_file (FILE* input_file, char* directory,
     return 0;
 }
 
-void free_bodies(VarLenData **bodies, int len)
-{
-    while (len--)
-    {
-        XFREE(bodies[len]->data);
-        XFREE(bodies[len]);
-    }
-}
