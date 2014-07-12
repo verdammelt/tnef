@@ -5,9 +5,9 @@
 #   baseline
 #   diff
 check_test_full () {
-    diff $1 $2 > $3 2>&1
+    diff "$1" "$2" > "$3" 2>&1
     if [ $? -ne 0 ]; then
-        echo "\'diff $1 $2 > $3\' -- Test Failed!"
+        echo "\'diff \"$1\" \"$2\" > \"$3\"\' -- Test Failed!"
         exit 1
     fi
 }
