@@ -247,79 +247,70 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    a->num_values = 1;
         }
 
-	switch (a->type)
+	if (!mvf &&
+	    (a->type == szMAPI_STRING ||
+	     a->type == szMAPI_UNICODE_STRING ||
+	     a->type == szMAPI_OBJECT ||
+	     a->type == szMAPI_BINARY))
 	{
-	case szMAPI_SHORT:        /* 2 bytes */
-	    assert(!mvf);
-	    v = alloc_mapi_values (a);
-	    v->len = 2;
-	    v->data.bytes2 = GETINT16(buf+idx);
-	    idx += 4;	/* assume padding of 2, advance by 4! */
-	    break;
+	    a->num_values = GETINT32(buf+idx); 
+	    idx += 4;
+	}
 
-	case szMAPI_INT:	/* 4 bytes, possible MV */
-	    v = alloc_mapi_values (a);
-	    for ( j=0; j< a->num_values; j++ )
+	v = alloc_mapi_values (a);
+
+	for (j = 0; j < a->num_values; j++) 
+	{
+	    switch (a->type)
 	    {
+	    case szMAPI_SHORT:	/* 2 bytes */
+		v->len = 2;
+		v->data.bytes2 = GETINT16(buf+idx);
+		idx += 4;	/* assume padding of 2, advance by 4! */
+		break;
+
+	    case szMAPI_INT:	/* 4 bytes */
 		v->len = 4;
 		v->data.bytes4 = GETINT32(buf+idx);
 		idx += 4;
 		v++;
-	    }
-	    break;
+		break;
 
-	case szMAPI_FLOAT:      /* 4 bytes */
-	case szMAPI_BOOLEAN:			/* this should be 2 bytes + 2 padding */
-	    assert(!mvf);
-	    v = alloc_mapi_values (a);
-	    v->len = 4;
-	    v->data.bytes4 = GETINT32(buf+idx);
-	    idx += v->len;
-	    break;
+	    case szMAPI_FLOAT:	/* 4 bytes */
+	    case szMAPI_BOOLEAN: /* this should be 2 bytes + 2 padding */
+		v->len = 4;
+		v->data.bytes4 = GETINT32(buf+idx);
+		idx += v->len;
+		break;
 
-	case szMAPI_SYSTIME:         /* 8 bytes */
-	    v = alloc_mapi_values (a);
-	    for ( j=0; j< a->num_values; j++ )
-	    {
+	    case szMAPI_SYSTIME: /* 8 bytes */
 		v->len = 8;
 		v->data.bytes8[0] = GETINT32(buf+idx);
 		v->data.bytes8[1] = GETINT32(buf+idx+4);
 		idx += 8;
 		v++;
-	    }
-	    break;
+		break;
 
-	case szMAPI_DOUBLE:		/* 8 bytes */
-	case szMAPI_APPTIME:
-	case szMAPI_CURRENCY:
-	case szMAPI_INT8BYTE:
-	    assert(!mvf);
-	    v = alloc_mapi_values (a);
-	    v->len = 8;
-	    v->data.bytes8[0] = GETINT32(buf+idx);
-	    v->data.bytes8[1] = GETINT32(buf+idx+4);
-	    idx += v->len;
-	    break;
+	    case szMAPI_DOUBLE:	/* 8 bytes */
+	    case szMAPI_APPTIME:
+	    case szMAPI_CURRENCY:
+	    case szMAPI_INT8BYTE:
+		v->len = 8;
+		v->data.bytes8[0] = GETINT32(buf+idx);
+		v->data.bytes8[1] = GETINT32(buf+idx+4);
+		idx += v->len;
+		break;
 
-	case szMAPI_CLSID:
-	    assert(!mvf);
-	    v = alloc_mapi_values (a);
-	    v->len = sizeof (GUID);
-	    copy_guid_from_buf(&v->data.guid, buf+idx);
-	    idx += v->len;
-	    break;
+	    case szMAPI_CLSID:
+		v->len = sizeof (GUID);
+		copy_guid_from_buf(&v->data.guid, buf+idx);
+		idx += v->len;
+		break;
 
-	case szMAPI_STRING:
-	case szMAPI_UNICODE_STRING:
-	case szMAPI_OBJECT:
-	case szMAPI_BINARY:
-	  if (!mvf) {		/* always is variable length */
-	    a->num_values = GETINT32(buf+idx); idx += 4;
-	  }
-
-	    v = alloc_mapi_values (a);
-	    for (j = 0; j < a->num_values; j++)
-	    {
+	    case szMAPI_STRING:
+	    case szMAPI_UNICODE_STRING:
+	    case szMAPI_OBJECT:
+	    case szMAPI_BINARY:
 		v->len = GETINT32(buf+idx); idx += 4;
 
 		if (a->type == szMAPI_UNICODE_STRING)
@@ -334,29 +325,27 @@ mapi_attr_read (size_t len, unsigned char *buf)
 
 		idx += pad_to_4byte(v->len);
 		v++;
+		break;
+
+	    case szMAPI_NULL:	/* illegal in input tnef streams */
+	    case szMAPI_ERROR:
+	    case szMAPI_UNSPECIFIED:
+		fprintf (stderr,
+			 "Invalid attribute, input file may be corrupted\n");
+		if (!ENCODE_SKIP) exit (1);
+
+		return NULL;
+
+	    default:		/* should never get here */
+		fprintf (stderr,
+			 "Undefined attribute, input file may be corrupted\n");
+		if (!ENCODE_SKIP) exit (1);
+
+		return NULL;
+
 	    }
-	    break;
-
-	case szMAPI_NULL:	/* illegal in input tnef streams */
-	case szMAPI_ERROR:
-	case szMAPI_UNSPECIFIED:
-
-            fprintf (stderr,
-                 "Invalid attribute, input file may be corrupted\n");
-            if (!ENCODE_SKIP) exit (1);
-
-	    return NULL;
-
-        default:		/* should never get here */
-            fprintf (stderr,
-                 "Undefined attribute, input file may be corrupted\n");
-            if (!ENCODE_SKIP) exit (1);
-
-	    return NULL;
-
+	    if (DEBUG_ON) mapi_attr_dump (attrs[i]);
 	}
-	if (DEBUG_ON) mapi_attr_dump (attrs[i]);
-
     }
     attrs[i] = NULL;
 
