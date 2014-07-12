@@ -26,7 +26,6 @@ TNEF Key: 1512
 	#0 [len: 16] = 0xc6 0xdd 0x05 0x2e 0xcf 0x14 0x82 0x4c 0xa6 0x20 0x9f 0xce 0x9e 0x47 0xf9 0x85 
 (MAPI) 1016 [type: MAPI integer (signed 32 bits) <0003>] [num_values = 1] = 
 	#0 [len: 4] = 3
-!!MULTI_VALUE_FLAG seen (0x1205 0x02)
 (MAPI) 1205 [type: MAPI short (signed 16 bits) <0002>] [num_values = 1] = 
 	#0 [len: 2] = 60
 (MAPI) 1206 [type: MAPI integer (signed 32 bits) <0003>] [num_values = 1] = 

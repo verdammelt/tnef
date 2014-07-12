@@ -171,7 +171,7 @@ MAPI_Attr**
 mapi_attr_read (size_t len, unsigned char *buf)
 {
     size_t idx = 0;
-    uint32 i,j,mvf;
+    uint32 i,j;
     uint32 num_properties = GETINT32(buf+idx);
     MAPI_Attr** attrs = CHECKED_XMALLOC (MAPI_Attr*, (num_properties + 1));
 
@@ -226,36 +226,30 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    }
 	}
 
-	/* Multi-valued attributes have their type modified by the MULTI_VALUE_FLAG value */
-	if (a->type & MULTI_VALUE_FLAG)
+	/* 
+	 * Multi-value types and string/object/binary types have
+	 * multiple values 
+	 */
+	if (a->type & MULTI_VALUE_FLAG ||
+	    a->type == szMAPI_STRING ||
+	    a->type == szMAPI_UNICODE_STRING ||
+	    a->type == szMAPI_OBJECT ||
+	    a->type == szMAPI_BINARY)
 	{
-	    a->type -= MULTI_VALUE_FLAG;
-	    mvf = 1;
-
-	    if (DEBUG_ON)
-	    {
-		fprintf( stdout, "!!MULTI_VALUE_FLAG seen (0x%02x 0x%02x)\n", a->name, a->type );
-		fflush( NULL );
-	    }
-
 	    a->num_values = GETINT32(buf+idx);
 	    idx += 4;
 	}
         else
         {
-            mvf = 0;
 	    a->num_values = 1;
         }
 
-	if (!mvf &&
-	    (a->type == szMAPI_STRING ||
-	     a->type == szMAPI_UNICODE_STRING ||
-	     a->type == szMAPI_OBJECT ||
-	     a->type == szMAPI_BINARY))
+	/* Amend the type in case of multi-value type */
+	if (a->type & MULTI_VALUE_FLAG)
 	{
-	    a->num_values = GETINT32(buf+idx); 
-	    idx += 4;
+	    a->type -= MULTI_VALUE_FLAG;
 	}
+
 
 	v = alloc_mapi_values (a);
 
