@@ -205,7 +205,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
         }
 
 	/* handle special case of GUID prefixed properties */
-	if (a->name >= GUID_EXISTS_FLAG)
+	if (a->name & GUID_EXISTS_FLAG)
 	{
 	    /* copy GUID */
 	    a->guid = CHECKED_XMALLOC(GUID, 1);
