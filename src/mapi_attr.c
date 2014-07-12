@@ -186,24 +186,6 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	a->type = GETINT16(buf+idx); idx += 2;
 	a->name = GETINT16(buf+idx); idx += 2;
 
-
-	/* Multi-valued attributes have their type modified by the MULTI_VALUE_FLAG value */
-	if (a->type & MULTI_VALUE_FLAG)
-	{
-	    a->type -= MULTI_VALUE_FLAG;
-	    mvf = 1;
-
-	    if (DEBUG_ON)
-	    {
-		fprintf( stdout, "!!MULTI_VALUE_FLAG seen (0x%02x 0x%02x)\n", a->name, a->type );
-		fflush( NULL );
-	    }
-	}
-        else
-        {
-            mvf = 0;
-        }
-
 	/* handle special case of GUID prefixed properties */
 	if (a->name >= GUID_EXISTS_FLAG)
 	{
@@ -244,11 +226,31 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    }
 	}
 
+	/* Multi-valued attributes have their type modified by the MULTI_VALUE_FLAG value */
+	if (a->type & MULTI_VALUE_FLAG)
+	{
+	    a->type -= MULTI_VALUE_FLAG;
+	    mvf = 1;
+
+	    if (DEBUG_ON)
+	    {
+		fprintf( stdout, "!!MULTI_VALUE_FLAG seen (0x%02x 0x%02x)\n", a->name, a->type );
+		fflush( NULL );
+	    }
+
+	    a->num_values = GETINT32(buf+idx);
+	    idx += 4;
+	}
+        else
+        {
+            mvf = 0;
+	    a->num_values = 1;
+        }
+
 	switch (a->type)
 	{
 	case szMAPI_SHORT:        /* 2 bytes */
 	    assert(!mvf);
-	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = 2;
 	    v->data.bytes2 = GETINT16(buf+idx);
@@ -256,15 +258,6 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    break;
 
 	case szMAPI_INT:	/* 4 bytes, possible MV */
-	    if ( mvf )
-            {
-                a->num_values = GETINT32(buf+idx);
-		idx += 4;
-	    }
-	    else
-	    {
-		a->num_values = 1;
-	    }
 	    v = alloc_mapi_values (a);
 	    for ( j=0; j< a->num_values; j++ )
 	    {
@@ -278,7 +271,6 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	case szMAPI_FLOAT:      /* 4 bytes */
 	case szMAPI_BOOLEAN:			/* this should be 2 bytes + 2 padding */
 	    assert(!mvf);
-	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = 4;
 	    v->data.bytes4 = GETINT32(buf+idx);
@@ -286,15 +278,6 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    break;
 
 	case szMAPI_SYSTIME:         /* 8 bytes */
-	    if ( mvf )
-            {
-                a->num_values = GETINT32(buf+idx);
-		idx += 4;
-	    }
-	    else
-	    {
-		a->num_values = 1;
-	    }
 	    v = alloc_mapi_values (a);
 	    for ( j=0; j< a->num_values; j++ )
 	    {
@@ -311,7 +294,6 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	case szMAPI_CURRENCY:
 	case szMAPI_INT8BYTE:
 	    assert(!mvf);
-	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = 8;
 	    v->data.bytes8[0] = GETINT32(buf+idx);
@@ -321,7 +303,6 @@ mapi_attr_read (size_t len, unsigned char *buf)
 
 	case szMAPI_CLSID:
 	    assert(!mvf);
-	    a->num_values = 1;
 	    v = alloc_mapi_values (a);
 	    v->len = sizeof (GUID);
 	    copy_guid_from_buf(&v->data.guid, buf+idx);
@@ -331,8 +312,11 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	case szMAPI_STRING:
 	case szMAPI_UNICODE_STRING:
 	case szMAPI_OBJECT:
-	case szMAPI_BINARY:       /* variable length */
+	case szMAPI_BINARY:
+	  if (!mvf) {		/* always is variable length */
 	    a->num_values = GETINT32(buf+idx); idx += 4;
+	  }
+
 	    v = alloc_mapi_values (a);
 	    for (j = 0; j < a->num_values; j++)
 	    {
