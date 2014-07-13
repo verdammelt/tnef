@@ -28,7 +28,7 @@
 
 If FILE is not specified standard input is used
 
-Report bugs to <verdammelt@users.sourceforge.net>
+Report bugs to <verdammelt@gmail.com>
 
 ./../../src/tnef -h
 ./../../src/tnef: [options] [FILE]
@@ -60,4 +60,4 @@ Report bugs to <verdammelt@users.sourceforge.net>
 
 If FILE is not specified standard input is used
 
-Report bugs to <verdammelt@users.sourceforge.net>
+Report bugs to <verdammelt@gmail.com>

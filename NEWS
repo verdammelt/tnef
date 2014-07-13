@@ -1,6 +1,12 @@
 TNEF NEWS -- history of user-visible changes.   18 April 2011
 Copyright (C) 2000-2011 by Mark Simpson
 
+* 1.4.11 [12 July 2014]
+** Fixing bug when parsing files with multiple value MAPI attributes
+*** https://github.com/verdammelt/tnef/issues/3
+** Fixing compilation warnings
+*** https://github.com/verdammelt/tnef/issues/5
+
 * 1.4.10 [4 November 2013]
 ** Incorporating documentation patch from bentley (github)
 ** Fixing small problems from new versions of automake/gcc

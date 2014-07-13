@@ -1,3 +1,12 @@
+2014-07-12 verdammelt <verdammelt@gmail.com>
+	* src/mapi_attr.c:
+	  mapi_read_attr handling multiple value attrbutes consistently.
+	  fixing compilation warning
+	* tests/files/multi-value-attribute.test:
+	  test case for multi-value attributes.
+	* src/main.c:
+	  fixing compilatino warning
+	
 2013-11-04 verdammelt <verdammelt@gmail.com>
 	* src/tnef.c:
 	  free_bodies needs to be defined bofore use - C99
