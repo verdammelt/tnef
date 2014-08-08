@@ -51,12 +51,12 @@
 
 /* COPYRIGHTS & NO_WARRANTY -- defined to make code below a little nicer to
    read */
-static const char* NO_WARRANTY = \
+static const char NO_WARRANTY[] = \
 "%s comes with ABSOLUTELY NO WARRANTY.\n"
 "You may redistribute copies of %s under the terms of the GNU General\n"
 "Public License.  For more information about these matters, see the file\n"
 "named COPYING.";
-static const char* USAGE = \
+static const char USAGE[] = \
 "-f FILE,--file=FILE     \tUse FILE as input ('-' == stdin)\n"
 "-C DIR, --directory=DIR \tUnpack files into DIR\n"
 "-x SIZE --maxsize=SIZE  \tLimit maximum size of extracted archive (bytes)\n"
