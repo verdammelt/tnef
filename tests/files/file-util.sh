@@ -6,7 +6,6 @@ test=`echo $0 | sed -e 's/\(.*\)\..*/\1/' -e 's/^\.\///'`
 check_test_files () {
     for f in `cat datafiles/$test.list`
     do
-      f=`echo $f | sed -e 's/<SPACE>/ /g'`
       check_test_full "$srcdir/$test.dir/$f"              \
                       "$srcdir/baselines/$f.baseline"     \
                       "$srcdir/$f.diff"

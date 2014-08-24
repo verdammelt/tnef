@@ -14,6 +14,8 @@ EXTRA_DIST	=	MAPI_ATTACH_DATA_OBJ.list	\
 			missing-filenames.tnef		\
 			multi-name-property.list	\
 			multi-name-property.tnef	\
+			multi-value-attribute.list	\
+			multi-value-attribute.tnef	\
 			one-file.list			\
 			one-file.tnef			\
 			rtf.list			\
