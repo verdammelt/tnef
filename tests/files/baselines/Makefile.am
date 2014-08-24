@@ -18,6 +18,8 @@ EXTRA_DIST	=	AUTHORS.baseline			\
 			missing-filenames.baseline		\
 			missing-filenames-body.rtf.baseline	\
 			multi-name-property.baseline		\
+			multi-value-attribute.baseline		\
+			multi-value-attribute-body.rtf.baseline		\
 			one-file.baseline			\
 			README.baseline				\
 			rtf.baseline				\
@@ -31,5 +33,6 @@ EXTRA_DIST	=	AUTHORS.baseline			\
 			Untitled_Attachment.baseline		\
 			VIA_Nytt_14021.htm.baseline		\
 			VIA_Nytt_1402.doc.baseline		\
-			VIA_Nytt_1402.pdf.baseline
+			VIA_Nytt_1402.pdf.baseline		\
+			208225__5_seconds__Voice_Mail.mp3.baseline
 
