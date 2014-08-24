@@ -1,3 +1,21 @@
+2014-08-24 verdammelt <verdammelt@gmail.com>
+	* AUTHORS: Updating author address and adding contributor section.
+	
+	* src/tnef.c: fixing compiler warning
+	
+	* INSTALL, README, configure.[ac,in]: Renaming configure.in to
+	  configure.ac to fix autoconf warnings (ileGITimo@github)
+
+	* tests/files/baselines/Makefile.am,
+	* tests/files/baseline/208225__5_seconds__Voice_Mail.mp3.baseline,
+	* tests/files/baselines/multi-value-attribute.baseline,
+	* tests/files/datafiles/Makefile.am,
+	* tests/files/datafiles/multi-value-attribute.list,
+	* tests/files/datafiles/multi-value-attribute.tnef,
+	* tests/files/file-util.sh: Fixing problem with distribution
+	tarball creation. (needed to change the data file and baselines to
+	complete the fix)
+	
 2014-07-12 verdammelt <verdammelt@gmail.com>
 	* src/mapi_attr.c:
 	  mapi_read_attr handling multiple value attrbutes consistently.
@@ -5,7 +23,7 @@
 	* tests/files/multi-value-attribute.test:
 	  test case for multi-value attributes.
 	* src/main.c:
-	  fixing compilatino warning
+	  fixing compilation warning
 	
 2013-11-04 verdammelt <verdammelt@gmail.com>
 	* src/tnef.c:
