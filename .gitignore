@@ -8,6 +8,6 @@ tnef.spec
 *.tar.gz
 config.log
 config.status
-BUGS
 *.trs
 *.log
+BUGS

@@ -1,8 +1,18 @@
-Please send any bugs/enhancement requests to:
+For bug reports or feature requests please visit the GitHub page
+https://github.com/verdammelt/tnef and create an issue.
 
-       Mark Simpson <@PACKAGE_BUGREPORT@> 
+When submitting a bug report please always inculude:
 
-Or visit the GitHub page https://github.com/verdammelt/tnef and create
-an issue.
+* the version of tnef you are using: tnef --version
 
-----------------------------------------------------------------------
+* the output of running tnef in full deubg mode (with both --debug and
+  --verbose switches) against the data file).
+
+* the data file causing the problem (if you can include it).
+
+If you cannot include the data file due to privacy concerns please
+consider making a test data file which produces the same error without
+any private data, or sending the data file to the maintainer: Mark
+Simpson <verdammelt@gmail.com>. Without a data file it can be hard or
+impossible to debug and fix a problem.
+
