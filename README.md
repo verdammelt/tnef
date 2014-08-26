@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/verdammelt/tnef.svg?branch=master)](https://api.travis-ci.org/verdammelt/tnef.svg)
+
 
                                    TNEF
                                    ====
