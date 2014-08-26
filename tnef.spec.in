@@ -38,7 +38,7 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %files
 %defattr(-,root,root)
-%doc README COPYING ChangeLog AUTHORS NEWS TODO BUGS
+%doc README.md COPYING ChangeLog AUTHORS NEWS TODO BUGS
 %{prefix}/bin/tnef
 %{prefix}/share/man/man1/tnef.1.gz
 
