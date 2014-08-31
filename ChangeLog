@@ -1,1595 +1,683 @@
-2014-08-24 verdammelt <verdammelt@gmail.com>
-	* AUTHORS: Updating author address and adding contributor section.
-	
-	* src/tnef.c: fixing compiler warning
-	
-	* INSTALL, README, configure.[ac,in]: Renaming configure.in to
-	  configure.ac to fix autoconf warnings (ileGITimo@github)
-
-	* tests/files/baselines/Makefile.am,
-	* tests/files/baseline/208225__5_seconds__Voice_Mail.mp3.baseline,
-	* tests/files/baselines/multi-value-attribute.baseline,
-	* tests/files/datafiles/Makefile.am,
-	* tests/files/datafiles/multi-value-attribute.list,
-	* tests/files/datafiles/multi-value-attribute.tnef,
-	* tests/files/file-util.sh: Fixing problem with distribution
-	tarball creation. (needed to change the data file and baselines to
-	complete the fix)
-	
-2014-07-12 verdammelt <verdammelt@gmail.com>
-	* src/mapi_attr.c:
-	  mapi_read_attr handling multiple value attrbutes consistently.
-	  fixing compilation warning
-	* tests/files/multi-value-attribute.test:
-	  test case for multi-value attributes.
-	* src/main.c:
-	  fixing compilation warning
-	
-2013-11-04 verdammelt <verdammelt@gmail.com>
-	* src/tnef.c:
-	  free_bodies needs to be defined bofore use - C99
-	* .gitignore:
-	  new testing script from automake generates *.log and *.trs files 
-	  which need to be ignored.
-	* compile, test-driver:
-	  adding these missing automake files.
-	
-2013-10-22 Anthony J. Bently <anthony@cathet.us>
-	* doc/tnef.1.in:
-	- Remove some redundant macros (empty paragraphs, etc)
-	- Properly format the title
-	- Correct the "-*- nroff -*-" line (was a mistyped comment)
-	- Fix formatting issues with .IR
-	- Start new sentences on a new line. (This is a standard so that 
-	  troff formats inter-sentences properly.)
-	
-2012-02-29 Engelke Eschner <tekai@gmx.li>
-	* src/file.c, src/main.c, src/mapi_attr.c, src/tnef.c
-	Free more memory
-
-	* src/file.c, src/file.h
-	Print content id with the mime type
-
-	* src/main.c
-	verbose option includes --list--with-mime-types
-
-	* src/tnef.c
-	Assign the body a respective mime type
-
-	* tests/cmdline/mime-types.baseline, tests/cmdline/stdin.baseline,
-	* tests/cmdline/verbose.baseline
-	Adjust tests to include mime type
-
-2011-04-18 verdammelt <verdammelt@viril.local>
-	* NEWS: new release
-
-	* src/main.c, configure.in:
-	  Increasing version & copyright
-
-	* doc/tnef.1.in:
-	  Applying patch #3014753 from Jari Aalto
-	  (https://sourceforge.net/users/jaalto/)
-	  to fix hyphenation.
-
-2010-01-30 verdammelt <verdammelt@virgil.local>
-	* src/ConvertUTF.[ch] src/Makefile.am
-	  Removing unused code
-
-	* src/util[ch]:
-	  Reverting to previous version of utf decoder.
-
-	* src/main.c:
-	  Updating main copyright statement.
-
-2009-08-25 verdammelt <verdammelt@virgil.local>
-	* src/util.[ch], src/ConvertUTF.[ch], src/Makefile.am
-	Integrating Public Domain UTF conversion code
-
-	* src/path.c, src/attr.c, src/tnef.c
-	Fixing new warnings about 'unsigned char' mostly.
-
-2009-08-24 verdammelt <verdammelt@virgil.local>
-
-	* src/attr.c, src/attr.h, src/common.h, src/debug.c, src/file.c,
-	* src/file.h, src/main.c, src/mapi_attr.c, src/mkdata.awk,
-	* src/options.c, src/options.h, src/path.c, src/path.h, src/replace,
-	* src/rtf.c, src/tnef.c, tests/cmdline, tests/cmdline/body.baseline,
-	* tests/cmdline/debug.baseline, tests/cmdline/help.baseline,
-	* tests/cmdline/list.baseline, tests/cmdline/maxsize.baseline,
-	* tests/cmdline/mime-types.baseline,
-	* tests/cmdline/rtf-test.rtf.baseline, tests/cmdline/stdin.baseline,
-	* tests/cmdline/triples-test-2.rtf.baseline,
-	* tests/cmdline/verbose.baseline,
-	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline,
-	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
-	* tests/files/baselines/MAPI_OBJECT-body.rtf.baseline,
-	* tests/files/baselines/MAPI_OBJECT.baseline,
-	* tests/files/baselines/body.baseline,
-	* tests/files/baselines/data-before-name-body.rtf.baseline,
-	* tests/files/baselines/data-before-name.baseline,
-	* tests/files/baselines/garbage-at-end.baseline,
-	* tests/files/baselines/long-filename-body.rtf.baseline,
-	* tests/files/baselines/long-filename.baseline,
-	* tests/files/baselines/missing-filenames-body.rtf.baseline,
-	* tests/files/baselines/missing-filenames.baseline,
-	* tests/files/baselines/multi-name-property.baseline,
-	* tests/files/baselines/one-file.baseline,
-	* tests/files/baselines/rtf-body.rtf.baseline,
-	* tests/files/baselines/rtf.baseline,
-	* tests/files/baselines/triples-body.rtf.baseline,
-	* tests/files/baselines/triples.baseline,
-	* tests/files/baselines/two-files.baseline, tnef.spec.in:
-	Integrated code changes from Randy Diffenderfer
+2014-08-25  Mark Simpson <verdammelt@gmail.com>
 
-2009-01-01  verdammelt  <verdammelt@virgil.local>
+  * Makefile.am, TODO: Removing ancient TODO file.
 
-	* contrib/tnef-alpine.perl, contrib/tnef-alpine.perl.README:
-	Adding PERL helper script to link alpine and tnef.
-	Contributed by Urs Schuerer
+  * INSTALL, Makefile.am, README, README.md, tnef.spec.in: Switching to
+  markdown for README.
 
-2008-09-28  verdammelt  <verdammelt@virgil.local>
+2014-08-24  Mark Simpson <verdammelt@gmail.com>
 
-	* tests/cmdline/version.baseline, configure.in, NEWS:
-	Releasing v1.4.5 with bug fix
+  * .gitignore, BUGS.in: Updating BUGS file.
 
-	* src/tnef.c, tests/cmdline/Makefile.am, tests/cmdline/stdin.baseline, tests/cmdline/stdin.test:
-	fixing bug 2126695
+2014-08-24  ileGITimo <github@martins.cc>
 
-2008-05-30  verdammelt  <verdammelt@virgil.local>
+  * INSTALL, README, configure.ac, configure.in: renamed configure.in to
+  configure.ac updated INSTALL/README to add autoreconf
 
-	* NEWS: adding news
+2014-08-24  Mark Simpson <verdammelt@gmail.com>
 
-	* ChangeLog: updating ChangeLog
+  * .../208225 (5 seconds) Voice Mail.mp3.baseline,
+  .../208225__5_seconds__Voice_Mail.mp3.baseline,
+  tests/files/baselines/Makefile.am,
+  .../files/baselines/multi-value-attribute.baseline,
+  tests/files/datafiles/Makefile.am,
+  tests/files/datafiles/multi-value-attribute.list,
+  tests/files/datafiles/multi-value-attribute.tnef, tests/files/file-util.sh:
+  Fixing problem when generating dist tarball.  Had to modify the TNEF data
+  file because it contained a file with spaces in the name and this seemed to
+  be an intractable problem for the Makefiles. Because the data file was
+  changed then baselines also needed to be changed.  Furthermore, a previous
+  hack to deal with the filename with a space in it is no longer needed so it
+  was removed.
 
-2008-03-28  verdammelt  <verdammelt@virgil.local>
+2014-07-12  Mark Simpson <verdammelt@gmail.com>
 
-	* tests/cmdline/help.baseline, src/options.h, src/mapi_attr.c, src/main.c, src/attr.c:
-	Applying ignore checksum patch.  Adds new command line option for
-	changing checksum errors into warnings
+  * ChangeLog, NEWS, configure.in, src/main.c, tests/cmdline/help.baseline,
+  tests/cmdline/version.baseline: New Version: 1.4.11  * ChangeLog * News *
+  copyright update * version number
 
-2008-02-25  verdammelt  <verdammelt@MBPro.local>
+  * BUGS.in, configure.in: Pointing people at gmail & github.
 
-	* INSTALL, README, depcomp, install-sh, missing, mkinstalldirs:
-	updating build artefacts
+  * src/main.c, src/mapi_attr.c: Fixing compiler warnings.
 
-	* doc/tnef.1.in: correcting typos in man page
+  * src/mapi_attr.c, tests/files/baselines/multi-name-property.baseline,
+  .../files/baselines/multi-value-attribute.baseline: Cleaning up multi-value
+  detection and handling.
 
-	* configure.in, src/main.c, tests/cmdline/version.baseline, tnef.spec.in:
-	increasing version number and updating copyright year
+  * tests/files/Makefile.am, .../208225 (5 seconds) Voice Mail.mp3.baseline,
+  .../multi-value-attribute-body.rtf.baseline,
+  .../files/baselines/multi-value-attribute.baseline,
+  tests/files/datafiles/multi-value-attribute.list,
+  tests/files/datafiles/multi-value-attribute.tnef,
+  tests/files/multi-value-attribute.test: Adding test for multi-value
+  attributes.
 
-2006-09-15  verdammelt  <verdammelt@MBPro.local>
+  * tests/files/file-util.sh, tests/util.sh: Changing test framework to handle
+  output files with spaces in the names.
 
-	* tnef.spec.in: Fixing version number and share path
+2013-11-04  Mark Simpson <verdammelt@gmail.com>
 
-2006-08-28  verdammelt  <verdammelt@freya>
+  * configure.in, tests/cmdline/version.baseline: Increasing version number
 
-	* tests/cmdline/body.baseline: Updating baseline for unicode change
+  * ChangeLog, NEWS: Updating News / Changelog
 
-2006-08-25  verdammelt  <verdammelt@freya>
+  * compile, test-driver: missing files should be copied in - not symlinked!
 
-	* configure.in, NEWS: incremeting version
+  * compile, test-driver: Adding missing files for automake
 
-	* src/mapi_attr.c:
-	re-instating unicode_to_utf8 usage lost during v1.4 development
+2012-02-29  Mark Simpson <verdammelt@gmail.com>
 
-	* tests/files/baselines/body.baseline, tests/cmdline/version.baseline:
-	Fixing baseline given code changes
+  * NEWS, configure.in, tests/cmdline/version.baseline: Preparing a new release
 
-2006-08-06  verdammelt  <verdammelt@freya>
+2012-03-01  Engelke Eschner <tekai@gmx.li>
 
-	* tests/files/file-util.sh (run_test):
-	improving handling for stdout and stderr to make tests
-	more robust.
+  * tests/cmdline/mime-types.baseline, tests/cmdline/stdin.baseline,
+  tests/cmdline/verbose.baseline: adjust tests
 
-	* tests/files/baselines/garbage-at-end.baseline: fixing baseline
+  * src/file.c, src/file.h: free path and print content-id when mime-type is
+  printed
 
-	* tests/files/baselines/Makefile.am (EXTRA_DIST):
-	adding garbage-at-end.baseline
+2011-04-18  Mark Simpson <verdammelt@gmail.com>
 
-	* tests/files/datafiles/Makefile.am (EXTRA_DIST):
-	adding garbage-at-end.list, garbage-at-end.tnef
+  * ChangeLog, NEWS, configure.in, src/main.c, tests/cmdline/version.baseline:
+  cutting a new release
 
-	* src/tnef.c (data_left): fixing problem with variable declarations
+2010-01-30  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
 
-2006-07-23  verdammelt  <verdammelt@freya>
+  * NEWS, configure.in, src/ConvertUTF.c, src/ConvertUTF.h, src/Makefile.am,
+  src/main.c, src/util.c, tests/cmdline/version.baseline: reverting to my utf
+  decoder as public domain decoder had problems; also updating main copyright
+  message
 
-	* configure.in, tnef/configure.in, NEWS, tnef/NEWS:
-	Preparing to release v1.4.2
+2009-08-26  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
 
-	* tests/cmdline/version.baseline, tnef/tests/cmdline/version.baseline:
-	updating version number
+  * ChangeLog, NEWS, configure.in, src/Makefile.am,
+  tests/cmdline/version.baseline: creating new release: 1.4.6
 
-	* tests/files/baselines/garbage-at-end.baseline, tests/files/datafiles/garbage-at-end.list, tests/files/datafiles/garbage-at-end.tnef, tests/files/garbage-at-end.test, tnef/tests/files/baselines/garbage-at-end.baseline, tnef/tests/files/datafiles/garbage-at-end.list, tnef/tests/files/datafiles/garbage-at-end.tnef, tnef/tests/files/garbage-at-end.test:
-	New file.
+  * src/attr.c, src/path.c, src/tnef.c: fixing new warnings
 
-	* tests/files/baselines/garbage-at-end.baseline, tests/files/datafiles/garbage-at-end.list, tests/files/datafiles/garbage-at-end.tnef, tests/files/garbage-at-end.test, tnef/tests/files/baselines/garbage-at-end.baseline, tnef/tests/files/datafiles/garbage-at-end.list, tnef/tests/files/datafiles/garbage-at-end.tnef, tnef/tests/files/garbage-at-end.test:
-	new test for 'garbage at end' problem
+  * src/ConvertUTF.c, src/ConvertUTF.h, src/util.c, src/util.h: using public
+  domain utf conversion
 
-	* src/replace/dummy.c, tnef/src/replace/dummy.c: New file.
+2009-08-25  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, src/attr.c, src/attr.h, src/common.h, src/debug.c, src/file.c,
+  src/file.h, src/main.c, src/mapi_attr.c, src/mkdata.awk, src/options.c,
+  src/options.h, src/path.c, src/path.h, src/rtf.c, src/tnef.c,
+  tests/cmdline/body.baseline, tests/cmdline/debug.baseline,
+  tests/cmdline/help.baseline, tests/cmdline/list.baseline,
+  tests/cmdline/maxsize.baseline, tests/cmdline/mime-types.baseline,
+  tests/cmdline/rtf-test.rtf.baseline, tests/cmdline/stdin.baseline,
+  tests/cmdline/triples-test-2.rtf.baseline, tests/cmdline/verbose.baseline,
+  .../MAPI_ATTACH_DATA_OBJ-body.rtf.baseline,
+  .../files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+  .../files/baselines/MAPI_OBJECT-body.rtf.baseline,
+  tests/files/baselines/MAPI_OBJECT.baseline,
+  tests/files/baselines/body.baseline,
+  .../baselines/data-before-name-body.rtf.baseline,
+  tests/files/baselines/data-before-name.baseline,
+  tests/files/baselines/garbage-at-end.baseline,
+  .../baselines/long-filename-body.rtf.baseline,
+  tests/files/baselines/long-filename.baseline,
+  .../baselines/missing-filenames-body.rtf.baseline,
+  tests/files/baselines/missing-filenames.baseline,
+  tests/files/baselines/multi-name-property.baseline,
+  tests/files/baselines/one-file.baseline,
+  tests/files/baselines/rtf-body.rtf.baseline,
+  tests/files/baselines/rtf.baseline,
+  tests/files/baselines/triples-body.rtf.baseline,
+  tests/files/baselines/triples.baseline,
+  tests/files/baselines/two-files.baseline, tnef.spec.in: accepting changes
+  from Randy Diffenderfer
 
-	* src/replace/dummy.c, tnef/src/replace/dummy.c:
-	new dummy file/function to ensure that libreplace.a is never empty
+2009-01-01  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
 
-	* tests/files/Makefile.am, tnef/tests/files/Makefile.am:
-	New test for the 'garbage at end' problem
+  * contrib/tnef-alpine.perl, contrib/tnef-alpine.perl.README: Adding PERL
+  helper script to link alpine and tnef. Contributed by Urs Schuerer
 
-	* src/replace/Makefile.am, tnef/src/replace/Makefile.am:
-	New dummy file/function so that libreplace.a is never empty
+2008-12-28  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
 
-	* src/tnef.c, tnef/src/tnef.c:
-	removing sys/stat.h -- that is now in common.h
+  * NEWS, configure.in, tests/cmdline/version.baseline: changing version to 2.0
 
-	* src/common.h, tnef/src/common.h: conditionally including sys/stat.h
+  * ChangeLog, configure.in, src/app/Makefile.am, src/attr.c,
+  src/lib/Makefile.am, src/lib/alloc.c, src/lib/alloc.h, src/lib/attr.c,
+  src/lib/io.c, src/lib/io.h, src/lib/mapi-names.data, src/lib/mapi-types.data,
+  src/lib/mapi.c, src/lib/mkdata.awk, src/lib/tnef-names.data,
+  src/lib/tnef-types.data, src/lib/tnef.c, src/lib/tnef.h, src/util.c,
+  src/util.h, tests/cmdline/version.baseline,
+  tests/files/baselines/Makefile.am: merging from v1.4.5 to trunk
 
-	* configure.in, tnef/configure.in:
-	Adding AC_HEADER_STAT - used in tnef.c.
+2008-11-28  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
 
-2006-04-23  verdammelt  <verdammelt@freya>
+  * ChangeLog, configure.in, tests/cmdline/version.baseline: changing version
+  to 2.0
 
-	* src/tnef.c, tnef/src/tnef.c (get_body_files):
-	correcting mistake in allocation of File pointers.
-	Was allocating objects of type FILE not File!
+  * ChangeLog, INSTALL, NEWS, README, configure.in, depcomp, doc/tnef.1.in,
+  install-sh, missing, mkinstalldirs, src/attr.c, src/main.c, src/mapi_attr.c,
+  src/options.h, src/tnef.c, tests/cmdline/Makefile.am,
+  tests/cmdline/help.baseline, tests/cmdline/stdin.baseline,
+  tests/cmdline/stdin.test, tests/cmdline/version.baseline,
+  tests/files/Makefile.am, tnef.spec.in: merging from 1.4.5
+
+  * configure.in, src/Makefile.am, src/attr.c, src/util.c, src/util.h: Getting
+  the mainline code to work again
+
+2008-09-28  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * NEWS, configure.in, tests/cmdline/version.baseline: Releasing v1.4.5 with
+  bug fix
+
+  * src/tnef.c, tests/cmdline/Makefile.am, tests/cmdline/stdin.baseline,
+  tests/cmdline/stdin.test: fixing bug 2126695
+
+2008-03-28  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * src/attr.c, src/main.c, src/mapi_attr.c, src/options.h,
+  tests/cmdline/help.baseline: Applying ignore checksum patch.  Adds new
+  command line option for changing checksum errors into warnings
+
+2008-02-25  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * INSTALL, README, depcomp, install-sh, missing, mkinstalldirs: updating
+  build artefacts
+
+  * configure.in, src/main.c, tests/cmdline/version.baseline, tnef.spec.in:
+  increasing version number and updating copyright year
+
+2006-12-30  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * configure.in, src/app/Makefile.am, src/lib/Makefile.am, src/lib/alloc.c,
+  src/lib/alloc.h, src/lib/attr.c, src/lib/io.c, src/lib/io.h,
+  src/lib/mapi-names.data, src/lib/mapi-types.data, src/lib/mapi.c,
+  src/lib/mkdata.awk, src/lib/tnef-names.data, src/lib/tnef-types.data,
+  src/lib/tnef.c, src/lib/tnef.h: initial checkin of libtnef code
+
+  * src/Makefile.am, src/xstrdup.c: removing xstrdup.c
+
+2006-10-16  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, NEWS, src/Makefile.am, src/mapi_attr.c,
+  tests/cmdline/body.baseline, tests/files/baselines/body.baseline,
+  tnef.spec.in: merging from v1.4.3
+
+2006-08-25  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * NEWS, configure.in: incremeting version
+
+  * tests/cmdline/version.baseline, tests/files/baselines/body.baseline: Fixing
+  baseline given code changes
 
-	* src/file.c, tnef/src/file.c (file_add_mapi_attrs):
-	fixing allocation of mime_types to be the
-	correct size.
+2006-08-06  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
 
-2006-04-23  verdammelt  <verdammelt@freya>
-
-	* NEWS: Adding info about v1.4.1
-
-	* configure.in: Updating version number
-
-	* tests/cmdline/version.baseline:
-	Updating test baseline for new version number
-
-	* tests/cmdline/help.baseline:
-	Updating test baseline to expect --list-with-mime-types option
-
-	* tests/cmdline/Makefile.am: New tests for mime-type feature
-
-	* tests/cmdline/mime-types.test: New file.
-
-	* tests/cmdline/mime-types.test: New tests for mime-type feature
-
-	* tests/cmdline/mime-types.baseline: New file.
-
-	* tests/cmdline/mime-types.baseline: New tests for mime-type feature
-
-	* src/options.c: (g_flags) changing to int from int8.
-
-	* src/options.h: new LISTMIME option.
-
-	* src/main.c (USAGE):
-	new --list-with-mime-types added to usage statement
-	(parse_cmdline): handling --list-with-mime-types
-
-	* src/file.h: (struct File) New mime_type member.
-
-	* src/file.c (file_write):
-	Adding optional printing of mime type with filename.
-	(file_add_mapi_attrs): Handling of MAPI_ATTACH_MIME_TAG to save the
-	MIME type of the file.
-	(file_free): Freeing the new mime-type.
-
-2006-03-20  verdammelt  <verdammelt@freya>
-
-	* tests/cmdline/body.baseline, tests/cmdline/maxsize.baseline, tests/cmdline/maxsize.test, tests/cmdline/version.baseline, tests/files/Makefile.am, tests/files/baselines/Makefile.am, tests/files/baselines/data-before-name.baseline, tests/files/baselines/multi-name-property.baseline, tests/files/baselines/triples.baseline, tests/files/datafiles/Makefile.am, tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef, tests/files/multi-name-property.test, ChangeLog, NEWS, TODO, configure.in, src/Makefile.am, src/alloc.c, src/alloc.h, src/attr.c, src/attr.h, src/common.h, src/date.c, src/date.h, src/debug.c, src/debug.h, src/file.c, src/file.h, src/main.c, src/mapi_attr.c, src/mapi_attr.h, src/mkdata.awk, src/options.c, src/options.h, src/path.c, src/path.h, src/replace/Makefile.am, src/replace/basename.c, src/replace/ldiv.c, src/replace/ldiv.h, src/replace/malloc.c, src/replace/strdup.c, src/rtf.c, src/rtf.h, src/tnef-names.data, src/tnef.c, src/tnef.h, src/util.c, src/util.h, src/xstrdup.c:
-	merging from v1.4
-
-2006-03-18  verdammelt  <verdammelt@freya>
-
-        * NEWS: Release of v1.4
-
-	* tests/files/baselines/Makefile.am, tests/files/datafiles/Makefile.am:
-	adding files to dist.
-
-2006-03-12  verdammelt  <verdammelt@freya>
-
-	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
-	New file.
-
-	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
-	adding test for handling of multi-name properties
-
-	* tests/files/baselines/multi-name-property.baseline: New file.
-
-	* tests/files/baselines/multi-name-property.baseline:
-	adding test for handling of multi-name properties
-
-	* tests/files/multi-name-property.test: New file.
-
-	* tests/files/Makefile.am, tests/files/multi-name-property.test:
-	adding test for handling of multi-name properties
-
-	* tests/cmdline/maxsize.baseline, tests/cmdline/maxsize.test:
-	tweaking maxsize tests to overcome co-incidence on 64 bit and alpha arch.
-
-2006-03-12  verdammelt  <verdammelt@freya>
-
-	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
-	New file.
-
-	* tests/files/datafiles/multi-name-property.list, tests/files/datafiles/multi-name-property.tnef:
-	adding test for handling of multi-name properties
-
-	* tests/files/baselines/multi-name-property.baseline: New file.
-
-	* tests/files/baselines/multi-name-property.baseline:
-	adding test for handling of multi-name properties
-
-	* tests/files/multi-name-property.test: New file.
-
-	* tests/files/Makefile.am, tests/files/multi-name-property.test:
-	adding test for handling of multi-name properties
-
-	* tests/cmdline/maxsize.baseline, tests/cmdline/maxsize.test:
-	tweaking maxsize tests to overcome co-incidence on 64 bit and alpha arch.
-
-2006-03-07  verdammelt  <verdammelt@freya>
-
-	* date.c:
-	date_to_str: increasing buffer size to remove problem with buffer
-	overrun
-
-2006-03-06  verdammelt  <verdammelt@freya>
-
-	* mkdata.awk: fixing syntax error
-
-	* Makefile.am: missing write.h
-
-2006-03-04  verdammelt  <verdammelt@freya>
-
-	* replace/Makefile.am: removing ldiv.h from distributed sources
-
-2006-02-20  verdammelt  <verdammelt@freya>
-
-	* replace/strdup.c, replace/malloc.c, replace/basename.c, xstrdup.c, util.h, util.c, tnef.h, tnef.c, rtf.h, rtf.c, path.h, path.c, options.h, options.c, mkdata.awk, mapi_attr.h, mapi_attr.c, main.c, file.h, file.c, debug.h, debug.c, date.h, date.c, common.h, attr.h, attr.c, alloc.h, alloc.c:
-	Updating copyright statement.
-
-	* replace/ldiv.h, replace/ldiv.c: no longer needed
-
-	* mapi_attr.c:
-	Removing ldiv, user contributed another way to compute padding size
-	Fixing parsing of mapi attributes with respect to multi-value
-	properties
-
-	* mapi_attr.h: Adding defines to help with parsing of mapi attrs
-
-	* rtf.c, tnef-names.data: Fixing typo
-
-2006-02-20  verdammelt  <verdammelt@freya>
-
-	* NEWS: updating NEWS
-
-	* tests/cmdline/version.baseline, src/replace/strdup.c, src/replace/malloc.c, src/replace/basename.c, src/xstrdup.c, src/util.h, src/util.c, src/tnef.h, src/tnef.c, src/rtf.h, src/rtf.c, src/path.h, src/path.c, src/options.h, src/options.c, src/mkdata.awk, src/mapi_attr.h, src/mapi_attr.c, src/main.c, src/file.h, src/file.c, src/debug.h, src/debug.c, src/date.h, src/date.c, src/common.h, src/attr.h, src/attr.c, src/alloc.h, src/alloc.c:
-	Updating copyright statement.
-
-	* src/replace/ldiv.h, src/replace/ldiv.c: no longer needed
-
-	* TODO: updating TODO
-
-	* src/mapi_attr.c:
-	Removing ldiv, user contributed another way to compute padding size
-	Fixing parsing of mapi attributes with respect to multi-value
-	properties
-
-	* src/mapi_attr.h: Adding defines to help with parsing of mapi attrs
-
-	* configure.in: Removing ldiv
-
-	* tests/files/baselines/triples.baseline, tests/files/baselines/data-before-name.baseline, tests/cmdline/body.baseline, src/rtf.c, src/tnef-names.data:
-	Fixing typo
-
-2005-10-14  verdammelt  <verdammelt@freya>
-
-	* NEWS: Merging from v1.3.x and adding v1.4 base info
-
-	* src/rtf.h: changing buffers to be unsigned char*
-
-	* src/rtf.c: changing buffers to be unsigned char*
-	(decompress_rtf_data): merging bug fix from v1.3.4
-
-	* src/util.h, src/util.c, src/tnef.c, src/mapi_attr.h, src/mapi_attr.c, src/file.h, src/file.c, src/date.h, src/date.c, src/attr.h, src/attr.c:
-	changing buffers to be unsigned char*
-
-	* tests/files/baselines/two-files.baseline, tests/files/baselines/triples-body.rtf.baseline, tests/files/baselines/triples.baseline, tests/files/baselines/rtf-body.rtf.baseline, tests/files/baselines/rtf.baseline, tests/files/baselines/one-file.baseline, tests/files/baselines/missing-filenames-body.rtf.baseline, tests/files/baselines/missing-filenames.baseline, tests/files/baselines/MAPI_OBJECT-body.rtf.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline, tests/files/baselines/long-filename-body.rtf.baseline, tests/files/baselines/long-filename.baseline, tests/files/baselines/data-before-name-body.rtf.baseline, tests/files/baselines/body.baseline:
-	Changes to debug output including new MAPI name definitions and
-	corrected rtf output.
-
-	* tests/cmdline/triples-test-2.rtf.baseline, tests/cmdline/rtf-test.rtf.baseline, tests/cmdline/body.baseline:
-	Changes to debug output including new MAPI name definitions.
-
-2005-10-13  verdammelt  <verdammelt@freya>
-
-	* tests/cmdline/maxsize.baseline, tests/cmdline/debug.baseline:
-	Additional MAPI attribute names
-
-	* contrib/evolution.helper.README, contrib/evolution.helper:
-	New files from v1.3
-
-	* .cvsignore: adding BUGS to ignore list
-
-	* tests/files/baselines/Makefile.am, tests/files/baselines/body-body.html.baseline, tests/files/baselines/body.baseline, tests/files/baselines/data-before-name-body.rtf.baseline, tests/files/baselines/data-before-name.baseline, tests/files/baselines/long-filename-body.rtf.baseline, tests/files/baselines/long-filename.baseline, tests/files/baselines/missing-filenames-body.rtf.baseline, tests/files/baselines/missing-filenames.baseline, tests/files/baselines/rtf-body.rtf.baseline, tests/files/baselines/triples-body.rtf.baseline, tests/files/datafiles/MAPI_ATTACH_DATA_OBJ.list, tests/files/datafiles/MAPI_OBJECT.list, tests/files/datafiles/Makefile.am, tests/files/datafiles/body.list, tests/files/datafiles/body.tnef, tests/files/datafiles/data-before-name.list, tests/files/datafiles/long-filename.list, tests/files/datafiles/missing-filenames.list, tests/files/datafiles/rtf.list, tests/files/datafiles/triples.list, doc/tnef.1.in, src/main.c, src/mapi-names.data, src/options.h, src/rtf.c, src/tnef.c, src/tnef.h, src/util.c, src/util.h, tests/cmdline/Makefile.am, tests/cmdline/body-test.html.baseline, tests/cmdline/body.baseline, tests/cmdline/body.test, tests/cmdline/help.baseline, tests/cmdline/message.html.baseline, tests/cmdline/rtf-test.rtf.baseline, tests/cmdline/triples-test-2.rtf.baseline, tests/cmdline/triples-test-2.txt.baseline, tests/cmdline/triples-test.txt.baseline, tests/files/Makefile.am, tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline, tests/files/baselines/MAPI_OBJECT-body.rtf.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/body.test, tests/files/file-util.sh, ChangeLog, NEWS, configure.in, tnef.spec.in:
-	checking in old merge from v1.3
-
-2005-10-11  verdammelt  <verdammelt@freya>
-
-	* Release v1.3.4
-
-        * ChangeLog: New version
-
-	* configure.in, tests/cmdline/version.baseline: fixing version number
-
-	* tests/files/baselines/triples-body.rtf.baseline, tests/files/baselines/rtf-body.rtf.baseline, tests/files/baselines/missing-filenames-body.rtf.baseline, tests/files/baselines/MAPI_OBJECT-body.rtf.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline, tests/files/baselines/long-filename-body.rtf.baseline, tests/files/baselines/data-before-name-body.rtf.baseline, tests/cmdline/triples-test-2.rtf.baseline, tests/cmdline/rtf-test.rtf.baseline:
-	updating RTF file baselines given new RTF decompression fix.
-
-2005-10-10  verdammelt  <verdammelt@freya>
-
-	* src/tnef.c:
-	Changing various 'char*' declarations for binary data to 'unsigned
-	char*' to fix compiler warnings.
-
-	* src/tnef.c (decompress_rtf_buf):
-	fixing bug #1318728 (problem with length during
-	uncompressing of rtf data)
-
-2005-10-08  verdammelt  <verdammelt@freya>
-
-	* contrib/evolution.helper, contrib/evolution.helper.README:
-	Adding contrib diretory with evolution helper script to begin with.
-
-	* contrib/evolution.helper, contrib/evolution.helper.README: New file.
-
-2005-05-17  verdammelt  <verdammelt@freya>
-
-        * Release v1.3.3
-
-	* NEWS, configure.in, ChangeLog: New version
-
-	* src/main.c: (parse_cmdline): fixing small bug in shifting
-	argument to all lowercase.
-
-	* tests/cmdline/Makefile.am,
-	* tests/files/datafile/Makefile.am,
-	* tests/files/baselines/Makefile.am:
-	New items for distribution.
-
-	* acinclude.m4: (AC_COMPILE_WARNINGS, AC_DEBUG_COMPILE) fixing
-	quoting warning.
-
-	* doc/tnef.1.in: Updating document for new --save-body and
-	--body-pref feature.
-
-
-	* tnef.spec.in:
-	[Bug# 1200197] fix from John Simpson <jms1@users.sf.net>
-
-2005-05-16  verdammelt  <verdammelt@freya>
-
-	* tests/files/baselines/rtf2.baseline,
-	* tests/files/datafiles/rtf2.list,
-	* tests/files/datafiles/rtf2.tnef,
-	* tests/files/rtf2.test:
-	rtf2 test superceeded body test
-
-	* tests/files/baselines/body.baseline: new body baseline
-
-	* tests/cmdline/body.baseline,
-	* tests/files/baselines/triples-body.rtf.baseline,
-	* tests/files/datafiles/body.list:
-	new baselines & test data
-
-	* tests/cmdline/body.test, tests/files/body.test:
-	new tests for body feature
-
-	* src/tnef.c:
-	new function get_text_data encapsulating code to get text message
-	body
-
-	* src/main.c: initializing i
-
-	* tests/cmdline/triples-test.txt.baseline,
-	* tests/cmdline/triples-test-2.txt.baseline,
-	* tests/cmdline/triples-test-2.rtf.baseline,
-	* tests/cmdline/rtf-test.rtf.baseline,
-	* tests/cmdline/message.html.baseline,
-	* tests/cmdline/Makefile.am,
-	* tests/cmdline/body-test.html.baseline:
-	new --save-body test and use of it in other tests.
-
-	* tests/files/datafiles/triples.list,
-	* tests/files/datafiles/rtf.list,
-	* tests/files/datafiles/missing-filenames.list,
-	* tests/files/datafiles/MAPI_OBJECT.list,
-	* tests/files/datafiles/MAPI_ATTACH_DATA_OBJ.list,
-	* tests/files/datafiles/long-filename.list,
-	* tests/files/datafiles/data-before-name.list,
-	* tests/files/datafiles/body.tnef,
-	* tests/files/baselines/triples.baseline,
-	* tests/files/baselines/rtf-body.rtf.baseline,
-	* tests/files/baselines/rtf.baseline,
-	* tests/files/baselines/missing-filenames-body.rtf.baseline,
-	* tests/files/baselines/missing-filenames.baseline,
-	* tests/files/baselines/MAPI_OBJECT-body.rtf.baseline,
-	* tests/files/baselines/MAPI_OBJECT.baseline,
-	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline,
-	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
-	* tests/files/baselines/long-filename-body.rtf.baseline,
-	* tests/files/baselines/long-filename.baseline,
-	* tests/files/baselines/data-before-name-body.rtf.baseline,
-	* tests/files/baselines/data-before-name.baseline,
-	* tests/files/baselines/body-body.html.baseline,
-	* tests/files/Makefile.am,
-	* tests/files/file-util.sh :
-	New test for body files.
-	Updating other tests to use the --save-body switch (new baselines etc.)
-
-2005-05-04  verdammelt  <verdammelt@freya>
-
-	* tests/files/baselines/long-filename.baseline, tests/files/baselines/missing-filenames.baseline, tests/files/baselines/one-file.baseline, tests/files/baselines/rtf.baseline, tests/files/baselines/two-files.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline:
-	Updating baselines for new named attributes
-
-	* tests/files/baselines/rtf2.baseline, tests/files/rtf2.test:
-	Updating rtf body saving test with new preferences
-
-	* tests/cmdline/debug.baseline, tests/cmdline/help.baseline, tests/cmdline/maxsize.baseline:
-	Updating baselines for new named attributes
-
-	* src/tnef.c:
-	Saving the body whether it is text, rtf, or html.  Using body_pref
-	feature to determine which order to try to save in (or save all of
-	them).
-
-	* src/main.c:
-	Making the --save-rtf feature a more general --save-body feature.
-	This entails adding a --body-pref flag which specifies the preference
-	for the type of body to save (an ordering).  This preference must be
-	validated.
-
-	* src/tnef.h:
-	Making the --save-rtf feature a more general --save-body feature
-
-	* src/mapi-names.data:
-	Adding new-found names.  Most important is MAPI_BODY_HTML (0x1013)
-
-2005-04-23  verdammelt  <verdammelt@freya>
-
-	* tnef.c: fixing memory leak with GUID
-
-2005-03-07  verdammelt  <verdammelt@freya>
-
-	* main.c: ignoring negative maxsize options
-
-	* common.h: moving formatting macros to write.c
-
-	* mapi_attr.c: using new copy_guid_from_attr function
-
-	* write.h, write.c: New output methods for signed integers
-	Updating other output methods
-
-2005-03-05  verdammelt  <verdammelt@freya>
-
-        * Release v1.3.2
-
-	* ChangeLog: update again.
-
-	* maxsize.baseline: Updating baseline to match proper output
-
-2005-02-22  verdammelt  <verdammelt@freya>
-
-        * NEWS, ChangeLog, configure.in: new version
-
-	* tests/cmdline/version.baseline: new version
-
-	* tests/cmdline/maxsize.test: refixing
-
-2005-02-13  verdammelt  <verdammelt@freya>
-
-	* tests/cmdline/maxsize.test, tests/cmdline/maxsize.baseline:
-	Changing initial tests from 23 bytes to 25 bytes because on 64 bit
-	systems the sizeof(Attr) is 24 bytes itself, was causing the test to
-	fail due to different output (but not incorrect program
-	operation). [Bug# 1121539]
-
-2005-02-12  verdammelt  <verdammelt@freya>
-
-	* src/main.c (parse_cmdline):
-	ignoring negative values to maxsize option. [Bug# 1121539]
-
-2005-02-11  verdammelt  <verdammelt@freya>
-
-	* tnef.c (copy_guid_from_buf):
-	[Bug# 1117373].  New function to parse a GUID
-	from a character buffer correctly; big endian machines interpreted it
-	incorrectly, forcing to be dealt with as little endian number.
-
-	(decode_mapi): Use of new function
-
-	(dump_mapi_attr): Fixing compiler warnings
-
-2005-02-07  verdammelt  <verdammelt@freya>
-
-	* configure.in: adding stroul to checked functions
-
-	* configure.in, src/basename.h, src/basename.c:
-	[Bug# 1109683] - fixing declaration of basename
-
-2005-02-05  verdammelt  <verdammelt@freya>
-
-        * Release v1.3.1
-
-	* tests/cmdline/version.baseline:
-	removing extra spaces which screwed up the test
-
-2005-02-01  verdammelt  <verdammelt@freya>
-
-        * ChangeLog, NEWS: new version
-
-	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline:
-	Fixing boolean output changes the baseline.
-
-	* tests/cmdline/version.baseline, configure.in: Bump the version number
-
-	* src/tnef.c (MAPI_GUID):
-	changed member types to ensure portability to 64 bit
-	system
-	(dump_mapi_attr): Fixed printing of boolean, Mac & Sparc platforms was
-	showing incorect value.
-	(decode_mapi): removed bogus C++ style comments
-	(save_rtf_data): C doesn't allow mixing declarations and statements
-	but GCC lets you!
-
-	* tnef.spec.in:
-	 made changes as suggested by jmsl@users.sf.net [BUG: #1102128]
-
-	* src/main.c: Updating copyright date
-
-2005-05-17  verdammelt  <verdammelt@freya>
-
-        * Release v1.3.3
-
-	* NEWS, configure.in, ChangeLog: New version
-
-	* src/main.c: (parse_cmdline): fixing small bug in shifting
-	argument to all lowercase.
-
-	* tests/cmdline/Makefile.am,
-	* tests/files/datafile/Makefile.am,
-	* tests/files/baselines/Makefile.am:
-	New items for distribution.
-
-	* acinclude.m4: (AC_COMPILE_WARNINGS, AC_DEBUG_COMPILE) fixing
-	quoting warning.
-
-	* doc/tnef.1.in: Updating document for new --save-body and
-	--body-pref feature.
-
-
-	* tnef.spec.in:
-	[Bug# 1200197] fix from John Simpson <jms1@users.sf.net>
-
-2005-05-16  verdammelt  <verdammelt@freya>
-
-	* tests/files/baselines/rtf2.baseline,
-	* tests/files/datafiles/rtf2.list,
-	* tests/files/datafiles/rtf2.tnef,
-	* tests/files/rtf2.test:
-	rtf2 test superceeded body test
-
-	* tests/files/baselines/body.baseline: new body baseline
-
-	* tests/cmdline/body.baseline,
-	* tests/files/baselines/triples-body.rtf.baseline,
-	* tests/files/datafiles/body.list:
-	new baselines & test data
-
-	* tests/cmdline/body.test, tests/files/body.test:
-	new tests for body feature
-
-	* src/tnef.c:
-	new function get_text_data encapsulating code to get text message
-	body
-
-	* src/main.c: initializing i
-
-	* tests/cmdline/triples-test.txt.baseline,
-	* tests/cmdline/triples-test-2.txt.baseline,
-	* tests/cmdline/triples-test-2.rtf.baseline,
-	* tests/cmdline/rtf-test.rtf.baseline,
-	* tests/cmdline/message.html.baseline,
-	* tests/cmdline/Makefile.am,
-	* tests/cmdline/body-test.html.baseline:
-	new --save-body test and use of it in other tests.
-
-	* tests/files/datafiles/triples.list,
-	* tests/files/datafiles/rtf.list,
-	* tests/files/datafiles/missing-filenames.list,
-	* tests/files/datafiles/MAPI_OBJECT.list,
-	* tests/files/datafiles/MAPI_ATTACH_DATA_OBJ.list,
-	* tests/files/datafiles/long-filename.list,
-	* tests/files/datafiles/data-before-name.list,
-	* tests/files/datafiles/body.tnef,
-	* tests/files/baselines/triples.baseline,
-	* tests/files/baselines/rtf-body.rtf.baseline,
-	* tests/files/baselines/rtf.baseline,
-	* tests/files/baselines/missing-filenames-body.rtf.baseline,
-	* tests/files/baselines/missing-filenames.baseline,
-	* tests/files/baselines/MAPI_OBJECT-body.rtf.baseline,
-	* tests/files/baselines/MAPI_OBJECT.baseline,
-	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ-body.rtf.baseline,
-	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
-	* tests/files/baselines/long-filename-body.rtf.baseline,
-	* tests/files/baselines/long-filename.baseline,
-	* tests/files/baselines/data-before-name-body.rtf.baseline,
-	* tests/files/baselines/data-before-name.baseline,
-	* tests/files/baselines/body-body.html.baseline,
-	* tests/files/Makefile.am,
-	* tests/files/file-util.sh :
-	New test for body files.
-	Updating other tests to use the --save-body switch (new baselines etc.)
-
-2005-05-04  verdammelt  <verdammelt@freya>
-
-	* tests/files/baselines/long-filename.baseline, tests/files/baselines/missing-filenames.baseline, tests/files/baselines/one-file.baseline, tests/files/baselines/rtf.baseline, tests/files/baselines/two-files.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline:
-	Updating baselines for new named attributes
-
-	* tests/files/baselines/rtf2.baseline, tests/files/rtf2.test:
-	Updating rtf body saving test with new preferences
-
-	* tests/cmdline/debug.baseline, tests/cmdline/help.baseline, tests/cmdline/maxsize.baseline:
-	Updating baselines for new named attributes
-
-	* src/tnef.c:
-	Saving the body whether it is text, rtf, or html.  Using body_pref
-	feature to determine which order to try to save in (or save all of
-	them).
-
-	* src/main.c:
-	Making the --save-rtf feature a more general --save-body feature.
-	This entails adding a --body-pref flag which specifies the preference
-	for the type of body to save (an ordering).  This preference must be
-	validated.
-
-	* src/tnef.h:
-	Making the --save-rtf feature a more general --save-body feature
-
-	* src/mapi-names.data:
-	Adding new-found names.  Most important is MAPI_BODY_HTML (0x1013)
-
-2005-04-23  verdammelt  <verdammelt@freya>
-
-	* tnef.c: fixing memory leak with GUID
-
-2005-03-07  verdammelt  <verdammelt@freya>
-
-	* main.c: ignoring negative maxsize options
-
-	* common.h: moving formatting macros to write.c
-
-	* mapi_attr.c: using new copy_guid_from_attr function
-
-	* write.h, write.c: New output methods for signed integers
-	Updating other output methods
-
-2005-03-05  verdammelt  <verdammelt@freya>
-
-        * Release v1.3.2
-
-	* ChangeLog: update again.
-
-	* maxsize.baseline: Updating baseline to match proper output
-
-2005-02-22  verdammelt  <verdammelt@freya>
-
-        * NEWS, ChangeLog, configure.in: new version
-
-	* tests/cmdline/version.baseline: new version
-
-	* tests/cmdline/maxsize.test: refixing
-
-2005-02-13  verdammelt  <verdammelt@freya>
-
-	* tests/cmdline/maxsize.test, tests/cmdline/maxsize.baseline:
-	Changing initial tests from 23 bytes to 25 bytes because on 64 bit
-	systems the sizeof(Attr) is 24 bytes itself, was causing the test to
-	fail due to different output (but not incorrect program
-	operation). [Bug# 1121539]
-
-2005-02-12  verdammelt  <verdammelt@freya>
-
-	* src/main.c (parse_cmdline):
-	ignoring negative values to maxsize option. [Bug# 1121539]
-
-2005-02-11  verdammelt  <verdammelt@freya>
-
-	* tnef.c (copy_guid_from_buf):
-	[Bug# 1117373].  New function to parse a GUID
-	from a character buffer correctly; big endian machines interpreted it
-	incorrectly, forcing to be dealt with as little endian number.
-
-	(decode_mapi): Use of new function
-
-	(dump_mapi_attr): Fixing compiler warnings
-
-2005-02-07  verdammelt  <verdammelt@freya>
-
-	* configure.in: adding stroul to checked functions
-
-	* configure.in, src/basename.h, src/basename.c:
-	[Bug# 1109683] - fixing declaration of basename
-
-2005-02-05  verdammelt  <verdammelt@freya>
-
-        * Release v1.3.1
-
-	* tests/cmdline/version.baseline:
-	removing extra spaces which screwed up the test
-
-2005-02-01  verdammelt  <verdammelt@freya>
-
-        * ChangeLog, NEWS: new version
-
-	* tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline:
-	Fixing boolean output changes the baseline.
-
-	* tests/cmdline/version.baseline, configure.in: Bump the version number
-
-	* src/tnef.c (MAPI_GUID):
-	changed member types to ensure portability to 64 bit
-	system
-	(dump_mapi_attr): Fixed printing of boolean, Mac & Sparc platforms was
-	showing incorect value.
-	(decode_mapi): removed bogus C++ style comments
-	(save_rtf_data): C doesn't allow mixing declarations and statements
-	but GCC lets you!
-
-	* tnef.spec.in:
-	 made changes as suggested by jmsl@users.sf.net [BUG: #1102128]
-
-	* src/main.c: Updating copyright date
-
-2005-01-15  verdammelt  <verdammelt@freya>
-
-	* tnef.1.in: adding info about --save-rtf
-
-2005-01-13  verdammelt  <verdammelt@freya>
-
-	* src/tnef.c:
-	(decode_mapi) initial parsing of multi-named GUID prefixed
-	properties.
-
-2004-11-15  verdammelt  <verdammelt@freya>
-
-	* src/tnef.c (munge_fname): length parameter is unecessary.
-	(decode_mapi): removing unused parameter
-	(decode_mapi): using real length for attribute length and skipping
-	over pad instead of acting like the actual data length was the padded
-	length.
-	(save_rtf_data): properly 'munging' the name to get the directory
-	(file_add_mapi_attrs): new munge_fname signature
-	(file_add_attr): new munge_fname signature
-
-	* configure.in: upping the version number
-
-	* tests/cmdline/version.baseline: updating version number
-
-	* tests/cmdline/Makefile.am:
-	commenting out the not-yet-implemented tests
-
-	* tests/files/Makefile.am, tests/files/rtf2.test, tests/files/baseline/message.rtf.baseline, tests/files/baseline/rtf2.baseline, tests/files/datafiles/rtf2.list:
-	new test for the --save-rtf switch
-
-	* tests/files/file-util.sh:
-	(run_test) adding TEST_EXTRA_FLAGS for the rtf2 test
-
-	* tests/files/baselines/two-files.baseline, tests/files/baselines/triples.baseline, tests/files/baselines/rtf.baseline, tests/files/baselines/one-file.baseline, tests/files/baselines/missing-filenames.baseline, tests/files/baselines/long-filename.baseline, tests/files/baselines/data-before-name.baseline, tests/files/baselines/VIA_Nytt_14021.htm.baseline, tests/files/baselines/VIA_Nytt_1402.pdf.baseline, tests/files/baselines/MAPI_OBJECT.baseline, tests/files/baselines/MAPI_ATTACH_DATA_OBJ.baseline, tests/cmdline/maxsize.baseline, tests/cmdline/help.baseline, tests/cmdline/debug.baseline:
-	New baselines due to new message attribute parsing
-
-	* src/main.c:
-	(parse_cmdline) PACKAGE is no longer valid, PACKAGE_NAME needs to be
-	used instead
-
-	* tests/util.sh: (check_test_full) capturing stderr as well as stdout
-
-2004-11-13  verdammelt  <verdammelt@freya>
-
-	* README: adding a bit more explanation
-
-	* src/tnef.c:
-	adding parsing of message attributes and parsing of RTF message content
-
-	* src/tnef.h, src/main.c: adding save-rtf feature
-
-2004-02-16  verdammelt  <verdammelt@freya>
-
-	* src/tnef.c, src/malloc.c, src/ldiv.c, src/getopt_long.c:
-	VC6 compiler fixes reported by shooshx@users.sourceforge.net
-
-2004-01-09  verdammelt  <verdammelt@ix>
-
-	* configure.in, NEWS, ChangeLog: New Version
-	(fixing distribution errors)
-
-	* Makefile.am:
-	setting to gnu style since gnits style does not like the 1.2.3.1 style
-	version number
-
-	* tests/cmdline/version.baseline:
-	updating version baseline for new version
-
-	* doc/tnef.1.in:
-	Updates to clarify purpose of tnef program.  The original text seemed
-	to imply that tnef operated somehow upon the RTF markup data contained
-	in a MS-TNEF attachment (it does not address the RTF markup, but only
-	the contained attached files).
-
-	* tests/files/datafiles/Makefile.am, tests/files/baselines/Makefile.am:
-	triples files were missing from distribution.
-
-2003-12-24  Mark Simpson  <verdammelt@ix>
-
-	* configure.in, NEWS, ChangeLog: Release v1.2.3
-	New version
-
-	* tests/files/datafiles/triples.tnef:
-	* tests/files/datafiles/triples.list:
-	* tests/files/baselines/triples.baseline:
-	* tests/files/triples.test:
-	* tests/files/Makefile.am:
-	* tests/cmdline/version.baseline:
-	* tests/cmdline/maxsize.baseline:
-	maxsize and triplet printing tests
-
-	* src/tnef.c (decode_mapi):
-	handling szMAPI_UNSPECIFIED like szMAPI_BINARY etc.
-
-2003-06-17  Mark Simpson  <damned@theworld.com>
-
-	* TODO: New items in TODO list.
-
-	* tests/files/Makefile.am:
-	* tests/files/triples.test:
-	* tests/files/baseline/triples.baseline:
-	* tests/files/datafiles/triples.list:
-	* tests/files/datafiles/triples.tnef:
-	New test for dumping of szTRIPLES data.
-
-	* src/tnef.c (dump_attr): Adding decoding of szTRIPLE type for
-	dumping.
-
-	* src/tnef.h: Copyright header change.
-
-2003-05-22  Mark Simpson  <damned@theworld.com>
-
-	* doc/www/htdocs/Makefile.am:
-	* doc/www/htdocs/index.html.in:
-	* doc/www/htdocs/index.html:
-	Removed index.html.in and checked in index.html.  Will use Id CVS
-	keyword instead of 'building' the file to put the date in.
-
-2003-05-17  Mark Simpson  <damned@theworld.com>
-
-	* Makefile.am:
-	* configure.in:
-	* doc/Makefile.am:
-	* doc/www/.cvsignore:
-	* doc/www/Makefile.am:
-	* doc/www/cgi-bin/.cvsignore
-	* doc/www/cgi-bin/Makefile.am
-	* doc/www/htdocs/.cvsignore
-	* doc/www/htdocs/Makefile.am
-	* doc/www/htdocs/index.html
-	* doc/www/htdocs/style.css
-	First pass primitive web site for TNEF.  This is to be installed
-	at tnef.sourceforge.net
-
-	* doc/.cvsignore:
-	* src/.cvsignore:
-	* src/baseline.h:
-	* src/malloc.c:
-	These files had DOS line-endings.  Switched to Unix line endings.
-
-2003-05-16  Mark Simpson  <damned@theworld.com>
-
-	* doc/tnef.1.in:
-	* src/alloc.c:
-	* src/alloc.h:
-	* src/main.c:
-	* src/path.c:
-	* src/strdup.c:
-	* src/tnef.c:
-	* tests/cmdline/Makefile.am:
-	* tests/cmdline/help.baseline:
-	* tests/cmdline/maxsize.baseline:
-	* tests/cmdline/maxsize.test:
-	New command line option -x SIZE | --maxsize=SIZE.  New allocation
-	functions to use allocation limit given by these new command line
-	switches.  This can be used by the user to protect against
-	nefarious TNEF files.
-
-	* doc/tnef.1.c:
-	* src/main.c:
-	* tests/cmdline/help.baseline:
-	Removed deprecated command line options.
-
-	* src/tnef.c:
-	* tests/cmdline/debug.baseline:
-	* tests/file/MAPI_ATTACH_DATA_OBJ.baseline:
-	* tests/file/MAPI_OBJECT.baseline:
-	* tests/file/data-before-name.baseline:
-	* tests/file/long-filename.baseline:
-	* tests/file/missing-filenames.baseline:
-	* tests/one-file.baseline:
-	* tests/rtf.baseline:
-	* tests/two-files.baseline:
-	Added length to debug attribute output.  Tweaked MAPI attribute
-	debug output.
-
-2003-04-28  Mark Simpson  <damned@theworld.com>
-
-	* Release 1.2.1:
-
-	* News:
-	* configure.in:
-	New version.
-
-2003-03-30  Mark Simpson  <damned@theworld.com>
-
-	* src/tnef.c (copy_date_from_attr, dump_attr, dump_mapi_attr):
-	get_[tnef|mapi]_[name|type]_str return allocated buffer.  Must
-	call FREE.
-
-	* src/tnef.c (dump_mapi_attr): szMAPI_CLSID must be printed out
-	carefully.
-
-	* src/tnef.c (decode_mapi): no longer using memove for integer
-	type objects (sz_MAPI_SHORT, szMAPI_INT &c.).  this fixes an
-	endian problem. (bug: 712371).
-
-2003-03-06  Mark Simpson  <damned@theworld.com>
-
-	* tests/cmdline/*.test:
-	* tests/cmdline/*.baseline:
-	* tests/files/*.test:
-	* tests/files/*.baseline:
-	* tests/files/file-utils.sh:
-	* tests/util.sh:
-	Update scripts and baselines to use and expect $srcdir for all
-	paths. (bug: 698111)
-
-2003-03-02  Mark Simpson  <damned@theworld.com>
-
-	* Release 1.2.0:
-
-	* News:
-	* configure.in:
-	New version
-
-	* AUTHORS: Moved thanks message to THANKS file.
-
-	* THANKS: New file to keep gnits checking happy.
-
-	* Makefile.am (AUTOMAKE_OPTIONS): Changed to gnits.
-
-	* src/tnef.c (dump_mapi_attr): Dumping szMAPI_OBJECT like
-	sz_MAPI_BINARY so that the data is dumped, not the pointer to the
-	data.  Dumping the pointer value causes tests to fail randomly as
-	the address changes between runs.
-
-	* tests/*: Automated tests for command line arguments and data
-	files now added to tests directory.  Using automake's test
-	facility to run shell scripts.  They are organized into two
-	subdirectories.  One for command line parameter testing/general
-	features and the other for different sorts of data files.  Many
-	new files were added.
-
-2003-02-27  Mark Simpson  <damned@theworld.com>
-
-	* Release 1.1.5:
-	Code Cleanup
-	Help & Copyright statement cleanup
-	Inclusion of MAPI_OBJECT test file
-	Correction to MacOSX gettext link error.
-
-2002-12-10  Mark Simpson  <damned@theworld.com>
-
-        * Release 1.1.4:
-
-	* News:
-	* configure.in:
-	New version
-
-	* INSTALL:
-	* mkinstalldirs:
-	* install-sh:
-	Updated version.
-
-	* src/malloc.c: Adding simple fixed malloc implementation to cover
-	case that AC_FUNC_MALLOC test in configure.in
-
-	* src/tnef.c (dump_mapi_attr): Adding new types to dump function.
-	(decode_mapi): Handling szMAPI_OBJECT type.
-	(file_add_mapi_attrs): Handling MAPI_ATTACH_DATA_OBJ.
-
-2002-10-27  Mark Simpson  <damned@theworld.com>
-
-	* Release 1.1.3:
-
-	* News:
-	* configure.in:
-	New version
-
-	* src/getopt_long.c (getopt_long): Editing this copied code so
-	that when it is actually uesd it will work!
-
-	* src/basename.h, src/alloc.h, src/path.h: including config.h
-
-	* src/basename.h: always declare basename prototype.
-
-2002-09-15  Mark Simpson  <damned@theworld.com>
-
-	* lisp/*
-	Nearly functionally complete.
-
-2002-09-12  Mark Simpson  <damned@theworld.com>
-
-	* config.h.in: removed this generated file from the source tree.
-	Regenerate with autoheader.
-
-	* configure.in: Removed unnecessary AC_FUNC_STAT check (which
-	caused problems on Mac OSX).  Also removed old AM_PROG_CC_STDC
-	check.  (fixes bug 608075)
-
-	* tnef.spec.in (Packager): Fixing typo which kept
-	PACKAGE_BUGREPORT from being expanded.
-
-	* doc/tnef.1, doc/tnef.1.in:
-	Using configured bug reporting address in man page.  Removed the
-	old tnef.1 file.
-
-	* lisp: first version of a TNEF lisp library.  Bare-bones
-	functionality, can read in a an entire TNEF file but doesn't do
-	anything with it yet.
-
-	* src, src/Makefile.am: renamed names.data and types.data to
-	tnef-names.data and tnef-types.data respectively.
-
-2002-09-05  Mark Simpson  <damned@theworld.com>
-
-	* Release v1.1.2:
-
-	* News:
-	* configure.in:
-	New version.
-
-	* tests/MAPI_ATTACH_DATA_OBJ.tnef: new test file for bug fixed.
-
-2002-09-03  Mark Simpson  <damned@theworld.com>
-
-	* src/tnef.c (file_add_mapi_attrs): Fixing bug found by Asbjorn
-	Pettersen <AsbjornPettersen@dualog.no>.  This bug occurs when
-	MAPI_ATTACH_DATA_OBJ is where the data for the file is defined
-	instead of attATTACHDATA;
-
-	* src/tnef.c: Removal of unecessary unistd.h
-	(courtesy of Asbjorn Pettersen <AsbjornPettersen@dualog.no>)
-
-	* <misc files>
-	Updated copyright statements.  Misc changes for newer version of
-	automake/autoconf &c.
-
-2001-09-18  Mark Simpson  <damned@world.std.com>
-
-        * Release v1.1.1:
-
-	* NEWS:
-	* configure.in:
-	New version.
-
-	* tnef.spec.in: Small improvements.
-
-	* doc/Makefile.am, doc/tnef.1: man page renamed to tnef.1 to put
-	it into the correct manual page section.
-
-	* src/strdup.c (strdup): Fixing off by one error.
-
-2001-08-13  Mark Simpson  <damned@world.std.com>
-
-	* Release v1.1:
-
-	* NEWS:
-	* configure.in:
-	New version.
-
-	* src/main.c: Disallowing -w with reading a file from stdin.
-
-	* src/alloc.c (MALLOC):
-	Modified to not produce error if size is zero.  Some libc
-	libraries return NULL if size is zero.
-
-	* doc/Makefile.am:
-	* doc/tnef.3:
-	New file courtesy Clark Morgan <cmorgan@aracnet.com>
-
-2001-07-17  Mark Simpson  <damned@world.std.com>
-
-	* configure.in:
-	Checking for ldiv.
-
-	* tnef.spec.in:
-	Cleanup and addition of doc.
-
-	* src/ldiv.c, src/ldiv.h:
-	New files to be compiled if ldiv is not defined.
-
-	* src/tnef.c:
-	Cleaning up a few memory leaks.
-
-2001-04-07  Mark Simpson  <damned@world.std.com>
-
-	* Release 1.0.1:
-
-	* NEWS:
-	* configure.in:
-	New version.
-
-	* src/tnef.c:
-	Fixing problem with directory usage.  When a
-	MAPI_ATTACH_LONG_FILENAME is found TNEF must prepend the directory
-	to it just like when it finds a attATTACHTITLE.
-
-	Adding an ident line.
-
-2001-03-17  Mark Simpson  <damned@world.std.com>
-
-	* Release 1.0:
-	* NEWS:
-	* configure.in:
-
-	* src/tnef.c:
-	* src/tnef.h:
-	* src/mkdata.awk:
-	* src/mapi-names.data:
-	* src/mapi-types.data:
-	* src/Makefile.am:
-	* src/.cvsignore:
-	New support for MAPI attributes which are inside of TNEF
-	attributes.  This allows for getting the long filenames.
-
-	* doc/file-format.tex:
-	Now includes information about MAPI types.
-
-2001-01-17  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.16
-
-	* src/main.c (USAGE, parse_cmdline)
-	* src/tnef.c (NUMBER_FILES, find_free_number, write_file):
-	* src/tnef.h:
-	New numbered backup feature (idea and code from:
-	Jean-Jacques Michel <jjmichel@linbox.com>)
-
-2000-11-15  Mark Simpson  <damned@world.std.com>
-
-	* configure.in:
-	New --enable-debug switch
-	Using AC_REPLACE_FUNCS to check for basename
-
-	* acinclude.m4: New AC_DEBUG_COMPILE macro.  Implementation of
-	--enable-debug in configure script.
-
-	* src/tnef.c (write_file, rename_file, decode_attachment): Changes
-	needed because basename does not return a newly allocated
-	pointer.  It returns a pointer into the string it was passed.  Do
-	not free this string.
-
-	* src/path.c (concat_fname): Function is now more robust.
-	(basename): Removed this function to basename.c
-
-	* src/basename.c: New file containing my implementation of
-	basename (based upon glibc).  Will be built only on platforms
-	without one of its own.
-
-	* src/strdup.c: Tweaked my implementation after seeing the one in
-	glibc.
-
-	* .cvsignore: Now ignoring the distribution
-
-	* src/alloc.c:
-	* src/alloc.h:
-	* src/path.c:
-	* src/path.h:
-	* src/main.c:
-	* src/sizes.h:
-	* src/strdup.h:
-	* src/tnef.c:
-	* src/tnef.h:
-	Extra comments.
-
-	* src/path.c:
-	* src/path.h:
-	Conditional compilation of basename.  This is now checked for in
-	the configure script.
-
-2000-10-27  Mark Simpson  <damned@world.std.com>
-
-	* Release 0.15
-
-	* configure.in: Fixing int sizeof check to remove warning.
-	Checking for vprintf.  Addition of maintainer mode.
-
-	* src/tnef.h: Addition of overwrite and confirmation
-	functionality.
-
-	* src/tnef.c: Addition of overwite and confirmation
-	functionality. Moving of debug output into a seperate
-	function. Moving of writing and renaming files into seperate
-	files.
-
-	* src/main.c: Changes to add two new flags: --overwite and
-	--interactive/--confirmation/-w.
-
-	* Makefile.am (AUTOMAKE_OPTIONS): Setting up defaults for automake
-	runs.
-
-2000-10-06  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.14
-
-	* configure.in: Check for executable extension.
-	Add --enable-warnings options and removing unused --enable-debug.
-	Add checks for strrchr, memmove, and memory.h
-
-	* acinclude.m4: New file with definitin of AC_COMPILER_WARNING
-	used by ./configure --enable-warnings
-
-	* src/tnef.c, src/tnef.h, src/main.h:
-	New command line argument handling.
-	New command line argument: --use-paths.
-	Corrected pathname security bug.
-
-	* src/alloc.c, src/alloc.h, src/path.c, src/path.h:
-	New files breaking code out of tnef.c
-
-	* src/Makefile.am: Removed CFLAGS so default is used instead.
-
-2000-09-26  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.13
-
-2000-09-23  Mark Simpson  <damned@world.std.com>
-
-	* tnef.spec.in: New file to allow creation of rpm files
-
-	* src/tnef.c, src/main.c: -C option same as -d, -t option same as
-	-l,-n. -v option like tar now. --debug is heavy output (like
-	--verbose was previously).
-	(some changes provided by Ambrose Li <acli@mingpaoxpress.com>
-
-	* minor spelling corrections.
-
-2000-04-27  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.12
-
-	* src/Makefile.am (CFLAGS): using -g
-
-	* src/tnef.c (decode_attachment): Fixed so that it can handle the
-	filename to come after the attachment data... fix curtesy of:
-	"Adam L. Gibson" <Adam@PTM.com>
-
-2000-03-23  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.11
-
-2000-03-22  Mark Simpson  <damned@world.std.com>
-
-	* configure.in: Checking for getopt_long function.
-
-	* src/tnef.c: Inserting byte-order fix from Nathan Neulinger
-	<nneul@umr.edu>.  Fixes date display problem.
-
-	* src/main.c: Using new getopt_long.h when needed.
-
-	* src/getopt_long.c, src/getopt_long.h: Stole these getopt and
-	getopt_long functions from GNUEmacs 20.5.1 and put them in here
-	with minor mods so that we can build on platforms without a
-	builtin getopt_long function.
-
-	* tests/Makefile.am, tests/long-filename.tnef,
-	tests/missing-filenames.tnef: More test files.
-
-2000-02-16  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.10
-
-	* src/tnef.c:
-	Replace calls to malloc with new Malloc function which produces an
-	error and aborts if memory allocation fails.
-	(dump_attr): Temporary fix for Solaris problem with date data.
-	(decode_attachment): Make up a filename if one is not given in the
-	tnef file.
-
-1999-12-26  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.9
-
-	* src/tnef.c (decode_attachment): Undoing previous changes
-	concerning attATTACHMENT type.  Found that this did not work
-	reliably and that the changes were incorrect as well.
-
-1999-12-04  Mark Simpson  <damned@world.std.com>
-
-        * Release v0.8
-
-	* src/tnef.c (decode_attachment): Now watches for attATACHMENT
-	records.  These contain the real filename of the file whereas the
-	attATTACHTITLE is a 'short' filename.  Keeping both ways right now
-	just in case.  Not sure what else is in the attATTACHMENT buffer
-	though.
-
-1999-10-26  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.7.2
-
-	* src/Makefile.am:
-	* src/main.c:
-	* src/tnef.c:
-	* src/tnef.h:
-	Moving main functions and command line parsing to separate file.
-
-	* doc/Makefile.am:
-	* doc/file-format.tex:
-	* doc/.cvsignore:
-	Replacing text file with LaTeX file describing file format.
-
-        * Release v0.7.1
-
-        * TODO: Many new tasks.
-
-	* tests/Makefile.am:
-	* tests/one-file.tnef:
-	* tests/rtf.tnef:
-	* tests/two-files.tnef:
-	Replaced/renamed test files.
-
-        * src/tnef.c: Moved strings of copyright and no-warranty statement
-	to top of file for clarity.
-
-	* src/mkdata.awk:
-	* src/names.data:
-	* src/strdup.c:
-	* src/strdup.h:
-	* src/tnef.c:
-	* src/types.data:
-	Copyright fix. Comment Line added.
-
-1999-10-14  Mark Simpson  <simpson@world.std.com>
-
-	* ChangeLog: v0.7
-
-        * configure.in: New --enable-debug-build switch.  Now checking for
-	int size so we can create appropriate typedefs
-
-	* src/Makefile.am:
-	* src/mkdata.awk:
-	* src/sizes.h:
-	* src/tnef.c:
-	* src/tnef.h:
-	* src/types.data:
-	Typedef-ing int types for the sizes we need and using them.
-	checksum now works because of this.
-
-	* acconfig.h: Added DEBUG and NDEBUG for the --enable-deubug-build
-	switch to configure.
-
-	* Makefile.am:
-	* doc/.cvsignore:
-	* doc/Makefile.am:
-	* tests/.cvsignore:
-	* tests/Makefile.am:
-	doc and tests directory now being 'built' and included in
-	distribution.
-
-1999-10-13  Mark Simpson  <simpson@world.std.com>
-
-        * Release v0.6
-
-        * Makefile.am: add BUGS to EXTRA_DIST
-
-        * TODO: more to do
-
-	* BUGS, README: creating this file.
-
-	* src/tnef.c (parse_cmdline): Fixed copyright statement for
-	--version.
-
-1999-10-12  Mark Simpson  <simpson@world.std.com>
-
-	* Release v0.5
-
-	* src/tnef.c (dump_attr): Now handling szSHORT and szLONG and
-	szTEXT.
-	(usage, parse_cmdline): New switches -l/--list to simply list
-	contents (currently the same as -n/--dry_run.  -f/--file no longer
-	mandatory, -f/--file can accept '-' to mean stdin.
-
-        * Release v0.4
-
-	* src/tnef.c: Extern decl of tempnam to quiet compiler.
-	(dump_attr): dump_attr can now handle dates.
-	(check_checksum): #if 0 out this function for now until it works.
-	(decode_attachment): Change in attribute name: attFILENAME becomes
-	attATTACHTITLE.
-	(decode_attachment, parse_cmdline): New -n option allows for tnef
-	to do nothing other than read the file.  If -n was given it will
-	not write the files.
-
-	* src/tnef.h: Adding date structure.
-
-	* src/names.data: Complete listing of attributes
-
-	* src/Makefile.am: Still working on a good way to get names.[ch]
-	and types.[ch] built and linked but not have them in the dist.
-	This way will work: $(tnef_OBJECTS) depends upon the
-	{names,types}.o and BUILT_SOURCES contains names.[ch] and
-	types.[ch] and most importantly tnef_LIBADD has {names,types}.o
-
-	* TODO: adding some good ideas.
-
-	* tests/two-files: replaced with tnef file that actually _has_ two
-	files in it.
-
-1999-10-09  Mark Simpson  <damned@world.std.com>
-
-	* Release v0.3
-
-	* TODO: Adding some ideas here.
-
-	* configure.in: Looking for awk and strdup, version update
-
-	* src/tnef.c:
-	* src/tnef.h: Big changes to use generated lists of names and
-	types, changes to flow of code, less specialized handling when we
-	just don't care.  All verbose printing done in one function.
-	New -d/--directory option for specifying where to put extracted
-	files.
-
-	* src/.cvsignore: Ignore generated files
-
-	* src/Makefile.am: Changes to use generated files
-
-	* src/mkdata.awk: AWK script to create foo.[ch] out of foo.data
-
-	* src/strdup.c:
-	* src/strdup.h: New files defining strdup in case we try to build
-	on a system without it.
-	* src/names.data:
-	* src/types.data: New files containing data to create the
-	names.[ch] and types.[ch] files.  These contain the #define's for
-	names and types, and also code to get the string equivalents.
-	* doc/grammer: new file defining the grammer of a TNEF Stream.
-
-	* src/tnef.c:
-	* src/tnef.h:
-	changing #define'd names
-
-1999-10-06  Mark Simpson  <damned@world.std.com>
-
-	* src/tnef.c: Removed static buffers
-
-	* tests/one-file:
-	* tests/rtf:
-	* tests/two-files:
-	Test files
-
-	* src/Makefile.am: header file needed for distribution of source
-
-	* configure.in: Checking for install program and size_t decl.
-
-	* AUTHORS: Initial content
-
-	* .cvsignore:
-	* src/.cvsignore: ignoring more files
-
+  * ChangeLog, NEWS, configure.in, src/Makefile.am, src/attr.h, src/common.h,
+  src/replace/Makefile.am, src/replace/dummy.c, src/tnef.c,
+  tests/files/Makefile.am, tests/files/baselines/Makefile.am,
+  tests/files/baselines/garbage-at-end.baseline,
+  tests/files/datafiles/Makefile.am, tests/files/datafiles/garbage-at-end.list,
+  tests/files/datafiles/garbage-at-end.tnef, tests/files/file-util.sh,
+  tests/files/garbage-at-end.test: intermeditate checkin
+
+2006-07-23  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * NEWS, configure.in: Preparing to release v1.4.2
+
+  * tests/files/baselines/garbage-at-end.baseline,
+  tests/files/datafiles/garbage-at-end.list,
+  tests/files/datafiles/garbage-at-end.tnef, tests/files/garbage-at-end.test:
+  new test for 'garbage at end' problem
+
+  * src/attr.h, src/tnef.c: Adding a check to see if there is any more data at
+  the end of the file.  Reporting an error if there is a garbage at the end.
+
+2006-05-02  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, NEWS, configure.in, src/file.c, src/file.h, src/main.c,
+  src/options.c, src/options.h, src/tnef.c, tests/cmdline/Makefile.am,
+  tests/cmdline/help.baseline, tests/cmdline/mime-types.baseline,
+  tests/cmdline/mime-types.test, tests/cmdline/version.baseline: # merging from
+  v1.4.1
+
+2006-04-23  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * tests/cmdline/Attic/mime-types.baseline,
+  tests/cmdline/Attic/mime-types.test, tests/cmdline/Makefile.am,
+  tests/cmdline/mime-types.baseline, tests/cmdline/mime-types.test: New tests
+  for mime-type feature
+
+2006-03-20  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, NEWS, TODO, configure.in, src/Makefile.am, src/alloc.c,
+  src/alloc.h, src/attr.c, src/attr.h, src/common.h, src/date.c, src/date.h,
+  src/debug.c, src/debug.h, src/file.c, src/file.h, src/main.c,
+  src/mapi_attr.c, src/mapi_attr.h, src/mkdata.awk, src/options.c,
+  src/options.h, src/path.c, src/path.h, src/replace/Makefile.am,
+  src/replace/basename.c, src/replace/ldiv.c, src/replace/ldiv.h,
+  src/replace/malloc.c, src/replace/strdup.c, src/rtf.c, src/rtf.h,
+  src/tnef-names.data, src/tnef.c, src/tnef.h, src/util.c, src/util.h,
+  src/xstrdup.c, tests/cmdline/body.baseline, tests/cmdline/maxsize.baseline,
+  tests/cmdline/maxsize.test, tests/cmdline/version.baseline,
+  tests/files/Makefile.am, tests/files/baselines/Makefile.am,
+  tests/files/baselines/data-before-name.baseline,
+  tests/files/baselines/multi-name-property.baseline,
+  tests/files/baselines/triples.baseline, tests/files/datafiles/Makefile.am,
+  tests/files/datafiles/multi-name-property.list,
+  tests/files/datafiles/multi-name-property.tnef,
+  tests/files/multi-name-property.test: merging from v1.4
+
+2006-03-18  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * tests/files/baselines/Makefile.am, tests/files/datafiles/Makefile.am:
+  adding files to dist.
+
+2006-03-12  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * tests/files/Makefile.am,
+  tests/files/baselines/multi-name-property.baseline,
+  tests/files/datafiles/multi-name-property.list,
+  tests/files/datafiles/multi-name-property.tnef,
+  tests/files/multi-name-property.test: adding test for handling of multi-name
+  properties
+
+  * tests/cmdline/maxsize.baseline, tests/cmdline/maxsize.test: tweaking
+  maxsize tests to overcome co-incidence on 64 bit and alpha arch.
+
+2006-02-20  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * src/alloc.c, src/alloc.h, src/attr.c, src/attr.h, src/common.h, src/date.c,
+  src/date.h, src/debug.c, src/debug.h, src/file.c, src/file.h, src/main.c,
+  src/mapi_attr.c, src/mapi_attr.h, src/mkdata.awk, src/options.c,
+  src/options.h, src/path.c, src/path.h, src/replace/basename.c,
+  src/replace/malloc.c, src/replace/strdup.c, src/rtf.c, src/rtf.h, src/tnef.c,
+  src/tnef.h, src/util.c, src/util.h, src/xstrdup.c,
+  tests/cmdline/version.baseline: Updating copyright statement.
+
+  * src/replace/ldiv.c, src/replace/ldiv.h: no longer needed
+
+  * src/rtf.c, src/tnef-names.data, tests/cmdline/body.baseline,
+  tests/files/baselines/data-before-name.baseline,
+  tests/files/baselines/triples.baseline: Fixing typo
+
+2005-10-14  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * tests/files/datafiles/rtf2.list, tests/files/datafiles/rtf2.tnef,
+  tests/files/rtf2.test: removing unneeded files during merge
+
+  * src/file.c, src/file.h, src/mapi_attr.c, src/mapi_attr.h, src/tnef.c,
+  src/util.c, src/util.h: changing buffers to be unsigned char*
+
+  * src/attr.c, src/attr.h, src/date.c, src/date.h: changing buffers to be
+  unsigned char*
+
+  * .../MAPI_ATTACH_DATA_OBJ-body.rtf.baseline,
+  .../files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+  .../files/baselines/MAPI_OBJECT-body.rtf.baseline,
+  tests/files/baselines/MAPI_OBJECT.baseline,
+  tests/files/baselines/body.baseline,
+  .../baselines/data-before-name-body.rtf.baseline,
+  .../baselines/long-filename-body.rtf.baseline,
+  tests/files/baselines/long-filename.baseline,
+  .../baselines/missing-filenames-body.rtf.baseline,
+  tests/files/baselines/missing-filenames.baseline,
+  tests/files/baselines/one-file.baseline,
+  tests/files/baselines/rtf-body.rtf.baseline,
+  tests/files/baselines/rtf.baseline,
+  tests/files/baselines/triples-body.rtf.baseline,
+  tests/files/baselines/triples.baseline,
+  tests/files/baselines/two-files.baseline: Changes to debug output including
+  new MAPI name definitions and corrected rtf output.
+
+  * tests/cmdline/body.baseline, tests/cmdline/rtf-test.rtf.baseline,
+  tests/cmdline/triples-test-2.rtf.baseline: Changes to debug output including
+  new MAPI name definitions.
+
+2005-10-13  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * tests/cmdline/debug.baseline, tests/cmdline/maxsize.baseline: Additional
+  MAPI attribute names
+
+  * contrib/evolution.helper, contrib/evolution.helper.README: New files from
+  v1.3
+
+  * ChangeLog, NEWS, configure.in, doc/tnef.1.in, src/main.c,
+  src/mapi-names.data, src/options.h, src/rtf.c, src/tnef.c, src/tnef.h,
+  src/util.c, src/util.h, tests/cmdline/Makefile.am,
+  tests/cmdline/body-test.html.baseline, tests/cmdline/body.baseline,
+  tests/cmdline/body.test, tests/cmdline/help.baseline,
+  tests/cmdline/message.html.baseline, tests/cmdline/rtf-test.rtf.baseline,
+  tests/cmdline/triples-test-2.rtf.baseline,
+  tests/cmdline/triples-test-2.txt.baseline,
+  tests/cmdline/triples-test.txt.baseline, tests/files/Makefile.am,
+  .../MAPI_ATTACH_DATA_OBJ-body.rtf.baseline,
+  .../files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+  .../files/baselines/MAPI_OBJECT-body.rtf.baseline,
+  tests/files/baselines/MAPI_OBJECT.baseline,
+  tests/files/baselines/Makefile.am,
+  tests/files/baselines/body-body.html.baseline,
+  tests/files/baselines/body.baseline,
+  .../baselines/data-before-name-body.rtf.baseline,
+  tests/files/baselines/data-before-name.baseline,
+  .../baselines/long-filename-body.rtf.baseline,
+  tests/files/baselines/long-filename.baseline,
+  .../baselines/missing-filenames-body.rtf.baseline,
+  tests/files/baselines/missing-filenames.baseline,
+  tests/files/baselines/rtf-body.rtf.baseline,
+  tests/files/baselines/triples-body.rtf.baseline, tests/files/body.test,
+  tests/files/datafiles/MAPI_ATTACH_DATA_OBJ.list,
+  tests/files/datafiles/MAPI_OBJECT.list, tests/files/datafiles/Makefile.am,
+  tests/files/datafiles/body.list, tests/files/datafiles/body.tnef,
+  tests/files/datafiles/data-before-name.list,
+  tests/files/datafiles/long-filename.list,
+  tests/files/datafiles/missing-filenames.list, tests/files/datafiles/rtf.list,
+  tests/files/datafiles/triples.list, tests/files/file-util.sh, tnef.spec.in:
+  checking in old merge from v1.3
+
+2005-04-23  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, src/mapi_attr.c: Merging from v1.3 branch again
+
+2005-03-07  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * src/write.c, src/write.h: New output methods for signed integers Updating
+  other output methods
+
+  * tests/files/baselines/rtf.baseline, tests/files/baselines/rtf2.baseline,
+  tests/files/baselines/triples.baseline,
+  tests/files/baselines/two-files.baseline: New baselines for new output style
+
+  * tests/files/baselines/MAPI_OBJECT.baseline,
+  tests/files/baselines/missing-filenames.baseline: New baselines for new
+  output style
+
+  * tests/cmdline/debug.baseline, tests/cmdline/maxsize.baseline,
+  tests/cmdline/maxsize.test, tests/cmdline/version.baseline,
+  .../files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+  tests/files/baselines/data-before-name.baseline,
+  tests/files/baselines/long-filename.baseline: New baselines for new output
+  style
+
+2005-02-08  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * NEWS, tnef.spec.in: merging from 1.3.x
+
+2005-02-07  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * src/basename.c, src/basename.h, src/common.h, src/getopt_long.c,
+  src/getopt_long.h, src/ldiv.c, src/ldiv.h, src/malloc.c, src/sizes.h,
+  src/strdup.c, src/strdup.h, src/write.c, src/write.h, src/xstrdup.c: removing
+  and adding
+
+  * INSTALL, NEWS, acinclude.m4, configure.in, src/Makefile.am, src/alloc.c,
+  src/alloc.h, src/attr.c, src/attr.h, src/date.c, src/date.h, src/debug.c,
+  src/debug.h, src/file.c, src/file.h, src/main.c, src/mapi_attr.c,
+  src/mapi_attr.h, src/mkdata.awk, src/options.c, src/options.h, src/path.c,
+  src/path.h, src/replace/Makefile.am, src/replace/basename.c,
+  src/replace/getopt_long.c, src/replace/getopt_long.h, src/replace/ldiv.c,
+  src/replace/ldiv.h, src/replace/malloc.c, src/replace/strdup.c, src/rtf.c,
+  src/rtf.h, src/tnef.c, src/tnef.h, src/util.c, src/util.h,
+  tests/cmdline/maxsize.baseline, tests/cmdline/verbose.baseline: initial
+  checkin of reorganized code
+
+2005-01-17  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * tests/files/baselines/Makefile.am, tests/files/datafiles/Makefile.am:
+  fixing distribution
+
+2005-01-13  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, NEWS: New version
+
+2004-11-15  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * tests/files/baselines/message.rtf.baseline,
+  tests/files/baselines/rtf2.baseline, tests/files/datafiles/rtf2.list: new
+  tests for --save-rtf switch
+
+  * tests/files/Makefile.am, tests/files/rtf2.test: new test for the --save-rtf
+  switch
+
+  * tests/cmdline/debug.baseline, tests/cmdline/help.baseline,
+  tests/cmdline/maxsize.baseline,
+  .../files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+  tests/files/baselines/MAPI_OBJECT.baseline,
+  tests/files/baselines/VIA_Nytt_1402.pdf.baseline,
+  tests/files/baselines/VIA_Nytt_14021.htm.baseline,
+  tests/files/baselines/data-before-name.baseline,
+  tests/files/baselines/long-filename.baseline,
+  tests/files/baselines/missing-filenames.baseline,
+  tests/files/baselines/one-file.baseline, tests/files/baselines/rtf.baseline,
+  tests/files/baselines/triples.baseline,
+  tests/files/baselines/two-files.baseline: New baselines due to new message
+  attribute parsing
+
+2004-11-13  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * src/main.c, src/tnef.h: adding save-rtf feature
+
+2004-02-16  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * src/getopt_long.c, src/ldiv.c, src/malloc.c, src/tnef.c: VC6 compiler fixes
+  reported by shooshx@users.sourceforge.net
+
+2004-01-09  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * NEWS, configure.in: New Version (fixing distribution errors)
+
+  * tests/files/baselines/Makefile.am, tests/files/datafiles/Makefile.am:
+  triples files were missing from distribution.
+
+2003-12-24  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, NEWS, configure.in: Release v1.2.3 New version
+
+  * tests/cmdline/maxsize.baseline, tests/cmdline/version.baseline,
+  tests/files/Makefile.am, tests/files/baselines/triples.baseline,
+  tests/files/datafiles/triples.list, tests/files/datafiles/triples.tnef,
+  tests/files/triples.test: maxsize and triplet printing tests
+
+2003-05-23  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * doc/www/htdocs/Makefile.am, doc/www/htdocs/index.html,
+  doc/www/htdocs/index.html.in: Tweaking web page
+
+2003-05-17  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * doc/www/Makefile.am, doc/www/cgi-bin/Makefile.am,
+  doc/www/htdocs/index.html.in: New primitive first pass as web page
+
+  * Makefile.am, configure.in, doc/FAQ, doc/Makefile.am,
+  doc/www/htdocs/Makefile.am, doc/www/htdocs/index.html.in,
+  doc/www/htdocs/style.css: prmitive first pass as web page and FAQ
+
+  * src/basename.h, src/malloc.c: file had DOS line endings, changed to Unix
+  line endings.
+
+  * src/main.c, tests/cmdline/help.baseline: New maxsize command line option
+  Removed deprecated command line options
+
+  * doc/tnef.1.in, tests/cmdline/Makefile.am, tests/cmdline/maxsize.baseline,
+  tests/cmdline/maxsize.test: New maxsize command line options.  Changes to doc
+  and new test.
+
+  * src/alloc.c, src/alloc.h, src/path.c, src/strdup.c: New functions to
+  allocation memory but only up to a set limit.  Used along with new --maxsize
+  command line option.
+
+  * .../files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+  tests/files/baselines/MAPI_OBJECT.baseline,
+  tests/files/baselines/data-before-name.baseline,
+  tests/files/baselines/long-filename.baseline,
+  tests/files/baselines/missing-filenames.baseline,
+  tests/files/baselines/one-file.baseline, tests/files/baselines/rtf.baseline,
+  tests/files/baselines/two-files.baseline: Re-baselining due to changes in
+  debug format
+
+2003-04-29  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, NEWS, configure.in: Version 1.2.1 fixes BUG698111 and BUG712371
+
+  * tests/cmdline/debug.test, tests/cmdline/directory.baseline,
+  tests/cmdline/directory.test, tests/cmdline/help.test,
+  tests/cmdline/list.baseline, tests/cmdline/list.test,
+  tests/cmdline/overwrite.baseline, tests/cmdline/overwrite.test,
+  tests/cmdline/verbose.baseline, tests/cmdline/verbose.test,
+  tests/cmdline/version.test, tests/files/MAPI_ATTACH_DATA_OBJ.test,
+  tests/files/MAPI_OBJECT.test, tests/files/data-before-name.test,
+  tests/files/file-util.sh, tests/files/long-filename.test,
+  tests/files/missing-filenames.test, tests/files/one-file.test,
+  tests/files/rtf.test, tests/files/two-files.test, tests/util.sh: Update
+  scripts and baselines to use and expect $srcdir for all paths (Fixes
+  BUG698111)
+
+  * tests/cmdline/basic.baseline, tests/cmdline/basic.test: Update scripts and
+  baselines to use and expect $srcdir for all paths (Fixes BUG698111)
+
+2003-03-02  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * THANKS, tests/cmdline/Makefile.am, tests/cmdline/basic.test,
+  tests/cmdline/debug.test, tests/cmdline/directory.test,
+  tests/cmdline/help.test, tests/cmdline/interactive.test,
+  tests/cmdline/list.test, tests/cmdline/overwrite.test,
+  tests/cmdline/use-path.test, tests/cmdline/verbose.test,
+  tests/cmdline/version.test, tests/files/MAPI_ATTACH_DATA_OBJ.test,
+  tests/files/MAPI_OBJECT.test, tests/files/Makefile.am,
+  tests/files/baselines/Makefile.am, tests/files/data-before-name.test,
+  tests/files/datafiles/Makefile.am, tests/files/file-util.sh,
+  tests/files/long-filename.test, tests/files/missing-filenames.test,
+  tests/files/one-file.test, tests/files/rtf.test, tests/files/two-files.test,
+  tests/util.sh: Fixing dos vs. unix line endings in files.  All files must be
+  unix line eneded.
+
+  * ChangeLog, NEWS, configure.in: New version: 1.2.0 Addition of automated
+  testing.
+
+  * AUTHORS, Makefile.am, THANKS: Changed AUTOMAKE_OPTIONS to gnits. Added
+  THANKS file to keep gnits checking happy Movied thanks section from AUTHORS
+  to THANKS file
+
+  * tests/MAPI_ATTACH_DATA_OBJ.tnef, tests/MAPI_OBJECT.tnef, tests/Makefile.am,
+  tests/cmdline/AUTHORS.baseline, tests/cmdline/Makefile.am,
+  tests/cmdline/basic.baseline, tests/cmdline/basic.test,
+  tests/cmdline/debug.baseline, tests/cmdline/debug.test,
+  tests/cmdline/directory.baseline, tests/cmdline/directory.test,
+  tests/cmdline/help.baseline, tests/cmdline/help.test,
+  tests/cmdline/interactive.baseline, tests/cmdline/interactive.test,
+  tests/cmdline/list.baseline, tests/cmdline/list.test,
+  tests/cmdline/overwrite.baseline, tests/cmdline/overwrite.test,
+  tests/cmdline/test.tnef, tests/cmdline/use-path.baseline,
+  tests/cmdline/use-path.test, tests/cmdline/verbose.baseline,
+  tests/cmdline/verbose.test, tests/cmdline/version.baseline,
+  tests/cmdline/version.test, tests/data-before-name.tnef,
+  tests/files/MAPI_ATTACH_DATA_OBJ.test, tests/files/MAPI_OBJECT.test,
+  tests/files/Makefile.am, tests/files/baselines/AUTHORS.baseline,
+  tests/files/baselines/AUTOEXEC.BAT.baseline,
+  tests/files/baselines/CONFIG.SYS.baseline,
+  .../files/baselines/MAPI_ATTACH_DATA_OBJ.baseline,
+  tests/files/baselines/MAPI_OBJECT.baseline,
+  tests/files/baselines/Makefile.am, tests/files/baselines/README.baseline,
+  .../baselines/TechlibDEC99-JAN00.doc.baseline,
+  tests/files/baselines/TechlibDEC99.doc.baseline,
+  tests/files/baselines/TechlibNOV99.doc.baseline,
+  tests/files/baselines/Untitled Attachment.baseline,
+  tests/files/baselines/Untitled_Attachment.baseline,
+  tests/files/baselines/VIA_Nytt_1402.doc.baseline,
+  tests/files/baselines/VIA_Nytt_1402.pdf.baseline,
+  tests/files/baselines/VIA_Nytt_14021.htm.baseline,
+  tests/files/baselines/boot.ini.baseline,
+  tests/files/baselines/data-before-name.baseline,
+  tests/files/baselines/generpts.src.baseline,
+  tests/files/baselines/long-filename.baseline,
+  tests/files/baselines/missing-filenames.baseline,
+  tests/files/baselines/one-file.baseline, tests/files/baselines/rtf.baseline,
+  tests/files/baselines/two-files.baseline, tests/files/data-before-name.test,
+  tests/files/datafiles/MAPI_ATTACH_DATA_OBJ.list,
+  tests/files/datafiles/MAPI_ATTACH_DATA_OBJ.tnef,
+  tests/files/datafiles/MAPI_OBJECT.list,
+  tests/files/datafiles/MAPI_OBJECT.tnef, tests/files/datafiles/Makefile.am,
+  tests/files/datafiles/data-before-name.list,
+  tests/files/datafiles/data-before-name.tnef,
+  tests/files/datafiles/long-filename.list,
+  tests/files/datafiles/long-filename.tnef,
+  tests/files/datafiles/missing-filenames.list,
+  tests/files/datafiles/missing-filenames.tnef,
+  tests/files/datafiles/one-file.list, tests/files/datafiles/one-file.tnef,
+  tests/files/datafiles/rtf.list, tests/files/datafiles/rtf.tnef,
+  tests/files/datafiles/two-files.list, tests/files/datafiles/two-files.tnef,
+  tests/files/file-util.sh, tests/files/long-filename.test,
+  tests/files/missing-filenames.test, tests/files/one-file.test,
+  tests/files/rtf.test, tests/files/two-files.test, tests/long-filename.tnef,
+  tests/missing-filenames.tnef, tests/one-file.tnef, tests/rtf.tnef,
+  tests/two-files.tnef, tests/util.sh: New files for automated testing. 
+  Removed old data files since they are moved to a files/datafiles
+
+2003-02-28  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * NEWS, configure.in, src/alloc.c, src/alloc.h, src/basename.c,
+  src/getopt_long.c, src/main.c, src/path.c, src/strdup.c, src/tnef.c,
+  tests/MAPI_OBJECT.tnef, tests/Makefile.am: * code cleanup * adding test file:
+  MAPI_OBJECT.tnef * fixing gettext link problem for MacOSX * help & copyright
+  message cleanup
+
+2002-12-11  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, INSTALL, NEWS, configure.in, install-sh, mkinstalldirs,
+  src/malloc.c, src/tnef.c: Fixing bugs concerning incorrect decoding and use
+  of MAPI properties. Specifically MAPI_OBJECT was not being decoded and
+  stored.
+
+2002-10-27  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * NEWS, configure.in, doc/Makefile.am, src/getopt_long.c:
+  configuration/distribution fixes
+
+  * src/alloc.h, src/basename.h, src/path.h: including config.h
+
+2002-09-12  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, config.h.in, configure.in, doc/tnef.1, doc/tnef.1.in,
+  tnef.spec.in: more config updates, fix for bug 608075
+
+  * ChangeLog, src/Makefile.am, src/mapi-types.data, src/names.data,
+  src/tnef-names.data, src/tnef-types.data, src/types.data: beginnings of new
+  lisp library
+
+2002-09-06  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * ChangeLog, tests/MAPI_ATTACH_DATA_OBJ.tnef: New Test file
+
+2002-09-04  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * aclocal.m4, configure, configure.in: more small config automake type
+  changes.
+
+  * AUTHORS, aclocal.m4, configure, configure.in: Fixing version number and
+  email address.
+
+  * AUTHORS, COPYING, ChangeLog, INSTALL, Makefile.in, NEWS, acconfig.h,
+  aclocal.m4, configure, depcomp, doc/Makefile.in, install-sh, missing,
+  mkinstalldirs, src/Makefile.in, src/tnef.c, tests/Makefile.in: more fixing of
+  automake, autoconf, aclocal, autoheader usage.
+
+2002-08-30  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * BUGS, BUGS.in, config.h.in, configure, configure.in, src/Makefile.am,
+  src/alloc.c, src/alloc.h, src/basename.c, src/basename.h, src/getopt_long.c,
+  src/ldiv.c, src/ldiv.h, src/main.c, src/path.c, src/path.h, src/sizes.h,
+  src/strdup.c, src/strdup.h, src/tnef.c, src/tnef.h, tnef.spec.in: Update to
+  configuration system. Removal of unistd.h Update of copyright dates
+  everywhere.
+
+2002-07-20  verdammelt <verdammelt@8a66442b-22cf-489f-9b4a-ac61fdaa4a32>
+
+  * AUTHORS, BUGS, COPYING, ChangeLog, INSTALL, Makefile.am, Makefile.in, NEWS,
+  README, TODO, acconfig.h, acinclude.m4, aclocal.m4, config.h.in, configure,
+  configure.in, doc/Makefile.am, doc/Makefile.in, doc/file-format.tex,
+  doc/tnef.1, install-sh, missing, mkinstalldirs, src/Makefile.am,
+  src/Makefile.in, src/alloc.c, src/alloc.h, src/basename.c, src/getopt_long.c,
+  src/getopt_long.h, src/ldiv.c, src/ldiv.h, src/main.c, src/mapi-names.data,
+  src/mapi-types.data, src/mkdata.awk, src/names.data, src/path.c, src/path.h,
+  src/sizes.h, src/strdup.c, src/strdup.h, src/tnef.c, src/tnef.h,
+  src/types.data, stamp-h.in, tests/Makefile.am, tests/Makefile.in,
+  tests/data-before-name.tnef, tests/long-filename.tnef,
+  tests/missing-filenames.tnef, tests/one-file.tnef, tests/rtf.tnef,
+  tests/two-files.tnef, tnef.spec.in: Initial code base based upon tnef v1.1.1.
+   (Older code has been lost [sigh])
