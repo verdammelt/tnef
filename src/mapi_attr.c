@@ -174,6 +174,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
     uint32 i,j;
     assert(len > 4);
     uint32 num_properties = GETINT32(buf+idx);
+    assert((num_properties+1) != 0);
     MAPI_Attr** attrs = CHECKED_XMALLOC (MAPI_Attr*, (num_properties + 1));
 
     idx += 4;
@@ -212,6 +213,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 		    /* read the data into a buffer */
 		    a->names[i].data 
 			= CHECKED_XMALLOC(unsigned char, a->names[i].len);
+		    assert((idx+(a->names[i].len*2)) <= len);
 		    for (j = 0; j < (a->names[i].len >> 1); j++)
 			a->names[i].data[j] = (buf+idx)[j*2];
 
@@ -308,8 +310,11 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    case szMAPI_BINARY:
 		CHECKINT32(idx, len); v->len = GETINT32(buf+idx); idx += 4;
 
+		assert(v->len + idx <= len);
+
 		if (a->type == szMAPI_UNICODE_STRING)
 		{
+		    assert(v->len != 0);
 		    v->data.buf = (unsigned char*)unicode_to_utf8(v->len, buf+idx);
 		}
 		else
