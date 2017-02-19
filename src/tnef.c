@@ -77,8 +77,10 @@ free_bodies(VarLenData **bodies, int len)
 {
     while (len--)
     {
-        XFREE(bodies[len]->data);
-        XFREE(bodies[len]);
+        if (bodies[len]) {
+            XFREE(bodies[len]->data);
+            XFREE(bodies[len]);
+        }
     }
 }
 
