@@ -28,6 +28,10 @@
 
 #include "common.h"
 
+#define CHECKINT32(a, b) { if(a+4 > b){ exit(-1); } }
+#define CHECKINT16(a, b) { if(a+2 > b){ exit(-1); } }
+#define CHECKINT8(a, b) { if(a+1 > b){ exit(-1); } }
+
 extern uint32 GETINT32(unsigned char*p);
 extern uint16 GETINT16(unsigned char*p);
 extern uint8 GETINT8(unsigned char*p);
