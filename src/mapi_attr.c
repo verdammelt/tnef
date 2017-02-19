@@ -203,7 +203,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 		size_t i;
 
 		a->names = CHECKED_XCALLOC(VarLenData, a->num_names);
-
+		assert(a->names);
 		for (i = 0; i < a->num_names; i++)
 		{
 		    size_t j;
@@ -255,7 +255,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 
 
 	v = alloc_mapi_values (a);
-
+	assert(v);
 	for (j = 0; j < a->num_values; j++) 
 	{
 	    switch (a->type)
