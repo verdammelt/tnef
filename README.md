@@ -1,8 +1,8 @@
-[![Build Status](https://api.travis-ci.org/verdammelt/tnef.svg?branch=master)](https://api.travis-ci.org/verdammelt/tnef.svg)
+[![Build Status](https://travis-ci.org/verdammelt/tnef.svg?branch=master)](https://travis-ci.org/verdammelt/tnef)
 
 
-                                   TNEF
-                                   ====
+TNEF
+====
 
 TNEF is a program for unpacking MIME attachments of type
 "application/ms-tnef". This is a Microsoft only attachment.
