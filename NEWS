@@ -1,5 +1,8 @@
 TNEF NEWS -- history of user-visible changes.   31 August 2014
-Copyright (C) 2000-2014 by Mark Simpson
+Copyright (C) 2000-2017 by Mark Simpson
+
+* 1.4.13 [23 February 2017]
+** Fixing security issues reported by Eric Sesterhenn and Hanno Böck
 
 * 1.4.12 [31 August 2014]
 ** Fixing bug in distribution tarball.
