@@ -1,3 +1,23 @@
+2017-02-19 Eric Sesterhenn <eric.sesterhenn@x41-dsec.de>
+	
+	* src/mapi_attr.c: Prevent null pointer dereference.
+	
+	* src/mapi_attr.c: Use asserts on lengths to prevent invalid
+	reads/writes.
+	
+	* src/tnef.c: Prevent an invalid free.
+	
+	* src/file.c, src/tnef.c: Check types to avoid invalid
+	reads/writes.
+
+	* src/mapi_attr.c, src/rtf.c, src/util.h: Check integer lengths
+	before reading the from input.
+	
+2017-02-17  Eric Sesterhenn <eric.sesterhenn@x41-dsec.de>
+
+	* src/alloc.c, src/alloc.h: Fix integer overflows and harden
+	memory allocator.
+
 2014-08-25  Mark Simpson <verdammelt@gmail.com>
 
   * Makefile.am, TODO: Removing ancient TODO file.

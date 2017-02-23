@@ -40,16 +40,16 @@ pad_to_4byte (size_t length)
 
 /* Copy the GUID data from a character buffer */
 static void
-copy_guid_from_buf (GUID* guid, unsigned char *buf)
+copy_guid_from_buf (GUID* guid, unsigned char *buf, size_t len)
 {
     int i;
     int idx = 0;
     assert (guid);
     assert (buf);
 
-    guid->data1 = GETINT32(buf + idx); idx += sizeof (uint32);
-    guid->data2 = GETINT16(buf + idx); idx += sizeof (uint16);
-    guid->data3 = GETINT16(buf + idx); idx += sizeof (uint16);
+    CHECKINT32(idx, len); guid->data1 = GETINT32(buf + idx); idx += sizeof (uint32);
+    CHECKINT16(idx, len); guid->data2 = GETINT16(buf + idx); idx += sizeof (uint16);
+    CHECKINT16(idx, len); guid->data3 = GETINT16(buf + idx); idx += sizeof (uint16);
     for (i = 0; i < 8; i++, idx += sizeof (uint8))
 	guid->data4[i] = (uint8)(buf[idx]);
 }
@@ -172,7 +172,9 @@ mapi_attr_read (size_t len, unsigned char *buf)
 {
     size_t idx = 0;
     uint32 i,j;
+    assert(len > 4);
     uint32 num_properties = GETINT32(buf+idx);
+    assert((num_properties+1) != 0);
     MAPI_Attr** attrs = CHECKED_XMALLOC (MAPI_Attr*, (num_properties + 1));
 
     idx += 4;
@@ -183,34 +185,35 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	MAPI_Attr* a = attrs[i] = CHECKED_XCALLOC(MAPI_Attr, 1);
 	MAPI_Value* v = NULL;
 
-	a->type = GETINT16(buf+idx); idx += 2;
-	a->name = GETINT16(buf+idx); idx += 2;
+	CHECKINT16(idx, len); a->type = GETINT16(buf+idx); idx += 2;
+	CHECKINT16(idx, len); a->name = GETINT16(buf+idx); idx += 2;
 
 	/* handle special case of GUID prefixed properties */
 	if (a->name & GUID_EXISTS_FLAG)
 	{
 	    /* copy GUID */
 	    a->guid = CHECKED_XMALLOC(GUID, 1);
-	    copy_guid_from_buf(a->guid, buf+idx);
+	    copy_guid_from_buf(a->guid, buf+idx, len);
 	    idx += sizeof (GUID);
 
-	    a->num_names = GETINT32(buf+idx); idx += 4;
+	    CHECKINT32(idx, len); a->num_names = GETINT32(buf+idx); idx += 4;
 	    if (a->num_names > 0)
 	    {
 		/* FIXME: do something useful here! */
 		size_t i;
 
 		a->names = CHECKED_XCALLOC(VarLenData, a->num_names);
-
+		assert(a->names);
 		for (i = 0; i < a->num_names; i++)
 		{
 		    size_t j;
 
-		    a->names[i].len = GETINT32(buf+idx); idx += 4;
+		    CHECKINT32(idx, len); a->names[i].len = GETINT32(buf+idx); idx += 4;
 
 		    /* read the data into a buffer */
 		    a->names[i].data 
 			= CHECKED_XMALLOC(unsigned char, a->names[i].len);
+		    assert((idx+(a->names[i].len*2)) <= len);
 		    for (j = 0; j < (a->names[i].len >> 1); j++)
 			a->names[i].data[j] = (buf+idx)[j*2];
 
@@ -222,7 +225,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    else
 	    {
 		/* get the 'real' name */
-		a->name = GETINT32(buf+idx); idx+= 4;
+		CHECKINT32(idx, len); a->name = GETINT32(buf+idx); idx+= 4;
 	    }
 	}
 
@@ -236,7 +239,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    a->type == szMAPI_OBJECT ||
 	    a->type == szMAPI_BINARY)
 	{
-	    a->num_values = GETINT32(buf+idx);
+	    CHECKINT32(idx, len); a->num_values = GETINT32(buf+idx);
 	    idx += 4;
 	}
         else
@@ -252,20 +255,20 @@ mapi_attr_read (size_t len, unsigned char *buf)
 
 
 	v = alloc_mapi_values (a);
-
+	assert(v);
 	for (j = 0; j < a->num_values; j++) 
 	{
 	    switch (a->type)
 	    {
 	    case szMAPI_SHORT:	/* 2 bytes */
 		v->len = 2;
-		v->data.bytes2 = GETINT16(buf+idx);
+		CHECKINT16(idx, len); v->data.bytes2 = GETINT16(buf+idx);
 		idx += 4;	/* assume padding of 2, advance by 4! */
 		break;
 
 	    case szMAPI_INT:	/* 4 bytes */
 		v->len = 4;
-		v->data.bytes4 = GETINT32(buf+idx);
+		CHECKINT32(idx, len); v->data.bytes4 = GETINT32(buf+idx);
 		idx += 4;
 		v++;
 		break;
@@ -273,14 +276,14 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    case szMAPI_FLOAT:	/* 4 bytes */
 	    case szMAPI_BOOLEAN: /* this should be 2 bytes + 2 padding */
 		v->len = 4;
-		v->data.bytes4 = GETINT32(buf+idx);
+		CHECKINT32(idx, len); v->data.bytes4 = GETINT32(buf+idx);
 		idx += v->len;
 		break;
 
 	    case szMAPI_SYSTIME: /* 8 bytes */
 		v->len = 8;
-		v->data.bytes8[0] = GETINT32(buf+idx);
-		v->data.bytes8[1] = GETINT32(buf+idx+4);
+		CHECKINT32(idx, len); v->data.bytes8[0] = GETINT32(buf+idx);
+		CHECKINT32(idx+4, len); v->data.bytes8[1] = GETINT32(buf+idx+4);
 		idx += 8;
 		v++;
 		break;
@@ -290,14 +293,14 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    case szMAPI_CURRENCY:
 	    case szMAPI_INT8BYTE:
 		v->len = 8;
-		v->data.bytes8[0] = GETINT32(buf+idx);
-		v->data.bytes8[1] = GETINT32(buf+idx+4);
+		CHECKINT32(idx, len); v->data.bytes8[0] = GETINT32(buf+idx);
+		CHECKINT32(idx+4, len); v->data.bytes8[1] = GETINT32(buf+idx+4);
 		idx += v->len;
 		break;
 
 	    case szMAPI_CLSID:
 		v->len = sizeof (GUID);
-		copy_guid_from_buf(&v->data.guid, buf+idx);
+		copy_guid_from_buf(&v->data.guid, buf+idx, len);
 		idx += v->len;
 		break;
 
@@ -305,10 +308,13 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    case szMAPI_UNICODE_STRING:
 	    case szMAPI_OBJECT:
 	    case szMAPI_BINARY:
-		v->len = GETINT32(buf+idx); idx += 4;
+		CHECKINT32(idx, len); v->len = GETINT32(buf+idx); idx += 4;
+
+		assert(v->len + idx <= len);
 
 		if (a->type == szMAPI_UNICODE_STRING)
 		{
+		    assert(v->len != 0);
 		    v->data.buf = (unsigned char*)unicode_to_utf8(v->len, buf+idx);
 		}
 		else

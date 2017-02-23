@@ -67,11 +67,11 @@ static const char USAGE[] = \
 "        --overwrite     \tOverwrite existing files\n"
 "        --number-backups\tInstead of overwriting file FOO,\n"
 "                        \t  create FOO.n instead\n"
-"        --use-paths     \tUse pathnames for files if found in the TNEF\n" 
+"        --use-paths     \tUse pathnames for files if found in the TNEF\n"
 "                        \t  file (for security reasons paths to included\n"
 "                        \t  files are ignored by default)\n"
-"        --unix-paths    \tMake Windows filenames more Unix friendly\n" 
-"        --allow-absolute-paths\tAllow absolute paths (NOT RECOMMENDED)\n" 
+"        --unix-paths    \tMake Windows filenames more Unix friendly\n"
+"        --allow-absolute-paths\tAllow absolute paths (NOT RECOMMENDED)\n"
 "        --save-body[=FILE]\tSave the message body to a file\n"
 "        --body-pref=PREF\tPreferred body type (R|H|T|ALL)\n"
 "-h,     --help          \tShow this message\n"
@@ -103,15 +103,15 @@ validate_body_pref (char *optarg)
 
     if (optarg == NULL)
     {
-	fprintf (stderr, "--body-pref cannot be null.\n");
-	abort();
+        fprintf (stderr, "--body-pref cannot be null.\n");
+        abort();
     }
     if (strlen(optarg) == 0 || strlen(optarg) > 3)
     {
         fprintf (stderr, "'%s' is an invalid setting for --body-pref\n", optarg);
-	abort();
+        abort();
     }
-    
+
     pref = strdup (optarg);
     p = pref;
 
@@ -121,19 +121,19 @@ validate_body_pref (char *optarg)
     /* 'all' is a special setting, do not validate */
     if (strcmp (pref, "all") != 0)
     {
-	i = 0;
-	while (pref[i])
-	{
-	    if (pref[i] != 'r'
-		&& pref[i] != 'h'
-		&& pref[i] != 't')
-	    {
-		fprintf (stderr, 
-			 "--body-pref setting can only contain R, H or T.\n");
-		abort();
-	    }
-	    i++;
-	}
+        i = 0;
+        while (pref[i])
+        {
+            if (pref[i] != 'r'
+                && pref[i] != 'h'
+                && pref[i] != 't')
+            {
+                fprintf (stderr,
+                         "--body-pref setting can only contain R, H or T.\n");
+                abort();
+            }
+            i++;
+        }
     }
     return pref;
 }
@@ -143,23 +143,23 @@ static void
 parse_cmdline (int argc, char **argv,
                char **in_file,
                char **out_dir,
-	       char **body_file,
-	       char **body_pref,
+               char **body_file,
+               char **body_pref,
                size_t *max_size,
                int *flags)
 {
     int i = 0;
     int option_index = 0;
-    static struct option long_options[] = 
-    { 
+    static struct option long_options[] =
+    {
         {"confirmation", no_argument, 0, 'w' },
         {"debug", no_argument, 0, 0},
         {"directory", required_argument, 0, 'C' },
         {"file", required_argument, 0, 'f' },
         {"help", no_argument, 0, 'h'},
-	{"ignore-checksum", no_argument, 0, 'K'},
-	{"ignore-encode", no_argument, 0, 0 },
-	{"ignore-cruft", no_argument, 0, 0 },
+        {"ignore-checksum", no_argument, 0, 'K'},
+        {"ignore-encode", no_argument, 0, 0 },
+        {"ignore-cruft", no_argument, 0, 0 },
         {"interactive", no_argument, 0, 'w' },
         {"list-with-mime-types", no_argument, 0, 0},
         {"list", no_argument, 0, 't'},
@@ -169,8 +169,8 @@ parse_cmdline (int argc, char **argv,
         {"use-paths", no_argument, 0, 0},
         {"unix-paths", no_argument, 0, 0},
         {"allow-absolute-paths", no_argument, 0, 0},
-	{"save-body", optional_argument, 0, 0 },
-	{"body-pref", required_argument, 0, 0 },
+        {"save-body", optional_argument, 0, 0 },
+        {"body-pref", required_argument, 0, 0 },
         {"verbose", no_argument, 0, 'v'},
         {"version", no_argument, 0, 'V'},
         { 0, 0, 0, 0 }
@@ -182,7 +182,7 @@ parse_cmdline (int argc, char **argv,
     while ((i = getopt_long (argc, argv, "f:C:x:vVwhtK",
                              long_options, &option_index)) != -1)
     {
-        switch (i) 
+        switch (i)
         {
         case 0:               /* long options with no val field */
             if (strcmp (long_options[option_index].name,
@@ -215,33 +215,33 @@ parse_cmdline (int argc, char **argv,
             {
                 *flags |= NUMBERED;
             }
-	    else if (strcmp (long_options[option_index].name,
-			     "save-body") == 0)
-	    {
-		*flags |= SAVEBODY;
-		(*body_file) = strdup(((optarg) ? optarg : "message"));
-	    }
-	    else if (strcmp (long_options[option_index].name,
-			     "body-pref") == 0)
-	    {
+            else if (strcmp (long_options[option_index].name,
+                             "save-body") == 0)
+            {
+                *flags |= SAVEBODY;
+                (*body_file) = strdup(((optarg) ? optarg : "message"));
+            }
+            else if (strcmp (long_options[option_index].name,
+                             "body-pref") == 0)
+            {
                     XFREE((*body_pref));
-		(*body_pref) = validate_body_pref (optarg);
-	    }
-	    else if (strcmp (long_options[option_index].name,
-			     "list-with-mime-types") == 0)
-	    {
-		*flags |= LIST|LISTMIME;
-	    }
-	    else if (strcmp (long_options[option_index].name,
-			     "ignore-encode") == 0)
-	    {
-		*flags |= ENCODE_OK;
-	    }
-	    else if (strcmp (long_options[option_index].name,
-			     "ignore-cruft") == 0)
-	    {
-		*flags |= CRUFT_OK;
-	    }
+                (*body_pref) = validate_body_pref (optarg);
+            }
+            else if (strcmp (long_options[option_index].name,
+                             "list-with-mime-types") == 0)
+            {
+                *flags |= LIST|LISTMIME;
+            }
+            else if (strcmp (long_options[option_index].name,
+                             "ignore-encode") == 0)
+            {
+                *flags |= ENCODE_OK;
+            }
+            else if (strcmp (long_options[option_index].name,
+                             "ignore-cruft") == 0)
+            {
+                *flags |= CRUFT_OK;
+            }
             else
             {
                 abort ();       /* impossible! */
@@ -250,16 +250,16 @@ parse_cmdline (int argc, char **argv,
 
         case 'V':
             fprintf (stderr, "%s\n", PACKAGE_STRING);
-            fprintf (stderr, 
-		     "Copyright (C) 1999-2014 by Mark Simpson\n"
-		     "Copyright (C) 1997 by Thomas Boll (original code)");
+            fprintf (stderr,
+                     "Copyright (C) 1999-2017 by Mark Simpson\n"
+                     "Copyright (C) 1997 by Thomas Boll (original code)");
             fprintf (stderr, "\n");
             fprintf (stderr, NO_WARRANTY, PACKAGE_NAME, PACKAGE_NAME);
             fprintf (stderr, "\n");
             exit (0);
             break;
 
-        case 'v': 
+        case 'v':
                 *flags |= VERBOSE|LISTMIME;
             break;
 
@@ -267,7 +267,7 @@ parse_cmdline (int argc, char **argv,
             if (strcmp (optarg, "-") == 0) (*in_file) = NULL;
             else (*in_file) = optarg;
             break;
-            
+
         case 'C':
             (*out_dir) = optarg;
             break;
@@ -278,16 +278,16 @@ parse_cmdline (int argc, char **argv,
                 (*max_size) = strtoul (optarg, &end_ptr, 10);
                 if (*end_ptr != '\0')
                 {
-                    fprintf (stderr, 
+                    fprintf (stderr,
                              "Invalid argument to --maxsize/-x option: '%s'\n",
                              optarg);
                     exit (-1);
                 }
-		if (0 > ((int32)(*max_size)))
-		{
-		    fprintf (stderr, "Ignoring negative value given for --maxsize/-x option: '%s' \n", optarg);
-		    (*max_size) = 0L;
-		}
+                if (0 > ((int32)(*max_size)))
+                {
+                    fprintf (stderr, "Ignoring negative value given for --maxsize/-x option: '%s' \n", optarg);
+                    (*max_size) = 0L;
+                }
             }
             break;
 
@@ -304,9 +304,9 @@ parse_cmdline (int argc, char **argv,
             *flags |= CONFIRM;
             break;
 
-	case 'K':
-	  *flags |= CHECKSUM_OK;
-	  break;
+        case 'K':
+          *flags |= CHECKSUM_OK;
+          break;
 
         case '?':
             fprintf (stderr, "Try '%s --help' for more info.\n", argv[0]);
@@ -332,7 +332,7 @@ parse_cmdline (int argc, char **argv,
 
 
 int
-main (int argc, char *argv[]) 
+main (int argc, char *argv[])
 {
     FILE *fp = NULL;
     char *in_file = NULL;
@@ -341,17 +341,17 @@ main (int argc, char *argv[])
     char *body_pref = NULL;
     int flags = NONE;
     size_t max_size = 0;
-    
-    parse_cmdline (argc, argv, 
-		   &in_file, &out_dir, 
-		   &body_file, &body_pref,
-		   &max_size, 
-		   &flags);
+
+    parse_cmdline (argc, argv,
+                   &in_file, &out_dir,
+                   &body_file, &body_pref,
+                   &max_size,
+                   &flags);
 
     set_alloc_limit (max_size);
     if (flags & DBG_OUT)
     {
-        fprintf (stdout, "setting alloc_limit to: %lu\n", 
+        fprintf (stdout, "setting alloc_limit to: %lu\n",
                  (unsigned long)max_size);
     }
 
@@ -359,7 +359,7 @@ main (int argc, char *argv[])
     if (in_file)
     {
         fp = fopen (in_file, "rb");
-        if (fp == NULL) 
+        if (fp == NULL)
         {
             perror (in_file);
             exit (1);
@@ -372,7 +372,7 @@ main (int argc, char *argv[])
 
     if (fp == stdin && flags & CONFIRM)
     {
-        fprintf (stderr, 
+        fprintf (stderr,
                  "Cannot read file from STDIN and use "
                  "interactive mode at the same time.\n");
         exit (1);

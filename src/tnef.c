@@ -77,8 +77,10 @@ free_bodies(VarLenData **bodies, int len)
 {
     while (len--)
     {
-        XFREE(bodies[len]->data);
-        XFREE(bodies[len]);
+        if (bodies[len]) {
+            XFREE(bodies[len]->data);
+            XFREE(bodies[len]);
+        }
     }
 }
 
@@ -165,10 +167,12 @@ get_html_data (MAPI_Attr *a)
     int j;
     for (j = 0; j < a->num_values; j++)
     {
-	body[j] = XMALLOC(VarLenData, 1);
-	body[j]->len = a->values[j].len;
-	body[j]->data = CHECKED_XCALLOC(unsigned char, a->values[j].len);
-	memmove (body[j]->data, a->values[j].data.buf, body[j]->len);
+        if (a->type == szMAPI_BINARY) {
+ 	    body[j] = XMALLOC(VarLenData, 1);
+	    body[j]->len = a->values[j].len;
+	    body[j]->data = CHECKED_XCALLOC(unsigned char, a->values[j].len);
+	    memmove (body[j]->data, a->values[j].data.buf, body[j]->len);
+        }
     }
     return body;
 }
@@ -306,13 +310,13 @@ parse_file (FILE* input_file, char* directory,
 		    for (i = 0; mapi_attrs[i]; i++)
 		    {
 			MAPI_Attr *a = mapi_attrs[i];
-			    
-			if (a->name == MAPI_BODY_HTML)
+		
+			if (a->type == szMAPI_BINARY && a->name == MAPI_BODY_HTML)
 			{
 			    body.html_bodies = get_html_data (a);
                                 html_size = a->num_values;
 			}
-			else if (a->name == MAPI_RTF_COMPRESSED)
+			else if (a->type == szMAPI_BINARY && a->name == MAPI_RTF_COMPRESSED)
 			{
 			    body.rtf_bodies = get_rtf_data (a);
                                 rtf_size = a->num_values;

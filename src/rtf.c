@@ -348,7 +348,7 @@ get_rtf_data (MAPI_Attr *a)
     int j;
     for (j = 0; j < a->num_values; j++)
     {
-	if (is_rtf_data (a->values[j].data.buf))
+	if (a->values[j].len > 12 && is_rtf_data (a->values[j].data.buf))
 	{
 	    body[j] = (VarLenData*)XMALLOC(VarLenData, 1);
 
