@@ -53,12 +53,16 @@ copy_triple_from_attr (Attr* attr, TRIPLE *t)
     assert (attr);
     assert (t);
     assert (attr->type == szTRIPLES);
+    assert (attr->len > 8);
 
     t->trp.id = GETINT16 (attr->buf);
     t->trp.chbgtrp = GETINT16 (attr->buf+2);
     t->trp.cch = GETINT16 (attr->buf+4);
     t->trp.cb = GETINT16 (attr->buf+6);
     t->sender_display_name = (char*)(attr->buf+8);
+
+    assert (attr->len > 8+t->trp.cch);
+
     t->sender_address = (char*)(attr->buf+8+t->trp.cch);
 }
 
