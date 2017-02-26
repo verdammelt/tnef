@@ -31,9 +31,9 @@
 /* Store a date according to file specification */
 struct date
 {
-    int16 year, month, day;
-    int16 hour, min, sec;
-    int16 dow;
+    uint16 year, month, day;
+    uint16 hour, min, sec;
+    uint16 dow;
 };
 
 extern const char *date_to_str (struct date* dt);

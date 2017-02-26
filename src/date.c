@@ -43,10 +43,11 @@ const char *
 date_to_str (struct date *dt)
 {
     static char buf[32];
-    sprintf (buf, "%s %04d/%02d/%02d %02d:%02d:%02d",
+    snprintf (buf, sizeof(buf), "%s %04d/%02d/%02d %02d:%02d:%02d",
 	     dow_str(dt->dow),
 	     dt->year, dt->month, dt->day,
 	     dt->hour, dt->min, dt->sec);
+    buf[sizeof(buf)-1] = '\0';
     return buf;
 }
 
