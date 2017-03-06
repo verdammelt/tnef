@@ -308,7 +308,9 @@ get_rtf_data_from_buf (size_t len, unsigned char *data,
     uint32 magic;
     uint32 checksum;
     size_t idx = 0;
-    
+
+    assert(len > 16);
+
     compr_size = GETINT32(data + idx); idx += 4;
     uncompr_size = GETINT32(data + idx); idx += 4;
     magic = GETINT32(data + idx); idx += 4;

@@ -46,6 +46,7 @@ copy_guid_from_buf (GUID* guid, unsigned char *buf, size_t len)
     int idx = 0;
     assert (guid);
     assert (buf);
+    assert (len > 16);
 
     CHECKINT32(idx, len); guid->data1 = GETINT32(buf + idx); idx += sizeof (uint32);
     CHECKINT16(idx, len); guid->data2 = GETINT16(buf + idx); idx += sizeof (uint16);
@@ -193,7 +194,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	{
 	    /* copy GUID */
 	    a->guid = CHECKED_XMALLOC(GUID, 1);
-	    copy_guid_from_buf(a->guid, buf+idx, len);
+	    copy_guid_from_buf(a->guid, buf+idx, len-idx);
 	    idx += sizeof (GUID);
 
 	    CHECKINT32(idx, len); a->num_names = GETINT32(buf+idx); idx += 4;
@@ -300,7 +301,7 @@ mapi_attr_read (size_t len, unsigned char *buf)
 
 	    case szMAPI_CLSID:
 		v->len = sizeof (GUID);
-		copy_guid_from_buf(&v->data.guid, buf+idx, len);
+		copy_guid_from_buf(&v->data.guid, buf+idx, len-idx);
 		idx += v->len;
 		break;
 
