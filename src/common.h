@@ -58,11 +58,18 @@ extern void *memmove (void *, const void*, size_t)
 #  include <sys/stat.h>
 #endif
 
+#ifndef __has_builtin
+# define __has_builtin(x) 0
+#endif
+#if __has_builtin(__builtin_mul_overflow)
+# define HAVE_BUILTIN_OVERFLOW 1
+#endif
+
 extern char* xstrdup (const char* str);
 
 /* ********** SIZES ********** */
 
-/* 
+/*
  * typedefs for the types specified in the grammar:
  * BYTE  -- 1 byte  -- char
  * WORD  -- 2 bytes -- short/int
