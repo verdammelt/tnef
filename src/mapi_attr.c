@@ -200,7 +200,6 @@ mapi_attr_read (size_t len, unsigned char *buf)
 	    CHECKINT32(idx, len); a->num_names = GETINT32(buf+idx); idx += 4;
 	    if (a->num_names > 0)
 	    {
-		/* FIXME: do something useful here! */
 		size_t i;
 
 		a->names = CHECKED_XCALLOC(VarLenData, a->num_names);
@@ -212,13 +211,8 @@ mapi_attr_read (size_t len, unsigned char *buf)
 		    CHECKINT32(idx, len); a->names[i].len = GETINT32(buf+idx); idx += 4;
 
 		    /* read the data into a buffer */
-		    a->names[i].data 
-			= CHECKED_XMALLOC(unsigned char, a->names[i].len);
-		    assert((idx+(a->names[i].len*2)) <= len);
-		    for (j = 0; j < (a->names[i].len >> 1); j++)
-			a->names[i].data[j] = (buf+idx)[j*2];
-
-		    /* But what are we going to do with it? */
+                    assert(idx+a->names[i].len <= len);
+		    a->names[i].data = unicode_to_utf8(a->names[i].len, buf+idx);
 		    
 		    idx += pad_to_4byte(a->names[i].len);
 		}
