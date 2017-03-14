@@ -173,7 +173,7 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
 	    switch (a->name)
 	    {
 	    case MAPI_ATTACH_LONG_FILENAME:
-		assert(a->type == szMAPI_STRING);
+		assert(a->type == szMAPI_STRING || a->type == szMAPI_UNICODE_STRING);
 		if (file->name) XFREE(file->name);
 		file->name = strdup( (char*)a->values[0].data.buf );
 		break;
@@ -187,18 +187,18 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
 		break;
 
              case MAPI_ATTACH_MIME_TAG:
-		assert(a->type == szMAPI_STRING);
+		assert(a->type == szMAPI_STRING || a->type == szMAPI_UNICODE_STRING);
 		if (file->mime_type) XFREE (file->mime_type);
 		file->mime_type = CHECKED_XMALLOC (char, a->values[0].len);
 		memmove (file->mime_type, a->values[0].data.buf, a->values[0].len);
 		break;
 
-                case MAPI_ATTACH_CONTENT_ID:
-                    assert(a->type == szMAPI_STRING);
-                    if (file->content_id) XFREE(file->content_id);
-                    file->content_id = CHECKED_XMALLOC (char, a->values[0].len);
-                    memmove (file->content_id, a->values[0].data.buf, a->values[0].len);
-                    break;
+            case MAPI_ATTACH_CONTENT_ID:
+                assert(a->type == szMAPI_STRING || a->type == szMAPI_UNICODE_STRING);
+                if (file->content_id) XFREE(file->content_id);
+                file->content_id = CHECKED_XMALLOC (char, a->values[0].len);
+                memmove (file->content_id, a->values[0].data.buf, a->values[0].len);
+                break;
 
 	    default:
 		break;
