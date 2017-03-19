@@ -40,6 +40,9 @@ get_alloc_limit()
     return alloc_limit;
 }
 
+#ifdef HAVE_BUILTIN_OVERFLOW
+# define check_mul_overflow __builtin_mul_overflow
+#else
 size_t
 check_mul_overflow(size_t a, size_t b, size_t* res)
 {
@@ -48,6 +51,7 @@ check_mul_overflow(size_t a, size_t b, size_t* res)
     *res = tmp;
     return 0;
 }
+#endif
 
 static void
 alloc_limit_failure (char *fn_name, size_t size)
