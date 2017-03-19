@@ -1,3 +1,28 @@
+2017-03-19 Mark Simpson <vedammelt@gmail.com>
+	* src/common.h, src/alloc.c: use __builtin_mul_overflow when
+	available.
+	
+	* src/mapi_attr.c (mapi_attr_read): Correct parsing of MAPI
+	attribute names.
+
+	* src/file.c (file_add_mapi_attr): Include Unicode String as valid
+	type.
+
+	* tests/files/Makefile.am,
+	tests/files/baselines/example.dat.baseline,
+	tests/files/baselines/image001.png.baseline,
+	tests/files/baselines/image002.png.baseline,
+	tests/files/baselines/image003.png.baseline,
+	tests/files/baselines/spaconsole2.cfg.baseline,
+	tests/files/baselines/unicode-mapi-attr-name.baseline,
+	tests/files/baselines/unicode-mapi-attr.baseline,
+	tests/files/datafiles/unicode-mapi-attr-name.list,
+	tests/files/datafiles/unicode-mapi-attr-name.tnef,
+	tests/files/datafiles/unicode-mapi-attr.list,
+	tests/files/datafiles/unicode-mapi-attr.tnef,
+	tests/files/unicode-mapi-attr-name.test: Include test cases for
+	above fixes.
+	
 2017-02-19 Eric Sesterhenn <eric.sesterhenn@x41-dsec.de>
 	
 	* src/mapi_attr.c: Prevent null pointer dereference.
