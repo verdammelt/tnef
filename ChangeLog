@@ -1,3 +1,7 @@
+2017-05-27 Mark Simpson <verdammelt@gmail.com>
+	* src/mapi_attr.c: assert that attribute names are non-zero length.
+	* src/utils.c: guard against zero length in unicode_to_utf8.
+	
 2017-03-19 Mark Simpson <vedammelt@gmail.com>
 	* src/common.h, src/alloc.c: use __builtin_mul_overflow when
 	available.
