@@ -211,6 +211,8 @@ mapi_attr_read (size_t len, unsigned char *buf)
 		    CHECKINT32(idx, len); a->names[i].len = GETINT32(buf+idx); idx += 4;
 
 		    /* read the data into a buffer */
+                    /* read the data into a buffer */
+                    assert(a->names[i].len != 0);
                     assert(idx+a->names[i].len <= len);
 		    a->names[i].data = unicode_to_utf8(a->names[i].len, buf+idx);
 		    
