@@ -67,13 +67,14 @@ For security reasons, paths to attached files are
 ignored by default.
 .TP
 \fB\-\-save\-body FILE\fP
-Save message body data found in the TNEF data.
-There can be up to
-three message bodies in the file, plain text, HTML encoded, and RTF
-encoded.
-Which are saved is specified by the \-\-body-pref option.
-By default the message bodies are written to a file named message with
-an extension based upon the type (txt, html, rtf).
+Save message body data found in the TNEF data. By default \fBtnef\fP
+only extracts the attached files and not the message body.
+
+There can be up to three message bodies in the file, plain text,
+HTML encoded, and RTF encoded. Which are saved is specified by the
+\-\-body-pref option. By default the message bodies are written to a
+file named message with an extension based upon the type (txt, html,
+rtf).
 .TP
 \fB\-\-body\-pref PREF\fP
 Specifies which of the possibly three message body formats will be
