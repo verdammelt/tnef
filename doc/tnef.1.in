@@ -169,12 +169,14 @@ tnef \-t
 .BR mutt (1),
 other email clients.
 .SH "AUTHOR"
-Mark Simpson.
-.SH "REPORTING BUGS"
-Report bugs to
-.nh     \"no hyphenation
 Mark Simpson <@PACKAGE_BUGREPORT@>
+.SH "REPORTING BUGS"
+Please report issues via this project's issue tracker on GitHub: 
+.nh     \"no hyphenation
+https://github.com/verdammelt/tnef/issues
 .hy 1   \"enable hyphenation
+.
+
 .SH "OTHER REFERENCES"
 This web page:
 .PP
