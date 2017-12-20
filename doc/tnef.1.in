@@ -101,7 +101,7 @@ display version and copyright.
 produce verbose output.
 .TP
 \fB\-\-debug\fP
-enable debug output.
+enable debug output. (This will produce a very large amount of output.)
 .SH "EXAMPLE"
 The following example demonstrates typical
 .B tnef
