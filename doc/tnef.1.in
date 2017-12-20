@@ -100,7 +100,10 @@ usage with a popular Unix mail client called "mutt".
 Mutt can't use
 .B tnef
 for its intended purpose until an appropriate content type definition
-exists in ~/.mailcap .
+exists in
+.nh     \"no hyphenation
+~/.mailcap.
+.hy 1   \"enable hyphenation
 Here's a sample definition:
 .PP
 .RS
