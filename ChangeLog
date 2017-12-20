@@ -1,3 +1,8 @@
+2017-12-20 Mark Simpson <verdammelt@gmail.com>
+	* doc/tnef.1.in: Various documentation fixes and clarifications
+	* doc/Mailfile.am, doc/file-format.{tex,txt}: replaced TeX version
+	of file format documentation with text version.
+	
 2017-05-27 Mark Simpson <verdammelt@gmail.com>
 	* src/mapi_attr.c: assert that attribute names are non-zero length.
 	* src/utils.c: guard against zero length in unicode_to_utf8.
