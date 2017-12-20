@@ -37,8 +37,19 @@ unpack file attachments into DIR.
 \fB\-x SIZE, \-\-maxsize=SIZE\fP
 limit maximum size of extracted archive (bytes)
 .TP
-\fB\-t,  \-\-list\fP
-list attached files, do not extract.
+\fB\-t, \-\-list\fP
+list attached files, do not extract. For each file in the datafile the
+file name and full path will be printed.
+
+If the verbose option is also provided then this option acts as the
+\-\-list\-with\-mime\-types option and also prints the file length (in
+bytes) and the date of the file before the other data.
+
+.TP
+\fB\-\-list\-with\-mime\-types\fP
+same as list option but also prints MIME type and content ID of each
+file after filename and file path.
+
 .TP
 \fB\-w,  \-\-interactive,  \-\-confirmation\fP
 ask for confirmation for every action.
