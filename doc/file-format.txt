@@ -1,0 +1,114 @@
+* Overview
+
+This document defines the TNEF file format.
+
+* File Format
+
+(Note: items delimited by '<>' are literal values or descriptions of
+the value. All other tokens are defined in the format.
+
+     tnef_stream :: TNEF_SIGNATURE key object
+
+     key :: <nonzero 16 bit integer>
+
+     object :: message_seq
+            :: message_seq attach_seq
+            :: attach_seq
+
+     message_seq :: att_tnef_version
+                 :: att_tnef_version msg_attr_seq
+                 :: att_tnef_version att_msg_class
+                 :: att_tnef_version att_msg_class msg_attr_seq
+                 :: att_msg_class
+                 :: att_msg_class msg_attr_seq
+                 :: msg_attr_seq
+
+     attr_tnef_version :: LVL_MESSAGE attTNEFVERSION
+                          <sizeof(ULONG)> <0x000010000> checksum
+
+     msg_attr_seq :: msg_attr+
+
+     msg_attr :: LVL_MESSAGE attr_id attr_len attr_data checksum
+
+     attr_id :: <one of the defined attributes>
+
+     attr_type :: <one of the defined attribute types>
+
+     attr_len :: <length in bytes of attr data>
+
+     attr_data :: <data associated with the attr, attr_len bytes long>
+
+     attach_seq :: att_rend_data
+                :: att_rend_data att_attr_seq
+
+     att_rend_data :: LVL_MESSAGE attATTACHRENDDATA
+                      <sizeof(RENDDATA)> renddata checksum
+
+     renddata :: <contents of the RENDDATA structure>
+
+     att_attr_seq :: att_attr+
+
+     att_attr :: LVL_ATTACHMENT attr_id attr_len attr_data checksum
+
+     checksum :: <integer which is the sumb of bytes % 65536>
+
+     TNEF_SIGNATURE :: <0x22e9f78>
+
+     LVL_MESSAGE :: <0x01>
+
+     LVL_ATTACHMENT :: <0x02>
+
+     attTNEFVERSION :: <0x9006>
+     
+     attATTACHRENDDATA :: <0x9002>
+
+
+All attribute names are defined in src/tnef-names.data; all attribute
+types in src/tnef-types.data.
+
+* Notes on Attributes
+
+This section describes special handling needed for some attributes.
+
+** attATTACHMENT (0x9005)
+
+This attribute has some interesting MAPI properties in it. Most
+importantly is the long filename MAPI property. The MAPI proerties
+have the following structure:
+
+Property_seq :: <integer property count> Property_value
+
+Property_value :: property_tag Property
+               :: property_tag Proptag_name Property
+
+Property :: Value
+         :: value_count Value
+
+Value :: value_data
+      :: value_size value_data padding
+      :: value_size value_IID value_data padding
+
+Proptag_name :: name_guid name_kind name_id
+             :: name_guid name_kind name_string_length name_string
+                padding
+
+* Data Structure
+
+In some cases the attribute data is structured data. This section
+describes those data structures.
+
+** date
+
+     struct date
+     {
+         int16 year, month, day;
+         int16 hour, min, sec;
+         int16 dow;
+     };
+
+The dow member is zero based with Sunday equal to zero.
+
+** RENDDATA
+
+This data structure is not currently defined since it is unclear that it is
+needed by anything other than Microsoft Outlook.
