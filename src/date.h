@@ -1,7 +1,7 @@
 /*
  * date.h -- functions for dealing with dates.
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2018 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,4 +40,3 @@ extern const char *date_to_str (struct date* dt);
 extern void date_read (struct date *dt, const unsigned char *buf);
 
 #endif /* DATE_H */
-

@@ -1,7 +1,7 @@
 /*
  * debug.c -- functions for debug output
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2018 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,12 +34,11 @@ debug_print (const char *fmt, ...)
 {
     if (DEBUG_ON)
     {
-	va_list args;
-	va_start (args, fmt);
-	VPRINTF(stdout, fmt, args);
-	va_end (args);
+        va_list args;
+        va_start (args, fmt);
+        VPRINTF(stdout, fmt, args);
+        va_end (args);
 
-	fflush( NULL );		/* make sure it gets output */
+        fflush( NULL );		/* make sure it gets output */
     }
 }
-

@@ -1,6 +1,6 @@
 ./../../src/tnef --version
 tnef 1.4.15
-Copyright (C) 1999-2017 by Mark Simpson
+Copyright (C) 1999-2018 by Mark Simpson
 Copyright (C) 1997 by Thomas Boll (original code)
 tnef comes with ABSOLUTELY NO WARRANTY.
 You may redistribute copies of tnef under the terms of the GNU General
@@ -9,7 +9,7 @@ named COPYING.
 
 ./../../src/tnef -V
 tnef 1.4.15
-Copyright (C) 1999-2017 by Mark Simpson
+Copyright (C) 1999-2018 by Mark Simpson
 Copyright (C) 1997 by Thomas Boll (original code)
 tnef comes with ABSOLUTELY NO WARRANTY.
 You may redistribute copies of tnef under the terms of the GNU General

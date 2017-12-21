@@ -1,7 +1,7 @@
 /*
  * strdup.c -- version of strdup for systems without one
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2018 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,4 +48,3 @@ strdup (const char *str)
     return out;
 }
 #endif /* !HAVE_STRDUP */
-

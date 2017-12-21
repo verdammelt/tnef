@@ -1,8 +1,8 @@
 /*
  * malloc.c -- replacement malloc function if provided malloc does not
- *             handle malloc(0) well  
+ *             handle malloc(0) well
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2018 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

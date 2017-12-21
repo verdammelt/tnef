@@ -1,8 +1,8 @@
-/* 
+/*
  * tnef.h -- extract files from Microsoft TNEF format.
- * 
- * Copyright (C) 1999-2006 by Mark Simpson <damned@theworld.com>
- * 
+ *
+ * Copyright (C) 1999-2017{ Mark Simpson <damned@theworld.com>
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2, or (at your option)
@@ -18,7 +18,7 @@
  * program's maintainer or write to: The Free Software Foundation,
  * Inc.; 59 Temple Place, Suite 330; Boston, MA 02111-1307, USA.
  *
- * Commentary: 
+ * Commentary:
  * 		Various defined values for decoding a TNEF file.
  */
 #ifndef TNEF_H
@@ -35,11 +35,8 @@
 
 /* Main entrance point to tnef processing */
 extern int
-parse_file(FILE *input, char * output_dir, 
-	   char *body_file, char *body_pref,
-	   int flags);
+parse_file(FILE *input, char * output_dir,
+           char *body_file, char *body_pref,
+           int flags);
 
 #endif /* !TNEF_H */
-
-
-

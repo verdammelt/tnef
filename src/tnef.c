@@ -1,7 +1,7 @@
 /*
  * tnef.c -- extract files from microsoft TNEF format
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2018 Mark Simpson <damned@theworld.com>
  * Copyright (C)1997 Thomas Boll  <tb@boll.ch>	[ORIGINAL AUTHOR]
  *
  * This program is free software; you can redistribute it and/or modify
@@ -72,7 +72,7 @@ read_object (FILE *in)
     return attr;
 }
 
-static void 
+static void
 free_bodies(VarLenData **bodies, int len)
 {
     while (len--)
@@ -86,8 +86,8 @@ free_bodies(VarLenData **bodies, int len)
 
 static File**
 get_body_files (const char* filename,
-		const char pref,
-		const MessageBody* body)
+                const char pref,
+                const MessageBody* body)
 {
     File **files = NULL;
     VarLenData **data;
@@ -98,51 +98,51 @@ get_body_files (const char* filename,
     switch (pref)
     {
     case 'r':
-	data = body->rtf_bodies;
-	ext = ".rtf";
+        data = body->rtf_bodies;
+        ext = ".rtf";
             type = "text/rtf";
-	break;
+        break;
     case 'h':
-	data = body->html_bodies;
-	ext = ".html";
+        data = body->html_bodies;
+        ext = ".html";
             type = "text/html";
-	break;
+        break;
     case 't':
-	data = body->text_body;
-	ext = ".txt";
+        data = body->text_body;
+        ext = ".txt";
             type = "text/plain";
-	break;
+        break;
     default:
-	data = NULL;
-	break;
+        data = NULL;
+        break;
     }
 
     if (data)
     {
-	int count = 0;
-	char *tmp 
-	    = CHECKED_XCALLOC(char, 
-			      strlen(filename) + strlen(ext) + 1);
-	strcpy (tmp, filename);
-	strcat (tmp, ext);
+        int count = 0;
+        char *tmp
+            = CHECKED_XCALLOC(char,
+                              strlen(filename) + strlen(ext) + 1);
+        strcpy (tmp, filename);
+        strcat (tmp, ext);
 
         char *mime = CHECKED_XCALLOC(char, strlen(type) + 1);
         strcpy (mime, type);
 
-	/* first get a count */
-	while (data[count++]);
+        /* first get a count */
+        while (data[count++]);
 
-	files = (File**)XCALLOC(File*, count + 1);
-	for (i = 0; data[i]; i++)
-	{
-	    files[i] = (File*)XCALLOC(File, 1);
-	    files[i]->name = tmp;
+        files = (File**)XCALLOC(File*, count + 1);
+        for (i = 0; data[i]; i++)
+        {
+            files[i] = (File*)XCALLOC(File, 1);
+            files[i]->name = tmp;
             files[i]->mime_type = mime;
-	    files[i]->len = data[i]->len;
-	    files[i]->data 
-		= CHECKED_XMALLOC(unsigned char, data[i]->len);
-	    memmove (files[i]->data, data[i]->data, data[i]->len);
-	}
+            files[i]->len = data[i]->len;
+            files[i]->data
+                = CHECKED_XMALLOC(unsigned char, data[i]->len);
+            memmove (files[i]->data, data[i]->data, data[i]->len);
+        }
     }
     return files;
 }
@@ -168,10 +168,10 @@ get_html_data (MAPI_Attr *a)
     for (j = 0; j < a->num_values; j++)
     {
         if (a->type == szMAPI_BINARY) {
- 	    body[j] = XMALLOC(VarLenData, 1);
-	    body[j]->len = a->values[j].len;
-	    body[j]->data = CHECKED_XCALLOC(unsigned char, a->values[j].len);
-	    memmove (body[j]->data, a->values[j].data.buf, body[j]->len);
+            body[j] = XMALLOC(VarLenData, 1);
+            body[j]->len = a->values[j].len;
+            body[j]->data = CHECKED_XCALLOC(unsigned char, a->values[j].len);
+            memmove (body[j]->data, a->values[j].data.buf, body[j]->len);
         }
     }
     return body;
@@ -181,62 +181,62 @@ int
 data_left (FILE* input_file)
 {
     int retval = 1;
-    
+
     if (feof(input_file)) retval = 0;
     else if (input_file != stdin)
     {
-	/* check if there is enough data left */
-	struct stat statbuf;
-	size_t pos, data_left;
-	fstat (fileno(input_file), &statbuf);
-	pos = ftell(input_file);
-	data_left = (statbuf.st_size - pos);
+        /* check if there is enough data left */
+        struct stat statbuf;
+        size_t pos, data_left;
+        fstat (fileno(input_file), &statbuf);
+        pos = ftell(input_file);
+        data_left = (statbuf.st_size - pos);
 
-	if (data_left > 0 && data_left < MINIMUM_ATTR_LENGTH) 
-	{
-	    if ( CRUFT_SKIP )
-	    {
-		/* look for specific flavor of cruft -- trailing "\r\n" */
+        if (data_left > 0 && data_left < MINIMUM_ATTR_LENGTH)
+        {
+            if ( CRUFT_SKIP )
+            {
+                /* look for specific flavor of cruft -- trailing "\r\n" */
 
-		if ( data_left == 2 )
-		{
-		    int c = fgetc( input_file );
+                if ( data_left == 2 )
+                {
+                    int c = fgetc( input_file );
 
-		    if ( c < 0 )	/* this should never happen */
-		    {
-			fprintf( stderr, "ERROR: confused beyond all redemption.\n" );
-			exit (1);
-		    }
+                    if ( c < 0 )	/* this should never happen */
+                    {
+                        fprintf( stderr, "ERROR: confused beyond all redemption.\n" );
+                        exit (1);
+                    }
 
-		    ungetc( c, input_file );
+                    ungetc( c, input_file );
 
-		    if ( c == 0x0d )		/* test for "\r" part of "\r\n" */
-		    {
-			/* "trust" that next char is 0x0a and ignore this cruft */
+                    if ( c == 0x0d )		/* test for "\r" part of "\r\n" */
+                    {
+                        /* "trust" that next char is 0x0a and ignore this cruft */
 
-			if ( VERBOSE_ON )
-			    fprintf( stderr, "WARNING: garbage at end of file (ignored)\n" );
+                        if ( VERBOSE_ON )
+                            fprintf( stderr, "WARNING: garbage at end of file (ignored)\n" );
 
-			if ( DEBUG_ON )
-			    debug_print( "!!garbage at end of file (ignored)\n" );
-		    }
-		    else
-		    {
-			fprintf( stderr, "ERROR: garbage at end of file.\n" );
-		    }
-		}
-		else
-		{
-		    fprintf (stderr, "ERROR: garbage at end of file.\n");
-		}
-	    }
-	    else
-	    {
-		fprintf (stderr, "ERROR: garbage at end of file.\n");
-	    }
+                        if ( DEBUG_ON )
+                            debug_print( "!!garbage at end of file (ignored)\n" );
+                    }
+                    else
+                    {
+                        fprintf( stderr, "ERROR: garbage at end of file.\n" );
+                    }
+                }
+                else
+                {
+                    fprintf (stderr, "ERROR: garbage at end of file.\n");
+                }
+            }
+            else
+            {
+                fprintf (stderr, "ERROR: garbage at end of file.\n");
+            }
 
-	    retval = 0;
-	}
+            retval = 0;
+        }
     }
     return retval;
 }
@@ -244,9 +244,9 @@ data_left (FILE* input_file)
 
 /* The entry point into this module.  This parses an entire TNEF file. */
 int
-parse_file (FILE* input_file, char* directory, 
-	    char *body_filename, char *body_pref,
-	    int flags)
+parse_file (FILE* input_file, char* directory,
+            char *body_filename, char *body_pref,
+            int flags)
 {
     uint32 d;
     uint16 key;
@@ -263,8 +263,8 @@ parse_file (FILE* input_file, char* directory,
     d = geti32(input_file);
     if (d != TNEF_SIGNATURE)
     {
-	fprintf (stdout, "Seems not to be a TNEF file\n");
-	return 1;
+        fprintf (stdout, "Seems not to be a TNEF file\n");
+        return 1;
     }
 
     /* Get the key */
@@ -274,110 +274,110 @@ parse_file (FILE* input_file, char* directory,
     /* The rest of the file is a series of 'messages' and 'attachments' */
     while ( data_left( input_file ) )
     {
-	attr = read_object( input_file );
+        attr = read_object( input_file );
 
-	if ( attr == NULL ) break;
+        if ( attr == NULL ) break;
 
-	/* This signals the beginning of a file */
-	if (attr->name == attATTACHRENDDATA)
-	{
-	    if (file)
-	    {
-		file_write (file, directory);
-		file_free (file);
-	    }
-	    else
-	    {
-		file = CHECKED_XCALLOC (File, 1);
-	    }
-	}
+        /* This signals the beginning of a file */
+        if (attr->name == attATTACHRENDDATA)
+        {
+            if (file)
+            {
+                file_write (file, directory);
+                file_free (file);
+            }
+            else
+            {
+                file = CHECKED_XCALLOC (File, 1);
+            }
+        }
 
-	/* Add the data to our lists. */
-	switch (attr->lvl_type)
-	{
-	case LVL_MESSAGE:
-	    if (attr->name == attBODY)
-	    {
-		body.text_body = get_text_data (attr);
-	    }
-	    else if (attr->name == attMAPIPROPS) 
-	    { 
-		MAPI_Attr **mapi_attrs 
-		    = mapi_attr_read (attr->len, attr->buf); 
-		if (mapi_attrs)
-		{ 
-		    int i;
-		    for (i = 0; mapi_attrs[i]; i++)
-		    {
-			MAPI_Attr *a = mapi_attrs[i];
-		
-			if (a->type == szMAPI_BINARY && a->name == MAPI_BODY_HTML)
-			{
-			    body.html_bodies = get_html_data (a);
+        /* Add the data to our lists. */
+        switch (attr->lvl_type)
+        {
+        case LVL_MESSAGE:
+            if (attr->name == attBODY)
+            {
+                body.text_body = get_text_data (attr);
+            }
+            else if (attr->name == attMAPIPROPS)
+            {
+                MAPI_Attr **mapi_attrs
+                    = mapi_attr_read (attr->len, attr->buf);
+                if (mapi_attrs)
+                {
+                    int i;
+                    for (i = 0; mapi_attrs[i]; i++)
+                    {
+                        MAPI_Attr *a = mapi_attrs[i];
+
+                        if (a->type == szMAPI_BINARY && a->name == MAPI_BODY_HTML)
+                        {
+                            body.html_bodies = get_html_data (a);
                                 html_size = a->num_values;
-			}
-			else if (a->type == szMAPI_BINARY && a->name == MAPI_RTF_COMPRESSED)
-			{
-			    body.rtf_bodies = get_rtf_data (a);
+                        }
+                        else if (a->type == szMAPI_BINARY && a->name == MAPI_RTF_COMPRESSED)
+                        {
+                            body.rtf_bodies = get_rtf_data (a);
                                 rtf_size = a->num_values;
-			}
-		    }
-		    /* cannot save attributes to file, since they
-		     * are not attachment attributes */ 
-		    /* file_add_mapi_attrs (file, mapi_attrs); */
-		    mapi_attr_free_list (mapi_attrs); 
-		    XFREE (mapi_attrs); 
-		}
-	    }
-	    break;
-	case LVL_ATTACHMENT:
-	    file_add_attr (file, attr);
-	    break;
-	default:
-	    fprintf (stderr, "Invalid lvl type on attribute: %d\n",
-		     attr->lvl_type);
-	    return 1;
-	    break;
-	}
-	attr_free (attr);
-	XFREE (attr);
+                        }
+                    }
+                    /* cannot save attributes to file, since they
+                     * are not attachment attributes */
+                    /* file_add_mapi_attrs (file, mapi_attrs); */
+                    mapi_attr_free_list (mapi_attrs);
+                    XFREE (mapi_attrs);
+                }
+            }
+            break;
+        case LVL_ATTACHMENT:
+            file_add_attr (file, attr);
+            break;
+        default:
+            fprintf (stderr, "Invalid lvl type on attribute: %d\n",
+                     attr->lvl_type);
+            return 1;
+            break;
+        }
+        attr_free (attr);
+        XFREE (attr);
     }
 
     if (file)
     {
-	file_write (file, directory);
-	file_free (file);
-	XFREE (file);
+        file_write (file, directory);
+        file_free (file);
+        XFREE (file);
     }
-    
+
     /* Write the message body */
     if (flags & SAVEBODY)
     {
-	int i = 0;
-	int all_flag = 0;
-	if (strcmp (body_pref, "all") == 0) 
-	{
-	    all_flag = 1;
-	    body_pref = "rht";
-	}
+        int i = 0;
+        int all_flag = 0;
+        if (strcmp (body_pref, "all") == 0)
+        {
+            all_flag = 1;
+            body_pref = "rht";
+        }
 
-	for (; i < 3; i++)
-	{
-	    File **files
-		= get_body_files (body_filename, body_pref[i], &body);
-	    if (files)
-	    {
-		int j = 0; 
-		for (; files[j]; j++)
-		{
-		    file_write(files[j], directory);
-		    file_free (files[j]);
+        for (; i < 3; i++)
+        {
+            File **files
+                = get_body_files (body_filename, body_pref[i], &body);
+            if (files)
+            {
+                int j = 0;
+                for (; files[j]; j++)
+                {
+                    file_write(files[j], directory);
+                    file_free (files[j]);
                     XFREE(files[j]);
-		}
-		XFREE(files);
-		if (!all_flag) break;
-	    }
-	}
+                }
+                XFREE(files);
+                if (!all_flag) break;
+            }
+        }
     }
 
     if (body.text_body)
@@ -397,4 +397,3 @@ parse_file (FILE* input_file, char* directory,
     }
     return 0;
 }
-

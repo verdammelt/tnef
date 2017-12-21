@@ -1,7 +1,7 @@
 /*
  * date.c -- functions for dealing with dates.
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2018 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
 
 /* Array of days of the week for translating a date */
 const char* day_of_week[] = { "Sun", "Mon", "Tue",
-			      "Wed", "Thu", "Fri", "Sat" };
+                              "Wed", "Thu", "Fri", "Sat" };
 
 extern const char *
 dow_str(int dow)
@@ -44,9 +44,9 @@ date_to_str (struct date *dt)
 {
     static char buf[32];
     snprintf (buf, sizeof(buf), "%s %04d/%02d/%02d %02d:%02d:%02d",
-	     dow_str(dt->dow),
-	     dt->year, dt->month, dt->day,
-	     dt->hour, dt->min, dt->sec);
+             dow_str(dt->dow),
+             dt->year, dt->month, dt->day,
+             dt->hour, dt->min, dt->sec);
     buf[sizeof(buf)-1] = '\0';
     return buf;
 }
@@ -64,4 +64,3 @@ date_read (struct date *dt, const unsigned char *buf)
     dt->sec = GETINT16 (tmp + i); i += sizeof (uint16);
     dt->dow = GETINT16 (tmp + i); i += sizeof (uint16);
 }
-

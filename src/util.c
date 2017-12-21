@@ -1,7 +1,7 @@
 /*
  * util.c -- Utility functions
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2018 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,9 +32,9 @@
 uint32 GETINT32(unsigned char *p)
 {
     return (uint32)((uint8)(p)[0]           \
-		    +((uint8)(p)[1]<<8)     \
-		    +((uint8)(p)[2]<<16)    \
-		    +((uint8)(p)[3]<<24));
+                    +((uint8)(p)[1]<<8)     \
+                    +((uint8)(p)[2]<<16)    \
+                    +((uint8)(p)[3]<<24));
 }
 
 uint16 GETINT16 (unsigned char* p)
@@ -52,8 +52,8 @@ getbuf (FILE *fp, unsigned char buf[], size_t n)
 {
     if (fread (buf, 1, n, fp) != n)
     {
-	perror ("Unexpected end of input");
-	exit (1);
+        perror ("Unexpected end of input");
+        exit (1);
     }
     return buf;
 }

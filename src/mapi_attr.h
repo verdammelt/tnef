@@ -1,7 +1,7 @@
 /*
  * mapi_attr.h -- Functions for handling MAPI attributes
  *
- * Copyright (C)1999-2006 Mark Simpson <damned@theworld.com>
+ * Copyright (C)1999-2018 Mark Simpson <damned@theworld.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,11 +47,11 @@ typedef struct
     size_t len;
     union
     {
-	unsigned char *buf;
-	uint16 bytes2;
-	uint32 bytes4;
-	uint32 bytes8[2];
-	GUID guid;
+        unsigned char *buf;
+        uint16 bytes2;
+        uint32 bytes4;
+        uint32 bytes8[2];
+        GUID guid;
     } data;
 } MAPI_Value;
 
