@@ -46,7 +46,7 @@ copy_guid_from_buf (GUID* guid, unsigned char *buf, size_t len)
     int idx = 0;
     assert (guid);
     assert (buf);
-    assert (len > 16);
+    assert (len >= 16);
 
     CHECKINT32(idx, len); guid->data1 = GETINT32(buf + idx); idx += sizeof (uint32);
     CHECKINT16(idx, len); guid->data2 = GETINT16(buf + idx); idx += sizeof (uint16);
