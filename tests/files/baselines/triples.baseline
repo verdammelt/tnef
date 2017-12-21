@@ -1,7 +1,7 @@
 setting alloc_limit to: 0
 TNEF Key: ea64
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe3 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1251, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 16] = 0x5049 0x2e4d 0x7041 0x6f70 0x6e69 0x6d74 0x6e65 0x0074
 (MESS) Priority <800d> [type: short <0004>] [len: 2] = 2
 (MESS) Subject <8004> [type: string <0001>] [len: 15] ='Sample Summary'

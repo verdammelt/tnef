@@ -83,10 +83,18 @@ attr_dump (Attr* attr)
     switch (attr->type)
     {
     case szBYTE:
-        for (i=0; i < attr->len; i++)
+        if (attr->name == attOEMCODEPAGE)
         {
-            fputc (' ', stdout);
-            write_byte(stdout, (uint8)attr->buf[i]);
+            fprintf(stdout, " CodePage - Primary: %u, Secondary: %u",
+                    GETINT32(attr->buf), GETINT32(attr->buf + 4));
+        }
+        else
+        {
+            for (i=0; i < attr->len; i++)
+            {
+                fputc (' ', stdout);
+                write_byte(stdout, (uint8)attr->buf[i]);
+            }
         }
         break;
 

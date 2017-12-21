@@ -1,7 +1,7 @@
 setting alloc_limit to: 0
 TNEF Key: 69ec
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] ='03243010448E7D4B8B3C7A2F0032076D'
 (MESS) Priority <800d> [type: short <0004>] [len: 2] = 2
 (MESS) Date Sent <8005> [type: date <0003>] [len: 14] = Fri 2014/06/20 10:27:10

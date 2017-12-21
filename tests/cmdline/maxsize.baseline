@@ -1,14 +1,14 @@
 setting alloc_limit to: 33
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] =checked_xmalloc: Maximum allocation size exceeded (maxsize = 33; size = 34).
 
 setting alloc_limit to: 33
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] =checked_xmalloc: Maximum allocation size exceeded (maxsize = 33; size = 34).
 
@@ -17,7 +17,7 @@ Invalid argument to --maxsize/-x option: 'foo'
 setting alloc_limit to: 0
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
 (MESS) Date Start <0006> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
@@ -175,7 +175,7 @@ Ignoring negative value given for --maxsize/-x option: '-33'
 setting alloc_limit to: 0
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
 (MESS) Date Start <0006> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
@@ -332,7 +332,7 @@ AUTHORS	|	AUTHORS
 setting alloc_limit to: 1024
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
 (MESS) Date Start <0006> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
@@ -345,7 +345,7 @@ checked_xcalloc: Maximum allocation size exceeded (maxsize = 1024; size = 1464).
 setting alloc_limit to: 2048
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
 (MESS) Date Start <0006> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
@@ -502,7 +502,7 @@ AUTHORS	|	AUTHORS
 setting alloc_limit to: 1464
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
 (MESS) Date Start <0006> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
@@ -659,7 +659,7 @@ AUTHORS	|	AUTHORS
 setting alloc_limit to: 1463
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
 (MESS) Date Start <0006> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
@@ -672,7 +672,7 @@ checked_xcalloc: Maximum allocation size exceeded (maxsize = 1463; size = 1464).
 setting alloc_limit to: 1465
 TNEF Key: 237
 (MESS) TNEF Version <9006> [type: dword <0008>] [len: 4] = 0x00010000
-(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = 0xe4 0x04 0x00 0x00 0x00 0x00 0x00 0x00
+(MESS) OEM Codepage <9007> [type: byte <0006>] [len: 8] = CodePage - Primary: 1252, Secondary: 0
 (MESS) Message Class <8008> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
 (MESS) Message ID <8009> [type: string <0001>] [len: 33] ='20017FCFD081D311A7A50008C71BCA8D'
 (MESS) Date Start <0006> [type: word <0007>] [len: 24] = 0x5049 0x2e4d 0x694d 0x7263 0x736f 0x666f 0x2074 0x614d 0x6c69 0x4e2e 0x746f 0x0065
