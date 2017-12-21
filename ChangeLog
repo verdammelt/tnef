@@ -1,3 +1,7 @@
+2017-12-21 Mark Simpson <verdammelt@gmail.com>
+	* README, doc/tnef.1.in: Documenting this program's assumption of
+	Unicode.
+	
 2017-12-20 Mark Simpson <verdammelt@gmail.com>
 	* doc/tnef.1.in: Various documentation fixes and clarifications
 	* doc/Mailfile.am, doc/file-format.{tex,txt}: replaced TeX version

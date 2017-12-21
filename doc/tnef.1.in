@@ -103,6 +103,10 @@ produce verbose output.
 .TP
 \fB\-\-debug\fP
 enable debug output. (This will produce a very large amount of output.)
+.SH "KNOWN LIMITATIONS"
+.B tnef
+ignores the OEMCodePage data in the data file. It assumes Unicode
+data.
 .SH "EXAMPLE"
 The following example demonstrates typical
 .B tnef
