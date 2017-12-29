@@ -1,3 +1,6 @@
+2017-12-29 Mark Simpson <verdammelt@gmail.com>
+	* doc/tnef.1.in: Replace broken link in man page.
+	
 2017-12-21 Mark Simpson <verdammelt@gmail.com>
 	* README, doc/tnef.1.in: Documenting this program's assumption of
 	Unicode.
