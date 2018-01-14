@@ -1,3 +1,6 @@
+2018-01-13 Mark Simpson <verdammelt@gmail.com>
+	* configure.ac, tests/cmdline/version.baseline: Update version number.
+	
 2017-12-29 Mark Simpson <verdammelt@gmail.com>
 	* doc/tnef.1.in: Replace broken link in man page.
 	

@@ -1,6 +1,9 @@
 TNEF NEWS -- history of user-visible changes.   31 August 2014
 Copyright (C) 2000-2017 by Mark Simpson
 
+* 1.4.17 [13 Jan 2018]
+** Fix embarrassing version number problem.
+
 * 1.4.16 [01 Jan 2018]
 ** Several documentation fixes.
 ** Small bug fix for UUID assertion.
