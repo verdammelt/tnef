@@ -31,10 +31,8 @@
 /* Needed to transform char buffers into little endian numbers */
 uint32 GETINT32(unsigned char *p)
 {
-    return (uint32)((uint8)(p)[0]           \
-                    +((uint8)(p)[1]<<8)     \
-                    +((uint8)(p)[2]<<16)    \
-                    +((uint8)(p)[3]<<24));
+  uint8* q=(uint8*)p;
+  return q[0] + (q[1]<<8) + (q[2]<<16)+ (((uint32)q[3])<<24);
 }
 
 uint16 GETINT16 (unsigned char* p)
