@@ -256,9 +256,14 @@ attr_read (FILE* in)
     attr->type = (type_and_name >> 16);
     attr->name = ((type_and_name << 16) >> 16);
     attr->len = geti32(in);
-    attr->buf = CHECKED_XCALLOC (unsigned char, attr->len);
+    /* Allocate an extra byte for the null terminator. */
+    attr->buf = CHECKED_XCALLOC (unsigned char, attr->len + 1);
 
     (void)getbuf(in, attr->buf, attr->len);
+    /* Always null terminate, in case the input lacks it,
+       this avoids strdup() being invoked on possibly non-terminated
+       input later (file.c, file_add_attr()). */
+    attr->buf[attr->len]='\0';
 
     checksum = geti16(in);
     if (!check_checksum(attr, checksum))
