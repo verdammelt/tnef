@@ -106,29 +106,31 @@ checked_xmalloc (size_t num, size_t size)
 
 /* xmallocs memory and clears it out */
 void*
-xcalloc (size_t num, size_t size)
+xcalloc (size_t num, size_t size, size_t extra)
 {
     size_t res;
     if (check_mul_overflow(num, size, &res))
         abort();
 
     void *ptr;
-    ptr = malloc(res);
+    if (res + extra < res)
+        abort();
+    ptr = malloc(res + extra);
     if (ptr)
     {
-        memset (ptr, '\0', (res));
+        memset (ptr, '\0', (res + extra));
     }
     return ptr;
 }
 
 /* xcallocs memory but only up to a limit */
 void*
-checked_xcalloc (size_t num, size_t size)
+checked_xcalloc (size_t num, size_t size, size_t extra)
 {
     size_t res;
     if (check_mul_overflow(num, size, &res))
         abort();
 
     alloc_limit_assert ("checked_xcalloc", (res));
-    return xcalloc (num, size);
+    return xcalloc (num, size, extra);
 }

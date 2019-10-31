@@ -37,17 +37,19 @@ extern size_t get_alloc_limit();
 extern void alloc_limit_assert (char *fn_name, size_t size);
 extern void* checked_xmalloc (size_t num, size_t size);
 extern void* xmalloc (size_t num, size_t size);
-extern void* checked_xcalloc (size_t num, size_t size);
-extern void* xcalloc (size_t num, size_t size);
+extern void* checked_xcalloc (size_t num, size_t size, size_t extra);
+extern void* xcalloc (size_t num, size_t size, size_t extra);
 
 #define XMALLOC(_type,_num)			                \
         ((_type*)xmalloc((_num), sizeof(_type)))
 #define XCALLOC(_type,_num) 				        \
-        ((_type*)xcalloc((_num), sizeof (_type)))
+  ((_type*)xcalloc((_num), sizeof (_type), 0))
 #define CHECKED_XMALLOC(_type,_num) 			        \
         ((_type*)checked_xmalloc((_num),sizeof(_type)))
-#define CHECKED_XCALLOC(_type,_num) 			        \
-        ((_type*)checked_xcalloc((_num),sizeof(_type)))
+#define CHECKED_XCALLOC(_type,_num)			\
+  ((_type*)checked_xcalloc((_num),sizeof(_type),0))
+#define CHECKED_XCALLOC_ADDNULL(_type,_num)		\
+  ((_type*)checked_xcalloc((_num),sizeof(_type),1))
 #define XFREE(_ptr)						\
         do { if (_ptr) { free (_ptr); _ptr = 0; } } while (0)
 
