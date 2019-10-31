@@ -13,7 +13,7 @@ more and more mail is encapsulated into this format.
 The TNEF program allows one to unpack the attachments which were
 encapsulated into the TNEF attachment. Thus alleviating the need to
 use Microsoft Outlook to view the attachment. Caveat: TNEF does not
-handle well attachments with non-Unicode filenames or data.
+handle attachments with non-Unicode filenames or data well.
 
 TNEF is mainly tested and used on GNU/Linux and CYGWIN systems.  It
 'should' work on other UNIX and UNIX-like systems.
