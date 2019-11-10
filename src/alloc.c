@@ -76,13 +76,14 @@ alloc_limit_assert (char *fn_name, size_t size)
 
 /* attempts to malloc memory, if fails print error and call abort */
 void*
-xmalloc (size_t num, size_t size)
+xmalloc (size_t num, size_t size, size_t extra)
 {
     size_t res;
     if (check_mul_overflow(num, size, &res))
         abort();
-
-    void *ptr = malloc (res);
+    if (res + extra < res)
+        abort();
+    void *ptr = malloc (res + extra);
     if (!ptr
         && (size != 0))         /* some libc don't like size == 0 */
     {
@@ -94,41 +95,44 @@ xmalloc (size_t num, size_t size)
 
 /* Allocates memory but only up to a limit */
 void*
-checked_xmalloc (size_t num, size_t size)
+checked_xmalloc (size_t num, size_t size, size_t extra)
 {
     size_t res;
     if (check_mul_overflow(num, size, &res))
         abort();
-
+    if (res + extra < res)
+        abort();
     alloc_limit_assert ("checked_xmalloc", res);
-    return xmalloc (num, size);
+    return xmalloc (num, size, extra);
 }
 
 /* xmallocs memory and clears it out */
 void*
-xcalloc (size_t num, size_t size)
+xcalloc (size_t num, size_t size, size_t extra)
 {
     size_t res;
     if (check_mul_overflow(num, size, &res))
         abort();
 
     void *ptr;
-    ptr = malloc(res);
+    if (res + extra < res)
+        abort();
+    ptr = malloc(res + extra);
     if (ptr)
     {
-        memset (ptr, '\0', (res));
+        memset (ptr, '\0', (res + extra));
     }
     return ptr;
 }
 
 /* xcallocs memory but only up to a limit */
 void*
-checked_xcalloc (size_t num, size_t size)
+checked_xcalloc (size_t num, size_t size, size_t extra)
 {
     size_t res;
     if (check_mul_overflow(num, size, &res))
         abort();
 
     alloc_limit_assert ("checked_xcalloc", (res));
-    return xcalloc (num, size);
+    return xcalloc (num, size, extra);
 }

@@ -316,8 +316,10 @@ mapi_attr_read (size_t len, unsigned char *buf)
                 }
                 else
                 {
-                    v->data.buf = CHECKED_XMALLOC(unsigned char, v->len);
+		  /* add space for a null terminator, in case of evil input */
+                    v->data.buf = CHECKED_XMALLOC_ADDNULL(unsigned char, v->len);
                     memmove (v->data.buf, buf+idx, v->len);
+		    v->data.buf[v->len] = '\0';
                 }
 
                 idx += pad_to_4byte(v->len);
