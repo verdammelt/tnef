@@ -251,7 +251,7 @@ parse_cmdline (int argc, char **argv,
         case 'V':
             fprintf (stderr, "%s\n", PACKAGE_STRING);
             fprintf (stderr,
-                     "Copyright (C) 1999-2018 by Mark Simpson\n"
+                     "Copyright (C) 1999-2019 by Mark Simpson\n"
                      "Copyright (C) 1997 by Thomas Boll (original code)");
             fprintf (stderr, "\n");
             fprintf (stderr, NO_WARRANTY, PACKAGE_NAME, PACKAGE_NAME);

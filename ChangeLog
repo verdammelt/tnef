@@ -1,3 +1,11 @@
+2019-11-10 Paul Dreik <pauldreik@github>
+	* src/alloc.c, src/alloc.h
+	* src/attr.c src/mapi_attr.c
+	Ensure null termination of strdups in the face of potentially
+	malicious inputs.
+	
+	* src/util.h: fix shift into sign bit.
+	
 2018-01-13 Mark Simpson <verdammelt@gmail.com>
 	* configure.ac, tests/cmdline/version.baseline: Update version number.
 	

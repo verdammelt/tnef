@@ -1,5 +1,11 @@
 TNEF NEWS -- history of user-visible changes.   31 August 2014
-Copyright (C) 2000-2017 by Mark Simpson
+Copyright (C) 2000-2019 by Mark Simpson
+
+* 1.4.18 [10 Nov 2019]
+** Improve safety of strdups
+*** https://github.com/verdammelt/tnef/pull/40
+** Correct possible improper bitshift.
+*** https://github.com/verdammelt/tnef/pull/41
 
 * 1.4.17 [13 Jan 2018]
 ** Fix embarrassing version number problem.
