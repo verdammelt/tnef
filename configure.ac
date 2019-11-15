@@ -35,7 +35,7 @@ AC_CHECK_SIZEOF(int)
 
 dnl check for library functions
 AC_REPLACE_FUNCS(strdup getopt_long basename)
-AC_CHECK_FUNCS(strrchr memmove memset strtoul)
+AC_CHECK_FUNCS(strrchr memmove memset strtoul index rindex)
 AC_FUNC_VPRINTF
 AC_FUNC_MALLOC
 
