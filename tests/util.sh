@@ -27,6 +27,3 @@ check_file () {
     check_exists $1
     check_test_full $1 $1.baseline $1.diff
 }
-
-    
-        
