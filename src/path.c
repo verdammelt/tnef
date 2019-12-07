@@ -35,6 +35,14 @@
 #include "path.h"
 #include "debug.h"
 
+#if !HAVE_RINDEX && HAVE_STRRCHR
+#  define rindex strrchr
+#endif
+
+#if !HAVE_INDEX
+#  define index strchr
+#endif
+
 /* concatenates fname1 with fname2 to make a pathname, adds '/' as needed */
 /* strips trailing '/' */
 

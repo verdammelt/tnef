@@ -5,7 +5,7 @@
 #   baseline
 #   diff
 check_test_full () {
-    diff "$1" "$2" > "$3" 2>&1
+    diff --ignore-space-change "$1" "$2" > "$3" 2>&1
     if [ $? -ne 0 ]; then
         echo "\'diff \"$1\" \"$2\" > \"$3\"\' -- Test Failed!"
         exit 1
@@ -27,6 +27,3 @@ check_file () {
     check_exists $1
     check_test_full $1 $1.baseline $1.diff
 }
-
-    
-        
