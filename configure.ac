@@ -1,8 +1,8 @@
-AC_PREREQ(2.59)
+AC_PREREQ([2.72])
 AC_INIT([tnef],[1.4.18],[verdammelt@gmail.com])
 AC_CONFIG_SRCDIR([src/tnef.c])
 AM_INIT_AUTOMAKE
-AC_CONFIG_HEADER([src/config.h])
+AC_CONFIG_HEADERS([src/config.h])
 AC_CONFIG_LIBOBJ_DIR(src/replace)
 
 dnl check for programs
@@ -19,7 +19,6 @@ dnl check for libraries
 AC_CHECK_LIB([intl],gettext)
 
 dnl check for headers
-AC_HEADER_STDC
 AC_CHECK_HEADERS([libintl.h])
 AC_CHECK_DECLS([basename])
 
