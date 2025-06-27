@@ -69,6 +69,6 @@ typedef struct
 extern void attr_dump (Attr* attr);
 extern void attr_free (Attr* attr);
 extern void copy_date_from_attr (Attr* attr, struct date* dt);
-extern Attr* attr_read ();
+extern Attr* attr_read (FILE* in);
 
 #endif /* ATTR_H */
