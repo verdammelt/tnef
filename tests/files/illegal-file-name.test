@@ -1,0 +1,40 @@
+#!/bin/sh
+
+. "$srcdir/../util.sh"
+
+bin="$srcdir/../../src/tnef"
+input="$srcdir/../files/datafiles/illegal-file-name.dat"
+output_dir="$srcdir/illegal-file-name.dir"
+
+cleanup () {
+    rm -rf "$output_dir"
+}
+
+cleanup
+mkdir "$output_dir"
+
+if test ! -f "$input"; then
+    echo "SKIP: $input is not available"
+    cleanup
+    exit 77
+fi
+
+if ! "$bin" --directory "$output_dir" "$input" > "$srcdir/illegal-file-name.output" 2>&1; then
+    cat "$srcdir/illegal-file-name.output"
+    cleanup
+    exit 1
+fi
+
+if grep -q 'Illegal byte sequence' "$srcdir/illegal-file-name.output"; then
+    cat "$srcdir/illegal-file-name.output"
+    cleanup
+    exit 1
+fi
+
+if test "$(find "$output_dir" -type f -name '*.jpeg' | wc -l | tr -d ' ')" -ne 2; then
+    find "$output_dir" -type f -print
+    cleanup
+    exit 1
+fi
+
+cleanup
