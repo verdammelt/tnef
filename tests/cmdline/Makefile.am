@@ -18,13 +18,14 @@ EXTRA_DIST	=	help.test help.baseline			\
 			triples-test-2.txt.baseline		\
 			triples-test-2.rtf.baseline             \
 			mime-types.test mime-types.baseline     \
-			stdin.test stdin.baseline
+			stdin.test stdin.baseline              \
+			illegal-file-name.test
 
 TESTS		=	help.test version.test basic.test debug.test 	\
 			list.test verbose.test overwrite.test 		\
 			directory.test maxsize.test			\
 			body.test mime-types.test			\
-			stdin.test
+			stdin.test illegal-file-name.test
 #			use-path.test interactive.test
 
 XFAIL_TESTS	=	use-path.test interactive.test
