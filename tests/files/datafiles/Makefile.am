@@ -23,7 +23,8 @@ EXTRA_DIST	=	MAPI_ATTACH_DATA_OBJ.list	\
 			triples.list			\
 			triples.tnef			\
 			two-files.list			\
-			two-files.tnef
+			two-files.tnef			\
+			illegal-file-name.dat
 
 
 

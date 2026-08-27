@@ -245,16 +245,16 @@ sanitize_filename( const char *fname )
 
             if ( flag ) break;		/* while loop... */
 
+            /* Keep filesystem paths ASCII-only: MAPI string properties can
+               contain bytes that are invalid in the active locale. */
+            if ( !isascii( (int)*cp ) )
+            {
+                stet = 0;
+                break;
+            }
+
             if ( UNIX_FS )
             {
-                /* non-ascii chars */
-
-                if ( !isascii( (int)*cp ) )
-                {
-                    stet = 0;
-                    break;
-                }
-
                 /* unsavory unix chars */
 
                 for ( up=unsavory_unix_chars; *up; up++ )

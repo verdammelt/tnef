@@ -4,7 +4,8 @@ TESTS		=	one-file.test rtf.test two-files.test 		\
 			MAPI_ATTACH_DATA_OBJ.test triples.test 		\
 			body.test multi-name-property.test 		\
 			garbage-at-end.test multi-value-attribute.test  \
-			unicode-mapi-attr.test unicode-mapi-attr-name.test
+			unicode-mapi-attr.test unicode-mapi-attr-name.test \
+			illegal-file-name.test
 XFAIL_TESTS	=
 
 CLEANFILES	=	*.output *.diff *.dir
