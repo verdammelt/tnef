@@ -112,9 +112,16 @@ file_write (File *file, const char* directory)
                 else
                 {
                     char *tmp = find_free_number (path);
-                    debug_print ("Renaming %s to %s\n", path, tmp);
-                    XFREE (path);
-                    path = tmp;
+                    if (tmp != NULL) {
+                        debug_print ("Renaming %s to %s\n", path, tmp);
+                        XFREE (path);
+                        path = tmp;
+                    } else {
+                        fprintf (stderr,
+                                 "tnef: %s: Could not create file: File exists, all alternative names tried\n",
+                                 path);
+                        return;
+                    }
                 }
             }
         }
