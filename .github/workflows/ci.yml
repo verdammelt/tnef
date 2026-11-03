@@ -7,7 +7,9 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    # configure.ac requires autoconf >= 2.72, newer than ubuntu-latest ships
+    container: ubuntu:26.04
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y autoconf automake
+      - run: apt-get update && apt-get install -y autoconf automake gcc make
       - run: autoreconf && ./configure && make check
