@@ -25,6 +25,7 @@
 
 #include "common.h"
 #include <ctype.h>
+#include <limits.h>
 
 #if HAVE_SYS_STAT_H
 #  include <sys/stat.h>
@@ -110,16 +111,19 @@ find_free_number (const char *fname)
 {
     size_t len = (strlen(fname)
                   + 1	/* '.' */
-                  + 5	/* big enough for our purposes (i hope) */
+                  + 20	/* if unsigned int is 64 bits, 2**64-1 is 20 decimal digits */
                   + 1);	/* NULL */
     char *tmp = CHECKED_XMALLOC (char, len);
-    int counter = 1;
+    unsigned int counter = 0;
     do
     {
-        sprintf (tmp, "%s.%d", fname, counter++);
+        sprintf (tmp, "%s.%u", fname, ++counter);
+        if (!file_exists(tmp)) return tmp;
     }
-    while (file_exists(tmp));
-    return tmp;
+    while (counter < UINT_MAX);
+
+    XFREE(tmp);
+    return NULL;
 }
 
 /* windows pathname manipulation routines */
