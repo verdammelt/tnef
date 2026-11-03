@@ -316,18 +316,21 @@ get_rtf_data_from_buf (size_t len, unsigned char *data,
     magic = GETINT32(data + idx); idx += 4;
     checksum = GETINT32 (data + idx); idx += 4;
 
-    /* sanity check */
-    assert (compr_size + 4 == len);
-
     (*out_len) = uncompr_size;
 
     if (magic == rtf_uncompressed_magic) /* uncompressed rtf stream */
     {
+        /* sanity check */
+        assert (uncompr_size + 4 == len);
+
         (*out_data) = CHECKED_XCALLOC(unsigned char, (*out_len));
         memmove ((*out_data), data+4, uncompr_size);
     }
     else if (magic == rtf_compressed_magic) /* compressed rtf stream */
     {
+        /* sanity check */
+        assert (compr_size + 4 == len);
+
         if ( checksum == generate_crc( data+idx, len-idx ) )
         {
             (*out_data) = decompress_rtf_data (data+idx, len-idx, uncompr_size);
