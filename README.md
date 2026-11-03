@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/verdammelt/tnef.svg?branch=master)](https://travis-ci.org/verdammelt/tnef)
+[![Build Status](https://github.com/verdammelt/tnef/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/verdammelt/tnef/actions/workflows/ci.yml)
 
 
 TNEF
