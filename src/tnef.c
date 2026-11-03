@@ -120,14 +120,6 @@ get_body_files (const char* filename,
     if (data)
     {
         int count = 0;
-        char *tmp
-            = CHECKED_XCALLOC(char,
-                              strlen(filename) + strlen(ext) + 1);
-        strcpy (tmp, filename);
-        strcat (tmp, ext);
-
-        char *mime = CHECKED_XCALLOC(char, strlen(type) + 1);
-        strcpy (mime, type);
 
         /* first get a count */
         while (data[count++]);
@@ -135,8 +127,17 @@ get_body_files (const char* filename,
         files = (File**)XCALLOC(File*, count + 1);
         for (i = 0; data[i]; i++)
         {
+	    char *name
+		= CHECKED_XCALLOC(char,
+				  strlen(filename) + strlen(ext) + 1);
+	    strcpy (name, filename);
+	    strcat (name, ext);
+
+	    char *mime = CHECKED_XCALLOC(char, strlen(type) + 1);
+	    strcpy (mime, type);
+
             files[i] = (File*)XCALLOC(File, 1);
-            files[i]->name = tmp;
+	    files[i]->name = name;
             files[i]->mime_type = mime;
             files[i]->len = data[i]->len;
             files[i]->data
