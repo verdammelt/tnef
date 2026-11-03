@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  check:
+    # configure.ac requires autoconf >= 2.72, newer than ubuntu-24.04 ships
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y autoconf automake
+      - run: autoreconf && ./configure && make check
