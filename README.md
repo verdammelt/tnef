@@ -7,6 +7,8 @@ TNEF
 TNEF is a program for unpacking MIME attachments of type
 "application/ms-tnef". This is a Microsoft only attachment.
 
+TNEF stands ["Transport Neutral Encapsulation Format"](https://en.wikipedia.org/wiki/Transport_Neutral_Encapsulation_Format).
+
 Due to the proliferation of Microsoft Outlook and Exchange mail servers,
 more and more mail is encapsulated into this format.
 
