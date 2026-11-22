@@ -196,15 +196,13 @@ file_add_mapi_attrs (File* file, MAPI_Attr** attrs)
              case MAPI_ATTACH_MIME_TAG:
                 assert(a->type == szMAPI_STRING || a->type == szMAPI_UNICODE_STRING);
                 if (file->mime_type) XFREE (file->mime_type);
-                file->mime_type = CHECKED_XMALLOC (char, a->values[0].len);
-                memmove (file->mime_type, a->values[0].data.buf, a->values[0].len);
+                file->mime_type = strdup( (char*)a->values[0].data.buf );
                 break;
 
             case MAPI_ATTACH_CONTENT_ID:
                 assert(a->type == szMAPI_STRING || a->type == szMAPI_UNICODE_STRING);
                 if (file->content_id) XFREE(file->content_id);
-                file->content_id = CHECKED_XMALLOC (char, a->values[0].len);
-                memmove (file->content_id, a->values[0].data.buf, a->values[0].len);
+                file->content_id = strdup( (char*)a->values[0].data.buf );
                 break;
 
             default:

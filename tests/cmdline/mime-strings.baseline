@@ -1,0 +1,7 @@
+
+./../../src/tnef --list-with-mime-types mime-tag-unicode.tnef
+safe.txt	|	safe.txt	|	ࠀࠀ	|	
+./../../src/tnef --list-with-mime-types content-id-unicode.tnef
+safe.txt	|	safe.txt	|	unknown	|	ࠀࠀ
+./../../src/tnef --list-with-mime-types mime-tag-string.tnef
+safe.txt	|	safe.txt	|	ABCD	|	
