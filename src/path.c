@@ -306,6 +306,43 @@ sanitize_filename( const char *fname )
 }
 
 /*
+  remove ".." components (unless allowed) from a '/' separated
+  directory, in place.
+  returns non-zero if any ".." components were found
+*/
+
+static int
+strip_parent_dirs( char *dir )
+{
+    char *src = dir, *dst = dir;
+    size_t len;
+    int found = 0;
+    int parent;
+
+    while ( *src )
+    {
+        len = strcspn( src, "/" );
+        parent = ( ( len == 2 ) && ( strncmp( src, "..", 2 ) == 0 ) );
+
+        if ( parent ) found = 1;
+
+        if ( !parent || PARENT_OK )
+        {
+            memmove( dst, src, len );
+            dst += len;
+            if ( src[len] == '/' ) *dst++ = '/';
+        }
+
+        src += len;
+        if ( *src == '/' ) src++;
+    }
+
+    *dst = '\0';
+
+    return found;
+}
+
+/*
   pathname generator
 
   takes input filename and "sanitizes" it for filesystem use
@@ -367,6 +404,27 @@ munge_fname( const char *fname )
 
                     if ( *dir == '\0' ) dir = NULL;	/* nothing left */
                 }
+            }
+
+            /* handle parent directory components */
+
+            if ( dir )
+            {
+                if ( strip_parent_dirs( dir ) )
+                {
+                    if ( PARENT_OK )
+                    {
+                        if (VERBOSE_ON) debug_print( "WARNING: parent path: %s\n", fname );
+                        if (DEBUG_ON) debug_print( "!!parent path: %s\n", fname );
+                    }
+                    else
+                    {
+                        if (VERBOSE_ON) debug_print( "WARNING: parent path stripped: %s\n", fname );
+                        if (DEBUG_ON) debug_print( "!!parent path stripped: %s\n", fname );
+                    }
+                }
+
+                if ( *dir == '\0' ) dir = NULL;	/* nothing left */
             }
         }
         else

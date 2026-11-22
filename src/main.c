@@ -72,6 +72,7 @@ static const char USAGE[] = \
 "                        \t  files are ignored by default)\n"
 "        --unix-paths    \tMake Windows filenames more Unix friendly\n"
 "        --allow-absolute-paths\tAllow absolute paths (NOT RECOMMENDED)\n"
+"        --allow-parent-paths\tAllow '..' in paths (NOT RECOMMENDED)\n"
 "        --save-body[=FILE]\tSave the message body to a file\n"
 "        --body-pref=PREF\tPreferred body type (R|H|T|ALL)\n"
 "-h,     --help          \tShow this message\n"
@@ -169,6 +170,7 @@ parse_cmdline (int argc, char **argv,
         {"use-paths", no_argument, 0, 0},
         {"unix-paths", no_argument, 0, 0},
         {"allow-absolute-paths", no_argument, 0, 0},
+        {"allow-parent-paths", no_argument, 0, 0},
         {"save-body", optional_argument, 0, 0 },
         {"body-pref", required_argument, 0, 0 },
         {"verbose", no_argument, 0, 'v'},
@@ -204,6 +206,11 @@ parse_cmdline (int argc, char **argv,
                              "allow-absolute-paths") == 0)
             {
                 *flags |= ABSOLUTE_PATHS;
+            }
+            else if (strcmp (long_options[option_index].name,
+                             "allow-parent-paths") == 0)
+            {
+                *flags |= PARENT_PATHS;
             }
             else if (strcmp (long_options[option_index].name,
                              "overwrite") == 0)
