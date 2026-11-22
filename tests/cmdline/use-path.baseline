@@ -1,0 +1,4 @@
+
+./../../src/tnef --list --use-paths use-paths.tnef
+docs\report.txt	|	docs/report.txt
+\abs\absolute.txt	|	abs/absolute.txt

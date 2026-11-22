@@ -24,10 +24,10 @@ TESTS		=	help.test version.test basic.test debug.test 	\
 			list.test verbose.test overwrite.test 		\
 			directory.test maxsize.test			\
 			body.test mime-types.test			\
-			stdin.test
-#			use-path.test interactive.test
+			stdin.test use-path.test
+#			interactive.test
 
-XFAIL_TESTS	=	use-path.test interactive.test
+XFAIL_TESTS	=	interactive.test
 
 CLEANFILES	=	*.output *.diff
 
