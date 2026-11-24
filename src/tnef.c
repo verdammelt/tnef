@@ -362,7 +362,7 @@ parse_file (FILE* input_file, char* directory,
             body_pref = "rht";
         }
 
-        for (; i < 3; i++)
+        for (; i < 3 && body_pref[i]; i++)
         {
             File **files
                 = get_body_files (body_filename, body_pref[i], &body);

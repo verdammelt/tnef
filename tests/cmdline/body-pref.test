@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# A --body-pref shorter than three characters, used on a file with no
+# message body, must not read past the end of the preference string.
+# The over-read is only reliably detected when built with
+# AddressSanitizer.
+#
+# no-body.tnef was generated with a proof-of-concept script from
+# Julien Ahrens (RCE Security GmbH).
+
+. "$srcdir/../util.sh"
+
+bin="$srcdir/../../src/tnef"
+input="$srcdir/../files/datafiles/no-body.tnef"
+output_dir="$srcdir/body-pref.dir"
+
+cleanup () {
+    rm -rf "$output_dir"
+}
+
+cleanup
+mkdir "$output_dir"
+
+for pref in r h t rh; do
+    if ! "$bin" --directory "$output_dir" --save-body --body-pref=$pref \
+         "$input" > "$srcdir/body-pref.output" 2>&1; then
+        echo "--body-pref=$pref failed"
+        cat "$srcdir/body-pref.output"
+        cleanup
+        exit 1
+    fi
+done
+
+if test -n "$(ls -A "$output_dir")"; then
+    echo "Unexpected files written:"
+    ls -A "$output_dir"
+    cleanup
+    exit 1
+fi
+
+cleanup
