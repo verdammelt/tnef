@@ -15,6 +15,7 @@
                         	  files are ignored by default)
         --unix-paths    	Make Windows filenames more Unix friendly
         --allow-absolute-paths	Allow absolute paths (NOT RECOMMENDED)
+        --allow-parent-paths	Allow '..' in paths (NOT RECOMMENDED)
         --save-body[=FILE]	Save the message body to a file
         --body-pref=PREF	Preferred body type (R|H|T|ALL)
 -h,     --help          	Show this message
@@ -47,6 +48,7 @@ Report bugs to <verdammelt@gmail.com>
                         	  files are ignored by default)
         --unix-paths    	Make Windows filenames more Unix friendly
         --allow-absolute-paths	Allow absolute paths (NOT RECOMMENDED)
+        --allow-parent-paths	Allow '..' in paths (NOT RECOMMENDED)
         --save-body[=FILE]	Save the message body to a file
         --body-pref=PREF	Preferred body type (R|H|T|ALL)
 -h,     --help          	Show this message

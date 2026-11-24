@@ -28,7 +28,9 @@ EXTRA_DIST	=	MAPI_ATTACH_DATA_OBJ.list	\
 			no-body.tnef			\
 			mime-tag-unicode.tnef		\
 			content-id-unicode.tnef		\
-			mime-tag-string.tnef
+			mime-tag-string.tnef		\
+			use-paths.tnef			\
+			parent-paths.tnef
 
 
 

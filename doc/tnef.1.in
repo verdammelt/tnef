@@ -64,7 +64,14 @@ create FOO.n instead.
 \fB\-\-use\-paths\fP
 honor file pathnames specified in the TNEF attachment.
 For security reasons, paths to attached files are
-ignored by default.
+ignored by default. Absolute paths are made relative and '..'
+components are removed so files cannot be written outside the
+extraction directory.
+.TP
+\fB\-\-allow\-parent\-paths\fP
+with \-\-use\-paths, keep '..' components in attachment pathnames.
+This allows an attachment to be written outside the extraction
+directory. NOT RECOMMENDED.
 .TP
 \fB\-\-save\-body FILE\fP
 Save message body data found in the TNEF data. By default \fBtnef\fP

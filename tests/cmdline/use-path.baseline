@@ -1,0 +1,16 @@
+
+./../../src/tnef --list --use-paths use-paths.tnef
+docs\report.txt	|	docs/report.txt
+\abs\absolute.txt	|	abs/absolute.txt
+
+./../../src/tnef --list --use-paths parent-paths.tnef
+..\..\up\escape.txt	|	up/escape.txt
+docs\.\..\..\up\middle.txt	|	docs/./up/middle.txt
+
+./../../src/tnef --list --use-paths --allow-absolute-paths parent-paths.tnef
+..\..\up\escape.txt	|	up/escape.txt
+docs\.\..\..\up\middle.txt	|	docs/./up/middle.txt
+
+./../../src/tnef --list --use-paths --allow-parent-paths parent-paths.tnef
+..\..\up\escape.txt	|	../../up/escape.txt
+docs\.\..\..\up\middle.txt	|	docs/./../../up/middle.txt

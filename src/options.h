@@ -45,6 +45,7 @@ extern int g_flags;     /* program options */
 #define CRUFT_SKIP ((g_flags)&CRUFT_OK)
 #define UNIX_FS ((g_flags)&UNIX_PATHS)
 #define ABSOLUTE_OK ((g_flags)&ABSOLUTE_PATHS)
+#define PARENT_OK ((g_flags)&PARENT_PATHS)
 
 /* flags to modify behaviour of file parsing */
 enum { NONE    	= 0x00,
@@ -61,7 +62,8 @@ enum { NONE    	= 0x00,
        ENCODE_OK = 0x400,
        CRUFT_OK = 0x800,
        UNIX_PATHS = 0x1000,
-       ABSOLUTE_PATHS = 0x2000
+       ABSOLUTE_PATHS = 0x2000,
+       PARENT_PATHS = 0x4000
 };
 
 #endif /* OPTIONS_H */

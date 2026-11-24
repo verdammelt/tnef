@@ -1,5 +1,73 @@
 #!/bin/sh
 
-echo "$0: not yet implemented"
+# --use-paths: attachment paths inside the TNEF file are honoured, but
+# absolute paths are made relative to the extraction directory and '..'
+# components are removed unless --allow-parent-paths is given.
+#
+# The .tnef files were generated with a proof-of-concept script from
+# Julien Ahrens (RCE Security GmbH).
 
-exit 1
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+datadir=$srcdir/../files/datafiles
+work=$srcdir/use-path.dir
+extract=$work/a/b/extract
+
+cleanup() {
+    rm -rf $work
+}
+
+expect_file() {
+    if [ ! -f $1 ]; then
+        echo "$1 missing.  Test failed."
+        find $work -type f
+        cleanup
+        exit 1
+    fi
+}
+
+expect_no_file() {
+    if [ -f $1 ]; then
+        echo "$1 exists.  Test failed."
+        cleanup
+        exit 1
+    fi
+}
+
+cleanup
+mkdir -p $extract/docs/up $extract/abs $extract/up $work/a/up $work/a/b/up
+
+echo > $srcdir/use-path.output
+echo $bin --list --use-paths use-paths.tnef >> $srcdir/use-path.output
+$bin --list --use-paths $datadir/use-paths.tnef >> $srcdir/use-path.output 2>&1
+
+$bin --use-paths -C $extract $datadir/use-paths.tnef >> $srcdir/use-path.output 2>&1
+expect_file $extract/docs/report.txt
+expect_file $extract/abs/absolute.txt
+
+echo >> $srcdir/use-path.output
+echo $bin --list --use-paths parent-paths.tnef >> $srcdir/use-path.output
+$bin --list --use-paths $datadir/parent-paths.tnef >> $srcdir/use-path.output 2>&1
+
+$bin --use-paths -C $extract $datadir/parent-paths.tnef >> $srcdir/use-path.output 2>&1
+expect_file $extract/up/escape.txt
+expect_file $extract/docs/up/middle.txt
+expect_no_file $work/a/up/escape.txt
+expect_no_file $work/a/b/up/middle.txt
+
+echo >> $srcdir/use-path.output
+echo $bin --list --use-paths --allow-absolute-paths parent-paths.tnef >> $srcdir/use-path.output
+$bin --list --use-paths --allow-absolute-paths $datadir/parent-paths.tnef >> $srcdir/use-path.output 2>&1
+
+echo >> $srcdir/use-path.output
+echo $bin --list --use-paths --allow-parent-paths parent-paths.tnef >> $srcdir/use-path.output
+$bin --list --use-paths --allow-parent-paths $datadir/parent-paths.tnef >> $srcdir/use-path.output 2>&1
+
+$bin --use-paths --allow-parent-paths -C $extract $datadir/parent-paths.tnef >> $srcdir/use-path.output 2>&1
+expect_file $work/a/up/escape.txt
+expect_file $work/a/b/up/middle.txt
+
+check_test use-path
+
+cleanup
