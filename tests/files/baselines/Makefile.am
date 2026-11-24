@@ -34,5 +34,12 @@ EXTRA_DIST	=	AUTHORS.baseline			\
 			VIA_Nytt_14021.htm.baseline		\
 			VIA_Nytt_1402.doc.baseline		\
 			VIA_Nytt_1402.pdf.baseline		\
-			208225__5_seconds__Voice_Mail.mp3.baseline
+			208225__5_seconds__Voice_Mail.mp3.baseline	\
+			unicode-mapi-attr.baseline		\
+			unicode-mapi-attr-name.baseline		\
+			example.dat.baseline			\
+			image001.png.baseline		\
+			image002.png.baseline		\
+			image003.png.baseline		\
+			spaconsole2.cfg.baseline
 

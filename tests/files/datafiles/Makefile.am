@@ -30,7 +30,11 @@ EXTRA_DIST	=	MAPI_ATTACH_DATA_OBJ.list	\
 			content-id-unicode.tnef		\
 			mime-tag-string.tnef		\
 			use-paths.tnef			\
-			parent-paths.tnef
+			parent-paths.tnef		\
+			unicode-mapi-attr.list		\
+			unicode-mapi-attr.tnef		\
+			unicode-mapi-attr-name.list	\
+			unicode-mapi-attr-name.tnef
 
 
 
