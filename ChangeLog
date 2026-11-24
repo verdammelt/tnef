@@ -1,3 +1,7 @@
+2026-11-24 Mark Simpson <verdammelt@gmail.com>
+	* configure.ac, src/main.c, tests/cmdline/version.baseline, NEWS:
+	Release 1.5.0. See NEWS and git history for changes since 1.4.18.
+
 2019-11-10 Paul Dreik <pauldreik@github>
 	* src/alloc.c, src/alloc.h
 	* src/attr.c src/mapi_attr.c

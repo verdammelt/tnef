@@ -1,5 +1,5 @@
 AC_PREREQ([2.72])
-AC_INIT([tnef],[1.4.18],[verdammelt@gmail.com])
+AC_INIT([tnef],[1.5.0],[verdammelt@gmail.com])
 AC_CONFIG_SRCDIR([src/tnef.c])
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS([src/config.h])
