@@ -19,13 +19,14 @@ EXTRA_DIST	=	help.test help.baseline			\
 			triples-test-2.rtf.baseline             \
 			mime-types.test mime-types.baseline     \
 			stdin.test stdin.baseline               \
-			body-pref.test
+			body-pref.test				\
+			mime-strings.test mime-strings.baseline
 
 TESTS		=	help.test version.test basic.test debug.test 	\
 			list.test verbose.test overwrite.test 		\
 			directory.test maxsize.test			\
 			body.test mime-types.test			\
-			stdin.test body-pref.test
+			stdin.test body-pref.test mime-strings.test
 #			use-path.test interactive.test
 
 XFAIL_TESTS	=	use-path.test interactive.test

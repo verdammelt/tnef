@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# MIME tags and content IDs must be printed exactly, without reading past
+# the end of their buffers.  The over-read is only reliably detected when
+# built with AddressSanitizer.
+#
+# The .tnef files were generated with a proof-of-concept script from
+# Julien Ahrens (RCE Security GmbH).
+
+. $srcdir/../util.sh
+
+bin=$srcdir/../../src/tnef
+datadir=$srcdir/../files/datafiles
+
+echo > $srcdir/mime-strings.output
+for f in mime-tag-unicode content-id-unicode mime-tag-string; do
+    echo $bin --list-with-mime-types $f.tnef >> $srcdir/mime-strings.output
+    $bin --list-with-mime-types $datadir/$f.tnef >> $srcdir/mime-strings.output 2>&1
+done
+check_test mime-strings
