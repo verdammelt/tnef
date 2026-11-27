@@ -4,8 +4,11 @@ Copyright (C) 2000-2026 by Mark Simpson
 * 1.5.0 [24 Nov 2026]
 ** Security fixes
 *** Prevent path traversal when using --use-paths.
+**** CVE-2026-137726
 *** Fix out-of-bounds read of attachment MIME tag and content ID.
+**** CVE-2026-137727
 *** Fix out-of-bounds read with a short --body-pref argument.
+**** CVE-2026-137728
 *** Fix out-of-bounds read in get_rtf_data_from_buf().
 **** https://github.com/verdammelt/tnef/pull/54
 *** Fix buffer overflow in find_free_number().
